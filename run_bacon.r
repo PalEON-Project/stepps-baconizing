@@ -6,8 +6,10 @@ require(fields)
 require(sp)
 
 source('Bacon.R')
-source('write_agefile_stepps.r')
 source('utils/helpers.r')
+
+#do we need the next line?
+source('write_agefile_stepps.r')
 
 restart=FALSE
 
@@ -17,7 +19,7 @@ unlink('Cores/*/*.pdf')
 unlink('Cores/*/*.bacon')
 unlink('Cores/*/*.txt')
 
-pollen_meta <- read.csv('../data/pollen/pollen_meta_2014-07-22.csv', header=TRUE)
+pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE)
 
 pollen_meta <- get_survey_year(pollen_meta)
 

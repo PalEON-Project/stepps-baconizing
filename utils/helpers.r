@@ -13,7 +13,7 @@ pollen_to_albers <- function(coord, rescale=1e6){
 
 get_survey_year <- function(pollen_meta){
   
-  pls <- raster('../data/pls/age_of_sample.tif')
+  pls <- raster('data/age_of_sample.tif')
 #   plot(pls)
 
   coord  = data.frame(long=pollen_meta$long, lat= pollen_meta$lat)
