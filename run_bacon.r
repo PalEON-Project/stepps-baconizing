@@ -7,9 +7,7 @@ require(sp)
 
 source('Bacon.R')
 source('utils/helpers.r')
-
-#do we need the next line?
-source('write_agefile_stepps.r')
+source('utils/write_agefile_stepps.r')
 
 restart=FALSE
 
@@ -22,6 +20,9 @@ unlink('Cores/*/*.txt')
 pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE)
 
 pollen_meta <- get_survey_year(pollen_meta)
+
+# for some reason the datasetID changed for Jones Lake
+pollen_meta[pollen_meta$datasetID == 1394, 'datasetID'] = 15274
 
 ids = pollen_meta$datasetID
 
@@ -38,8 +39,8 @@ if (!file.exists('data/pollen_list.rdata')){
 # load_pollen_data(pollen_meta$datasetID)
 ncores = length(pollen_dat)
 
-bacon.params <- data.frame(handle = sapply(pollen_dat, function(x)x$metadata$dataset$collection.handle),
-                           dataset.id = sapply(pollen_dat, function(x)x$metadata$dataset$dataset.id),
+bacon.params <- data.frame(handle = sapply(pollen_dat, function(x)x$dataset$dataset.meta$collection.handle),
+                           dataset.id = sapply(pollen_dat, function(x)x$dataset$dataset.meta$dataset.id),
                            acc.mean.mod = 3.02,
                            acc.mean.old = 15,
                            acc.shape.mod = 0.53,
@@ -47,16 +48,14 @@ bacon.params <- data.frame(handle = sapply(pollen_dat, function(x)x$metadata$dat
                            mem.strength = 4,
                            mem.mean = 0.7,
                            hiatus = NA,
-#                            thick = sapply(pollen_dat, function(x) min(diff(x$sample.meta$depths)[diff(x$sample.meta$depths)>0])),
+                           #                            thick = sapply(pollen_dat, function(x) min(diff(x$sample.meta$depths)[diff(x$sample.meta$depths)>0])),
                            thick = 5,
-                           age.type = sapply(pollen_dat, function(x) unique(x$sample.meta$AgeType)),
+                           age.type = sapply(pollen_dat, function(x) unique(x$sample.meta$age.type)),
                            run = FALSE,
-                           suit = sapply(pollen_dat, function(x) ifelse(unique(x$sample.meta$AgeType) == 'Varve years BP', FALSE, NA)), 
+                           suit = sapply(pollen_dat, function(x) ifelse(unique(x$sample.meta$age.type) == 'Varve years BP', FALSE, NA)), 
                            ndates = NA,
                            success = NA,
                            stringsAsFactors=FALSE)
-
-
 
 for(i in 1:ncores){ 
   print(i)
@@ -91,8 +90,8 @@ long_cores <- c('Ferr01X', 'Hell Hole', 'Lone02', 'Warner')
 handles    <- c('FERRY', 'HELLHOLE', 'LONE', 'WARNER')
 ids        <- c('CLH2', 'CLH3', 'CLH5', 'CLH6')
 
-clh_meta   <- read.csv('data/hotchkiss_lynch_calcote_meta.csv', header=TRUE)
-clh_counts <- read.csv('data/hotchkiss_lynch_calcote_counts.csv', header=TRUE, stringsAsFactors=FALSE)
+clh_meta   <- read.csv('data/hotchkiss_lynch_calcote_meta_v0.1.csv', header=TRUE)
+clh_counts <- read.csv('data/hotchkiss_lynch_calcote_counts_v0.1.csv', header=TRUE, stringsAsFactors=FALSE)
 
 clh_meta <- clh_meta[clh_meta$name %in% long_cores, ]
 clh_counts <- clh_counts[clh_counts$name %in% long_cores, ]
@@ -120,7 +119,7 @@ bacon.params <- data.frame(handle = handles,
                            stringsAsFactors=FALSE)
 
 # add in the pre-samples
-pre_depths = read.csv(file='cal_data_mid_depth_2014-07-28.csv', stringsAsFactors=FALSE)
+pre_depths = read.csv(file='data/cal_data_mid_depth_2014-07-28.csv', stringsAsFactors=FALSE)
 for (i in 1:ncores){
   handle = bacon.params$handle[i]
   id = bacon.params$dataset.id[i]
@@ -153,6 +152,7 @@ write.table(bacon.params, file='bacon.params.csv', sep=',', append=TRUE, col.nam
 bacon.params <- read.csv('bacon.params.csv', header=TRUE, sep=',')
 
 # find depth span to determine if there is a minimum number of thicknesses that work
+ncores = nrow(bacon.params)
 lengths = rep(NA, ncores)
 for (i in 1:ncores){
   site.params = bacon.params[i,]
@@ -162,14 +162,14 @@ for (i in 1:ncores){
     lengths[i] = max(geochron$depth) - min(geochron$depth)
   }  
 }
-# sum(is.na(lengths))
-# lengths[lengths<20]
-# bacon.params$handle[lengths<20]
+sum(is.na(lengths))
+lengths[lengths<20]
+bacon.params$handle[lengths<20]
 
 write.table(t(colnames(bacon.params)), file='bacon.fit.hiatus.csv', sep=',', append=FALSE, col.names=FALSE, row.names=FALSE)
 
 # run bacon!
-for(i in 1:ncores){
+for(i in 101:ncores){
   
   print(i)
   site.params <- bacon.params[i,]

@@ -1,0 +1,92 @@
+---
+title: "Baconizing the Upper Midwest: Standardization and error quantification of age-depth models using Bacon"
+output: html_document
+---
+
+#### Intro: Including age uncertainty in age-depth models
+The ability to determine age-depth relationships of sediment cores is fundamental to paleoecological research.  Significant ecological conclusions are made based on dated sediment cores, and often without regard to the uncertain nature of the processes and the processing and interpretation of the data. The paleoecology community has recognized the need for improvement in traditional age-depth modelling practices for some time, but due to the complexity and uncertain nature of the age-depth relationship, solutions are neither simple nor obvious.
+
+Age-depth models are constructed based on dated (aged) stratigraphic markers that occur at various depths throughout the core, most often unevenly spaced. Most markers are determined based on deposited macrofossils, which are dated using radiometric methods. Macrofossil material is aged at specialty labs, who provide radiometric dates and an estimate of sampling error. However, not all markers are equal in quality - macrofossil material may or may not have originated at the time of deposition. For examples, plant material produced in a given year may remain on the forest floor for years for years before being washed into the lake and deposited in the sediment. So and so catalogued macrofossils used to date sediment, assigning a marker quality index to each allowing users to make more informed decisions about the reliability of their stratigraphic dates \cite{}.
+
+Radiometric dates subsequently must be converted to calendar years. This conversion is based on the rate of decay of the radioactive isotope, and its reliability depends on this rate of decay, the age of the material being dated, and others factors that affect the biospheric concentration of the isotope. For example, in radiocarbon dating, volcanic eruptions, solar winds, and nuclear testing all have the ability to affect the biospheric concentration of carbon-14, some having more localized effects than others \cite{}. As a result of non-constant atmospheric contributions, the relationship between calendar year and biospheric concentration may not be one-to-one, meaning a given radiocarbon year can correspond with multiple calendar years. 
+
+Although the majority of stratigraphic markers are dated using radiometric methods, some markers may be biostratigraphic in nature. These markers are assigned dates based on the interpretation of both the sediment core data and the existing body of supporting literature by the researcher, and can therefore be subjective in nature. For example, in the case of palynological data, a rise in sediment pollen counts of herbaceous agricultural indicators is often associated with European settlement. Since the date of settlement can be estimated based on historical records, it is often assigned to the sample corresponding with the identified change in pollen record. This methodology presents two issues: 1) the date of settlement is only approximately known, and varies according to location; 2) the identification of the sample which demonstrates a rise of agricultural indicators ``by eye'' is subjective, and not reproducible.
+
+Finally, the physical demarcations of core surface and sometimes the core bottom provide additional dates to help constrain age-depth curves. The majority of cores that begin at the uppermost layer of sediment include a core top estimate dated to the year of sampling, which is known with certainty. However, the accuracy of this date is compromised by both the mixing and compaction of the upper-most sediment layers during the sampling process, and this introduced error must be estimated based on sampling methods used and success of the drive. 
+
+#### Recent advances in age-depth modelling
+
+Bacon is awesome. Right???
+
+#### Meta-awesomeness
+
+One of the outcomes of the recent recognition of the importance of open and reproducible research has been the development of databases that store and curate large amounts of data, providing not only access but the ability to query data to the public. In paleoecology, one such database that hosts an array of paleoecological fossil data, including pollen and vertebrates among others. This easy access to such large amounts of data spanning large spatial and temporal scales allows researchers to answer questions that may have previously been unanswerable due to data and computational limitations. The path forward must be taken with caution - although great effort is put into the standardization of data formatting, all submitted data may not be of equal quality. This is surely mostly due to varying levels of experience, but one can imagine other factors that affect data quality. The issue of data quality as a function of principal investigator is difficult to detangle. This alone should not deter anyone from conducting large-scale meta-analyses, but should highlight the importance of careful review of any and all data.
+
+When performing meta-analysis using sediment data from multiple sites, we must consider the age-depth modelling processes used to date the cores. There is no consensus on a single best method, and there is a trade-off between method accessibility and flexibility. Within Neotoma, methods vary from linear interpolation to Bayesian methods. In large-scale meta-analyses, it is necessary to ask whether the age-depth modelling process affects has an effect on any ecological conclusions we make based on the data. And, is it justifiable to use data from multiple cores which each use differing age-depth models? 
+
+*We standardize everything to make it awesome. Simon, what are we really going to do in this paper???? Aside from making it awesome of course.*
+
+#### Towards standardization and uncertainty quantification
+
+Here we take a step towards answering some of the pending questions related to age-depth modelling using Bacon.  We begin with the modest data set of fossil pollen cores from the Upper Midwest, whose resulting age posteriors will be used in a vegetation reconstruction project supported by PalEON. With a focus on automation and standardization, we were required to make informed decisions about site and marker suitability as well as any input parameters required by Bacon. This attempt to streamline the process may lead one to think that the quality of the resulting age-depth model may be compromised. We argue that this is not the case. Typically for a single site, one may choose to repeatedly adjust input parameters until the resulting age-depth curve is satisfactory. However, the majority of the input parameters are used to determine model priors - for both the memory and accumulation rate. In a true Bayesian framework, priors must be established independently from the data to avoid bias. Prior specification is an area of research unto itself, and we refer readers to XXXX for further reading.
+
+#### Data Summary
+
+Currently we have 184 cores from Neotoma plus another 4 from Calcote in our potential prediction data set. Geochronological tables for these cores were filtered to remove any markers of questionable quality, as well as biostratigraphic markers (can be subjective and often vary by analyst). Radiocarbon, lead, and core-top markers were kept. Additionally, suitable pre-settlement samples identified during our elicitation exercise were added as additional biostratigraphic markers to existing geochronological tables.
+
+After filtering the chronological control tables, 21 out of the 184 cores were deemed unsuitable for further analysis because of either a missing geochron table (3 cores) or a lack of geochronological dates (18 cores). Of the remaining set of suitable cores, there are 87 that have only a core top and pre-settlement sample, 6 varved cores, and 76 with anywhere from 3 to 29 geochronological markers. Out of the suitable core set, there are 62 cores for which the geochronological markers cover the entire 2K interval - I was initially concerned that this would be an issue, but it is not as bad as I thought it would be (see the figure 2k_baconized_locations.pdf). Note that there are multiple cores at certain locations, so there are fewer than 62 points on the plot.
+
+#### Accumulation Rate Priors
+
+Using the depths and ages from the geochronological markers for cores in upper midwest, we computed empirical accumulation rates for each consecutive pair of markers. The age associated with each accumulation rate was taken to be the midpoint between the two markers. Rates were split into two groups based on their ages: modern, which encompassed present to 100 YBP, and 2K which contained rates from 100 to 2000 YBP. Summary statistics were computed for each of these groups. Gamma priors were then defined for both time frames, were each had a mean equal to the empirical mean, and a variance equal to double the empirical variance. Note that we use twice the empirical variance to account for additional variability in rates that was not observed. The prior distributions were defined as follows:
+
+|       | Mean     | Variance | Rate | Shape  |
+|-------|----------|----------|------|--------|
+|**Modern** | 3.02	   | 5.70     | 0.53 | 1.6    |
+|**2K**     | 15.00    | 250      | 0.06 | 0.9    |
+
+
+#### Section Thickness
+
+Bacon works by diving a core into sections whose width are determined by the user, and several parameters are fitted to each section. Diving a core into sections is in essence a time discretization, and we felt that it was important to use a consistent discretization for all cores. However, in practice this is not as simple as it sounds. Section thickness affects both run-time, model flexibility, and in certain cases the ability of Bacon to successful fit a model. Currently we are using a section thickness of 5 cm. This thickness is too large for at least one core. I'll summarize all the errors and we can revisit this.
+
+#### Dealing with missing/zero lead-210 errors
+
+Bacon requires that we pass errors associated with all chronological markers. In many cases, Lead-210 dates associated with cores from the Neotoma databased have zero errors associated with their designated ages. Knowing that this is highly unlikely (read impossible), we assigned errors to these Lead-210 dates based on Binford (1990). Binford stated that: “Ninety-five per cent confidence intervals range from about 1-2 years at 10 years of age, 10-20 at 100 years, and 80-90 at 150 years old.” Based on these confidence interval ranges, log(error) was modelled as a linear function of Lead-210 age. The fitted model was then used to predict confidence interval ranges for all Lead-210 dates which had zero error. Standard deviations (the statistic that Bacon accepts) were estimated by dividing confidence interval ranges by 2 (I know it would usually be 4, but Binford writes his 95% confidence intervals as 155 +/- 90, where 90 seems to be called the 95% confidence interval…anyone want to double check this so we get it right?). The ceiling of all lead date errors was taken in order to obtain integer-valued errors.
+
+#### Hiatus
+
+Empirical age-depth curves suggest that the age-depth relationship is non-linear, likely as a result of geophysical compaction processes. There is evidence that after the time of settlement, sediment accumulation is much faster (fewer years per cm) than before settlement (more years per cm). Although it is compelling to speculate that the coincidence of this change in rates with settlement is a result of land use change and increased erosion, this has yet to be demonstrated and further investigation is warranted. To account for these changing rates in our age-depths models, we assign a modern prior for the post-settlement portion of the core, and a 2K prior for the pre-settlement portion of the core. In practice, it is difficult to determine settlement horizon depth, but having results from such an exercise provides us with an estimate of this depth for most cores. To accommodate our use of two accumulation rate priors, we place a hiatus of negligible size at the pre-settlement sample depth. Several cores do not have suitable pre-settlement estimates, which occurred in cases where there may have been a lack of the land clearance signal in agricultural indicators, or disagreement among experts. For these cores, no hiatus was assigned, and the entire core was assigned the 2K accumulation rate prior. Additionally, there were many cores for which we had only core top and pre-settlement markers, in which case no hiatus was assigned and the modern accumulation rate prior was used.
+
+#### Expert elicitation exercise to identify settlement horizon
+
+As a result of European settlement, land clearances led to an increase in non-arboreal pollen. In the Upper Midwest, significant increases in Ambrosia, Rumex, and/or Poaceae are typically coincident with the settlement horizon. In particular, when these increases can be identified based on pollen count data, we can determine the pre-settlement sample - the sample that falls just before any increases in agricultural indicator species. This pre-settlement sample can be assumed to be of similar age as the Public Land Survey composition data, which allows us to calibrate a model describing the relationship between arboreal vegetation and sediment pollen. In practice, identify increases in agricultural indicators is often difficult, when possible, and results can be subjective. Although the pre-settlement sample has been identified for many of the fossil pollen cores in the Neotoma database, to reduce variability associated with the protocol used to determine these samples we asked a team of experts to identify pre-settlement samples based only on pollen diagrams depicting proportional changes through time as a function of depth for key indicator species and the ten most abundant arboreal taxa. Experts were prohibited from relying on stratigraphic dates (radiocarbon or other) or age-depth model estimates of sample age.
+
+For a summary of the settlement horizon elicitation exercise, see the calibration paper (coming soon).
+
+To generate the prediction data set, we would like to make use of the elicitation exercise results in order to include an additional stratigraphic marker in the chronological control tables. To do this, we need to be able to assign pre-settlement ages that correspond with the expert-determined pre-settlement depths with some confidence. From the PLS data, we have corresponding sample year for all sampled location. Within each grid cell, we determined the maximum sampling year, and then our pre-settlement age was determined by subtracting 50 from this value. An uncertainty of 50 standard deviations was used to account for our uncertainty of time of settlement. **Jack: need to clarify rationale for this 50/50 approach. Note that ideally our probability distribution for age would be asymmetric - we have an upper bound for pre-settlement.
+
+In five cases cores fell in grid cells where there was no digitized PLS data available. In these cases, we look to the surrounding grid cells to estimate the maximum sampling year. In the upper peninsula of Michigan, there was a single site for which there was no PLS data, which was assigned a maximum sampling year of 1860. The four remaining grid cells in which there were cores but no PLS data were in the lower peninsula of Michigan, and were assigned a maximum year of sampling of 1840.
+
+
+
+#### Results
+
+We were able to run Bacon successfully on of the 163 suitable cores from Neotoma in our prediction data set.
+
+Plots of the fits are here: bacon_fit_plots_hiatus_10-07-14.pdf
+
+We are also interested in how the Baconized core samples are distributed through time (see the figure baconized_cores_temporal_map.pdf, where time is binned into 400 year intervals; note time axis labels denote bin midpoints, and are in hundreds of years). Many of the cores with only a core top and a pre-settlement sample have pollen counts that extend further back in time, but to make use of these we would need to extrapolate back through time based on a linear fit using only two markers. Currently, we have agreed on extrapolating 100-200 years back through time.
+
+#### To do
+  * Add CLH sites to summary and figures (4 sites).
+  * Fix the Bacon plotting limits (yes I did this once, but they are still not quite right).
+  * Automate the code (Chris volunteered to help with this). Sometimes even a try statement can't prevent Bacon from being really angry!
+  * Compare new age models to default age models (not urgent, but interesting).
+
+```{r load_libraries}
+```
+
+
+```{r get_cores, echo=FALSE, message=FALSE, results='hide'}
+```
