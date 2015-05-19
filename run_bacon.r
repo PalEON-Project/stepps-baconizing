@@ -71,6 +71,11 @@ for(i in 1:ncores){
   site.id=site.id
   corename=site.handle
   cal.prog='Bacon'
+  
+  x=get_download(site.id)
+  x[[1]]$sample.meta
+  x[[1]]$chronologies
+  
   age.out = try(write_agefile_stepps(download=download, survey.year=survey.year, chronology=chronology, path=path, corename=corename, 
                                      site.id=site.id, cal.prog=cal.prog))
   if (!class(age.out)=='try-error'){
@@ -86,9 +91,9 @@ bacon.params[bacon.params$suit==FALSE,]
 
 write.table(bacon.params, file='bacon.params.csv', col.names=TRUE, row.names=FALSE, sep=',')
 
-long_cores <- c('Ferr01X', 'Hell Hole', 'Lone02', 'Warner')
-handles    <- c('FERRY', 'HELLHOLE', 'LONE', 'WARNER')
-ids        <- c('CLH2', 'CLH3', 'CLH5', 'CLH6')
+long_cores <- c('Ferr01X', 'Hell Hole', 'Lone02', 'Warner', 'Lily')
+handles    <- c('FERRY', 'HELLHOLE', 'LONE', 'WARNER', 'LILY')
+ids        <- c('CLH2', 'CLH3', 'CLH5', 'CLH6', 'CLH4')
 
 clh_meta   <- read.csv('data/hotchkiss_lynch_calcote_meta_v0.1.csv', header=TRUE)
 clh_counts <- read.csv('data/hotchkiss_lynch_calcote_counts_v0.1.csv', header=TRUE, stringsAsFactors=FALSE)

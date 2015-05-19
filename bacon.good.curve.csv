@@ -1,189 +1,189 @@
-handle,dataset.id,curve.fit,note
-AMBER,14631,,
-CHIPPEWA,369,0,weird top sample
-FRAINSLK,847,0,"check the top core age, check with Eric Grimm"
-GREENLK,982,0,"Could add coretop by hand (based on Eric's email) - sampling date ""-22"" for 0cm - fine tuning is okay, 200 yr date should be removed altogether"
-KIMBLE,13032,0,That depth seems wrong. All the radiocarbon dates are missing.
-LILYLAKE,1633,0,Missing everything.
-ANDRUSLK,205,0.5,"Simon thinks it's overfit, overconfident 210Pb dates likely a problem."
-BIGJOHN,272,0.5,The deposition time seems too low at the bottom
-CEDARBLK,352,0.5,underestimates then overestimates
-CUB2,532,0.5,Missing the last rc date by 2kyr
-HANSON,1004,0.5,"ugly plot, can't decide, missing last date?"
-KELLHOL1,1447,0.5,"That seems right, just wonky. But this means the median is too low."
-LAKEMARY,3473,0.5,"Seems to be missing a core top. Eric thinks the top sediments are missing.  Date assigned by COHMAP, probably a reasonable age, maybe nothing we can do about it."
-LTDOLLAR,12001,0.5,"The Deposition time needs to be higher, acc mean should be higher."
-MCNRNY2A,1725,0.5,"Presettlement assignment looks wonky, maybe our assesment of the pre-sett age is too old. (it's in a state forest, maybe make it younger)"
-MCNRNY3A,3485,0.5,"Presettlement assignment looks wonky, maybe our assesment of the pre-sett age is too old. (it's in a state forest, maybe make it younger)"
-MCNRNY4A,3486,0.5,"Presettlement assignment looks wonky, maybe our assesment of the pre-sett age is too old. (it's in a state forest, maybe make it younger)"
-OTTOMLK,1840,0.5,"The model ignores pre-sett, the lead dates are wonked."
-POGONIA,3558,0.5,"Seems to be missing a bunch of radiocarbon dates with the model, the memory might be too high? Is this a section problem?"
-RYERSE,2318,0.5,"Flexibility problems at the bottom of the core, should be higher."
-MENDOTAC,1735,0.75,"Probably should't be missing the date at 850cm, but otherwise okay."
-MENDOTAD,3488,0.75,This is doing something crazy.  My guess is that the age at 75cm is wrong.
-NELSLK,1793,0.75,"Giving us a >0 hiatus, pre-sett assignment might be too old."
-REIDEL,2053,0.75,Except for the very bottom.
-ROSSBURG,2290,0.75,"Having some problems with flexibility, that core top age is probably from a guess by Herb Wright."
-STWDARK2,3781,0.75,"Missing the last date, but the last RC age seems young maybe (or the 2nd last seems high)"
-WOLVERIN,3032,0.75,"There's lots I don't trust about the trace plot & posterior/prior for memory, but the model looks good."
-ADELINE,13060,1,
-ALLIE,29,1,top & pre-sett
-BADMED,223,1,top & pre-sett
-BBASS,241,1,"top & pre-sett, but note the depth is short."
-BECKMAN,249,1,top & pre-sett
-BECKMNBG,3062,1,top & pre-sett
-BILLYS,275,1,
-BLANDIN,280,1,
-BLOMFORD,10973,1,
-BLUMOUND,287,1,
-BOBLAKE,296,1,"top & bottom, a bit low."
-BOGD,298,1,
-BOSSUOT,305,1,"top & bttom, a bit high"
-BROWNSBY,314,1,ugly plot.
-BURNTSDE,325,1,"top & bottom, a bit low."
-CAMP,14633,1,"generally fine, a bit low."
-CAMP12LK,333,1,ugly plot (seems high)
-CAMPBELL,334,1,
-CAMPLAKE,13057,1,
-CANYON,3055,1,
-CHUBLAKE,12010,1,
-CINDY,382,1,
-CRAZY,521,1,
-DALTON,545,1,
-DEANS,12007,1,
-DEMONTLK,679,1,
-DENTONLK,681,1,ugly plot
-DEVILSWI,684,1,
-DISTRHFT,3081,1,
-DOGFISH,717,1,
-DUNNIGAN,774,1,
-EASTTWIN,781,1,
-EGGERT,786,1,
-ELEVENS,13069,1,
-EMILY,12008,1,a bit high
-ESKALAKE,13071,1,
-EVRHRTLK,12024,1,
-FAITH,817,1,
-FALLISON,13073,1,
-FARQUAR,822,1,
-FAWNANMN,10974,1,
-FAWNLAKE,824,1,
-FERRY,CLH2,1,
-FOXPOND,846,1,
-FRENCH,850,1,
-FROVOLD,10975,1,
-GASS,860,1,passes the lowest date. Could work better with hiatus at 510
-GEORGE,869,1,
-GOLDSMTH,967,1,little low at the bottom
-GOOSEMN,10976,1,
-GRICE,990,1,
-HELLHOLE,CLH3,1,
-HELLSKIT,3131,1,
-HEMOPOND,1032,1,
-HORSE,1109,1,
-HOSTAGE,1111,1,
-HUGLAKE,1134,1,
-HUSTLER,1138,1,ugly plot
-IRVIN,1153,1,
-IRWINSMT,13047,1,Awesome job with the 14C!
-JACOBSN2,3138,1,
-KEGAN,1446,1,
-KELLHOL2,3452,1,
-KELLNERS,1448,1,"Missing that last age, but okay."
-KIRCHNR1,1520,1,
-KIRCHNR2,3455,1,
-KITCHNER,1524,1,
-KOTIRANT,1548,1,
-KRYZ,1552,1,
-LAKE27,1581,1,
-LAKEANN,1584,1,
-LAKEANNF,3468,1,
-LAKECARL,1588,1,
-LEWISLK,1629,1,
-LITTBASS,1639,1,
-LKCLDSH,3482,1,"Awesome RC, but no identified pre-sett - Should be removed, should hav e no hiatus"
-LONE,CLH5,1,
-LOSTLAKE,1665,1,
-LYBECK,12014,1,
-MARTINPD,1708,1,
-MCCRANEY,1720,1,
-MINNIEN,1757,1,
-MINNIEO,3492,1,
-MNGRCL,515,1,
-MNLYC2,12005,1,
-MONSON,12006,1,
-MUDDLMN,12013,1,
-MUDLKMN1,1777,1,
-MUDLKMN2,1778,1,
-MURPHY,1781,1,
-MYRTLE,1786,1,
-OAKGLEN,13056,1,
-OCHEDA,10971,1,
-OLSONMN,10977,1,
-ONAMIA,1830,1,
-ONDRISPD,1831,1,
-PENNINGT,1884,1,
-PERCHMN,12009,1,
-PETERSL,1891,1,
-PGONIABG,3541,1,
-PLEASAMN,1955,1,
-PORTAGE,1966,1,
-RACHEL,12011,1,
-RADTKE,2011,1,
-REICHOW,2051,1,
-RHOLL,2062,1,
-RICEMNB,3568,1,"No pre-sett date, no one could assign it."
-RNDGROVE,10983,1,
-RUTZLAKE,2314,1,
-SEDIVY,2354,1,
-SEIDEL02,3620,1,
-SHAGAWA,2375,1,
-SHARKEY,13029,1,
-SILVERMN,2383,1,
-SISEEBA,2394,1,
-SOLUM,2581,1,
-SOSTANCH,2584,1,
-SOUHERON,10970,1,
-SPECTACL,2585,1,
-SPIRIT,2586,1,
-STCATHER,2600,1,
-STONE,2605,1,
-SUNFISH,2613,1,
-TAMARACK,2624,1,
-TERHELL,2638,1,
-THOMPSON,2640,1,
-THRDBGW,3788,1,
-TOENJES,2648,1,
-TWINMN1,2881,1,
-UNION,12015,1,
-UPGRAVEN,2888,1,
-VESTABRG,3831,1,
-WARNER,CLH6,1,
-WEBERLK,3837,1,
-WENTZEL,2948,1,
-WHITLIL1,2952,1,
-WINTERGR,2961,1,
-WOLSFELD,3031,1,
-WOODLAKE,3035,1,
-YELLOWDG,3047,1,
-ZIEBELL,12012,1,
-BASSK,14270,,
-BROWNLK,313,,
-CAMP11LK,332,,
-DARKLAKE,546,,
-DISTER59,700,,
-GLIMML1,13097,,
-IOLABOG,1151,,
-LASTLAKE,12004,,
-LITTLPIN,1643,,
-LKCLDSSW,3483,,
-MABEL,1685,,
-MNFRAL,12016,,
-MNSHBL,15274,,
-RICEMNA,2066,,
-RUBYLAKE,2309,,
-STONTAM1,2607,,
-STONTAM2,3780,,
-THIRDLK,3784,,
-THRDBGN,3786,,
-WESTOLAF,13051,,
+"handle","dataset.id","curve.fit","note"
+"CHIPPEWA",369,0,"weird top sample"
+"FRAINSLK",847,0,"check the top core age, check with Eric Grimm"
+"GREENLK",982,0,"Could add coretop by hand (based on Eric's email) - sampling date ""-22"" for 0cm - fine tuning is okay, 200 yr date should be removed altogether"
+"KIMBLE",13032,0,"That depth seems wrong. All the radiocarbon dates are missing."
+"LILYLAKE",1633,0,"Missing everything."
+"ANDRUSLK",205,0.5,"Simon thinks it's overfit, overconfident 210Pb dates likely a problem."
+"BIGJOHN",272,0.5,"The deposition time seems too low at the bottom"
+"CEDARBLK",352,0.5,"underestimates then overestimates"
+"CUB2",532,0.5,"Missing the last rc date by 2kyr"
+"HANSON",1004,0.5,"ugly plot, can't decide, missing last date?"
+"KELLHOL1",1447,0.5,"That seems right, just wonky. But this means the median is too low."
+"LAKEMARY",3473,0.5,"Seems to be missing a core top. Eric thinks the top sediments are missing.  Date assigned by COHMAP, probably a reasonable age, maybe nothing we can do about it."
+"LTDOLLAR",12001,0.5,"The Deposition time needs to be higher, acc mean should be higher."
+"MCNRNY2A",1725,0.5,"Presettlement assignment looks wonky, maybe our assesment of the pre-sett age is too old. (it's in a state forest, maybe make it younger)"
+"MCNRNY3A",3485,0.5,"Presettlement assignment looks wonky, maybe our assesment of the pre-sett age is too old. (it's in a state forest, maybe make it younger)"
+"MCNRNY4A",3486,0.5,"Presettlement assignment looks wonky, maybe our assesment of the pre-sett age is too old. (it's in a state forest, maybe make it younger)"
+"OTTOMLK",1840,0.5,"The model ignores pre-sett, the lead dates are wonked."
+"POGONIA",3558,0.5,"Seems to be missing a bunch of radiocarbon dates with the model, the memory might be too high? Is this a section problem?"
+"RYERSE",2318,0.5,"Flexibility problems at the bottom of the core, should be higher."
+"MENDOTAC",1735,0.75,"Probably should't be missing the date at 850cm, but otherwise okay."
+"MENDOTAD",3488,0.75,"This is doing something crazy.  My guess is that the age at 75cm is wrong."
+"NELSLK",1793,0.75,"Giving us a >0 hiatus, pre-sett assignment might be too old."
+"REIDEL",2053,0.75,"Except for the very bottom."
+"ROSSBURG",2290,0.75,"Having some problems with flexibility, that core top age is probably from a guess by Herb Wright."
+"STWDARK2",3781,0.75,"Missing the last date, but the last RC age seems young maybe (or the 2nd last seems high)"
+"WOLVERIN",3032,0.75,"There's lots I don't trust about the trace plot & posterior/prior for memory, but the model looks good."
+"ADELINE",13060,1,
+"ALLIE",29,1,"top & pre-sett"
+"BADMED",223,1,"top & pre-sett"
+"BBASS",241,1,"top & pre-sett, but note the depth is short."
+"BECKMAN",249,1,"top & pre-sett"
+"BECKMNBG",3062,1,"top & pre-sett"
+"BILLYS",275,1,
+"BLANDIN",280,1,
+"BLOMFORD",10973,1,
+"BLUMOUND",287,1,
+"BOBLAKE",296,1,"top & bottom, a bit low."
+"BOGD",298,1,
+"BOSSUOT",305,1,"top & bttom, a bit high"
+"BROWNSBY",314,1,"ugly plot."
+"BURNTSDE",325,1,"top & bottom, a bit low."
+"CAMP",14633,1,"generally fine, a bit low."
+"CAMP12LK",333,1,"ugly plot (seems high)"
+"CAMPBELL",334,1,
+"CAMPLAKE",13057,1,
+"CANYON",3055,1,
+"CHUBLAKE",12010,1,
+"CINDY",382,1,
+"CRAZY",521,1,
+"DALTON",545,1,
+"DEANS",12007,1,
+"DEMONTLK",679,1,
+"DENTONLK",681,1,"ugly plot"
+"DEVILSWI",684,1,
+"DISTRHFT",3081,1,
+"DOGFISH",717,1,
+"DUNNIGAN",774,1,
+"EASTTWIN",781,1,
+"EGGERT",786,1,
+"ELEVENS",13069,1,
+"EMILY",12008,1,"a bit high"
+"ESKALAKE",13071,1,
+"EVRHRTLK",12024,1,
+"FAITH",817,1,
+"FALLISON",13073,1,
+"FARQUAR",822,1,
+"FAWNANMN",10974,1,
+"FAWNLAKE",824,1,
+"FERRY","CLH2",1,
+"FOXPOND",846,1,
+"FRENCH",850,1,
+"FROVOLD",10975,1,
+"GASS",860,1,"passes the lowest date. Could work better with hiatus at 510"
+"GEORGE",869,1,
+"GOLDSMTH",967,1,"little low at the bottom"
+"GOOSEMN",10976,1,
+"GRICE",990,1,
+"HELLHOLE","CLH3",1,
+"HELLSKIT",3131,1,
+"HEMOPOND",1032,1,
+"HORSE",1109,1,
+"HOSTAGE",1111,1,
+"HUGLAKE",1134,1,
+"HUSTLER",1138,1,"ugly plot"
+"IRVIN",1153,1,
+"IRWINSMT",13047,1,"Awesome job with the 14C!"
+"JACOBSN2",3138,1,
+"KEGAN",1446,1,
+"KELLHOL2",3452,1,
+"KELLNERS",1448,1,"Missing that last age, but okay."
+"KIRCHNR1",1520,1,
+"KIRCHNR2",3455,1,
+"KITCHNER",1524,1,
+"KOTIRANT",1548,1,
+"KRYZ",1552,1,
+"LAKE27",1581,1,
+"LAKEANN",1584,1,
+"LAKEANNF",3468,1,
+"LAKECARL",1588,1,
+"LEWISLK",1629,1,
+"LITTBASS",1639,1,
+"LKCLDSH",3482,1,"Awesome RC, but no identified pre-sett - Should be removed, should hav e no hiatus"
+"LONE","CLH5",1,
+"LOSTLAKE",1665,1,
+"LYBECK",12014,1,
+"MARTINPD",1708,1,
+"MCCRANEY",1720,1,
+"MINNIEN",1757,1,
+"MINNIEO",3492,1,
+"MNGRCL",515,1,
+"MNLYC2",12005,1,
+"MONSON",12006,1,
+"MUDDLMN",12013,1,
+"MUDLKMN1",1777,1,
+"MUDLKMN2",1778,1,
+"MURPHY",1781,1,
+"MYRTLE",1786,1,
+"OAKGLEN",13056,1,
+"OCHEDA",10971,1,
+"OLSONMN",10977,1,
+"ONAMIA",1830,1,
+"ONDRISPD",1831,1,
+"PENNINGT",1884,1,
+"PERCHMN",12009,1,
+"PETERSL",1891,1,
+"PGONIABG",3541,1,
+"PLEASAMN",1955,1,
+"PORTAGE",1966,1,
+"RACHEL",12011,1,
+"RADTKE",2011,1,
+"REICHOW",2051,1,
+"RHOLL",2062,1,
+"RICEMNB",3568,1,"No pre-sett date, no one could assign it."
+"RNDGROVE",10983,1,
+"RUTZLAKE",2314,1,
+"SEDIVY",2354,1,
+"SEIDEL02",3620,1,
+"SHAGAWA",2375,1,
+"SHARKEY",13029,1,
+"SILVERMN",2383,1,
+"SISEEBA",2394,1,
+"SOLUM",2581,1,
+"SOSTANCH",2584,1,
+"SOUHERON",10970,1,
+"SPECTACL",2585,1,
+"SPIRIT",2586,1,
+"STCATHER",2600,1,
+"STONE",2605,1,
+"SUNFISH",2613,1,
+"TAMARACK",2624,1,
+"TERHELL",2638,1,
+"THOMPSON",2640,1,
+"THRDBGW",3788,1,
+"TOENJES",2648,1,
+"TWINMN1",2881,1,
+"UNION",12015,1,
+"UPGRAVEN",2888,1,
+"VESTABRG",3831,1,
+"WARNER","CLH6",1,
+"WEBERLK",3837,1,
+"WENTZEL",2948,1,
+"WHITLIL1",2952,1,
+"WINTERGR",2961,1,
+"WOLSFELD",3031,1,
+"WOODLAKE",3035,1,
+"YELLOWDG",3047,1,
+"ZIEBELL",12012,1,
+"AMBER",14631,,
+"BASSK",14270,,
+"BROWNLK",313,,
+"CAMP11LK",332,,
+"DARKLAKE",546,,
+"DISTER59",700,,
+"GLIMML1",13097,,
+"IOLABOG",1151,,
+"LASTLAKE",12004,,
+"LITTLPIN",1643,,
+"LKCLDSSW",3483,,
+"MABEL",1685,,
+"MNFRAL",12016,,
+"MNSHBL",15274,,
+"RICEMNA",2066,,
+"RUBYLAKE",2309,,
+"STONTAM1",2607,,
+"STONTAM2",3780,,
+"THIRDLK",3784,,
+"THRDBGN",3786,,
+"WESTOLAF",13051,,
