@@ -190,4 +190,4 @@ for (i in 1:n){
 # write the data
 ###########################################################################################################
 
-write.table(pollen_ts, file=paste('data/pollen_ts_', Sys.Date(), '.csv', sep=''), quote=FALSE, row.names=FALSE)
+write.table(pollen_ts, file=paste('data/pollen_ts_bacon_', Sys.Date(), '.csv', sep=''), quote=FALSE, row.names=FALSE)
