@@ -119,8 +119,8 @@ run.bacon <- function(site.params){
                  ask           = FALSE,
                  suggest       = FALSE,
                  depths.file   = FALSE, # i want to pass one, but bacon sometimes barfs if i do and i can't figure out why
-                 hiatus.shape  = 1,
-                 hiatus.mean   = 10,
+                 hiatus.shape  = 0.1,#1,
+                 hiatus.mean   = 1/100,#1/10
                  hiatus.depths = hiatus.depth)
       )
     )

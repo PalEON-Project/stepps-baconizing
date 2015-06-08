@@ -57,6 +57,7 @@ bacon.params <- data.frame(handle = sapply(pollen_dat, function(x)x$dataset$data
                            success = NA,
                            stringsAsFactors=FALSE)
 
+# 101 gives error still
 for(i in 1:ncores){ 
   print(i)
   site.handle <- as.vector(bacon.params$handle[i])
@@ -168,21 +169,24 @@ for (i in 1:ncores){
   }  
 }
 sum(is.na(lengths))
-lengths[lengths<20]
-bacon.params$handle[lengths<20]
+lengths[!is.na(lengths) & (lengths<20)]
+bacon.params$handle[!is.na(lengths) & (lengths<20)]
+bacon.params$handle[is.na(lengths)] # should be 17 problem sites
 
 write.table(t(colnames(bacon.params)), file='bacon.fit.hiatus.csv', sep=',', append=FALSE, col.names=FALSE, row.names=FALSE)
 
 # run bacon!
-for(i in 101:ncores){
+for(i in 21:30){
   
   print(i)
   site.params <- bacon.params[i,]
   
   # some sites don't work with thick=5
   # can we programmatically deal with this?
-  if (site.params$dataset.id %in% c(313, 774, 3485)){
+  if (site.params$dataset.id %in% c(774, 3485)){
     site.params$thick = 3
+  } else if (site.params$dataset.id %in% c(313)){
+    site.params$thick = 2
   }
   
   site.params <- run.bacon(site.params)
