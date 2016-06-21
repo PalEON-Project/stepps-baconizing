@@ -38,7 +38,7 @@ library(reshape2)
 
 ```
 
-Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings.  As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record, but for some time we have been aware of this situation, and have used 'fuzzy matching' to accomodate errors in age-depth modeling, or under-sampling of records using dated material.
+Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings.  As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record, but for some time we have been aware of this situation, and have used 'fuzzy matching' to accomodate errors in age-depth modeling, or under-sampling of records using dated material [@].
 
 As more and more ecologists are turning to the paleoecological record, and as we try to do more with what we have, this slight of hand becomes more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research.
 
@@ -219,15 +219,15 @@ Although it is compelling to speculate that the coincidence of a change in rates
 
 Bacon works by diving a core into sections whose width are determined by the user [@blaauw2011flexible]. Sections are the atomic unit of a Bacon model, and various parameters are fit within each section.  In particular, the `memory` parameter defines the flexibility of the accumulation rates within a single chronology, thus a model with large section thicknesses will be, by virtue of having fewer overall sections, less flexible. However, narrow section thicknesses result in very large run-times, and may show other, unanticipated problems associated with finding fit in multi-parameter space.
 
-Diving a core into sections is in essence a time discretization, and we felt that it was important to use a consistent discretization for all cores. However, in practice this is not as simple as it sounds. Section thickness affects run-time, model flexibility, and, in certain cases, the ability of Bacon to successful fit a model.  Given the flexibility in assigning section thicknesses, and the dependence
+Dividing a core into sections is an approximation of time discretization, abstracted through the process of deposition.  While consistent section widths across all cores (and thus consistent discretization) should be a goal, in practice, the internal unmeasurable variability in sedimentation rates, and uncertainty in the models themselves, makes the implementation of consistent section thicknesses difficult.  To provide prescriptive widths, but still allow flexibility as needed in the Bacon modelling, each core was run with widths of 5, 10, 15 and 20cm.  Moel fit was assessed visually, and the best fit model was subsequently chosen to be the default model for that core.
 
 ## Dealing with zero Lead-210 errors
 
-Bacon requires that we pass errors associated with all chronological markers. In many cases, Lead-210 dates associated with cores from the Neotoma databased have zero errors associated with their designated ages. Knowing that this is highly unlikely (read impossible), we assigned errors to these Lead-210 dates based on Binford (1990). Binford stated that: “Ninety-five per cent confidence intervals range from about 1-2 years at 10 years of age, 10-20 at 100 years, and 80-90 at 150 years old.” Based on these confidence interval ranges, log(error) was modelled as a linear function of Lead-210 age. The fitted model was then used to predict confidence interval ranges for all Lead-210 dates which had zero error. Standard deviations (the statistic that Bacon accepts) were estimated by dividing confidence interval ranges by 2 (I know it would usually be 4, but Binford writes his 95% confidence intervals as 155 +/- 90, where 90 seems to be called the 95% confidence interval…anyone want to double check this so we get it right?). The ceiling of all lead date errors was taken in order to obtain integer-valued errors.
-
+Bacon requires that all chronological markers be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma was entered without error reporting.  Of the 398 ^210^Pb markers in Neotoma 148 have no error reported.  Binford [-@binford1990] reports "Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."  Using this assessment we fit a smooth linear function to assign 95% CI intervals for all ^210^ dates with missing uncertainty.  These confidence intervals were then divided by 2 (and the integer ceiling taken) to obtain standard deviations to be used in the Bacon model.
 
 ## Expert elicitation exercise to identify settlement horizon
-As a result of European settlement, land clearances led to an increase in non-arboreal pollen. In the Upper Midwest, significant increases in Ambrosia, Rumex, and/or Poaceae are typically coincident with the settlement horizon. In particular, when these increases can be identified based on pollen count data, we can determine the pre-settlement sample - the sample that falls just before any increases in agricultural indicator species. This pre-settlement sample can be assumed to be of similar age as the Public Land Survey composition data, which allows us to calibrate a model describing the relationship between arboreal vegetation and sediment pollen. In practice, identify increases in agricultural indicators is often difficult, when possible, and results can be subjective. Although the pre-settlement sample has been identified for many of the fossil pollen cores in the Neotoma database, to reduce variability associated with the protocol used to determine these samples we asked a team of experts to identify pre-settlement samples based only on pollen diagrams depicting proportional changes through time as a function of depth for key indicator species and the ten most abundant arboreal taxa. Experts were prohibited from relying on stratigraphic dates (radiocarbon or other) or age-depth model estimates of sample age.
+
+The *Ambrosia* rise is a well known phenomenon in the eastern United States, and elsewhere, that appears to be contemporraneous with Euro-American settlement, land clearance and the initiation of intensive agriculture in the region [@mcandrews]. In the Upper Midwest, significant increases in *Ambrosia*, *Rumex*, and/or Poaceae are typically coincident with the settlement horizon. Because of this feature it is possible to establish a biostratigraphic chronological control. When the rise can be identified visually it can be used as a stratigraphic marker with an age defined as either immediately preceeding (when the "pre-settlement" sample is used), or immedately after.  The pre-settlement sample has been identified for many of the fossil pollen cores in the Neotoma database, to reduce variability associated with the protocol used to determine these samples we asked a team of experts to identify pre-settlement samples based only on pollen diagrams depicting proportional changes through time as a function of depth for key indicator species and the ten most abundant arboreal taxa. Experts were prohibited from relying on stratigraphic dates (radiocarbon or other) or age-depth model estimates of sample age.
 
 For a summary of the settlement horizon elicitation exercise, see the calibration paper (coming soon).
 
@@ -237,11 +237,15 @@ In five cases cores fell in grid cells where there was no digitized PLS data ava
 
 ## Bacon Model Comparison
 
+
 # Results
+
 
 # Discussion
 
+
 # Conclusions
+
 
 ## Acknowledgements
 
