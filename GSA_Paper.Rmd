@@ -1,0 +1,248 @@
+---
+title: "Age Models in Large Scale Synthesis"
+output:
+  html_document:
+    code_folding: show
+    highlight: pygment
+    number_sections: yes
+    theme: journal
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+csl: ecology.csl
+bibliography: baconizing.bib
+---
+
+# 120 Character Summary
+
+
+\pagebreak
+
+# Title Page
+
+\pagebreak
+
+# Abstract
+
+# Main Paper
+
+## Introduction
+
+```{r load_libraries}
+
+library(neotoma)
+library(plyr)
+library(reshape2)
+
+```
+
+Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings.  As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record, but for some time we have been aware of this situation, and have used 'fuzzy matching' to accomodate errors in age-depth modeling, or under-sampling of records using dated material.
+
+As more and more ecologists are turning to the paleoecological record, and as we try to do more with what we have, this slight of hand becomes more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research.
+
+```{r get_cores, echo=FALSE, message=FALSE, results='hide'}
+#all.pubs <- get_publication()
+#meta.table <- ldply(all.pubs, '[[', 'meta')
+
+source('R/getNAcores.R')
+
+pubs <- get_publication(all.datasets)
+
+meta.table       <- do.call(rbind.data.frame, 
+                            lapply(pubs, function(x){
+                              metas <- do.call(rbind.data.frame, lapply(x, '[[', 'meta'))
+                              metas[which.max(metas$year),]
+                            }))
+
+chron <- sapply(all.downloads, function(x)x$sample.meta$age.type[1])
+
+meta.table$chron <- NA
+meta.table$chron <- chron[rownames(meta.table)]
+
+```
+
+The Neotoma database has a large number of pollen records that can be used for paleoecological analysis.  These records have been obtained from publications that span a time period from  `r min(meta.table$year, na.rm=TRUE)` to `r max(meta.table$year, na.rm=TRUE)`, with more than half the records coming from before 1983.  For pollen records that are not "modern", sample age is obtained from a chronology constructed using classical [@blaauw2010methods] or Bayesian [@blaauw2011flexible; @buck2000bayesian;@blaauw2005radiocarbon;@ramsey1995radiocarbon] methods using dated material including radiocarbon (^14^C) and other radiometric dates (*e.g.* ^210^Pb, ^137^Cs). Chronologies are developed using dated stratigraphic control points from within a cores, which may be geochronological (dated material), geostratigraphic (e.g., the “modern” core top), and sometimes biostratigraphic (changes in pollen assemblages associated with dated changes on the landscape). Geochronological control points are dated using radiometric dating (typically radiocarbon, but sometime ^210^Pb), although these dates are uncertain due to analytical errors during the laboratory radiocarbon dating process [@ward1978procedures], the conversion of radiocarbon to calendar years [Reimer et al., 2013], and potential differences between age of macrofossil material and age of sediment [Blois et al., 2011]. Geostratigrahic markers may have fewer sources of uncertainty - the core top age is assumed to be the year of sampling, although sedimentary mixing of the upper sediment during sampling does introduce some uncertainty. Finally, biostratigraphic control points are determined by examination (usually visual) of changes in pollen assemblages throughout a core. However, time series of pollen counts are noisy, and in practice identifying changes in composition is both difficult and subjective. Even once a compositional change is identified, there is uncertainty: related to the chronological/stratigraphic sampling density [Liu et al., 2012], and related to the need to assign a single year to the landscape-scale phenomenon which caused this compositional shift.
+
+The development of the first IntCal curve was a major milestone in paleoecological analysis.  It allowed researchers to move from radiocarbon years to calibrated radiocarbon years.  Because radiocarbon years are not equivalent to calendar years, and because the relationship is non-linear, the use of calibration curves have provided researchers with an important tool to help improve model chronologies.  However, across the Neotoma database (here we refer to North America only), many records within the database still record chronologies using only radiocarbon years (Figure 1). The transition from age models in radiocarbon years to calibrated radiocarbon years is dramatic.  The final radiocarbon model appears to be from 1998, following this we see no more radiocarbon models.  Along with this transition, we are seeing a second transition from simple linear models to more complex models using flexible Bayesian methods.  A critical question then becomes, should we simply calibrate radiocarbon dates, or generate age models *de novo*?
+
+Age estimates of pollen samples, and in some cases their uncertainty, can be estimated
+using an age-depth model determined by a combination of the chronological controls. To
+determine which sample best represents pre-settlement times, it is possible to select the
+sample closest in age but not younger than the time of settlement. Instead, we rely on the
+existence of a biostratigraphic signal corresponding with the time of interest.
+During European settlement, land-clearances led to noticeable increases in certain agri-
+cultural indicators that is reflected in the pollen records, especially Ambrosia [McAndrews,
+1988]. This change in the relative abundance of Ambrosia, referred to as the Ambrosia rise,
+can be used to identify a reasonably representative presettlement assemblage that justifiable
+precedes major land clearance - here the pre-settlement pollen sample is defined to be the
+sample immediately prior to the first pollen sample that reflects the Ambrosia rise. We deal
+with some of the uncertainty associated with the identification of a biostratigraphic marker
+by: 1) avoiding the need to assign a date to our representative pre-settlement assemblage,
+and 2) using expert elicitation to reduce expert bias.
+
+
+```{r, plot.chron.change, fig.width=6, echo=FALSE, message=FALSE, results='hide'}
+
+ggplot(meta.table, aes(x = year, fill = chron)) + geom_bar() +
+  scale_x_continuous(limits = c(1948, 2014), expand=c(0,0)) + 
+  scale_y_continuous(limits=c(0, 110), expand = c(0,0)) + 
+  xlab('Publication Year') + 
+  ylab('Core Count') +
+  theme(legend.position = 'none',
+        axis.title.x = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+        axis.title.y = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14),
+        axis.text.y = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14))
+
+```
+**Figure 1**.  *Number of chronologies using either Radiocarbon dates or calibrated radiocarbon dates.*
+
+To understand he importance of developing new models we need to first show that there are systematic offsets that occur when we convert from radiocarbon to calendar years.  
+
+```{r, linear-fake, echo=FALSE, message=FALSE, results='hide'}
+
+library(Bchron)
+
+oldest <- seq(1000, 21000, by = 1000)
+depths <- 0:100
+
+model.recal <- function(max.age, depths){
+  ages <- seq(0, max.age, length.out = length(depths))
+  calibed <- BchronCalibrate(ages, 
+                             ageSds = rep(1, length(ages)), 
+                             calCurves = rep('intcal13', length(ages)))
+  
+  from.calib <- sapply(calibed, function(x)weighted.mean(x$ageGrid, x$densities))
+  lin.model <- approx(x = depths[c(1, length(depths))], 
+                      y = from.calib[c(1, length(depths))],
+                      xout = depths)
+  data.frame(depths  = depths,
+             direct  = from.calib,
+             linear  = lin.model$y,
+             max.age = factor(max.age))
+}
+
+out.tests <- ldply(oldest, model.recal, depths = depths)
+
+out.tests$diff <- out.tests$direct - out.tests$linear
+
+direct <- ggplot(out.tests, aes(x = direct, y = linear, color = max.age)) +
+            geom_line() +
+            scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
+            scale_y_continuous(limits = c(0, 21000), expand = c(0, 0)) +
+            theme(legend.position = 'none') +
+            xlab('Direct Recalibration') +
+            ylab('Linear Model with\n Recalibration')
+
+diff  <- ggplot(out.tests, aes(x = linear, y = diff, color = max.age)) +
+            geom_line() +
+            scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
+            geom_hline(aes(yintercept=0)) +
+            theme(legend.position='none') +
+            xlab('Linear Model with Recalibration') +
+            ylab('Model Difference')
+
+grid.arrange(direct, diff)
+
+```
+**Figure 2**. *The difference between directly calibrating radiocarbon ages from an existing model and rebuilding age models using linear interpolatation from calibrated radiocarbon ages.  Negative values result when the rebuilt model provides older dates than the directly calibrated dates.  Negative values indicate that recalibration of ^14^C dates and linear interpolation provides older ages than direct recalibration.*
+
+This, expressly is not the exact procedure or dataset that we ought to be using.  In part, it implies that 
+
+```{r}
+
+source('R/recalibrate.actual.R')
+basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = core)) + 
+            geom_line() +
+            theme(legend.position = 'none') +
+            scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
+            scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0))
+
+new.chrons$diff <- new.chrons$age.direct - new.chrons$age.lin
+
+diff.model <- gam(diff ~ s(age.lin, k = 42), data = na.omit(new.chrons))
+
+diff.pred <- predict(diff.model,
+                     newdata = data.frame(age.lin = seq(0, 21000, by = 10)),
+                     se.fit = TRUE, type = 'response')
+diff.data <- data.frame(age = seq(0, 21000, by = 10),
+                        pred = diff.pred[[1]], 
+                        se   = diff.pred[[2]])
+
+ggplot(new.chrons, aes(x = age.lin, y = diff, color = max.age)) +
+            geom_point(alpha = 0.2) + 
+            geom_line(data = diff.data, aes(x = age, y = pred), col = 'red', size = 2) + 
+            scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
+            scale_y_continuous(limits = c(-1000, 1000), expand = c(0, 0)) +
+            geom_hline(aes(yintercept=0)) +
+            theme(legend.position='none') +
+            xlab('Linear Model with Recalibration') +
+            ylab('Model Difference')
+
+grid.arrange(basic, diff)
+
+```
+
+# Methods
+
+## Bacon Settings
+
+### Accumulation Rate Priors
+
+Bacon provides a default accumulation rate based on Goring et al [-@]'s survey of Holocene accumulation rates in eastern North America.  Empirical age-depth curves suggest that the age-depth relationship is non-linear, as a result of sediment compaction [@], basin shape [@] and patterns of deposition and sediment transport operating on longer time scales [@]. By narrowing the geographic and temporal range for the target reconstructions it was neccessary to re-asses the mean accumulation rate using an approach similar to Goring et al [-@], but focused on a narrower temporal and spatial window.  Goring et al. [-@] show that there is a rapid inflection point in accumulation rates at approximately 500ybp and, regionally, there is evidence that after the time of settlement, sediment accumulation is much faster (fewer years per cm) than before settlement (more years per cm), although bulk density may decrease.
+
+For the upper Midwest we computed empirical accumulation rates for consecutive pairs of geochronological markers, within sites obtained from the Netoma database. We used the mean age for adjacent markers as the assigned age for each accumulation rate. Rates were split into two groups based on their ages: modern, which encompassed the present to 100 cal yr BP (the Modern prior), and from 100 cal yr BP to 2000 cal yr BP (the 2K prior). Summary statistics were computed for each group of accumulation rates. Gamma priors were then defined for both time frames, each with a mean set equal to the empirical mean, and a variance equal to double the empirical variance from the grouped accumulation rates.  Doubling the empirical variance represents a conservative approach to modeling uncertainty, in that it accounts for additional variability in accumulation rates that was not observed in the data.
+
+*Table 1*. The estimates from the accumulation rates.
+
+ Group   Mean	  Variance	 Rate	   Shape
+------ ---------- ------ -------- -------
+Modern	3.02	     5.70	   0.53	    1.6
+2K	    15.00	     250	   0.06	    0.9
+
+## Accounting for Non-Linearity
+
+Although it is compelling to speculate that the coincidence of a change in rates with Euro-American Settlement and associated changes in land use and erosion, many sites show a similar inflection, even in regions that remain largely protected from widespread land use change [@goring]. To account for non-linearity in accumulation rates, we assign the modern prior for the post-settlement portion of the core, and a 2K prior for the pre-settlement portion of the core. In practice, it is difficult to determine settlement horizon depth, but results from an expert elicitation exercise [@dawson; @kujawa] provides us with an estimate of the settlement depth for most cores.  Cores for which experts were unable to assign a horizon were given a 2K prior only, while an "instantaneous" hiatus was placed at the pre-settlement sample depth, which then faciliated a non-linear accumulation rate witin the chronology.  No hiatus was assigned and the modern accumulation rate prior was used for cores with only core top and pre-settlement markers.
+
+## Determining section thickness
+
+Bacon works by diving a core into sections whose width are determined by the user [@blaauw2011flexible]. Sections are the atomic unit of a Bacon model, and various parameters are fit within each section.  In particular, the `memory` parameter defines the flexibility of the accumulation rates within a single chronology, thus a model with large section thicknesses will be, by virtue of having fewer overall sections, less flexible. However, narrow section thicknesses result in very large run-times, and may show other, unanticipated problems associated with finding fit in multi-parameter space.
+
+Diving a core into sections is in essence a time discretization, and we felt that it was important to use a consistent discretization for all cores. However, in practice this is not as simple as it sounds. Section thickness affects run-time, model flexibility, and, in certain cases, the ability of Bacon to successful fit a model.  Given the flexibility in assigning section thicknesses, and the dependence
+
+## Dealing with zero Lead-210 errors
+
+Bacon requires that we pass errors associated with all chronological markers. In many cases, Lead-210 dates associated with cores from the Neotoma databased have zero errors associated with their designated ages. Knowing that this is highly unlikely (read impossible), we assigned errors to these Lead-210 dates based on Binford (1990). Binford stated that: “Ninety-five per cent confidence intervals range from about 1-2 years at 10 years of age, 10-20 at 100 years, and 80-90 at 150 years old.” Based on these confidence interval ranges, log(error) was modelled as a linear function of Lead-210 age. The fitted model was then used to predict confidence interval ranges for all Lead-210 dates which had zero error. Standard deviations (the statistic that Bacon accepts) were estimated by dividing confidence interval ranges by 2 (I know it would usually be 4, but Binford writes his 95% confidence intervals as 155 +/- 90, where 90 seems to be called the 95% confidence interval…anyone want to double check this so we get it right?). The ceiling of all lead date errors was taken in order to obtain integer-valued errors.
+
+
+## Expert elicitation exercise to identify settlement horizon
+As a result of European settlement, land clearances led to an increase in non-arboreal pollen. In the Upper Midwest, significant increases in Ambrosia, Rumex, and/or Poaceae are typically coincident with the settlement horizon. In particular, when these increases can be identified based on pollen count data, we can determine the pre-settlement sample - the sample that falls just before any increases in agricultural indicator species. This pre-settlement sample can be assumed to be of similar age as the Public Land Survey composition data, which allows us to calibrate a model describing the relationship between arboreal vegetation and sediment pollen. In practice, identify increases in agricultural indicators is often difficult, when possible, and results can be subjective. Although the pre-settlement sample has been identified for many of the fossil pollen cores in the Neotoma database, to reduce variability associated with the protocol used to determine these samples we asked a team of experts to identify pre-settlement samples based only on pollen diagrams depicting proportional changes through time as a function of depth for key indicator species and the ten most abundant arboreal taxa. Experts were prohibited from relying on stratigraphic dates (radiocarbon or other) or age-depth model estimates of sample age.
+
+For a summary of the settlement horizon elicitation exercise, see the calibration paper (coming soon).
+
+To generate the prediction data set, we would like to make use of the elicitation exercise results in order to include an additional stratigraphic marker in the chronological control tables. To do this, we need to be able to assign pre-settlement ages that correspond with the expert-determined pre-settlement depths with some confidence. From the PLS data, we have corresponding sample year for all sampled location. Within each grid cell, we determined the maximum sampling year, and then our pre-settlement age was determined by subtracting 50 from this value. An uncertainty of 50 standard deviations was used to account for our uncertainty of time of settlement. **Jack: need to clarify rationale for this 50/50 approach. Note that ideally our probability distribution for age would be asymmetric - we have an upper bound for pre-settlement.
+
+In five cases cores fell in grid cells where there was no digitized PLS data available. In these cases, we look to the surrounding grid cells to estimate the maximum sampling year. In the upper peninsula of Michigan, there was a single site for which there was no PLS data, which was assigned a maximum sampling year of 1860. The four remaining grid cells in which there were cores but no PLS data were in the lower peninsula of Michigan, and were assigned a maximum year of sampling of 1840.
+
+## Bacon Model Comparison
+
+# Results
+
+# Discussion
+
+# Conclusions
+
+## Acknowledgements
+
+# References
