@@ -46,7 +46,12 @@ As more and more ecologists are turning to the paleoecological record, and as we
 
 source('R/getNAcores.R')
 
-pubs <- get_publication(all.datasets)
+if('pubs.RData' %in% list.files('data/output')){
+  load('data/output/pubs.RData')
+} else {
+ pubs <- get_publication(all.datasets)
+ save(pubs, file = 'data/output/pubs.RData')
+}
 
 meta.table       <- do.call(rbind.data.frame, 
                             lapply(pubs, function(x){
