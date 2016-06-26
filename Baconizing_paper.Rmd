@@ -118,7 +118,8 @@ oldest <- seq(1000, 21000, by = 1000)
 depths <- 0:100
 
 model.recal <- function(max.age, depths){
-  ages <- seq(0, max.age, length.out = length(depths))
+   ages <- seq(71, max.age, length.out = length(depths))
+  # ages <- seq(0, max.age, length.out = length(depths))
   calibed <- BchronCalibrate(ages, 
                              ageSds = rep(1, length(ages)), 
                              calCurves = rep('intcal13', length(ages)))
