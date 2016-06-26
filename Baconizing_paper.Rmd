@@ -43,8 +43,6 @@ Researchers are increasingly using large paleoecological databases, either in th
 As more and more ecologists are turning to the paleoecological record, and as we try to do more with what we have, this slight of hand becomes more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research [@blaauw2012out].
 
 ```{r get_cores, echo=FALSE, message=FALSE, results='hide'}
-#all.pubs <- get_publication()
-#meta.table <- ldply(all.pubs, '[[', 'meta')
 
 source('R/getNAcores.R')
 
