@@ -11,7 +11,7 @@ output:
   pdf_document:
     toc: yes
     toc_depth: '3'
-csl: ecology.csl
+csl: elsevier-harvard.csl
 bibliography: baconizing.bib
 ---
 
@@ -35,6 +35,9 @@ bibliography: baconizing.bib
 library(neotoma)
 library(plyr)
 library(reshape2)
+library(mgcv)
+library(Bchron)
+
 
 ```
 
@@ -46,10 +49,11 @@ As more and more ecologists are turning to the paleoecological record, and as we
 
 source('R/getNAcores.R')
 
-if('pubs.RData' %in% list.files('data/output')){
+if ('pubs.RData' %in% list.files('data/output')) {
   load('data/output/pubs.RData')
 } else {
- pubs <- get_publication(all.datasets)
+ pubs <- neotoma::get_publication(all.datasets)
+ 
  save(pubs, file = 'data/output/pubs.RData')
 }
 
@@ -84,8 +88,8 @@ and 2) using expert elicitation to reduce expert bias.
 ```{r, plot.chron.change, fig.width=6, echo=FALSE, message=FALSE, results='hide'}
 
 ggplot(meta.table, aes(x = year, fill = chron)) + geom_bar() +
-  scale_x_continuous(limits = c(1948, 2014), expand=c(0,0)) + 
-  scale_y_continuous(limits=c(0, 110), expand = c(0,0)) + 
+  scale_x_continuous(limits = c(1948, 2014), expand = c(0,0)) + 
+  scale_y_continuous(limits = c(0, 110), expand = c(0,0)) + 
   xlab('Publication Year') + 
   ylab('Core Count') +
   theme(legend.position = 'none',
@@ -110,13 +114,13 @@ To understand he importance of developing new models we need to first show that 
 
 ```{r, linear-fake, echo=FALSE, message=FALSE, results='hide'}
 
-library(Bchron)
-
 oldest <- seq(1000, 21000, by = 1000)
 depths <- 0:100
 
 model.recal <- function(max.age, depths){
-  ages <- seq(100, max.age, length.out = length(depths))
+  # This is plotting out the changes between actual and interpolated dates when ages are directly
+  # recalibrated.  It's mostly just to 
+  ages <- seq(71, max.age, length.out = length(depths))
   calibed <- BchronCalibrate(ages, 
                              ageSds = rep(1, length(ages)), 
                              calCurves = rep('intcal13', length(ages)))
@@ -168,26 +172,28 @@ basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = core)) +
             scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
             scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0))
 
-new.chrons$diff <- new.chrons$age.direct - new.chrons$age.lin
-
-diff.model <- gam(diff ~ s(age.lin, k = 42), data = na.omit(new.chrons))
+# Build an age model with a knot every 500 years:
+diff.model <- gam(diff ~ s(age.lin, k = 42), 
+                  data = na.omit(new.chrons))
 
 diff.pred <- predict(diff.model,
                      newdata = data.frame(age.lin = seq(0, 21000, by = 10)),
                      se.fit = TRUE, type = 'response')
+
 diff.data <- data.frame(age = seq(0, 21000, by = 10),
                         pred = diff.pred[[1]], 
                         se   = diff.pred[[2]])
 
-ggplot(new.chrons, aes(x = age.lin, y = diff, color = max.age)) +
-            geom_point(alpha = 0.2) + 
-            geom_line(data = diff.data, aes(x = age, y = pred), col = 'red', size = 2) + 
+diff <- ggplot(new.chrons, aes(x = age.lin, y = diff)) +
+            geom_point(alpha = 0.2) +
+            geom_line(data = diff.data, aes(x = age, y = pred), col = 'red', size = 2) +
             scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
             scale_y_continuous(limits = c(-1000, 1000), expand = c(0, 0)) +
-            geom_hline(aes(yintercept=0)) +
-            theme(legend.position='none') +
+            geom_hline(aes(yintercept = 0)) +
+            theme(legend.position = 'none') +
             xlab('Linear Model with Recalibration') +
             ylab('Model Difference')
+
 
 grid.arrange(basic, diff)
 
