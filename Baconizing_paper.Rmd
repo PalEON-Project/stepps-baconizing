@@ -162,7 +162,7 @@ grid.arrange(direct, diff)
 This, expressly is not the exact procedure or dataset that we ought to be using.  In part, it implies that 
 
 ```{r}
-
+library(gam)
 source('R/recalibrate.actual.R')
 basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = core)) + 
             geom_line() +
@@ -172,7 +172,7 @@ basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = core)) +
 
 new.chrons$diff <- new.chrons$age.direct - new.chrons$age.lin
 
-diff.model <- gam(diff ~ s(age.lin, k = 42), data = na.omit(new.chrons))
+diff.model <- gam(diff ~ s(age.lin, 42), data = na.omit(new.chrons))
 
 diff.pred <- predict(diff.model,
                      newdata = data.frame(age.lin = seq(0, 21000, by = 10)),
@@ -191,7 +191,8 @@ ggplot(new.chrons, aes(x = age.lin, y = diff, color = max.age)) +
             xlab('Linear Model with Recalibration') +
             ylab('Model Difference')
 
-grid.arrange(basic, diff)
+# this seems broken
+# grid.arrange(basic, diff)
 
 ```
 
