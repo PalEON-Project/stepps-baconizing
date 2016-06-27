@@ -116,7 +116,7 @@ oldest <- seq(1000, 21000, by = 1000)
 depths <- 0:100
 
 model.recal <- function(max.age, depths){
-  ages <- seq(0, max.age, length.out = length(depths))
+  ages <- seq(100, max.age, length.out = length(depths))
   calibed <- BchronCalibrate(ages, 
                              ageSds = rep(1, length(ages)), 
                              calCurves = rep('intcal13', length(ages)))
@@ -146,8 +146,8 @@ direct <- ggplot(out.tests, aes(x = direct, y = linear, color = max.age)) +
 diff  <- ggplot(out.tests, aes(x = linear, y = diff, color = max.age)) +
             geom_line() +
             scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
-            geom_hline(aes(yintercept=0)) +
-            theme(legend.position='none') +
+            geom_hline(aes(yintercept = 0)) +
+            theme(legend.position = 'none') +
             xlab('Linear Model with Recalibration') +
             ylab('Model Difference')
 
@@ -161,6 +161,7 @@ This, expressly is not the exact procedure or dataset that we ought to be using.
 ```{r}
 
 source('R/recalibrate.actual.R')
+
 basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = core)) + 
             geom_line() +
             theme(legend.position = 'none') +

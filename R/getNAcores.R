@@ -12,7 +12,7 @@ if('all.downloads.RData' %in% list.files('data/output')){
   
   na.datasets <- llply(gpid.table$GeoPoliticalID[na.sites], function(x)get_dataset(datasettype = 'pollen', gpid = x))
   
-  all.datasets <- do.call(bind, na.datasets)
+  all.datasets <- bind(bind(na.datasets[[1]], na.datasets[[2]]), na.datasets[[3]])
   
   load('data/output/all.downloads.RData')
 } else{
@@ -22,7 +22,7 @@ if('all.downloads.RData' %in% list.files('data/output')){
   
   na.datasets <- llply(gpid.table$GeoPoliticalID[na.sites], function(x)get_dataset(datasettype = 'pollen', gpid = x))
   
-  all.datasets <- do.call(bind, na.datasets)
+  all.datasets <- bind(bind(na.datasets[[1]], na.datasets[[2]]), na.datasets[[3]])
   
   all.downloads <- get_download(all.datasets)
   
