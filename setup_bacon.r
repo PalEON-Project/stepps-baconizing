@@ -1,38 +1,44 @@
 #  Note, put this code in a directory with a Bacon.R file and a Cores directory.
 require(neotoma)
-require(raster)
-require(fields)
-require(sp)
 require(maps)
+require(fields)
+require(raster)
+require(rgdal)
+
+# sp is required by raster, loaded by default
+# require(sp)
 
 source('Bacon.R')
 source('utils/helpers.r')
 source('utils/write_agefile_stepps2.r')
 
-version=3
+version = 4
 
-pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE)
-pollen_meta <- get_survey_year(pollen_meta)
-# for some reason the datasetID changed for Jones Lake
-pollen_meta[pollen_meta$datasetID == 1394, 'datasetID'] = 15274
-# for some reason the datasetID changed for Canyon Lake
-pollen_meta[pollen_meta$datasetID == 3055, 'datasetID'] = 15682
-ids_old = pollen_meta$datasetID
-
+# pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE)
+# pollen_meta <- get_survey_year(pollen_meta)
+# # for some reason the datasetID changed for Jones Lake
+# pollen_meta[pollen_meta$datasetID == 1394, 'datasetID'] = 15274
+# # for some reason the datasetID changed for Canyon Lake
+# pollen_meta[pollen_meta$datasetID == 3055, 'datasetID'] = 15682
+# ids_old = pollen_meta$datasetID
 
 gpids <- get_table(table.name='GeoPoliticalUnits')
 gpid = c(gpids[which(gpids$GeoPoliticalName == 'Minnesota'),1],
          gpids[which(gpids$GeoPoliticalName == 'Wisconsin'),1],
          gpids[which(gpids$GeoPoliticalName == 'Michigan'),1])
-dl = get_dataset(datasettype='pollen', gpid=c(gpid), ageyoung=0)
+
+dl = list()
+for (i in 1:length(gpid)){
+  dl = c(dl, get_dataset(datasettype='pollen', gpid=gpid[i], ageyoung=0))
+}
 
 all_ids = as.numeric(names(dl))
-nsites = length(all_ids)
+nsites  = length(all_ids)
 
 # load list containing pollen counts
 # will load object called pollen2k
 # the first time takes a while to pull from Neotoma
-pol=NA
+pol = NA
 if (file.exists(paste0('data/pollen_list_v', version, '.rdata'))) {
   # loads object pollen2k
   load(paste0('data/pollen_list_v', version, '.rdata')) 
@@ -50,34 +56,32 @@ if (!file.exists(paste0('data/pollen_list_v', version, '.rdata'))|(length(all_id
   save(pol, file=paste0('data/pollen_list_v', version, '.rdata'))
 } 
 
-pollen_meta_all= data.frame(id = sapply(pol, function(x) x$dataset$site.data$site.id), 
-                            handle = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
-                            lat = sapply(pol, function(x) x$dataset[[1]]$lat),
-                            long = sapply(pol, function(x) x$dataset[[1]]$long))
+# extract the meta data
+pollen_meta_all = data.frame(id     = sapply(pol, function(x) x$dataset$site.data$site.id), 
+                            handle  = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
+                            lat     = sapply(pol, function(x) x$dataset[[1]]$lat),
+                            long    = sapply(pol, function(x) x$dataset[[1]]$long))
 pollen_meta_all$state = map.where(database="state", x=pollen_meta_all$long, y=pollen_meta_all$lat)
 
 pollen_meta_all = split_mi(pollen_meta_all, longlat=TRUE)
 pollen_meta_all$state = pollen_meta_all$state2
-pollen_meta_all <- get_survey_year(pollen_meta_all)
+pollen_meta_all       = get_survey_year(pollen_meta_all)
 
-
-
-ncores = length(pol)
-
-site_data <- data.frame(handle = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
-                        name = sapply(pol, function(x)x$dataset$site.data$site.name),
-                        dataset_id = sapply(pol, function(x)x$dataset$dataset.meta$dataset.id),
+# create meta data object
+site_data <- data.frame(handle      = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
+                        name        = sapply(pol, function(x)x$dataset$site.data$site.name),
+                        dataset_id  = sapply(pol, function(x)x$dataset$dataset.meta$dataset.id),
                         pol_age_min = sapply(pol, function(x) min(x$sample.meta$age)),
                         pol_age_max = sapply(pol, function(x) max(x$sample.meta$age)),
-                        age_type = sapply(pol, function(x) max(x$sample.meta$age.type)),
-                        bacon = rep(NA, ncores),
-                        gc_age_min = rep(NA, ncores),
-                        gc_age_max = rep(NA, ncores),
-                        reason = rep(NA, ncores),
-                        new = rep(NA, ncores),
-                        amb_rise = rep(NA))
+                        age_type    = sapply(pol, function(x) max(x$sample.meta$age.type)),
+                        bacon      = rep(NA, nsites),
+                        gc_age_min = rep(NA, nsites),
+                        gc_age_max = rep(NA, nsites),
+                        reason     = rep(NA, nsites),
+                        new        = rep(NA, nsites),
+                        amb_rise   = rep(NA))
 
-
+# generate object that contains bacon inputs for each core
 bacon.params <- data.frame(handle = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
                            dataset.id = sapply(pol, function(x)x$dataset$dataset.meta$dataset.id),
                            acc.mean.mod = 3.02,
@@ -96,37 +100,27 @@ bacon.params <- data.frame(handle = sapply(pol, function(x)x$dataset$dataset.met
                            success = NA,
                            stringsAsFactors=FALSE)
 
-# check = c(13060, 13069, 13071, 13073, 14446)
-# i_check = which(bacon.params$dataset.id %in% check)
-which(bacon.params$dataset.id %in% c(14626, 14933, 15032, 15269, 15660))
 
-# 101 gives error still
-for(i in 1:ncores){ 
+# write the chron control files for bacon
+for(i in 1:nsites){ 
   print(i)
   site.handle <- as.vector(bacon.params$handle[i])
   print(site.handle)
   site.id <- as.numeric(as.vector(bacon.params$dataset.id[i]))
+ 
+  age.out = try(write_agefile_stepps2(download    = pol[[i]], 
+                                      survey.year = pollen_meta_all$set.year[i], 
+                                      chronology  = 1, 
+                                      path        = '.', 
+                                      corename    = site.handle, 
+                                      site.id     = site.id, 
+                                      cal.prog    = 'Bacon'))
   
-  #for debugging
-  download=pol[[i]]
-  survey.year=pollen_meta_all$set.year[i]
-  chronology=1
-  path='.'
-  site.id=site.id
-  corename=site.handle
-  cal.prog='Bacon'
-  
-  x=get_download(site.id)
-  x[[1]]$sample.meta
-  x[[1]]$chronologies
-  
-  age.out = try(write_agefile_stepps2(download=download, survey.year=survey.year, chronology=chronology, path=path, corename=corename, 
-                                     site.id=site.id, cal.prog=cal.prog))
   if (!class(age.out)=='try-error'){
     site_data$bacon[i]      = age.out$run_flag
     site_data$gc_age_max[i] = age.out$gc_age_max
     site_data$gc_age_min[i] = age.out$gc_age_min
-    site_data$amb_rise[i] = age.out$amb_rise
+    site_data$amb_rise[i]   = age.out$amb_rise
     
     bacon.params$suit[i]   = age.out$run_flag
     bacon.params$ndates[i] = age.out$ndates
@@ -135,27 +129,24 @@ for(i in 1:ncores){
   }
 }
 
-# check to see why some fail
-bacon.params[bacon.params$suit==FALSE,]
-
-# why are some NA
-site_data[which(is.na(site_data$bacon)),]
-
-which(site_data$bacon == FALSE)
-site_data[which(site_data$bacon == FALSE),]
-site_data[which(site_data$bacon == TRUE),]
-
-length(which(site_data$bacon == TRUE))
-site_data$dataset.id[which(site_data$bacon == TRUE)] %in% ids_old
-sum(site_data$dataset.id[which(site_data$bacon == TRUE)] %in% ids_old)
-
-site_data$new = !(site_data$dataset_id %in% ids_old)
-site_data = site_data[with(site_data, order(-bacon, new)),]
+# # check to see why some fail
+# bacon.params[bacon.params$suit==FALSE,]
+# 
+# # why are some NA
+# site_data[which(is.na(site_data$bacon)),]
+# 
+# which(site_data$bacon == FALSE)
+# site_data[which(site_data$bacon == FALSE),]
+# site_data[which(site_data$bacon == TRUE),]
+# 
+# length(which(site_data$bacon == TRUE))
+# site_data$dataset.id[which(site_data$bacon == TRUE)] %in% ids_old
+# sum(site_data$dataset.id[which(site_data$bacon == TRUE)] %in% ids_old)
+# 
+# site_data$new = !(site_data$dataset_id %in% ids_old)
+# site_data     = site_data[with(site_data, order(-bacon, new)),]
 
 write.table(site_data, file=paste0('data/pollen_site_meta_umw_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
-
-
-
 write.table(bacon.params, file=paste0('data/bacon_params_umw_v', version, '.csv'), col.names=TRUE, row.names=FALSE, sep=',')
 
 #####################################################################################################################################
