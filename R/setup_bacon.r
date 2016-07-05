@@ -9,8 +9,8 @@ require(rgdal)
 # require(sp)
 
 source('Bacon.R')
-source('utils/helpers.r')
-source('utils/write_agefile_stepps2.r')
+source('R/utils/helpers.r')
+source('R/utils/write_agefile_stepps2.r')
 
 version = 4
 
@@ -58,9 +58,9 @@ if (!file.exists(paste0('data/pollen_list_v', version, '.rdata'))|(length(all_id
 
 # extract the meta data
 pollen_meta_all = data.frame(id     = sapply(pol, function(x) x$dataset$site.data$site.id), 
-                            handle  = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
-                            lat     = sapply(pol, function(x) x$dataset[[1]]$lat),
-                            long    = sapply(pol, function(x) x$dataset[[1]]$long))
+                             handle  = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
+                             lat     = sapply(pol, function(x) x$dataset[[1]]$lat),
+                             long    = sapply(pol, function(x) x$dataset[[1]]$long))
 pollen_meta_all$state = map.where(database="state", x=pollen_meta_all$long, y=pollen_meta_all$lat)
 
 pollen_meta_all = split_mi(pollen_meta_all, longlat=TRUE)
@@ -107,14 +107,12 @@ for(i in 1:nsites){
   site.handle <- as.vector(bacon.params$handle[i])
   print(site.handle)
   site.id <- as.numeric(as.vector(bacon.params$dataset.id[i]))
- 
-  age.out = try(write_agefile_stepps2(download    = pol[[i]], 
-                                      survey.year = pollen_meta_all$set.year[i], 
-                                      chronology  = 1, 
-                                      path        = '.', 
-                                      corename    = site.handle, 
-                                      site.id     = site.id, 
-                                      cal.prog    = 'Bacon'))
+  
+  age.out = try(write_agefile_stepps(download    = pol[[i]], 
+                                     survey.year = pollen_meta_all$set.year[i], 
+                                     path        = '.', 
+                                     corename    = site.handle, 
+                                     site.id     = site.id))
   
   if (!class(age.out)=='try-error'){
     site_data$bacon[i]      = age.out$run_flag
@@ -127,17 +125,20 @@ for(i in 1:nsites){
   } else {
     bacon.params$suit[i] = FALSE
   }
+  
+  # curl breaks without this
+  Sys.sleep(2)
 }
 
-# # check to see why some fail
-# bacon.params[bacon.params$suit==FALSE,]
+# check to see why some fail
+bacon.params[bacon.params$suit==FALSE,]
 # 
-# # why are some NA
-# site_data[which(is.na(site_data$bacon)),]
+# why are some NA
+site_data[which(is.na(site_data$bacon)),]
 # 
 # which(site_data$bacon == FALSE)
 # site_data[which(site_data$bacon == FALSE),]
-# site_data[which(site_data$bacon == TRUE),]
+site_data[which(site_data$bacon == TRUE),]
 # 
 # length(which(site_data$bacon == TRUE))
 # site_data$dataset.id[which(site_data$bacon == TRUE)] %in% ids_old
@@ -149,104 +150,104 @@ for(i in 1:nsites){
 write.table(site_data, file=paste0('data/pollen_site_meta_umw_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
 write.table(bacon.params, file=paste0('data/bacon_params_umw_v', version, '.csv'), col.names=TRUE, row.names=FALSE, sep=',')
 
-#####################################################################################################################################
-
-long_cores = c('Lone02', 'Lily04')
-handles    = c('LONE', 'LILY04')
-ids        = c('CLH5', 'CLH4')
-
-clh_meta   = read.csv('data/hotchkiss_lynch_calcote_meta_v0.1.csv', header=TRUE)
-clh_counts = read.csv('data/hotchkiss_lynch_calcote_counts_v0.1.csv', header=TRUE, stringsAsFactors=FALSE)
-
-clh_meta   = clh_meta[clh_meta$name %in% long_cores, ]
-clh_counts = clh_counts[clh_counts$name %in% long_cores, ]
-clh_meta   = get_survey_year(clh_meta)
-
-ncores = length(long_cores)
-
-bacon.params <- data.frame(handle = handles,
-                           dataset.id = ids,
-                           acc.mean.mod = 3.02,
-                           acc.mean.old = 15,
-                           acc.shape.mod = 0.53,
-                           acc.shape.old = 0.9,
-                           mem.strength = 4,
-                           mem.mean = 0.7,
-                           hiatus = NA,
-                           #                            thick = sapply(pol, function(x) min(diff(x$sample.meta$depths)[diff(x$sample.meta$depths)>0])),
-                           thick = 5,
-                           age.type = 'Radio',
-                           run = FALSE,
-                           suit = TRUE, 
-                           ndates = NA,
-                           success = NA,
-                           stringsAsFactors=FALSE)
-
-path='.'
-
-# add in the pre-samples
-pre_depths = read.csv(file='data/cal_data_mid_depth_2014-07-28.csv', stringsAsFactors=FALSE)
-for (i in 1:ncores){
-  handle = bacon.params$handle[i]
-  id = bacon.params$dataset.id[i]
-  if (any(pre_depths$id == bacon.params$dataset.id[i])){
-    amb_rise = TRUE
-    chron <- read.table(sprintf('Cores/%s/%s.csv', handle, handle), sep=',', header=TRUE)
-    if (!any(substr(chron$labid, 1, 4) == 'Pres')){
-      labid = 'Presettlement_paleon'
-      age   = 1950 - 1907 # want to make sure we get the presettlement date!
-      error = 50
-      depth = pre_depths$depth[which(pre_depths$id == bacon.params$dataset.id[i])]
-      cc    = 0   
-      chron <- rbind(chron, data.frame(labid, age, error, depth, cc))
-      chron <- chron[with(chron, order(age)),]
-      
-      write.csv(chron, sprintf('Cores/%s/%s.csv', handle, handle), row.names = FALSE, quote=TRUE)
-    }
-    gc_age_max = max(chron$age)
-    gc_age_min = min(chron$age)
-  } 
-  
-  ages = clh_counts[which(clh_counts$name==long_cores[i]), 'age']
-  pol_age_min = min(ages)
-  pol_age_max = max(ages)
-  
-  depths = clh_counts[which(clh_counts$name==long_cores[i]), 'depth_mid']
-  write.table(depths, paste0(path, "/Cores/", handle, "/", 
-                             handle, "_depths.txt"), col.names = FALSE, row.names = FALSE, quote=TRUE)
-  
-  site_data = rbind(site_data,
-                    data.frame(handle = handles[i],
-                               name  = handles[i],
-                               dataset_id = ids[i],
-                               pol_age_min = pol_age_min,
-                               pol_age_max = pol_age_max,
-                               age_type    = 'CLH',
-                               bacon       = TRUE,
-                               gc_age_min  = gc_age_min,
-                               gc_age_max  = gc_age_max,
-                               reason      = NA,
-                               new         = FALSE,
-                               amb_rise = amb_rise))
-  
-  pollen_meta_all = rbind(pollen_meta_all, 
-                          data.frame(id = ids[i],
-                                     handle = handles[i],
-                                     lat = clh_meta$lat[i],
-                                     long = clh_meta$long[i],
-                                     state = 'wisconsin',
-                                     state2 = 'wisconsin',
-                                     x = clh_meta$x[i],
-                                     y = clh_meta$y[i],
-                                     set.year = 1907))
-  
-}
+# #####################################################################################################################################
+# 
+# long_cores = c('Lone02', 'Lily04')
+# handles    = c('LONE', 'LILY04')
+# ids        = c('CLH5', 'CLH4')
+# 
+# clh_meta   = read.csv('data/hotchkiss_lynch_calcote_meta_v0.1.csv', header=TRUE)
+# clh_counts = read.csv('data/hotchkiss_lynch_calcote_counts_v0.1.csv', header=TRUE, stringsAsFactors=FALSE)
+# 
+# clh_meta   = clh_meta[clh_meta$name %in% long_cores, ]
+# clh_counts = clh_counts[clh_counts$name %in% long_cores, ]
+# clh_meta   = get_survey_year(clh_meta)
+# 
+# ncores = length(long_cores)
+# 
+# bacon.params <- data.frame(handle = handles,
+#                            dataset.id = ids,
+#                            acc.mean.mod = 3.02,
+#                            acc.mean.old = 15,
+#                            acc.shape.mod = 0.53,
+#                            acc.shape.old = 0.9,
+#                            mem.strength = 4,
+#                            mem.mean = 0.7,
+#                            hiatus = NA,
+#                            #                            thick = sapply(pol, function(x) min(diff(x$sample.meta$depths)[diff(x$sample.meta$depths)>0])),
+#                            thick = 5,
+#                            age.type = 'Radio',
+#                            run = FALSE,
+#                            suit = TRUE, 
+#                            ndates = NA,
+#                            success = NA,
+#                            stringsAsFactors=FALSE)
+# 
+# path='.'
+# 
+# # add in the pre-samples
+# pre_depths = read.csv(file='data/cal_data_mid_depth_2014-07-28.csv', stringsAsFactors=FALSE)
+# for (i in 1:ncores){
+#   handle = bacon.params$handle[i]
+#   id = bacon.params$dataset.id[i]
+#   if (any(pre_depths$id == bacon.params$dataset.id[i])){
+#     amb_rise = TRUE
+#     chron <- read.table(sprintf('Cores/%s/%s.csv', handle, handle), sep=',', header=TRUE)
+#     if (!any(substr(chron$labid, 1, 4) == 'Pres')){
+#       labid = 'Presettlement_paleon'
+#       age   = 1950 - 1907 # want to make sure we get the presettlement date!
+#       error = 50
+#       depth = pre_depths$depth[which(pre_depths$id == bacon.params$dataset.id[i])]
+#       cc    = 0   
+#       chron <- rbind(chron, data.frame(labid, age, error, depth, cc))
+#       chron <- chron[with(chron, order(age)),]
+#       
+#       write.csv(chron, sprintf('Cores/%s/%s.csv', handle, handle), row.names = FALSE, quote=TRUE)
+#     }
+#     gc_age_max = max(chron$age)
+#     gc_age_min = min(chron$age)
+#   } 
+#   
+#   ages = clh_counts[which(clh_counts$name==long_cores[i]), 'age']
+#   pol_age_min = min(ages)
+#   pol_age_max = max(ages)
+#   
+#   depths = clh_counts[which(clh_counts$name==long_cores[i]), 'depth_mid']
+#   write.table(depths, paste0(path, "/Cores/", handle, "/", 
+#                              handle, "_depths.txt"), col.names = FALSE, row.names = FALSE, quote=TRUE)
+#   
+#   site_data = rbind(site_data,
+#                     data.frame(handle = handles[i],
+#                                name  = handles[i],
+#                                dataset_id = ids[i],
+#                                pol_age_min = pol_age_min,
+#                                pol_age_max = pol_age_max,
+#                                age_type    = 'CLH',
+#                                bacon       = TRUE,
+#                                gc_age_min  = gc_age_min,
+#                                gc_age_max  = gc_age_max,
+#                                reason      = NA,
+#                                new         = FALSE,
+#                                amb_rise = amb_rise))
+#   
+#   pollen_meta_all = rbind(pollen_meta_all, 
+#                           data.frame(id = ids[i],
+#                                      handle = handles[i],
+#                                      lat = clh_meta$lat[i],
+#                                      long = clh_meta$long[i],
+#                                      state = 'wisconsin',
+#                                      state2 = 'wisconsin',
+#                                      x = clh_meta$x[i],
+#                                      y = clh_meta$y[i],
+#                                      set.year = 1907))
+#   
+# }
 
 write.table(pollen_meta_all, file=paste0('data/pollen_meta_all_umw_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
 
-write.table(site_data, file=paste0('data/pollen_site_meta_umw_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
-
-write.table(bacon.params, file=paste0('data/bacon_params_umw_v', version, '.csv'), sep=',', append=TRUE, col.names=FALSE, row.names=FALSE)
+# write.table(site_data, file=paste0('data/pollen_site_meta_umw_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
+# 
+# write.table(bacon.params, file=paste0('data/bacon_params_umw_v', version, '.csv'), sep=',', append=TRUE, col.names=FALSE, row.names=FALSE)
 
 
 # # plot core intervals
