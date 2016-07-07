@@ -127,13 +127,13 @@ run.bacon <- function(site.params){
     if (!(class(out) == 'try-error')){
       
       depths       = scan(sprintf('Cores/%s/%s_depths.txt', site.params$handle, site.params$handle))
-      depths.bacon = scan(sprintf('Cores/%s/%s_bacon_depths.csv', site.params$handle, site.params$handle))
+      depths.bacon = scan(sprintf('Cores/%s/%s_%s_bacon_depths.csv', site.params$handle, site.params$handle, thick))
       
       ndepths = length(depths.bacon)
       
       core.path = sprintf('Cores/%s', site.params$handle)
       #       outfile  = Sys.glob(paste0(core.path, '_*.out')) 
-      outfile = paste0(core.path, '/', site.params$handle, '_', ndepths, '.out')
+      outfile = paste0(core.path, '/', site.params$handle, '_', thick, '.out')
       output = read.table(outfile)
       
       #       # build depths.bacon using thick and upper and lower depths from 

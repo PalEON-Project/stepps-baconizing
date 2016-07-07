@@ -7,7 +7,7 @@ source('Bacon.R')
 source('utils/helpers.r')
 
 setup = FALSE
-version = 3
+version = 5
 
 if (setup){
   # remove files from any previous runs
@@ -52,8 +52,6 @@ for (i in 1:ncores){
 }
 
 i_check = which(setts == TRUE)
-
-i_check = 256
 #############################################################################################
 
 # run bacon!
@@ -79,7 +77,7 @@ run_batch <- function(ncores, thicks, bacon.params, suff){
   
   if (length(thicks == 1)) {thicks = rep(thick, ncores)}
   
-  for(i in i_check){#1:ncores){
+  for(i in 1:ncores){
     #for(i in ids_rerun){
     
     thick = thicks[i]
@@ -105,7 +103,7 @@ run_batch <- function(ncores, thicks, bacon.params, suff){
 
 # run_batch(ncores, thicks$thick, bacon.params, suff='opt')
 thicks = c(5, 10, 15, 20)
-# thicks=c(5)
+thicks=c(20)
 for (thick in thicks) {
   run_batch(ncores, thick, bacon.params, suff=as.character(thick))
 }

@@ -10,9 +10,9 @@ require(rgdal)
 
 source('Bacon.R')
 source('R/utils/helpers.r')
-source('R/utils/write_agefile_stepps2.r')
+source('R/utils/write_agefile_stepps.r')
 
-version = 4
+version = 5
 
 # pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE)
 # pollen_meta <- get_survey_year(pollen_meta)

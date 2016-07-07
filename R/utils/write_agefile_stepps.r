@@ -1,4 +1,4 @@
-write_agefile_stepps2 <- function (download, survey.year, path, corename, site.id) 
+write_agefile_stepps <- function (download, survey.year, path, corename, site.id) 
 {
   if (!file.exists(paste0(path, "/Cores"))) {
     stop(paste0("Core directory must exist.  There is no directory at ", 
