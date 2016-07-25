@@ -4,7 +4,7 @@ require(fields)
 require(sp)
 
 source('Bacon.R')
-source('utils/helpers.r')
+source('R/utils/helpers.r')
 
 setup = FALSE
 version = 5
@@ -109,8 +109,25 @@ for (thick in thicks) {
 }
 
 # after we choose the thicknesses, make the pdf of plots
+# pollen_meta_v3 <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_all_thicks_umw_v3.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
+# # pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_all_thicks_umw_v', version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
+# 
+# pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_all_umw_v5.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
+# 
+# pollen_meta$bacon = site_data$bacon[match(pollen_meta$id, site_data$dataset_id)]
+# pollen_meta = pollen_meta[!is.na(pollen_meta$bacon),]
+# pollen_meta = pollen_meta[(pollen_meta$bacon == TRUE),]
+# 
+# pollen_meta_v3 = pollen_meta_v3[substr(pollen_meta_v3$id, 1, 3) != 'CLH', ]
+# 
+# pollen_meta$thick = pollen_meta_v3$thick[match(pollen_meta$id, as.numeric(pollen_meta_v3$id))]
+# write.table(pollen_meta, file=paste0('data/pollen_meta_all_thicks_umw_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
+# 
+# pollen_meta[is.na(match(pollen_meta$id, as.numeric(pollen_meta_v3$id))),]
+# 
+# pollen_meta[is.na(match(pollen_meta$id, as.numeric(pollen_meta_v3$id))),]
+
 pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_all_thicks_umw_v', version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
-pollen_meta = pollen_meta[pollen_meta$bacon == TRUE,]
 
 
 # fix this!!!
@@ -121,7 +138,13 @@ thick = pollen_meta$thick
 # meta = data.frame(fname=fnames, thick=thicks[which(bacon.params$suit == 1),'thick'])
 # fname_str = sapply(cbind(fnames, thick), function(x) paste0('Cores/', x, '/', x, '_', ,'.pdf'))
 
+fnames_all = list.files(path = "Cores", pattern = ".*.pdf", all.files = TRUE,
+           full.names = FALSE, recursive = TRUE, include.dirs = TRUE)
+fnames_all = paste0('Cores/', fnames_all)
+
+
 fname_str = apply(cbind(fnames, thick), 1, function(x) paste0('Cores/', x[1], '/', x[1], '_', x[2],'.pdf'))
+fname_str = fname_str[fname_str %in% fnames_all]
 fname_str = paste(fname_str, collapse = ' ')
 
 sys_str = paste0("gs -sDEVICE=pdfwrite -o bacon_fit_plots_hiatus_v", version, ".pdf ", fname_str)
