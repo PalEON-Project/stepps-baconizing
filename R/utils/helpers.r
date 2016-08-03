@@ -165,7 +165,7 @@ run.bacon <- function(site.params){
       post = data.frame(depths=depths, samples)
       
       write.table(post, paste0('.', "/Cores/", site.params$handle, "/", 
-                               site.params$handle, "_samples.csv"), sep=',', col.names = TRUE, row.names = FALSE)
+                               site.params$handle, "_", site.params$thick, "_samples.csv"), sep=',', col.names = TRUE, row.names = FALSE)
       site.params$success = 1
       
     } else {

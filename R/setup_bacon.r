@@ -57,7 +57,7 @@ if (!file.exists(paste0('data/pollen_list_v', version, '.rdata'))|(length(all_id
 } 
 
 # extract the meta data
-pollen_meta_all = data.frame(id     = sapply(pol, function(x) x$dataset$site.data$site.id), 
+pollen_meta_all = data.frame(id     = sapply(pol, function(x) x$dataset$dataset.meta$dataset.id), 
                              handle  = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
                              lat     = sapply(pol, function(x) x$dataset[[1]]$lat),
                              long    = sapply(pol, function(x) x$dataset[[1]]$long))
@@ -66,6 +66,9 @@ pollen_meta_all$state = map.where(database="state", x=pollen_meta_all$long, y=po
 pollen_meta_all = split_mi(pollen_meta_all, longlat=TRUE)
 pollen_meta_all$state = pollen_meta_all$state2
 pollen_meta_all       = get_survey_year(pollen_meta_all)
+
+write.table(pollen_meta_all, file=paste0('data/pollen_meta_all_umw_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
+
 
 # create meta data object
 site_data <- data.frame(handle      = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
@@ -243,7 +246,6 @@ write.table(bacon.params, file=paste0('data/bacon_params_umw_v', version, '.csv'
 #   
 # }
 
-write.table(pollen_meta_all, file=paste0('data/pollen_meta_all_umw_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
 
 # write.table(site_data, file=paste0('data/pollen_site_meta_umw_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
 # 
