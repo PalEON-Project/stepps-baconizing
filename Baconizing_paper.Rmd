@@ -11,6 +11,11 @@ output:
   pdf_document:
     toc: yes
     toc_depth: '3'
+  word_document:
+    reference_docx: styles/word_template.docx
+    toc: yes
+    toc_depth: '3'
+
 csl: elsevier-harvard.csl
 bibliography: baconizing.bib
 ---
@@ -40,20 +45,19 @@ library(Bchron, verbose = FALSE)
 
 ```
 
-Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings.  As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record, but for some time we have been aware of this situation, and have used 'fuzzy matching' to accomodate errors in age-depth modeling, or under-sampling of records using dated material [@].
+Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings [@brewer2012paleoecoinformatics;@uhen2013card]. As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record. Paleoecologists have been aware of limitations in age modeling capabilities for some time, and the issues that these limitations cause are well noted [@grimm2009magnitude;@liu2012temporal].
 
-As more and more ecologists are turning to the paleoecological record, and as we try to do more with what we have, this slight of hand becomes more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research [@blaauw2012out].
+As more and more ecologists are turning to the paleoecological record, and as we try to do more with what we have, the limitations of extant age models become more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research [@blaauw2012out].
 
 ```{r get_cores, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
 
 source('R/getNAcores.R')
 
-if ('pubs.RData' %in% list.files('data/output')) {
-  load('data/output/pubs.RData')
+if ('pubs.rds' %in% list.files('data/output')) {
+  pubs <- readRDS('data/output/pubs.rds')
 } else {
- pubs <- neotoma::get_publication(all.datasets)
- 
- save(pubs, file = 'data/output/pubs.RData')
+ pubs <- neotoma::get_publication(all.downloads)
+ saveRDS(pubs, file = 'data/output/pubs.rds')
 }
 
 meta.table       <- do.call(rbind.data.frame, 
@@ -69,26 +73,19 @@ meta.table$chron <- chron[rownames(meta.table)]
 
 ```
 
-The Neotoma database has a large number of pollen records that can be used for paleoecological analysis.  These records have been obtained from publications that span a time period from  `r min(meta.table$year, na.rm=TRUE)` to `r max(meta.table$year, na.rm=TRUE)`, with more than half the records coming from before 1983.  For pollen records that are not "modern", sample age is obtained from a chronology constructed using classical [@blaauw2010methods] or Bayesian [@blaauw2011flexible; @buck2000bayesian;@blaauw2005radiocarbon;@ramsey1995radiocarbon] methods using dated material including radiocarbon (^14^C) and other radiometric dates (*e.g.* ^210^Pb, ^137^Cs). Chronologies are developed using dated stratigraphic control points from within a cores, which may be geochronological (dated material), geostratigraphic (e.g., the “modern” core top), and sometimes biostratigraphic (changes in pollen assemblages associated with dated changes on the landscape). Geochronological control points are dated using radiometric dating (typically radiocarbon, but sometime ^210^Pb), although these dates are uncertain due to analytical errors during the laboratory radiocarbon dating process [@ward1978procedures], the conversion of radiocarbon to calendar years [@reimer2013selection], and potential differences between age of macrofossil material and age of sediment [@blois2011methodological]. Geostratigrahic markers may have fewer sources of uncertainty - the core top age is assumed to be the year of sampling, although sedimentary mixing of the upper sediment during sampling does introduce some uncertainty. Finally, biostratigraphic control points are determined by examination (usually visual) of changes in pollen assemblages throughout a core. However, time series of pollen counts are noisy, and in practice identifying changes in composition is both difficult and subjective. Even once a compositional change is identified, there is uncertainty: related to the chronological/stratigraphic sampling density [@liu2012temporal], and related to the need to assign a single year to the landscape-scale phenomenon which caused this compositional shift.
+The Neotoma database [@grimm2008neotoma] contains `r length(get_dataset(datasettype="pollen", ageold = 2000, ageyoung = -70))` global pollen records that can be used for paleoecological analysis.  These records have been obtained from publications that span a time period from  `r min(meta.table$year, na.rm=TRUE)` to `r max(meta.table$year, na.rm=TRUE)`, with more than half the records coming from before 1983.  For pollen records that are not "modern", sample age is obtained from a chronology constructed using classical [@blaauw2010methods] or Bayesian [@blaauw2011flexible; @buck2000bayesian;@blaauw2005radiocarbon;@ramsey1995radiocarbon] methods using dated material including radiocarbon (^14^C) and other radiometric dates (*e.g.* ^210^Pb, ^137^Cs). 
 
-The development of the first IntCal curve was a major milestone in paleoecological analysis.  It allowed researchers to move from radiocarbon years to calibrated radiocarbon years.  Because radiocarbon years are not equivalent to calendar years, and because the relationship is non-linear, the use of calibration curves have provided researchers with an important tool to help improve model chronologies.  However, across the Neotoma database (here we refer to North America only), many records within the database still record chronologies using only radiocarbon years (Figure 1). The transition from age models in radiocarbon years to calibrated radiocarbon years is dramatic.  The final radiocarbon model appears to be from 1998, following this we see no more radiocarbon models.  Along with this transition, we are seeing a second transition from simple linear models to more complex models using flexible Bayesian methods.  A critical question then becomes, should we simply calibrate radiocarbon dates, or generate age models *de novo*?
+Chronologies are developed using dated stratigraphic control points from within a cores, which may be geochronological (dated material), geostratigraphic (e.g., the “modern” core top), and sometimes biostratigraphic (changes in pollen assemblages associated with dated changes on the landscape). Geochronological control point ages are often uncertain due to analytical errors during the laboratory radiocarbon dating process [@ward1978procedures], the conversion of radiocarbon to calendar years [@reimer2013selection], and potential differences between the ages of macrofossil material and age of sediment [@blois2011methodological]. Geostratigrahic markers may have fewer sources of uncertainty -- the core top age is assumed to be the year of sampling -- although sedimentary mixing of the upper sediment during sampling does introduce some uncertainty. Finally, biostratigraphic control points are determined by the examination (usually visual) of changes in pollen assemblages throughout a core. However, time series of pollen counts are noisy, and in practice identifying changes in composition is both difficult and subjective [@dawson2016quantifying]. There remains uncertainty in the identification of compositional shifts related to the chronological/stratigraphic sampling density [@liu2012temporal], and, in the case of landscape-scale phenomena such as the mid-Holocene Hemlock decline [@bennett2002determining;@davis1981outbreaks], the need to assign temporal bounds to the landscape-scale phenomenon that caused the compositional shift.
 
-Age estimates of pollen samples, and in some cases their uncertainty, can be estimated
-using an age-depth model determined by a combination of the chronological controls. To
-determine which sample best represents pre-settlement times, it is possible to select the
-sample closest in age but not younger than the time of settlement. Instead, we rely on the
-existence of a biostratigraphic signal corresponding with the time of interest.
-During European settlement, land-clearances led to noticeable increases in certain agri-
-cultural indicators that is reflected in the pollen records, especially *Ambrosia* [@mcandrews1988human]. This change in the relative abundance of Ambrosia, referred to as the *Ambrosia* rise, can be used to identify a reasonably representative presettlement assemblage that justifiable precedes major land clearance - here the pre-settlement pollen sample is defined to be the sample immediately prior to the first pollen sample that reflects the *Ambrosia* rise. We deal
-with some of the uncertainty associated with the identification of a biostratigraphic marker
-by: 1) avoiding the need to assign a date to our representative pre-settlement assemblage,
-and 2) using expert elicitation to reduce expert bias.
+The development of the first IntCal curve was a major milestone in paleoecological analysis [@hughen1998intcal98].  IntCal98, and subsequent itterations, allowed researchers to move from radiocarbon years to calibrated radiocarbon years using material of known age and associated ^14^C dates to build a calibration curve.  Because radiocarbon years are not equivalent to calendar years, and because the relationship is non-linear, the use of calibration curves have provided researchers with an important tool to help improve model chronologies.  However, across the Neotoma database (here we refer to North America only), many records within the database still record chronologies using only radiocarbon years (Figure 1). 
+
+The transition from age models using only radiocarbon years to those with calibrated radiocarbon years within Neotoma is dramatic.  The final radiocarbon model appears to be from 1998, following this we see no more radiocarbon models.  Along with this transition, we are seeing a second transition from simple linear models to more complex models using flexible Bayesian methods.  A critical question then becomes, when faced with records generated using only uncalibrated dates, should we calibrate radiocarbon dates, generate age models *de novo*, or ignore the records altogether?
 
 ```{r, plot.chron.change, fig.width=6, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
 
-ggplot(meta.table, aes(x = year, fill = chron)) + geom_bar() +
+ggplot(na.omit(meta.table), aes(x = year, fill = chron)) + geom_bar() +
   scale_x_continuous(limits = c(1948, 2014), expand = c(0,0)) + 
-  scale_y_continuous(limits = c(0, 70), expand = c(0,0)) + 
+  scale_y_continuous(limits = c(0, 60), expand = c(0,0)) + 
   xlab('Publication Year') + 
   ylab('Core Count') +
   theme(axis.title.x = element_text(family = 'serif', 
@@ -199,6 +196,8 @@ grid.arrange(basic, diff)
 
 ```
 
+Limitions of linear/classical models vs Baysian efforts.
+
 # Methods
 
 ## Bacon Settings
@@ -206,6 +205,12 @@ grid.arrange(basic, diff)
 ### Accumulation Rate Priors
 
 Bacon provides a default accumulation rate based on Goring et al [-@goring2012deposition]'s survey of Holocene accumulation rates in eastern North America.  Empirical age-depth curves suggest that the age-depth relationship is non-linear, as a result of sediment compaction in the upper sediments [@goring2012deposition], basin shape [@bennett2016interpretation] and patterns of deposition and sediment transport operating on longer time scales [@goring2012deposition;@webb1988rates]. By narrowing the geographic and temporal range for the target reconstructions it was neccessary to re-asses the mean accumulation rate using an approach similar to Goring et al [-@goring2012deposition], but focused on a narrower temporal and spatial window.  Goring et al. [-@goring2012deposition] show that there is a rapid inflection point in accumulation rates at approximately 500ybp and, regionally, there is evidence that after the time of settlement, sediment accumulation is much faster (fewer years per cm) than before settlement (more years per cm), although bulk density may decrease.
+
+![](figures/acc_rate_dists.png)
+
+**Figure N**
+
+Although it is compelling to speculate that the coincidence of a change in rates with Euro-American Settlement and associated changes in land use and erosion, many sites show a similar inflection, even in regions that remain largely protected from widespread land use change [@goring2012deposition]. To account for non-linearity in accumulation rates, we assign the modern prior for the post-settlement portion of the core, and a 2K prior for the pre-settlement portion of the core. In practice, it is difficult to determine settlement horizon depth, but results from an expert elicitation exercise [@dawson2016quantifying; @kujawa2016theeffect] provides us with an estimate of the settlement depth for most cores.  Cores for which experts were unable to assign a horizon were given a 2K prior only, while an "instantaneous" hiatus was placed at the pre-settlement sample depth, which then faciliated a non-linear accumulation rate witin the chronology.  No hiatus was assigned and the modern accumulation rate prior was used for cores with only core top and pre-settlement markers.
 
 For the upper Midwest we computed empirical accumulation rates for consecutive pairs of geochronological markers, within sites obtained from the Netoma database. We used the mean age for adjacent markers as the assigned age for each accumulation rate. Rates were split into two groups based on their ages: modern, which encompassed the present to 100 cal yr BP (the Modern prior), and from 100 cal yr BP to 2000 cal yr BP (the 2K prior). Summary statistics were computed for each group of accumulation rates. Gamma priors were then defined for both time frames, each with a mean set equal to the empirical mean, and a variance equal to double the empirical variance from the grouped accumulation rates.  Doubling the empirical variance represents a conservative approach to modeling uncertainty, in that it accounts for additional variability in accumulation rates that was not observed in the data.
 
@@ -216,9 +221,6 @@ For the upper Midwest we computed empirical accumulation rates for consecutive p
 Modern	3.02	     5.70	      0.53     1.6
 2K	    15.00	     250	      0.06	   0.9
 
-## Accounting for Non-Linearity
-
-Although it is compelling to speculate that the coincidence of a change in rates with Euro-American Settlement and associated changes in land use and erosion, many sites show a similar inflection, even in regions that remain largely protected from widespread land use change [@goring2012deposition]. To account for non-linearity in accumulation rates, we assign the modern prior for the post-settlement portion of the core, and a 2K prior for the pre-settlement portion of the core. In practice, it is difficult to determine settlement horizon depth, but results from an expert elicitation exercise [@dawson2016quantifying; @kujawa2016theeffect] provides us with an estimate of the settlement depth for most cores.  Cores for which experts were unable to assign a horizon were given a 2K prior only, while an "instantaneous" hiatus was placed at the pre-settlement sample depth, which then faciliated a non-linear accumulation rate witin the chronology.  No hiatus was assigned and the modern accumulation rate prior was used for cores with only core top and pre-settlement markers.
 
 ## Determining section thickness
 
@@ -232,9 +234,20 @@ Bacon requires that all chronological markers be associated with defined errors.
 
 ## Expert elicitation exercise to identify settlement horizon
 
+Age estimates of pollen samples, and in some cases their uncertainty, can be estimated
+using an age-depth model determined by a combination of the chronological controls. To
+determine which sample best represents pre-settlement times, it is possible to select the
+sample closest in age but not younger than the time of settlement. Instead, we rely on the
+existence of a biostratigraphic signal corresponding with the time of interest.
+During European settlement, land-clearances led to noticeable increases in certain agri-
+cultural indicators that is reflected in the pollen records, especially *Ambrosia* [@mcandrews1988human]. This change in the relative abundance of Ambrosia, referred to as the *Ambrosia* rise, can be used to identify a reasonably representative presettlement assemblage that justifiable precedes major land clearance - here the pre-settlement pollen sample is defined to be the sample immediately prior to the first pollen sample that reflects the *Ambrosia* rise. We deal
+with some of the uncertainty associated with the identification of a biostratigraphic marker
+by: 1) avoiding the need to assign a date to our representative pre-settlement assemblage,
+and 2) using expert elicitation to reduce expert bias.
+
 The *Ambrosia* rise is a well known phenomenon in the eastern United States, and elsewhere, that appears to be contemporraneous with Euro-American settlement, land clearance and the initiation of intensive agriculture in the region [@McAndrews1968;@mcandrews1988human]. In the Upper Midwest, significant increases in *Ambrosia*, *Rumex*, and/or Poaceae are typically coincident with the settlement horizon. Because of this feature it is possible to establish a biostratigraphic chronological control. When the rise can be identified visually it can be used as a stratigraphic marker with an age defined as either immediately preceeding (when the "pre-settlement" sample is used), or immedately after.  The pre-settlement sample has been identified for many of the fossil pollen cores in the Neotoma database, to reduce variability associated with the protocol used to determine these samples we asked a team of experts to identify pre-settlement samples based only on pollen diagrams depicting proportional changes through time as a function of depth for key indicator species and the ten most abundant arboreal taxa. Experts were prohibited from relying on stratigraphic dates (radiocarbon or other) or age-depth model estimates of sample age.
 
-For a summary of the settlement horizon elicitation exercise, see the calibration paper (coming soon).
+For a summary of the settlement horizon elicitation exercise, see the calibration paper [@dawson2016quantifying].
 
 To generate the prediction data set, we would like to make use of the elicitation exercise results in order to include an additional stratigraphic marker in the chronological control tables. To do this, we need to be able to assign pre-settlement ages that correspond with the expert-determined pre-settlement depths with some confidence. From the PLS data, we have corresponding sample year for all sampled location. Within each grid cell, we determined the maximum sampling year, and then our pre-settlement age was determined by subtracting 50 from this value. An uncertainty of 50 standard deviations was used to account for our uncertainty of time of settlement. **Jack: need to clarify rationale for this 50/50 approach. Note that ideally our probability distribution for age would be asymmetric - we have an upper bound for pre-settlement**.
 
