@@ -45,7 +45,9 @@ library(Bchron, verbose = FALSE)
 
 ```
 
-Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings [@brewer2012paleoecoinformatics;@uhen2013card]. As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record. Paleoecologists have been aware of limitations in age modeling capabilities for some time, and the issues that these limitations cause are well noted [@grimm2009magnitude;@liu2012temporal].
+Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings [@brewer2012paleoecoinformatics;@uhen2013card]. As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record. Paleoecologists have been aware of limitations in age modeling capabilities for some time, and the issues that these limitations cause are well noted [@grimm2009magnitude;@liu2012temporal].  
+
+Recent efforts with the European Pollen Database have focused on standardizing age models across the database [@giesecke2014towards]. These models used the software Clam [@blaauw2010methods], as did efforts with the North American Pollen Database [@blois2011methodological].  n both these cases, models were regenerated for records, although 
 
 As more and more ecologists are turning to the paleoecological record, and as we try to do more with what we have, the limitations of extant age models become more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research [@blaauw2012out].
 
@@ -163,11 +165,29 @@ This, expressly is not the exact procedure or dataset that we ought to be using.
 
 source('R/recalibrate.actual.R', echo = FALSE)
 
-basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = core)) + 
+basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = handle)) + 
             geom_line() +
             theme(legend.position = 'none') +
             scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
             scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0))
+
+for (i in unique(new.chrons$handle)) {
+  if (!paste0(gsub('/', '_', i), '.png') %in% list.files('figures/recal_test/')) {
+    cat(i, '\n')
+    try(ggsave(filename = paste0('figures/recal_test/', gsub('/', '_', i), '.png'),
+           plot = ggplot(subset(new.chrons, handle %in% i), 
+                         aes(x = age.direct, y = age.lin)) + 
+              geom_abline(intercept = 0, slope = 1, color = 'red', alpha = 0.5) +
+              geom_line(size = 1.5) +
+              theme(legend.position = 'none') +
+              ggtitle(i) +
+             theme_bw() +
+             coord_equal() +
+              scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
+              scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0))))
+    try(dev.off())
+  }
+}
 
 # Build an age model with a knot every 500 years:
 diff.model <- gam(diff ~ s(age.lin, k = 42), 
@@ -197,6 +217,8 @@ grid.arrange(basic, diff)
 ```
 
 Limitions of linear/classical models vs Baysian efforts.
+
+The importance of generating novel age models with harmonized ideas about the underlying mechanics (so weak) is clear for large-scale data synthesis.  Here we present the results of one such excersise.  In this paper we outline the decision making process around the parameter selection for the age models, we summarize differeces between the original chronologies and the new chronologies, we higlight differences between chronologies generated using two age model types and highlight best practices for chronologies within large-scale synthesis.
 
 # Methods
 

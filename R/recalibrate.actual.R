@@ -4,7 +4,7 @@
 if(!'chronologies.RData' %in% list.files('data/output/')){
   chronologies <- list()
   for(i in 1:length(all.downloads)){
-    chronologies[[i]] <- try(get_chroncontrol(all.downloads[[i]]$sample.meta$chronology.id[1]))
+    chronologies <- try(get_chroncontrol(all.downloads))
   }
   save(chronologies, file = 'data/chronologies.RData')
 } else{
@@ -61,7 +61,7 @@ rebuild <- function(x){
       } else {
         # If there's no data then we push out an NA (but still keep the site name, for tracking)
         
-        output <- data.frame(core       = all.downloads[[x]]$dataset$site$site.name,
+        output <- data.frame(core       = all.downloads[[x]]$dataset$site.data$site.name,
                              handle     = all.downloads[[x]]$dataset$dataset.meta$collection.handle,
                              age.direct = NA,
                              age.lin    = NA)
