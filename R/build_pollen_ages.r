@@ -223,16 +223,4 @@ write.table(pollen_ts, file=paste0('data/sediment_ages_', version, '.csv'), quot
 # # pollen_meta_old = read.table(file=paste0('data/bacon_ages/pollen_ts_bacon_meta_v2.csv'), sep=',', header=TRUE)
 
 
-#################################################################################################################################################
-## compare ages
-#################################################################################################################################################
 
-pollen_ts = pollen_ts[!(pollen_ts$id %in% c(3131)),]
-
-plot(pollen_ts$age_bacon, pollen_ts$age_bchron)
-plot(pollen_ts$age_bacon, pollen_ts$age_default)
-plot(pollen_ts$age_bchron, pollen_ts$age_default)
-
-plot(pollen_ts$age_default, pollen_ts$age_bchron-pollen_ts$age_bacon)
-plot(pollen_ts$age_default, pollen_ts$age_default-pollen_ts$age_bacon)
-plot(pollen_ts$age_default, pollen_ts$age_default-pollen_ts$age_bchron)
