@@ -1,12 +1,14 @@
 #  Get all the chronologies and rebuild as before:
 
-
-if(!'chronologies.RData' %in% list.files('data/output/')){
+if (!'chronologies.RData' %in% list.files('data/output/')) {
   chronologies <- list()
-  for(i in 1:length(all.downloads)){
+  
+  for (i in 1:length(all.downloads)) {
     chronologies <- try(get_chroncontrol(all.downloads))
   }
+  
   save(chronologies, file = 'data/chronologies.RData')
+
 } else{
   load('data/chronologies.RData')
 }
@@ -54,10 +56,18 @@ rebuild <- function(x){
                            y    = controls,
                            xout = all.downloads[[x]]$sample.meta$depth)
         
-        output <- data.frame(core       = all.downloads[[x]]$dataset$site$site.name,
-                             handle     = all.downloads[[x]]$dataset$dataset.meta$collection.handle,
-                             age.direct = from.calib,
-                             age.lin    = new.ages$y[good.ages])
+        if (all(diff(new.ages$y[good.ages]) > 0, na.rm = TRUE)) {
+          # Given that this is "rough & ready", eliminate all cores with age reversals.
+          output <- data.frame(core       = all.downloads[[x]]$dataset$site$site.name,
+                               handle     = all.downloads[[x]]$dataset$dataset.meta$collection.handle,
+                               age.direct = from.calib,
+                               age.lin    = new.ages$y[good.ages])
+        } else {
+          output <- data.frame(core       = all.downloads[[x]]$dataset$site.data$site.name,
+                               handle     = all.downloads[[x]]$dataset$dataset.meta$collection.handle,
+                               age.direct = NA,
+                               age.lin    = NA)  
+        }
       } else {
         # If there's no data then we push out an NA (but still keep the site name, for tracking)
         
@@ -79,6 +89,9 @@ rebuild <- function(x){
                          age.direct = NA,
                          age.lin = NA)
   }
+  
+  output$diff <- output$age.lin - output$age.direct
+  
   output
 }
 
@@ -95,14 +108,14 @@ if (!'new.chrons.RData' %in% list.files('data/output')) {
                             test <- data.frame(core       = NA, 
                                                handle     = NA,
                                                age.direct = NA,
-                                               age.lin    = NA)
+                                               age.lin    = NA,
+                                               diff       = NA)
                            }
                            
                            return(test)})
   
   new.chrons      <- do.call(rbind.data.frame, new.chrons)
-  new.chrons$diff <- new.chrons$age.lin - new.chrons$age.direct
-  
+
   
   save(new.chrons, file = 'data/output/new.chrons.RData')
 
