@@ -179,23 +179,23 @@ basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = handle)) +
             scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
             scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0))
 
-for (i in unique(new.chrons$handle)) {
-  if (!paste0(gsub('/', '_', i), '.png') %in% list.files('figures/recal_test/')) {
-    cat(i, '\n')
-    try(ggsave(filename = paste0('figures/recal_test/', gsub('/', '_', i), '.png'),
-           plot = ggplot(subset(new.chrons, handle %in% i), 
-                         aes(x = age.direct, y = age.lin)) + 
-              geom_abline(intercept = 0, slope = 1, color = 'red', alpha = 0.5) +
-              geom_line(size = 1.5) +
-              theme(legend.position = 'none') +
-              ggtitle(i) +
-             theme_bw() +
-             coord_equal() +
-              scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
-              scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0))))
-    try(dev.off())
-  }
-}
+# for (i in unique(new.chrons$handle)) {
+#   if (!paste0(gsub('/', '_', i), '.png') %in% list.files('figures/recal_test/')) {
+#     cat(i, '\n')
+#     try(ggsave(filename = paste0('figures/recal_test/', gsub('/', '_', i), '.png'),
+#            plot = ggplot(subset(new.chrons, handle %in% i), 
+#                          aes(x = age.direct, y = age.lin)) + 
+#               geom_abline(intercept = 0, slope = 1, color = 'red', alpha = 0.5) +
+#               geom_line(size = 1.5) +
+#               theme(legend.position = 'none') +
+#               ggtitle(i) +
+#              theme_bw() +
+#              coord_equal() +
+#               scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
+#               scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0))))
+#     try(dev.off())
+#   }
+# }
 
 # Build an age model with a knot every 500 years:
 diff.model <- gam(diff ~ s(age.lin, k = 42), 
@@ -219,18 +219,17 @@ diff <- ggplot(new.chrons, aes(x = age.lin, y = diff)) +
             xlab('Linear Model with Recalibration') +
             ylab('Model Difference')
 
-
 grid.arrange(basic, diff)
 
 ```
 
 **Figure 3**. *Direct recalibration of dates within Neotoma pollen records against semi-automated linear interpolation and calibration.  Here we use the chronological controls of the default age model, calibrate chronological controls reported in radiocarbon years, and then use linear interpolation.  Any records with age-reversals were rejected to simplify this illustrative example.*
 
-The exercise of comparing re-calibrated age models against directly calibrated dates highlights two issues.  The first is the possibility of systematic offsets for large-scale research projects, the second is the need for direct intervention and systematic rules-based chronology construction in synthesis work.  Gieseke et al. [-@ref] undertook a broad-scale reconstruction of European records based on prior reported chronologies in an effort to facilitate broad-scale reconstruction of patterns and processes of vegetation change in Europe [@brewerjournalofmaps].  Blois et al. [-@blois2011methodological] undertook the same process for eastern North America.  Each of these were labor intensive and resulted in the construction of multiple new age models.
+The exercise of comparing re-calibrated age models against directly calibrated dates highlights two issues.  The first is the possibility of systematic offsets for large-scale research projects, the second is the need for direct intervention and systematic rules-based chronology construction in synthesis work.  Gieseke et al. [-@giesecke2014towards] undertook a broad-scale reconstruction of European records based on prior reported chronologies in an effort to facilitate broad-scale reconstruction of patterns and processes of vegetation change in Europe [@brewer2016late].  Blois et al. [-@blois2011methodological] undertook the same process for eastern North America.  Each of these were labor intensive and resulted in the construction of multiple new age models.
 
 ## Limitions of linear/classical models vs Baysian efforts.
 
-Large scale data analysis across heterogeneous data can be complex, thus the use of harmonized age models, that integrate ideas about the underlying mechanics of the processes linking depth and time become important.  Developments since Blois *et al*. [-@blois2011methodological], and workshops such as the Neotoma Belfast Meeting [@grimmref] have begun the process of outlining the methods required to undertake large scale efforts to re-build age models.
+Large scale data analysis across heterogeneous data can be complex, thus the use of harmonized age models, that integrate ideas about the underlying mechanics of the processes linking depth and time become important.  Developments since Blois *et al*. [-@blois2011methodological], and workshops such as the Neotoma Belfast Meeting [@grimm2014working] have begun the process of outlining the methods required to undertake large scale efforts to re-build age models.
 
 Here we present the results of one such excersise.  In this paper we outline the decision making process around the parameter selection for the age models, we summarize differeces between the original chronologies and the new chronologies, we higlight differences between chronologies generated using two age model types and highlight best practices for chronologies within large-scale synthesis.
 
@@ -268,7 +267,35 @@ Dividing a core into sections is an approximation of time discretization, abstra
 
 Bacon requires that all chronological markers be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma was entered without error reporting.  Of the 398 ^210^Pb markers in Neotoma, 148 have no error reported.  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% CI intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and the integer ceiling taken) to obtain standard deviations to be used in the Bacon model.
 
-<!-- Should we put a figure here? -->
+```{r}
+geochron_tables <- readRDS('data/output/all_geochron_tables.rds')
+
+widen <- function(x) {
+  data.frame(x$dataset$site.data[,1:5], x$geochron)
+}
+
+wide_table <- do.call(rbind.data.frame, lapply(geochron_tables, widen))
+
+library(dplyr)
+
+leads <- wide_table %>% filter(geo.chron.type %in% "Lead-210")
+
+# There are some ages with improperly named age types.
+leads$age[leads$age.type %in% "Calendar years AD/BC" & leads$age > 500] <- 1950 - 
+  leads$age[leads$age.type %in% "Calendar years AD/BC" & leads$age > 500]
+
+# None of the ages reported as Calendar years BP are wrong.
+library(ggplot2)
+
+ggplot(leads[is.na(leads$e.older),], aes(x = age)) + 
+  geom_histogram(fill = 'red', alpha = 0.5, color = 'black') +
+  geom_point(data = leads, aes(x = age, y = e.older), alpha = 0.3) + 
+  geom_smooth(data = leads, aes(x = age, y = e.older)) +
+  coord_cartesian(xlim = c(0, 200), ylim = c(0, 150), expand = c(0, 0))
+
+```
+
+#
 
 ## Expert elicitation exercise to identify settlement horizon
 
