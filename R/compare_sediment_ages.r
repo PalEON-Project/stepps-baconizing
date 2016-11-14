@@ -2,20 +2,14 @@
 ## compare ages
 #################################################################################################################################################
 version = 1
-pollen_ts = read.csv(file=paste0('data/sediment_ages_', version, '.csv'))
+pollen_ts <- read.csv(file = paste0('data/sediment_ages_', version, '.csv'))
 
-# this one has varve ages labelled as depths
-pollen_ts = pollen_ts[!(pollen_ts$id %in% c(3131)),]
+pollen_ages <- pollen_ts %>% 
+  select(id, sitename, age_bacon, age_bchron, age_default) %>% 
+  filter(!id == 3131 & sitename %in% unique(gsub(" ", "", new.chrons[,1])))
 
+pollen_ages$diff_bacon <- pollen_ages$age_bacon - pollen_ages$age_default
+pollen_ages$diff_bcron <- pollen_ages$age_bchron - pollen_ages$age_default
 
-plot(pollen_ts$age_bacon, pollen_ts$age_bchron)
-plot(pollen_ts$age_bacon, pollen_ts$age_default)
-plot(pollen_ts$age_bchron, pollen_ts$age_default)
-
-plot(pollen_ts$age_default, pollen_ts$age_bchron-pollen_ts$age_bacon)
-plot(pollen_ts$age_default, pollen_ts$age_default-pollen_ts$age_bacon)
-plot(pollen_ts$age_default, pollen_ts$age_default-pollen_ts$age_bchron)
-
-plot(pollen_ts$age_bacon, pollen_ts$age_bchron-pollen_ts$age_bacon)
-plot(pollen_ts$age_bacon, pollen_ts$age_default-pollen_ts$age_bacon)
-plot(pollen_ts$age_bacon, pollen_ts$age_default-pollen_ts$age_bchron)
+long_df <- melt(pollen_ages, id.vars = c("id", "sitename", "age_default"),
+                measure.vars = c("diff_bacon", "diff_bcron"))

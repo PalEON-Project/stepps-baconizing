@@ -43,6 +43,7 @@ library(plyr, verbose = FALSE)
 library(reshape2, verbose = FALSE)
 library(mgcv, verbose = FALSE)
 library(Bchron, verbose = FALSE)
+library(viridis, verbose = FALSE)
 
 ```
 
@@ -424,6 +425,39 @@ In five cases cores fell in grid cells where there was no digitized PLS data ava
 
 # Results
 
+Recalibrating ages from with `Bacon()` and `BChron()` show bimodal distribution of age differences.  One set of recalibrated models show almost no change, while others show a continuously increasing offset with increasing time.
+
+<!-- SJG - I think this is because some of these ages are in radiocarbon years. -->
+
+```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
+source('R/compare_sediment_ages.r')
+
+ggplot(long_df, aes(x = age_default, y = value)) +
+  geom_point(aes(color = variable), alpha = 0.1) +
+  scale_color_viridis(discrete = TRUE) +
+  coord_cartesian(ylim = c(-2000, 2500), xlim = c(-100, 15000), expand = c(0, 0)) +
+  geom_smooth() +
+  theme_bw() +
+  xlab("Existing Age Model") +
+  ylab("Model Offset") +
+  theme(axis.title.x = element_text(family = 'serif', 
+                            face = 'bold.italic', 
+                            size = 18),
+  axis.title.y = element_text(family = 'serif', 
+                            face = 'bold.italic', 
+                            size = 18),
+  axis.ticks = element_blank(),
+  axis.text.x = element_text(family = 'serif', 
+                            face = 'italic', 
+                            size = 14),
+  axis.text.y = element_text(family = 'serif', 
+                            face = 'italic', 
+                            size = 14))
+  
+
+```
+
+**Figure**. *Recalibrated and reconstructed models.*
 
 # Discussion
 
@@ -431,6 +465,8 @@ In five cases cores fell in grid cells where there was no digitized PLS data ava
 # Conclusions
 
 
-## Acknowledgements
+# Acknowledgements
+
+This work is a contribution of the PalEON Project (http://paleon-project.org).  
 
 # References
