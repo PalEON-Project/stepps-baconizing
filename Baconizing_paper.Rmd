@@ -8,6 +8,7 @@ output:
     theme: journal
     toc: yes
     toc_depth: 3
+    toc_float: true
   pdf_document:
     toc: yes
     toc_depth: '3'
@@ -149,17 +150,45 @@ direct <- ggplot(out.tests, aes(x = direct, y = linear, color = max.age)) +
             scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
             scale_y_continuous(limits = c(0, 21000), 
                                expand = c(0, 0)) +
-            theme(legend.position = 'none') +
             xlab('Direct Recalibration') +
-            ylab('Linear Model with\n Recalibration')
+            ylab('Linear Model with\n Recalibration') +
+  theme_bw() +
+        theme(axis.title.x = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+        legend.position = 'none',
+        axis.title.y = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14),
+        axis.text.y = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14))
 
 diff  <- ggplot(out.tests, aes(x = linear, y = diff, color = max.age)) +
             geom_line() +
             scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
             geom_hline(aes(yintercept = 0)) +
-            theme(legend.position = 'none') +
             xlab('Linear Model with Recalibration') +
-            ylab('Model Difference')
+            ylab('Model Difference') +
+  theme_bw() +
+        theme(axis.title.x = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+              legend.position = 'none',
+        axis.title.y = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14),
+        axis.text.y = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14))
 
 grid.arrange(direct, diff)
 
@@ -175,9 +204,24 @@ source('R/recalibrate.actual.R', echo = FALSE)
 
 basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = handle)) + 
             geom_line() +
-            theme(legend.position = 'none') +
             scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
-            scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0))
+            scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0)) +
+        theme_bw() +
+        theme(axis.title.x = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+              legend.position = 'none',
+        axis.title.y = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14),
+        axis.text.y = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14))
+
 
 # for (i in unique(new.chrons$handle)) {
 #   if (!paste0(gsub('/', '_', i), '.png') %in% list.files('figures/recal_test/')) {
@@ -215,9 +259,23 @@ diff <- ggplot(new.chrons, aes(x = age.lin, y = diff)) +
             scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
             scale_y_continuous(limits = c(-1000, 1000), expand = c(0, 0)) +
             geom_hline(aes(yintercept = 0)) +
-            theme(legend.position = 'none') +
             xlab('Linear Model with Recalibration') +
-            ylab('Model Difference')
+            ylab('Model Difference') +
+          theme_bw() +
+          theme(axis.title.x = element_text(family = 'serif', 
+                                      face = 'bold.italic', 
+                                      size = 18),
+                legend.position = 'none',
+          axis.title.y = element_text(family = 'serif', 
+                                      face = 'bold.italic', 
+                                      size = 18),
+          axis.ticks = element_blank(),
+          axis.text.x = element_text(family = 'serif', 
+                                      face = 'italic', 
+                                      size = 14),
+          axis.text.y = element_text(family = 'serif', 
+                                      face = 'italic', 
+                                      size = 14))
 
 grid.arrange(basic, diff)
 
@@ -263,11 +321,11 @@ Bacon works by diving a core into sections whose width are determined by the use
 
 Dividing a core into sections is an approximation of time discretization, abstracted through the process of deposition.  While consistent section widths across all cores (and thus consistent discretization) should be a goal, in practice, the internal unmeasurable variability in sedimentation rates, and uncertainty in the models themselves, makes the implementation of consistent section thicknesses difficult.  To provide prescriptive widths, but still allow flexibility as needed in the Bacon modelling, each core was run with widths of 5, 10, 15 and 20cm.  Model fit was assessed visually, and the best fit model was subsequently chosen to be the default model for that core.
 
-## Dealing with zero ${210}^Pb$ errors
+## Dealing with zero ^210^Pb errors
 
 Bacon requires that all chronological markers be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma was entered without error reporting.  Of the 398 ^210^Pb markers in Neotoma, 148 have no error reported.  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% CI intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and the integer ceiling taken) to obtain standard deviations to be used in the Bacon model.
 
-```{r}
+```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
 geochron_tables <- readRDS('data/output/all_geochron_tables.rds')
 
 widen <- function(x) {
@@ -287,11 +345,54 @@ leads$age[leads$age.type %in% "Calendar years AD/BC" & leads$age > 500] <- 1950 
 # None of the ages reported as Calendar years BP are wrong.
 library(ggplot2)
 
-ggplot(leads[is.na(leads$e.older),], aes(x = age)) + 
+lead_smooth <- ggplot(leads %>% filter(e.older > 0), aes(x = age, y = e.older)) +
+  geom_point(alpha = 0.3) + 
+  geom_smooth(aes(x = age, y = e.older)) +
+  coord_cartesian(xlim = c(-60, 200), ylim = c(0, 150), expand = c(0, 0)) +
+  scale_y_sqrt() +
+  xlab("Years Before Present") +
+  ylab("Error - SD") +
+  
+  theme_bw() +
+        theme(axis.title.x = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+              legend.position = 'none',
+        axis.title.y = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14),
+        axis.text.y = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14))
+
+
+lead_na <- ggplot(leads[is.na(leads$e.older),], aes(x = age)) + 
   geom_histogram(fill = 'red', alpha = 0.5, color = 'black') +
-  geom_point(data = leads, aes(x = age, y = e.older), alpha = 0.3) + 
-  geom_smooth(data = leads, aes(x = age, y = e.older)) +
-  coord_cartesian(xlim = c(0, 200), ylim = c(0, 150), expand = c(0, 0))
+  xlab("Years Before Present") +
+  ylab("Unassigned Samples") +
+  
+  theme_bw() +
+        theme(axis.title.x = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+              legend.position = 'none',
+        axis.title.y = element_text(family = 'serif', 
+                                    face = 'bold.italic', 
+                                    size = 18),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14),
+        axis.text.y = element_text(family = 'serif', 
+                                    face = 'italic', 
+                                    size = 14))
+
+
+grid.arrange(lead_smooth, lead_na, ncol = 1)
 
 ```
 

@@ -98,7 +98,7 @@ rebuild <- function(x){
 #  This is just to debug, so I can see where errors occur.
 #  for(i in 1:length(chronologies))rebuild(i)
 
-if (!'new.chrons.RData' %in% list.files('data/output')) {
+if (!'new.chrons.RDS' %in% list.files('data/output')) {
   # Build the chronologies.  This then saves to a file so we don't have to re-run it every time.
   
   build.chrons <- lapply(1:length(chronologies), function(x){
@@ -114,12 +114,11 @@ if (!'new.chrons.RData' %in% list.files('data/output')) {
                            
                            return(test)})
   
-  new.chrons      <- do.call(rbind.data.frame, new.chrons)
-
+  new.chrons      <- do.call(rbind.data.frame, build.chrons)
   
-  save(new.chrons, file = 'data/output/new.chrons.RData')
+  saveRDS(new.chrons, file = 'data/output/new.chrons.RDS')
 
 } else {
-  load('data/output/new.chrons.RData')
+  new.chrons <- readRDS('data/output/new.chrons.RDS')
 }
 
