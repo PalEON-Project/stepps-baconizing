@@ -1,0 +1,1236 @@
+"handle","name","dataset_id","type","geo_age","cc"
+"ALLIE","Lake Allie",29,"Core top_100",-15,0
+"ALLIE","Lake Allie",29,"Presettlement_paleon",95,0
+"ANDERSLK","Anderson Lake",202,"Radiocarbon, average ",10350,1
+"ANDERSLK","Anderson Lake",202,"Radiocarbon_139",10800,1
+"BADMED","Bad Medicine Lake",223,"Core top_248",-15,0
+"BADMED","Bad Medicine Lake",223,"Presettlement_paleon",76,0
+"BBASS","Black Bass Lake",241,"Core top_418",-15,0
+"BBASS","Black Bass Lake",241,"Presettlement_paleon",80,0
+"BECKMAN","Beckman Lake",249,"Core top_441",0,0
+"BECKMAN","Beckman Lake",249,"Presettlement_paleon",94,0
+"BECKMNBG","Beckman Lake",3062,"Core top_7701",-29,0
+"BECKMNBG","Beckman Lake",3062,"Presettlement_paleon",94,0
+"BIGJOHN","Big John Pond",272,"Core top_588",-31,0
+"BIGJOHN","Big John Pond",272,"Presettlement_paleon",60,0
+"BIGJOHN","Big John Pond",272,"Radiocarbon_rc_590",1320,1
+"BIGJOHN","Big John Pond",272,"Radiocarbon_rc_591",3310,1
+"BILLYS","Billy's Lake",275,"Core top_603",-24,0
+"BILLYS","Billy's Lake",275,"Presettlement_paleon",80,0
+"BILLYS","Billy's Lake",275,"Radiocarbon_rc_604",100,1
+"BILLYS","Billy's Lake",275,"Radiocarbon_rc_605",1110,1
+"BILLYS","Billy's Lake",275,"Radiocarbon_rc_606",2070,1
+"BILLYS","Billy's Lake",275,"Radiocarbon_rc_607",3700,1
+"BILLYS","Billy's Lake",275,"Radiocarbon_rc_608",5980,1
+"BILLYS","Billy's Lake",275,"Radiocarbon_rc_609",9760,1
+"BLANDIN","Blandin Pond",280,"Core top_626",-32,0
+"BLANDIN","Blandin Pond",280,"Presettlement_paleon",81,0
+"BOBLAKE","Bob Lake",296,"Core top_679",-15,0
+"BOBLAKE","Bob Lake",296,"Presettlement_paleon",92,0
+"BOGD","Bog D Pond",298,"Core top_687",-13,0
+"BOGD","Bog D Pond",298,"Presettlement_paleon",71,0
+"BOGD","Bog D Pond",298,"Radiocarbon_689",2730,1
+"BOGD","Bog D Pond",298,"Radiocarbon_690",3930,1
+"BOGD","Bog D Pond",298,"Radiocarbon_691",8560,1
+"BOSSUOT","Bossuot Lake",305,"Core top_726",-15,0
+"BOSSUOT","Bossuot Lake",305,"Presettlement_paleon",95,0
+"BURNTSDE","Burntside Lake",325,"Core top_877",-24,0
+"BURNTSDE","Burntside Lake",325,"Presettlement_paleon",69,0
+"CAMPBELL","Campbell Lake",334,"Core top_954",-15,0
+"CAMPBELL","Campbell Lake",334,"Presettlement_paleon",96,0
+"CEDARBLK","Cedar Bog",352,"Core top_1085",-10,0
+"CEDARBLK","Cedar Bog",352,"Presettlement_paleon",94,0
+"CEDARBLK","Cedar Bog",352,"Radiocarbon_1087",4150,1
+"CEDARBLK","Cedar Bog",352,"Radiocarbon_1088",7880,1
+"CINDY","Cindy Pond",382,"Core top_1240",-15,0
+"CINDY","Cindy Pond",382,"Presettlement_paleon",72,0
+"MNGRCL","Cottonwood Lake",515,"Core top_1529",-15,0
+"MNGRCL","Cottonwood Lake",515,"Presettlement_paleon",82,0
+"CRAZY","Crazy Pond",521,"Core top_1557",-15,0
+"CRAZY","Crazy Pond",521,"Presettlement_paleon",75,0
+"DALTON","Dalton Lake",545,"Core top_1706",-15,0
+"DALTON","Dalton Lake",545,"Presettlement_paleon",81,0
+"DOGFISH","Dogfish Lake",717,"Core top_1954",-24,0
+"DOGFISH","Dogfish Lake",717,"Presettlement_paleon",55,0
+"EASTTWIN","East Twin Lake",781,"Core top_2050",-15,0
+"EASTTWIN","East Twin Lake",781,"Presettlement_paleon",95,0
+"EGGERT","Eggert Lake",786,"Core top_2075",-15,0
+"EGGERT","Eggert Lake",786,"Presettlement_paleon",95,0
+"FAITH","Faith Pond",817,"Core top_2271",-15,0
+"FAITH","Faith Pond",817,"Presettlement_paleon",78,0
+"FARQUAR","Farquar Lake",822,"Core top_2289",-15,0
+"FARQUAR","Farquar Lake",822,"Presettlement_paleon",96,0
+"FAWNLAKE","Fawn Lake",824,"Core top_2295",-15,0
+"FAWNLAKE","Fawn Lake",824,"Presettlement_paleon",87,0
+"FOXPOND","Fox Pond",846,"Core top_2356",-15,0
+"FOXPOND","Fox Pond",846,"Presettlement_paleon",75,0
+"FRENCH","French Lake",850,"Core top_16270",10,0
+"FRENCH","French Lake",850,"Presettlement_paleon",94,0
+"FRENCH","French Lake",850,"Radiocarbon_rc_16272",520,1
+"FRENCH","French Lake",850,"Radiocarbon_rc_16273",2325,1
+"FRENCH","French Lake",850,"Radiocarbon_rc_16274",3495,1
+"GEORGE","George Lake",869,"Core top_2489",-15,0
+"GEORGE","George Lake",869,"Presettlement_paleon",95,0
+"MNBELG","George Lake",15245,"Core top_32972",-13,0
+"MNBELG","George Lake",15245,"Settlement_32973",90,0
+"GOLDSMTH","Goldsmith Lake",967,"Core top_2586",-15,0
+"GOLDSMTH","Goldsmith Lake",967,"Presettlement_paleon",92,0
+"GRICE","Grice Pond",990,"Core top_2745",-15,0
+"GRICE","Grice Pond",990,"Presettlement_paleon",75,0
+"HEMOPOND","Hemo Pond",1032,"Core top_2998",-15,0
+"HEMOPOND","Hemo Pond",1032,"Presettlement_paleon",76,0
+"HORSE","Blocknic Lake [Horse Pond]",1109,"Core top_3098",-15,0
+"HORSE","Blocknic Lake [Horse Pond]",1109,"Presettlement_paleon",79,0
+"HORSHOHA","Horseshoe Lake",1110,"Radiocarbon_rc_3105",8100,1
+"HORSHOHA","Horseshoe Lake",1110,"Radiocarbon_rc_3106",8940,1
+"HORSHOHA","Horseshoe Lake",1110,"Radiocarbon_rc_3107",10180,1
+"HORSHOHA","Horseshoe Lake",1110,"Radiocarbon_rc_3108",11080,1
+"HORSHOHA","Horseshoe Lake",1110,"Radiocarbon_rc_3109",12330,1
+"HOSTAGE","Hostage Lake",1111,"Core top_3110",-30,0
+"HOSTAGE","Hostage Lake",1111,"Presettlement_paleon",79,0
+"HOSTAGE","Hostage Lake",1111,"Radiocarbon_rc_3112",1595,1
+"HOSTAGE","Hostage Lake",1111,"Radiocarbon_rc_3113",3485,1
+"HUGLAKE","Hug Lake",1134,"Core top_3133",-20,0
+"HUGLAKE","Hug Lake",1134,"Presettlement_paleon",65,0
+"IRVIN","Irvin Lake",1153,"Core top_3214",-32,0
+"IRVIN","Irvin Lake",1153,"Presettlement_paleon",81,0
+"IRVIN","Irvin Lake",1153,"Radiocarbon_3215",1540,1
+"IRVIN","Irvin Lake",1153,"Radiocarbon_3216",1950,1
+"IRVIN","Irvin Lake",1153,"Radiocarbon_3217",3170,1
+"IRVIN","Irvin Lake",1153,"Radiocarbon_3218",5890,1
+"IRVIN","Irvin Lake",1153,"Radiocarbon_3219",7500,1
+"JACOBSN2","Jacobson Lake",3138,"Core top_7897",0,0
+"JACOBSN2","Jacobson Lake",3138,"Presettlement_paleon",81,0
+"JACOBSN2","Jacobson Lake",3138,"Radiocarbon_7899",3920,1
+"JACOBSN2","Jacobson Lake",3138,"Radiocarbon_7900",7210,1
+"MNSHBL","Jones Lake",15274,"Core top_33147",-13,0
+"MNSHBL","Jones Lake",15274,"Presettlement_paleon",94,0
+"KEGAN","Kegan Lake",1446,"Core top_3535",-15,0
+"KEGAN","Kegan Lake",1446,"Presettlement_paleon",96,0
+"KIRCHNR1","Kirchner Marsh",1520,"Core top_3604",-9,0
+"KIRCHNR1","Kirchner Marsh",1520,"Radiocarbon_3605",1660,1
+"KIRCHNR1","Kirchner Marsh",1520,"Radiocarbon_rc_3606",4943,1
+"KIRCHNR1","Kirchner Marsh",1520,"Radiocarbon_rc_3607",6230,1
+"KIRCHNR1","Kirchner Marsh",1520,"Radiocarbon_rc_3608",9039,1
+"KIRCHNR1","Kirchner Marsh",1520,"Radiocarbon_3609",11760,1
+"KIRCHNR2","Kirchner Marsh",3455,"Core top_7924",0,0
+"KIRCHNR2","Kirchner Marsh",3455,"Presettlement_paleon",96,0
+"KIRCHNR2","Kirchner Marsh",3455,"Radiocarbon, average ",11942,1
+"KOTIRANT","Kotiranta Lake",1548,"Core top_3673",150,0
+"KOTIRANT","Kotiranta Lake",1548,"Radiocarbon_3677",13480,1
+"KRYZ","Kryzewinski Lake",1552,"Core top_3689",-15,0
+"KRYZ","Kryzewinski Lake",1552,"Presettlement_paleon",80,0
+"KYLENLK","Kylen Lake",1564,"Radiocarbon_3715",8410,1
+"KYLENLK","Kylen Lake",1564,"Radiocarbon_3716",8575,1
+"KYLENLK","Kylen Lake",1564,"Radiocarbon_3717",9320,1
+"KYLENLK","Kylen Lake",1564,"Radiocarbon_3718",10055,1
+"KYLENLK","Kylen Lake",1564,"Radiocarbon_3719",10430,1
+"KYLENLK","Kylen Lake",1564,"Radiocarbon_3720",10820,1
+"KYLENLK","Kylen Lake",1564,"Radiocarbon_3721",12390,1
+"KYLENLK","Kylen Lake",1564,"Radiocarbon_3722",13450,1
+"KYLENLK","Kylen Lake",1564,"Radiocarbon_3723",15850,1
+"LAKEANN","Lake Ann",1584,"Core top_3823",-15,0
+"LAKEANN","Lake Ann",1584,"Presettlement_paleon",95,0
+"LAKEANNF","Lake Ann",3468,"Core top_7930",-30,0
+"LAKEANNF","Lake Ann",3468,"Radiocarbon_7931",4390,1
+"LAKEANNF","Lake Ann",3468,"Radiocarbon_7932",7420,1
+"LAKECARL","Lake Carlson",1588,"Core top_3838",9,0
+"LAKECARL","Lake Carlson",1588,"Presettlement_paleon",97,0
+"LEWISLK","Lewis Lake",1629,"Core top_4049",-15,0
+"LEWISLK","Lewis Lake",1629,"Presettlement_paleon",93,0
+"LILYLAKE","Lily Lake (US:Minnesota)",1633,"Core top_4114",0,0
+"LILYLAKE","Lily Lake (US:Minnesota)",1633,"Radiocarbon_4116",350,1
+"LILYLAKE","Lily Lake (US:Minnesota)",1633,"Presettlement_paleon",103,0
+"LILYLAKE","Lily Lake (US:Minnesota)",1633,"Radiocarbon_4117",2160,1
+"LILYLAKE","Lily Lake (US:Minnesota)",1633,"Radiocarbon_4118",3570,1
+"LILYLAKE","Lily Lake (US:Minnesota)",1633,"Radiocarbon_4119",4050,1
+"LILYLAKE","Lily Lake (US:Minnesota)",1633,"Radiocarbon_4120",7220,1
+"LILYLAKE","Lily Lake (US:Minnesota)",1633,"Radiocarbon_4121",9680,1
+"LILYLAKE","Lily Lake (US:Minnesota)",1633,"Radiocarbon_4122",11770,1
+"LITTBASS","Little Bass Lake",1639,"Core top_4137",0,0
+"LITTBASS","Little Bass Lake",1639,"Presettlement_paleon",81,0
+"LITTBASS","Little Bass Lake",1639,"Radiocarbon_4139",1890,1
+"LITTBASS","Little Bass Lake",1639,"Radiocarbon_4140",3960,1
+"LITTBASS","Little Bass Lake",1639,"Radiocarbon_4141",5530,1
+"LITTBASS","Little Bass Lake",1639,"Radiocarbon_4142",7780,1
+"LITTBASS","Little Bass Lake",1639,"Radiocarbon_4143",10660,1
+"LKCLDSA","Lake of the Clouds",1649,"Annual laminations (v",9250,0
+"LKCLDSA","Lake of the Clouds",1649,"Annual laminations (v",9500,0
+"LKCLDSA","Lake of the Clouds",1649,"Annual laminations (v",9700,0
+"LKCLDSA","Lake of the Clouds",1649,"Annual laminations (v",9900,0
+"LKCLDSA","Lake of the Clouds",1649,"Annual laminations (v",10100,0
+"LKCLDSA","Lake of the Clouds",1649,"Annual laminations (v",10300,0
+"LKCLDSA","Lake of the Clouds",1649,"Annual laminations (v",10600,0
+"LKCLDSA","Lake of the Clouds",1649,"Annual laminations (v",11100,0
+"LKCLDSA","Lake of the Clouds",1649,"Annual laminations (v",11400,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",208,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",795,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",1140,0
+"LKCLDSH","Lake of the Clouds",3482,"Presettlement_paleon",71,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",1502,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",1815,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",2312,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",2751,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",3168,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",3624,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",4102,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",4518,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",5022,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",5513,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",5983,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",6379,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",6699,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",7005,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",7362,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",7721,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",8121,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",8491,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",8872,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",8986,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9063,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9131,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9197,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9242,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9325,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9375,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9447,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9501,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9513,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9557,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9600,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9617,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",9709,0
+"LKCLDSH","Lake of the Clouds",3482,"Annual laminations (v",10050,0
+"MARTINPD","Martin Pond",1708,"Core top_4611",0,0
+"MARTINPD","Martin Pond",1708,"Presettlement_paleon",72,0
+"MCCRANEY","McCraney Lake",1720,"Core top_4668",-15,0
+"MCCRANEY","McCraney Lake",1720,"Presettlement_paleon",75,0
+"MINNIEN","Lake Minnie",1757,"Core top_4754",0,0
+"MINNIEN","Lake Minnie",1757,"Presettlement_paleon",72,0
+"MINNIEO","Lake Minnie",3492,"Core top_8116",0,0
+"MINNIEO","Lake Minnie",3492,"Presettlement_paleon",72,0
+"MINNIEO","Lake Minnie",3492,"Radiocarbon_8118",3400,1
+"MINNIEO","Lake Minnie",3492,"Radiocarbon_8119",8140,1
+"MUDLKMN1","Mud Lake",1777,"Core top_4877",-15,0
+"MUDLKMN1","Mud Lake",1777,"Presettlement_paleon",95,0
+"MUDLKMN2","Mud Lake (US:Minnesota:Hubbard)",1778,"Core top_4879",-30,0
+"MUDLKMN2","Mud Lake (US:Minnesota:Hubbard)",1778,"Radiocarbon_rc_4880",90,1
+"MUDLKMN2","Mud Lake (US:Minnesota:Hubbard)",1778,"Presettlement_paleon",79,0
+"MUDLKMN2","Mud Lake (US:Minnesota:Hubbard)",1778,"Radiocarbon_rc_4881",2250,1
+"MUDLKMN2","Mud Lake (US:Minnesota:Hubbard)",1778,"Radiocarbon_rc_4882",2870,1
+"MURPHY","Murphy Lake",1781,"Core top_4893",-15,0
+"MURPHY","Murphy Lake",1781,"Presettlement_paleon",96,0
+"MYRTLE","Myrtle Lake",1786,"Core top_4908",0,0
+"MYRTLE","Myrtle Lake",1786,"Presettlement_paleon",67,0
+"MYRTLE","Myrtle Lake",1786,"Radiocarbon_4910",2680,1
+"MYRTLE","Myrtle Lake",1786,"Radiocarbon_4911",4840,1
+"MYRTLE","Myrtle Lake",1786,"Radiocarbon_4912",7850,1
+"MYRTLE","Myrtle Lake",1786,"Radiocarbon_4913",10150,1
+"MYRTLE","Myrtle Lake",1786,"Radiocarbon_4914",11120,1
+"NELSONPD","Nelson Pond",1794,"Radiocarbon_4987",5540,1
+"NELSONPD","Nelson Pond",1794,"Radiocarbon_4988",7245,1
+"ONAMIA","Lake Onamia",1830,"Core top_5143",-15,0
+"ONAMIA","Lake Onamia",1830,"Presettlement_paleon",80,0
+"ONDRISPD","Ondris Pond",1831,"Core top_5148",-15,0
+"ONDRISPD","Ondris Pond",1831,"Radiocarbon_5149",660,1
+"ONDRISPD","Ondris Pond",1831,"Presettlement_paleon",80,0
+"ONDRISPD","Ondris Pond",1831,"Radiocarbon_5150",1535,1
+"PGONIABG","Pogonia Bog Pond",3541,"Core top_8180",-24,0
+"PGONIABG","Pogonia Bog Pond",3541,"Presettlement_paleon",95,0
+"POGONIA","Pogonia Bog Pond",3558,"Core top_8209",-24,0
+"POGONIA","Pogonia Bog Pond",3558,"Radiocarbon_rc_8210",100,1
+"POGONIA","Pogonia Bog Pond",3558,"Presettlement_paleon",95,0
+"POGONIA","Pogonia Bog Pond",3558,"Radiocarbon_rc_8211",260,1
+"POGONIA","Pogonia Bog Pond",3558,"Radiocarbon_rc_8212",2550,1
+"POGONIA","Pogonia Bog Pond",3558,"Radiocarbon_rc_8213",3620,1
+"POGONIA","Pogonia Bog Pond",3558,"Radiocarbon_rc_8214",6250,1
+"POGONIA","Pogonia Bog Pond",3558,"Radiocarbon_rc_8215",10330,1
+"POGONIA","Pogonia Bog Pond",3558,"Radiocarbon_8216",11190,1
+"THRDBGW","Third Lake",3788,"Core top_8426",50,0
+"THRDBGW","Third Lake",3788,"Presettlement_paleon",50,0
+"PENNINGT","Pennington Lake",1884,"Core top_5333",-15,0
+"PENNINGT","Pennington Lake",1884,"Presettlement_paleon",93,0
+"PETERSL","Peterson Slough",1891,"Core top_5368",-30,0
+"PETERSL","Peterson Slough",1891,"Radiocarbon_rc_5369",110,1
+"PETERSL","Peterson Slough",1891,"Presettlement_paleon",72,0
+"PETERSL","Peterson Slough",1891,"Radiocarbon_rc_5370",3010,1
+"PLEASAMN","Pleasant Lake",1955,"Core top_5432",-15,0
+"PLEASAMN","Pleasant Lake",1955,"Presettlement_paleon",95,0
+"PORTAGE","Portage Lake",1966,"Core top_5481",0,0
+"PORTAGE","Portage Lake",1966,"Presettlement_paleon",77,0
+"PORTAGE","Portage Lake",1966,"Radiocarbon_5482",3685,1
+"PORTAGE","Portage Lake",1966,"Radiocarbon_5483",7320,1
+"PORTAGE","Portage Lake",1966,"Radiocarbon_5484",9780,1
+"REICHOW","Reichow Pond",2051,"Core top_5860",-15,0
+"REICHOW","Reichow Pond",2051,"Presettlement_paleon",79,0
+"REIDEL","Reidel Lake",2053,"Core top_5870",-34,0
+"REIDEL","Reidel Lake",2053,"Presettlement_paleon",79,0
+"REIDEL","Reidel Lake",2053,"Radiocarbon_rc_5872",1680,1
+"REIDEL","Reidel Lake",2053,"Radiocarbon_rc_5873",3310,1
+"REIDEL","Reidel Lake",2053,"Radiocarbon_rc_5874",5440,1
+"REIDEL","Reidel Lake",2053,"Radiocarbon_rc_5875",8360,1
+"REIDEL","Reidel Lake",2053,"Radiocarbon_rc_5876",10290,1
+"REIDEL","Reidel Lake",2053,"Radiocarbon_5877",11630,1
+"RHOLL","Rholl Lake",2062,"Core top_5902",-15,0
+"RHOLL","Rholl Lake",2062,"Presettlement_paleon",78,0
+"RICEMNB","Rice Lake",3568,"Core top_8314",-18,0
+"RICEMNB","Rice Lake",3568,"Radiocarbon_rc_8316",1930,1
+"ROSSBURG","Rossburg Bog",2290,"Core top_6058",2000,0
+"ROSSBURG","Rossburg Bog",2290,"Radiocarbon_6059",3500,1
+"ROSSBURG","Rossburg Bog",2290,"Radiocarbon_6060",7770,1
+"ROSSBURG","Rossburg Bog",2290,"Radiocarbon_6061",10100,1
+"RUTZLAKE","Rutz Lake",2314,"Core top_6206",-15,0
+"RUTZLAKE","Rutz Lake",2314,"Presettlement_paleon",95,0
+"RUTZLAKE","Rutz Lake",2314,"Radiocarbon_rc_6208",420,1
+"RUTZLAKE","Rutz Lake",2314,"Radiocarbon_rc_6209",1960,1
+"RUTZLAKE","Rutz Lake",2314,"Radiocarbon_rc_6210",3280,1
+"RUTZLAKE","Rutz Lake",2314,"Radiocarbon_rc_6211",4920,1
+"RUTZLAKE","Rutz Lake",2314,"Radiocarbon_rc_6212",7870,1
+"RUTZLAKE","Rutz Lake",2314,"Radiocarbon_rc_6213",9410,1
+"RUTZLAKE","Rutz Lake",2314,"Radiocarbon_6214",12000,1
+"SEDIVY","Sedivy Lake",2354,"Core top_6407",-15,0
+"SEDIVY","Sedivy Lake",2354,"Presettlement_paleon",79,0
+"SHAGAWA","Shagawa Lake",2375,"Core top_6487",-20,0
+"SHAGAWA","Shagawa Lake",2375,"Presettlement_paleon",66,0
+"SHAGAWA","Shagawa Lake",2375,"Radiocarbon_6494",1935,1
+"SILVERMN","Silver Lake",2383,"Core top_6567",-15,0
+"SILVERMN","Silver Lake",2383,"Presettlement_paleon",94,0
+"SISEEBA","Siseebakwet South",2394,"Core top_6641",-32,0
+"SISEEBA","Siseebakwet South",2394,"Presettlement_paleon",81,0
+"SOLUM","Solum Lake",2581,"Core top_6703",-15,0
+"SOLUM","Solum Lake",2581,"Presettlement_paleon",80,0
+"SOSTANCH","South Stanchfield Lake",2584,"Core top_6714",-15,0
+"SOSTANCH","South Stanchfield Lake",2584,"Presettlement_paleon",98,0
+"SPECTACL","Spectacle Lake",2585,"Core top_6716",-15,0
+"SPECTACL","Spectacle Lake",2585,"Presettlement_paleon",93,0
+"STCATHER","St. Catherines Lake",2600,"Core top_6803",-15,0
+"STCATHER","St. Catherines Lake",2600,"Presettlement_paleon",95,0
+"STONE","Stone Lake",2605,"Core top_6810",-15,0
+"STONE","Stone Lake",2605,"Presettlement_paleon",95,0
+"SUNFISH","Sunfish Lake",2613,"Core top_6864",-15,0
+"SUNFISH","Sunfish Lake",2613,"Presettlement_paleon",97,0
+"TERHELL","Quallen Lake [Terhell Pond]",2638,"Core top_7022",-10,0
+"TERHELL","Quallen Lake [Terhell Pond]",2638,"Presettlement_paleon",79,0
+"TERHELL","Quallen Lake [Terhell Pond]",2638,"Radiocarbon_7024",4270,1
+"THOMPSON","Thompson Pond",2640,"Core top_7033",0,0
+"THOMPSON","Thompson Pond",2640,"Presettlement_paleon",79,0
+"TOENJES","Toenjes Lake",2648,"Core top_7080",-15,0
+"TOENJES","Toenjes Lake",2648,"Presettlement_paleon",94,0
+"TWINMN1","Twin Lakes",2881,"Core top_7204",-15,0
+"TWINMN1","Twin Lakes",2881,"Presettlement_paleon",95,0
+"UPGRAVEN","Upper Graven Lake",2888,"Core top_7239",-34,0
+"UPGRAVEN","Upper Graven Lake",2888,"Presettlement_paleon",79,0
+"UPGRAVEN","Upper Graven Lake",2888,"Radiocarbon_rc_7241",940,1
+"UPGRAVEN","Upper Graven Lake",2888,"Radiocarbon_rc_7242",3490,1
+"UPGRAVEN","Upper Graven Lake",2888,"Radiocarbon_rc_7243",7740,1
+"UPGRAVEN","Upper Graven Lake",2888,"Radiocarbon_rc_7244",10310,1
+"WEBERLK","Weber Lake",3837,"Core top_8454",10,0
+"WEBERLK","Weber Lake",3837,"Presettlement_paleon",56,0
+"WENTZEL","Wentzel's Pond",2948,"Core top_7405",-30,0
+"WENTZEL","Wentzel's Pond",2948,"Radiocarbon_rc_7406",155,1
+"WENTZEL","Wentzel's Pond",2948,"Presettlement_paleon",77,0
+"WENTZEL","Wentzel's Pond",2948,"Radiocarbon_rc_7407",365,1
+"WENTZEL","Wentzel's Pond",2948,"Radiocarbon_rc_7408",2425,1
+"WHITLIL1","White Lily Lake",2952,"Core top_7429",-15,0
+"WHITLIL1","White Lily Lake",2952,"Presettlement_paleon",95,0
+"WILWRDPD","Willow River Pond",2956,"Radiocarbon_7459",5160,1
+"WILWRDPD","Willow River Pond",2956,"Radiocarbon_7460",7890,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7494",9150,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7495",10080,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7496",10534,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7497",11040,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7498",11270,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7499",11722,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7500",12240,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7501",13350,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7502",13510,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7503",13670,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7504",14720,1
+"WOLFCRK","Wolf Creek",3029,"Radiocarbon_7505",20500,1
+"WOLSFELD","Wolsfeld Lake",3031,"Core top_16252",-25,0
+"WOLSFELD","Wolsfeld Lake",3031,"Presettlement_paleon",95,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16259",335,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16260",433,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16261",2242,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16262",3402,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16263",3776,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16264",5836,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16265",6910,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16266",8268,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16267",11636,0
+"WOLSFELD","Wolsfeld Lake",3031,"Radiocarbon_cal_16268",13864,0
+"SOUHERON","South Heron Lake",10970,"Core top_16306",-13,0
+"SOUHERON","South Heron Lake",10970,"Presettlement_paleon",92,0
+"OCHEDA","Ocheda Lake",10971,"Core top_16308",-13,0
+"OCHEDA","Ocheda Lake",10971,"Presettlement_paleon",82,0
+"BLOMFORD","Blomford Lake",10973,"Core top_16334",-30,0
+"BLOMFORD","Blomford Lake",10973,"Presettlement_paleon",96,0
+"FAWNANMN","Fawn Lake",10974,"Core top_16336",-30,0
+"FAWNANMN","Fawn Lake",10974,"Presettlement_paleon",95,0
+"FROVOLD","Frovold Lake",10975,"Core top_16338",-30,0
+"FROVOLD","Frovold Lake",10975,"Presettlement_paleon",83,0
+"GOOSEMN","Goose Lake",10976,"Core top_16340",-28,0
+"GOOSEMN","Goose Lake",10976,"Presettlement_paleon",94,0
+"OLSONMN","Olson Lake",10977,"Core top_16342",-28,0
+"OLSONMN","Olson Lake",10977,"Presettlement_paleon",80,0
+"RNDGROVE","Round Grove Lake",10983,"Core top_16361",-28,0
+"RNDGROVE","Round Grove Lake",10983,"Presettlement_paleon",95,0
+"MNLYC2","Cottonwood Lake",12005,"Core top_17389",-20,0
+"MNLYC2","Cottonwood Lake",12005,"Presettlement_paleon",86,0
+"MONSON","Monson Lake",12006,"Core top_17391",-30,0
+"MONSON","Monson Lake",12006,"Presettlement_paleon",93,0
+"DEANS","Deans Lake",12007,"Core top_17393",-29,0
+"DEANS","Deans Lake",12007,"Presettlement_paleon",96,0
+"EMILY","Lake Emily",12008,"Core top_17395",-29,0
+"EMILY","Lake Emily",12008,"Presettlement_paleon",96,0
+"PERCHMN","Perch Lake",12009,"Core top_17397",-29,0
+"PERCHMN","Perch Lake",12009,"Presettlement_paleon",79,0
+"CHUBLAKE","Chub Lake",12010,"Core top_17399",-29,0
+"CHUBLAKE","Chub Lake",12010,"Presettlement_paleon",96,0
+"MNDLLR","Lake Rachel",12011,"Core top_17401",-30,0
+"MNDLLR","Lake Rachel",12011,"Presettlement_paleon",84,0
+"ZIEBELL","Ziebell Lake",12012,"Core top_17403",-32,0
+"ZIEBELL","Ziebell Lake",12012,"Presettlement_paleon",79,0
+"MNDLML","Mud Lake",12013,"Core top_17405",-30,0
+"MNDLML","Mud Lake",12013,"Presettlement_paleon",84,0
+"LYBECK","Lybeck Lake",12014,"Core top_17407",-32,0
+"LYBECK","Lybeck Lake",12014,"Presettlement_paleon",83,0
+"UNION","Union Lake",12015,"Core top_17409",-30,0
+"UNION","Union Lake",12015,"Presettlement_paleon",84,0
+"ALBERTL3","Albert Lea Lake",15248,"Core top_33008",-46,0
+"ALBERTL3","Albert Lea Lake",15248,"Ambrosia rise_33009",90,0
+"EVRHRTLK","Everhart Lake",12024,"Core top_17423",-30,0
+"EVRHRTLK","Everhart Lake",12024,"Presettlement_paleon",96,0
+"SHARKEY","Sharkey Lake",13029,"Core top_18437",-51,0
+"SHARKEY","Sharkey Lake",13029,"Ambrosia rise_18438",90,0
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18439",1530,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18440",2410,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18441",3630,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18442",4730,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18443",6528,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18444",6840,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18445",7995,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18446",9430,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18447",8130,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18448",9510,1
+"SHARKEY","Sharkey Lake",13029,"Radiocarbon_18449",10255,1
+"KIMBLE","Kimble Pond",13032,"Core top_18464",-51,0
+"KIMBLE","Kimble Pond",13032,"Presettlement_paleon",95,0
+"KIMBLE","Kimble Pond",13032,"Radiocarbon_18466",1040,1
+"KIMBLE","Kimble Pond",13032,"Radiocarbon_18467",2150,1
+"KIMBLE","Kimble Pond",13032,"Radiocarbon_18468",1995,1
+"KIMBLE","Kimble Pond",13032,"Radiocarbon_18469",2270,1
+"KIMBLE","Kimble Pond",13032,"Radiocarbon_18470",3890,1
+"KIMBLE","Kimble Pond",13032,"Radiocarbon_18471",5590,1
+"KIMBLE","Kimble Pond",13032,"Radiocarbon_18472",6620,1
+"KIMBLE","Kimble Pond",13032,"Radiocarbon_18473",7910,1
+"KIMBLE","Kimble Pond",13032,"Radiocarbon_18474",10570,1
+"WESTOLAF","West Olaf Lake",13051,"Presettlement_paleon",80,0
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18567",1360,1
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18568",2310,1
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18569",2280,1
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18570",3110,1
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18571",3345,1
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18572",4080,1
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18573",4260,1
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18574",5875,1
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18575",6680,1
+"WESTOLAF","West Olaf Lake",13051,"Radiocarbon_18576",8140,1
+"OAKGLEN","Oak Glen Lake",13056,"Core top_19495",-29,0
+"OAKGLEN","Oak Glen Lake",13056,"Presettlement_paleon",96,0
+"CAMPLAKE","Camp Lake",13057,"Core top_19497",-30,0
+"CAMPLAKE","Camp Lake",13057,"Presettlement_paleon",93,0
+"BASSK","Bass Lake",14270,"Core top_30514",-42,0
+"BASSK","Bass Lake",14270,"Settlement_30515",90,0
+"BASSK","Bass Lake",14270,"Radiocarbon_30511",480,1
+"BASSK","Bass Lake",14270,"Radiocarbon_30512",930,1
+"BASSK","Bass Lake",14270,"Radiocarbon_30513",1100,1
+"SALLIE","Lake Sallie",14403,"Core top_30745",-20,0
+"SALLIE","Lake Sallie",14403,"Ambrosia rise_30747",70,0
+"MNPPJL","Johnson Lake",14435,"Core top_30797",-30,0
+"MNPPJL","Johnson Lake",14435,"Ambrosia rise_30798",90,0
+"LILY","Lily Lake",14535,"Core top_31011",-45,0
+"LILY","Lily Lake",14535,"Settlement_31012",90,0
+"LILY","Lily Lake",14535,"Radiocarbon_31013",190,1
+"LILY","Lily Lake",14535,"Radiocarbon_31014",710,1
+"KELLYDUD","Kelly-Dudley Lake",14537,"Core top_31019",-38,0
+"KELLYDUD","Kelly-Dudley Lake",14537,"Settlement_31020",90,0
+"KELLYDUD","Kelly-Dudley Lake",14537,"Radiocarbon_31021",590,1
+"KELLYDUD","Kelly-Dudley Lake",14537,"Radiocarbon_31022",5700,1
+"MARTHA","Martha Lake",14539,"Core top_31028",-44,0
+"MARTHA","Martha Lake",14539,"Settlement_31029",90,0
+"MARTHA","Martha Lake",14539,"Radiocarbon_31030",750,1
+"MARTHA","Martha Lake",14539,"Radiocarbon_31031",2020,1
+"MARTHA","Martha Lake",14539,"Radiocarbon_31032",2580,1
+"MINNREG","Minnreg",14626,"Core top_31269",-42,0
+"MINNREG","Minnreg",14626,"Settlement_31270",90,0
+"MINNREG","Minnreg",14626,"Radiocarbon_31271",550,1
+"MINNREG","Minnreg",14626,"Radiocarbon_31272",710,1
+"MINNREG","Minnreg",14626,"Radiocarbon_31273",800,1
+"AMBER","Amber Lake",14631,"Core top_31288",-43,0
+"AMBER","Amber Lake",14631,"Settlement_31289",90,0
+"AMBER","Amber Lake",14631,"Radiocarbon_31290",400,1
+"AMBER","Amber Lake",14631,"Radiocarbon_31291",970,1
+"CAMP","Camp Lake",14633,"Core top_31296",-43,0
+"CAMP","Camp Lake",14633,"Settlement_31297",90,0
+"CAMP","Camp Lake",14633,"Radiocarbon_31298",670,1
+"CAMP","Camp Lake",14633,"Radiocarbon_31299",1650,1
+"CRYSTAL","Crystal Lake",14635,"Core top_31304",-44,0
+"CRYSTAL","Crystal Lake",14635,"Settlement_31305",104,0
+"CRYSTAL","Crystal Lake",14635,"Radiocarbon_31306",360,1
+"CRYSTAL","Crystal Lake",14635,"Radiocarbon_31307",1910,1
+"FISHL","Fish Lake",14637,"Core top_31312",-42,0
+"FISHL","Fish Lake",14637,"Settlement_31313",90,0
+"FISHL","Fish Lake",14637,"Radiocarbon_31314",460,1
+"FISHL","Fish Lake",14637,"Radiocarbon_31315",760,1
+"FISHS","Fish Lake",14639,"Core top_31321",-44,0
+"FISHS","Fish Lake",14639,"Settlement_31322",90,0
+"FISHS","Fish Lake",14639,"Radiocarbon_31323",740,1
+"FISHS","Fish Lake",14639,"Radiocarbon_31324",870,1
+"FISHS","Fish Lake",14639,"Radiocarbon_31325",1780,1
+"EAGLEL","Eagle Lake",14641,"Core top_31330",-45,0
+"EAGLEL","Eagle Lake",14641,"Settlement_31331",90,0
+"EAGLEL","Eagle Lake",14641,"Radiocarbon_31332",680,1
+"EAGLEL","Eagle Lake",14641,"Radiocarbon_31333",1680,1
+"EMILY_NE","Lake Emily, Northeast Basin",14643,"Core top_31338",-45,0
+"EMILY_NE","Lake Emily, Northeast Basin",14643,"Settlement_31339",90,0
+"EMILY_NE","Lake Emily, Northeast Basin",14643,"Radiocarbon_31340",420,1
+"EMILY_NE","Lake Emily, Northeast Basin",14643,"Radiocarbon_31341",930,1
+"FULLER","Fuller Lake",14645,"Core top_31346",-43,0
+"FULLER","Fuller Lake",14645,"Settlement_31347",90,0
+"FULLER","Fuller Lake",14645,"Radiocarbon_31348",820,1
+"FULLER","Fuller Lake",14645,"Radiocarbon_31349",1900,1
+"MNCLEB","Elk Lake",15167,"Core top_32740",-28,0
+"MNCLEB","Elk Lake",15167,"Ambrosia rise_32741",80,0
+"MNCLEC","Elk Lake",15168,"Core top_32742",-28,0
+"MNCLEC","Elk Lake",15168,"Ambrosia rise_32743",80,0
+"MNCLE4","Elk Lake",15169,"Core top_32744",-28,0
+"MNCLE4","Elk Lake",15169,"Ambrosia rise_32745",80,0
+"MNCLED","Elk Lake",15219,"Core top_32919",-20,0
+"MNCLED","Elk Lake",15219,"Ambrosia rise_32920",60,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",58,0
+"MNCLEL","Elk Lake",15269,"Ambrosia rise_33099",60,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",62,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",66,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",76,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",86,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",96,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",106,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",116,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",129,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",149,0
+"MNCLEL","Elk Lake",15269,"Annual laminations (v",169,0
+"MNBCSC","St. Clair Lake",15228,"Core top_32946",-20,0
+"MNBCSC","St. Clair Lake",15228,"Settlement_32947",80,0
+"MNCLSQ","Ozawindib Lake",15252,"Core top_33052",-23,0
+"MNCLSQ","Ozawindib Lake",15252,"Ambrosia rise_33053",60,0
+"MNCLSQ","Ozawindib Lake",15252,"Radiocarbon_33054",790,1
+"MNCHLH","Little Horseshoe Lake",15254,"Core top_33055",-30,0
+"MNCHLH","Little Horseshoe Lake",15254,"Ambrosia rise_33056",70,0
+"MNOTCL","Cora Lake",15256,"Core top_33057",-29,0
+"MNOTCL","Cora Lake",15256,"Ambrosia rise_33058",80,0
+"MNCVTL","Tamarack Lake",15266,"Core top_33095",-27,0
+"MNCVTL","Tamarack Lake",15266,"Settlement_33096",100,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",-14,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",-10,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",-6,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",0,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",4,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",10,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",16,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",20,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",26,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",37,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",45,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",49,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",55,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",61,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",65,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",69,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",75,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",95,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",105,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",115,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",125,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",135,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",145,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",155,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",165,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",175,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",183,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",193,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",203,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",218,0
+"MNHBLS","LaSalle Lake",15270,"Annual laminations (v",223,0
+"MNWSSO","Saint Olaf Lake",15273,"Core top_33145",-29,0
+"MNWSSO","Saint Olaf Lake",15273,"Ambrosia rise_33146",95,0
+"WILLIAMJ","Williams Lake",15281,"Core top_33153",-43,0
+"WILLIAMJ","Williams Lake",15281,"Radiocarbon_33154",7680,1
+"MNHNLL","Long Lake",15294,"Core top_33214",-29,0
+"MNHNLL","Long Lake",15294,"Ambrosia rise_33215",100,0
+"MNHNLL","Long Lake",15294,"Radiocarbon_33216",581,1
+"MNHNLL","Long Lake",15294,"Radiocarbon_33217",1135,1
+"MNHNLL","Long Lake",15294,"Radiocarbon_33218",2477,1
+"MNHNWB","Wolsfeld Woods Marsh",15318,"Core top_33311",-25,0
+"MNHNWB","Wolsfeld Woods Marsh",15318,"Ambrosia rise_33312",95,0
+"MNHNWB","Wolsfeld Woods Marsh",15318,"Radiocarbon_33313",905,1
+"DEEPLAKE","Deep Lake",15403,"Core top_33542",-40,0
+"DEEPLAKE","Deep Lake",15403,"Radiocarbon_33543",8090,1
+"DEEPLAKE","Deep Lake",15403,"Radiocarbon_33544",10700,1
+"QUALLY","Qually Pond",15965,"Core top_35038",-12,0
+"QUALLY","Qually Pond",15965,"Radiocarbon_35039",11740,1
+"ITASCAMB","Itasca Bison Kill Site",15989,"Radiocarbon_35106",9360,1
+"ITASCAMB","Itasca Bison Kill Site",15989,"Radiocarbon_35107",9640,1
+"ITASCAMB","Itasca Bison Kill Site",15989,"Radiocarbon_35108",9690,1
+"STEELMN","Steel Lake",17396,"Core top_37405",-50,0
+"STEELMN","Steel Lake",17396,"Radiocarbon_37410",340,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37411",780,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37412",1700,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37413",1880,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37414",1850,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37415",2160,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37416",2490,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37417",2680,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37418",2920,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37419",4100,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37406",4290,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37407",4510,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37420",4840,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37421",5280,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37422",5830,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37423",6170,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37424",6890,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37425",7880,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37426",8160,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37427",7210,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37428",7240,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37429",8580,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37430",8750,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37431",9470,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37432",9420,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37433",9620,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37408",9860,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37409",9790,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37434",15490,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37435",10430,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37436",41190,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37437",9870,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37438",10010,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37439",9960,1
+"STEELMN","Steel Lake",17396,"Radiocarbon_37440",35290,1
+"FOXMN","Fox Lake",19834,"Core top_39727",-52,0
+"FOXMN","Fox Lake",19834,"Radiocarbon_39728",345,1
+"FOXMN","Fox Lake",19834,"Radiocarbon_39729",1775,1
+"FOXMN","Fox Lake",19834,"Radiocarbon_39730",4770,1
+"FOXMN","Fox Lake",19834,"Radiocarbon_39731",5860,1
+"FOXMN","Fox Lake",19834,"Radiocarbon_39732",8220,1
+"LITSHING","Little Shingobee Lake",17947,"Core top_38312",-48,0
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38303",2915,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38304",3170,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38305",3395,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38306",5605,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38291",4655,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38298",5400,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38307",5505,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38308",6555,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38309",8125,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38310",8440,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38292",10810,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38299",10710,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38311",16230,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38293",10175,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38301",16180,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38294",10300,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38302",13000,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38295",10305,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38296",10510,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38297",10820,1
+"LITSHING","Little Shingobee Lake",17947,"Radiocarbon_38300",12840,1
+"MADELIA","Madelia",19812,"Radiocarbon_39683",9300,1
+"MADELIA","Madelia",19812,"Radiocarbon_39684",12650,1
+"HELLSKIT","Hell's Kitchen Lake",3131,"Core top_7808",-10,0
+"HELLSKIT","Hell's Kitchen Lake",3131,"Presettlement_paleon",43,0
+"HELLSKIT","Hell's Kitchen Lake",3131,"Radiocarbon_cal_7809",449,0
+"HELLSKIT","Hell's Kitchen Lake",3131,"Radiocarbon_cal_7810",1112,0
+"HELLSKIT","Hell's Kitchen Lake",3131,"Radiocarbon_cal_7811",1598,0
+"HELLSKIT","Hell's Kitchen Lake",3131,"Radiocarbon_cal_7812",2046,0
+"LAKEMARY","Lake Mary",3473,"Core top_7941",200,0
+"LAKEMARY","Lake Mary",3473,"Radiocarbon_7942",3650,1
+"LAKEMARY","Lake Mary",3473,"Radiocarbon_7943",8540,1
+"LAKEMARY","Lake Mary",3473,"Radiocarbon_7944",9460,1
+"BLUMOUND","Blue Mounds Creek",287,"Core top_665",0,0
+"BLUMOUND","Blue Mounds Creek",287,"Presettlement_paleon",116,0
+"BLUMOUND","Blue Mounds Creek",287,"Radiocarbon_667",4235,1
+"BLUMOUND","Blue Mounds Creek",287,"Radiocarbon_668",7335,1
+"BLUMOUND","Blue Mounds Creek",287,"Radiocarbon_669",9580,1
+"BLUMOUND","Blue Mounds Creek",287,"Radiocarbon_670",10485,1
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",10,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",20,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",30,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",40,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",50,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",60,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",70,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",80,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",90,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",100,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",110,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",120,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",130,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",140,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",150,0
+"DARKLAKE","Dark Lake",546,"Presettlement_paleon",43,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",160,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",170,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",180,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",190,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",200,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",210,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",246,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",286,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",324,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",364,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",402,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",450,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",491,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",530,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",570,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",610,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",650,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",690,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",730,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",770,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",810,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",850,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",890,0
+"DARKLAKE","Dark Lake",546,"Annual laminations (v",930,0
+"DEVILSWI","Devils Lake",684,"Core top_38069",0,0
+"DEVILSWI","Devils Lake",684,"Presettlement_paleon",104,0
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38058",2055,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38059",2430,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38060",4105,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38061",5245,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38062",6920,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38063",8640,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38064",8590,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38065",9740,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38066",10110,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38067",10730,1
+"DEVILSWI","Devils Lake",684,"Radiocarbon_38068",12580,1
+"DISTRHFT","Disterhaft Farm Bog",3081,"Presettlement_paleon",99,0
+"DISTRHFT","Disterhaft Farm Bog",3081,"Radiocarbon_7750",2850,1
+"DISTRHFT","Disterhaft Farm Bog",3081,"Radiocarbon_7751",5370,1
+"DISTRHFT","Disterhaft Farm Bog",3081,"Radiocarbon_7752",8480,1
+"DISTRHFT","Disterhaft Farm Bog",3081,"Radiocarbon_7753",11150,1
+"DISTRHFT","Disterhaft Farm Bog",3081,"Radiocarbon_7754",12520,1
+"DISTRHFT","Disterhaft Farm Bog",3081,"Radiocarbon_7755",15560,1
+"GASS","Gass Lake",860,"Core top_2443",0,0
+"GASS","Gass Lake",860,"Presettlement_paleon",116,0
+"GASS","Gass Lake",860,"Radiocarbon_2445",840,1
+"GASS","Gass Lake",860,"Radiocarbon_2446",3155,1
+"GASS","Gass Lake",860,"Radiocarbon_2447",4885,1
+"GASS","Gass Lake",860,"Radiocarbon_2448",6320,1
+"GASS","Gass Lake",860,"Radiocarbon_2449",9785,1
+"GASS","Gass Lake",860,"Radiocarbon_2450",11760,1
+"HANSEN","Hansen Marsh",1004,"Core top_2891",-15,0
+"HANSEN","Hansen Marsh",1004,"Radiocarbon_2893",10735,1
+"KELLHOL1","Kellys Hollow",1447,"Core top_3543",-29,0
+"KELLHOL1","Kellys Hollow",1447,"Radiocarbon_3546",4380,1
+"KELLHOL1","Kellys Hollow",1447,"Radiocarbon_3547",7700,1
+"KELLHOL2","Kellys Hollow",3452,"Core top_7914",-29,0
+"KELLHOL2","Kellys Hollow",3452,"Presettlement_paleon",43,0
+"KELLHOL2","Kellys Hollow",3452,"Radiocarbon_7915",2920,1
+"KELLHOL2","Kellys Hollow",3452,"Radiocarbon_7916",6580,1
+"KELLNERS","Kellners Lake",1448,"Core top_3549",-26,0
+"KELLNERS","Kellners Lake",1448,"Presettlement_paleon",104,0
+"KELLNERS","Kellners Lake",1448,"Radiocarbon_3550",1725,1
+"KELLNERS","Kellners Lake",1448,"Radiocarbon_3551",4450,1
+"KELLNERS","Kellners Lake",1448,"Radiocarbon_3552",10220,1
+"KELLNERS","Kellners Lake",1448,"Radiocarbon_3553",13970,1
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",10,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",20,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",30,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",40,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",50,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",60,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",70,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",80,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",90,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",100,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",110,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",120,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",130,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",140,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",150,0
+"LITTLPIN","Little Pine Lake",1643,"Presettlement_paleon",43,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",160,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",170,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",180,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",190,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",200,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",210,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",250,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",290,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",330,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",370,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",410,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",450,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",490,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",530,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",570,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",610,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",650,0
+"LITTLPIN","Little Pine Lake",1643,"Annual laminations (v",690,0
+"STWDARK2","Stewart's Dark Lake",3781,"Radiocarbon_8404",1770,1
+"STWDARK2","Stewart's Dark Lake",3781,"Radiocarbon_8405",4185,1
+"STWDARK2","Stewart's Dark Lake",3781,"Radiocarbon_8406",6350,1
+"STWDARK2","Stewart's Dark Lake",3781,"Radiocarbon_8407",8640,1
+"STWDARK2","Stewart's Dark Lake",3781,"Radiocarbon_8408",10140,1
+"STWDARK2","Stewart's Dark Lake",3781,"Radiocarbon_8409",10570,1
+"MENDOTAC","Lake Mendota",1735,"Core top_4700",0,0
+"MENDOTAC","Lake Mendota",1735,"Radiocarbon_rc_4702",110,1
+"MENDOTAC","Lake Mendota",1735,"Presettlement_paleon",116,0
+"MENDOTAC","Lake Mendota",1735,"Radiocarbon_rc_4703",2080,1
+"MENDOTAC","Lake Mendota",1735,"Radiocarbon_rc_4704",4640,1
+"MENDOTAC","Lake Mendota",1735,"Radiocarbon_rc_4705",7410,1
+"MENDOTAC","Lake Mendota",1735,"Radiocarbon_rc_4706",11770,1
+"MENDOTAD","Lake Mendota",3488,"Core top_8106",0,0
+"MENDOTAD","Lake Mendota",3488,"Radiocarbon_8108",1560,1
+"MENDOTAD","Lake Mendota",3488,"Radiocarbon_8109",3240,1
+"MENDOTAD","Lake Mendota",3488,"Radiocarbon_8110",6980,1
+"MENDOTAD","Lake Mendota",3488,"Radiocarbon_8111",8070,1
+"MENDOTAD","Lake Mendota",3488,"Radiocarbon_8112",10990,1
+"RADTKE","Radtke Lake",2011,"Core top_5702",0,0
+"RADTKE","Radtke Lake",2011,"Presettlement_paleon",104,0
+"RADTKE","Radtke Lake",2011,"Radiocarbon_5704",280,1
+"RADTKE","Radtke Lake",2011,"Radiocarbon_5705",2385,1
+"RADTKE","Radtke Lake",2011,"Radiocarbon_5706",4615,1
+"RADTKE","Radtke Lake",2011,"Radiocarbon_5707",6165,1
+"RADTKE","Radtke Lake",2011,"Radiocarbon_5708",7670,1
+"RADTKE","Radtke Lake",2011,"Radiocarbon_5709",9985,1
+"RADTKE","Radtke Lake",2011,"Radiocarbon_5710",11460,1
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",10,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",20,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",30,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",40,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",50,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",60,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",70,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",80,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",90,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",100,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",110,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",120,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",130,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",140,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",150,0
+"RUBYLAKE","Ruby Lake",2309,"Presettlement_paleon",43,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",160,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",170,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",180,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",190,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",200,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",210,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",250,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",290,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",330,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",370,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",410,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",450,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",490,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",530,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",570,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",610,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",650,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",690,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",730,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",770,0
+"RUBYLAKE","Ruby Lake",2309,"Annual laminations (v",810,0
+"SEIDEL01","Seidel",2355,"Radiocarbon_6413",8680,1
+"SEIDEL01","Seidel",2355,"Radiocarbon_6414",9225,1
+"SEIDEL01","Seidel",2355,"Radiocarbon_6415",10440,1
+"SEIDEL01","Seidel",2355,"Radiocarbon_6416",11620,1
+"SEIDEL02","Seidel",3620,"Core top_8354",-20,0
+"SEIDEL02","Seidel",3620,"Presettlement_paleon",104,0
+"TAMARACK","Tamarack Creek",2624,"Core top_6931",0,0
+"TAMARACK","Tamarack Creek",2624,"Presettlement_paleon",99,0
+"TAMARACK","Tamarack Creek",2624,"Radiocarbon_6933",1190,1
+"TAMARACK","Tamarack Creek",2624,"Radiocarbon_6934",2710,1
+"TAMARACK","Tamarack Creek",2624,"Radiocarbon_6935",3355,1
+"TAMARACK","Tamarack Creek",2624,"Radiocarbon_6936",4410,1
+"WOODLAKE","Wood Lake",3035,"Core top_7560",0,0
+"WOODLAKE","Wood Lake",3035,"Presettlement_paleon",43,0
+"WOODLAKE","Wood Lake",3035,"Radiocarbon_7562",1040,1
+"WOODLAKE","Wood Lake",3035,"Radiocarbon_7563",2520,1
+"WOODLAKE","Wood Lake",3035,"Radiocarbon_7564",4200,1
+"WOODLAKE","Wood Lake",3035,"Radiocarbon_7565",7210,1
+"WOODLAKE","Wood Lake",3035,"Radiocarbon_7566",10710,1
+"WOODLAKE","Wood Lake",3035,"Radiocarbon_7567",13000,1
+"ADELINE","Adeline Lake",13060,"Core top_30175",-61,0
+"ADELINE","Adeline Lake",13060,"Presettlement_paleon",43,0
+"ADELINE","Adeline Lake",13060,"Radiocarbon_30177",270,1
+"ADELINE","Adeline Lake",13060,"Radiocarbon_30178",1680,1
+"ADELINE","Adeline Lake",13060,"Radiocarbon_30179",2210,1
+"ADELINE","Adeline Lake",13060,"Radiocarbon_30180",2660,1
+"ADELINE","Adeline Lake",13060,"Radiocarbon_30181",3860,1
+"ELEVENS","Elevenses Lake",13069,"Core top_30182",-55,0
+"ELEVENS","Elevenses Lake",13069,"Presettlement_paleon",43,0
+"ELEVENS","Elevenses Lake",13069,"Radiocarbon_30184",445,1
+"ELEVENS","Elevenses Lake",13069,"Radiocarbon_30185",950,1
+"ELEVENS","Elevenses Lake",13069,"Radiocarbon_30186",1100,1
+"ELEVENS","Elevenses Lake",13069,"Radiocarbon_30187",1580,1
+"ELEVENS","Elevenses Lake",13069,"Radiocarbon_30188",1910,1
+"ELEVENS","Elevenses Lake",13069,"Radiocarbon_30189",2420,1
+"ELEVENS","Elevenses Lake",13069,"Radiocarbon_30190",3075,1
+"ELEVENS","Elevenses Lake",13069,"Radiocarbon_30191",3410,1
+"ESKALAKE","Eska Lake",13071,"Core top_30192",-60,0
+"ESKALAKE","Eska Lake",13071,"Presettlement_paleon",43,0
+"ESKALAKE","Eska Lake",13071,"Radiocarbon_30194",640,1
+"ESKALAKE","Eska Lake",13071,"Radiocarbon_30195",1510,1
+"ESKALAKE","Eska Lake",13071,"Radiocarbon_30196",1860,1
+"ESKALAKE","Eska Lake",13071,"Radiocarbon_30197",3200,1
+"FALLISON","Fallison Lake",13073,"Core top_30198",-55,0
+"FALLISON","Fallison Lake",13073,"Presettlement_paleon",43,0
+"FALLISON","Fallison Lake",13073,"Radiocarbon_30200",420,1
+"FALLISON","Fallison Lake",13073,"Radiocarbon_30201",1090,1
+"FALLISON","Fallison Lake",13073,"Radiocarbon_30202",1930,1
+"FALLISON","Fallison Lake",13073,"Radiocarbon_30203",5640,1
+"FALLISON","Fallison Lake",13073,"Radiocarbon_30204",7010,1
+"HELLHOLE","Hell Hole Lake",14446,"Core top_30808",-54,0
+"HELLHOLE","Hell Hole Lake",14446,"Presettlement_paleon",43,0
+"HELLHOLE","Hell Hole Lake",14446,"Radiocarbon_30810",600,1
+"HELLHOLE","Hell Hole Lake",14446,"Radiocarbon_30811",1084,1
+"HELLHOLE","Hell Hole Lake",14446,"Radiocarbon_30812",2184,1
+"HELLHOLE","Hell Hole Lake",14446,"Radiocarbon_30813",2955,1
+"HELLHOLE","Hell Hole Lake",14446,"Radiocarbon_30814",3779,1
+"EMRICK","Emrick Lake",15302,"Core top_33229",-54,0
+"EMRICK","Emrick Lake",15302,"Radiocarbon_33230",1150,1
+"EMRICK","Emrick Lake",15302,"Radiocarbon_33231",2830,1
+"EMRICK","Emrick Lake",15302,"Radiocarbon_33232",4410,1
+"EMRICK","Emrick Lake",15302,"Radiocarbon_33233",6600,1
+"EMRICK","Emrick Lake",15302,"Radiocarbon_33234",8960,1
+"EMRICK","Emrick Lake",15302,"Radiocarbon_33235",11600,1
+"ADVENTUR","Adventure Lake",15460,"Core top_33648",-54,0
+"ADVENTUR","Adventure Lake",15460,"Settlement_33649",100,0
+"BENACH","Benach Lake",15463,"Core top_33657",-54,0
+"BENACH","Benach Lake",15463,"Settlement_33658",100,0
+"BLUEJ","BlueJ Lake",15477,"Core top_33661",-55,0
+"BLUEJ","BlueJ Lake",15477,"Settlement_33662",100,0
+"BROZIE","Brozie Lake",15478,"Core top_33663",-51,0
+"BROZIE","Brozie Lake",15478,"Settlement_33664",100,0
+"CAMPTWO","Camp Two Lake",15479,"Core top_33665",-54,0
+"CAMPTWO","Camp Two Lake",15479,"Settlement_33666",100,0
+"FERRY01","Ferry Lake",15489,"Core top_33681",-50,0
+"FERRY01","Ferry Lake",15489,"Radiocarbon_33677",250,1
+"FERRY01","Ferry Lake",15489,"Radiocarbon_33678",1198,1
+"FERRY01","Ferry Lake",15489,"Radiocarbon_33679",1554,1
+"FERRY01","Ferry Lake",15489,"Radiocarbon_33680",2237,1
+"HEMLOCK","Hemlock Lake",15740,"Core top_37151",-32,0
+"HEMLOCK","Hemlock Lake",15740,"Ambrosia rise_37152",70,0
+"HEMLOCK","Hemlock Lake",15740,"Radiocarbon_37153",1815,1
+"HEMLOCK","Hemlock Lake",15740,"Radiocarbon_37154",9230,1
+"WARNERWI","Warner Lake",15882,"Core top_34717",-54,0
+"WARNERWI","Warner Lake",15882,"Presettlement_paleon",43,0
+"WARNERWI","Warner Lake",15882,"Radiocarbon_34718",475,1
+"WARNERWI","Warner Lake",15882,"Radiocarbon_34719",700,1
+"WARNERWI","Warner Lake",15882,"Radiocarbon_34720",1500,1
+"WARNERWI","Warner Lake",15882,"Radiocarbon_34721",1910,1
+"OPINES","Lake O' Pines",15925,"Core top_34866",-46,0
+"OPINES","Lake O' Pines",15925,"Radiocarbon_34867",310,1
+"OPINES","Lake O' Pines",15925,"Radiocarbon_34868",2970,1
+"OPINES","Lake O' Pines",15925,"Radiocarbon_34869",3760,1
+"OPINES","Lake O' Pines",15925,"Radiocarbon_34870",5140,1
+"OPINES","Lake O' Pines",15925,"Radiocarbon_34871",7620,1
+"OPINES","Lake O' Pines",15925,"Radiocarbon_34872",11050,1
+"LIMABOG","Lima Bog",16129,"Core top_35463",-30,0
+"LIMABOG","Lima Bog",16129,"Radiocarbon_35464",3975,1
+"LIMABOG","Lima Bog",16129,"Radiocarbon_35465",7090,1
+"LIMABOG","Lima Bog",16129,"Radiocarbon_35466",8070,1
+"LIMABOG","Lima Bog",16129,"Radiocarbon_35467",8960,1
+"LIMABOG","Lima Bog",16129,"Radiocarbon_35468",10180,1
+"CAPITOLA","Capitola Lake",17304,"Core top_36997",-35,0
+"CAPITOLA","Capitola Lake",17304,"Radiocarbon_36998",2920,1
+"CAPITOLA","Capitola Lake",17304,"Radiocarbon_36999",3040,1
+"CAPITOLA","Capitola Lake",17304,"Radiocarbon_37000",3940,1
+"CAPITOLA","Capitola Lake",17304,"Radiocarbon_37001",4620,1
+"CAPITOLA","Capitola Lake",17304,"Radiocarbon_37002",6970,1
+"BEAVERWI","Beaver Lake",17387,"Core top_37379",-30,0
+"BEAVERWI","Beaver Lake",17387,"Ambrosia rise_37380",80,0
+"BEAVERWI","Beaver Lake",17387,"Radiocarbon_rc_37381",110,1
+"BEAVERWI","Beaver Lake",17387,"Radiocarbon_rc_37382",2480,1
+"BEAVERWI","Beaver Lake",17387,"Radiocarbon_37383",4690,1
+"BEAVERWI","Beaver Lake",17387,"Radiocarbon_rc_37384",5290,1
+"LONESTAR","Lone Star Lake",19931,"Core top_39881",-52,0
+"LONESTAR","Lone Star Lake",19931,"Presettlement_paleon",43,0
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39883",745,1
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39884",910,1
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39885",1334,1
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39886",1430,1
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39887",1450,1
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39888",1930,1
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39889",2288,1
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39890",2450,1
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39891",2840,1
+"LONESTAR","Lone Star Lake",19931,"Radiocarbon_39892",3710,1
+"LILY04","Lily Lake",19933,"Core top_39893",-54,0
+"LILY04","Lily Lake",19933,"Presettlement_paleon",43,0
+"LILY04","Lily Lake",19933,"Radiocarbon_39895",660,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39896",918,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39897",870,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39898",1340,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39899",1380,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39900",1320,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39901",1310,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39902",1820,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39903",2270,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39904",2490,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39905",2893,1
+"LILY04","Lily Lake",19933,"Radiocarbon_39906",3820,1
+"CAMP11LK","Camp 11 Lake",332,"Core top_927",0,0
+"CAMP11LK","Camp 11 Lake",332,"Presettlement_paleon",43,0
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_929",1055,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_930",1855,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_931",2430,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_932",2280,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_933",3900,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_934",3920,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_935",5795,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_936",7160,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_937",8450,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_938",8715,1
+"CAMP11LK","Camp 11 Lake",332,"Radiocarbon_939",10200,1
+"CHIPPEWA","Chippewa Bog",369,"Radiocarbon_1175",1200,1
+"CHIPPEWA","Chippewa Bog",369,"Radiocarbon_1176",4130,1
+"CHIPPEWA","Chippewa Bog",369,"Radiocarbon_1177",8410,1
+"CHIPPEWA","Chippewa Bog",369,"Radiocarbon_1178",9540,1
+"CUB2","Cub Lake",532,"Core top_1633",20,0
+"CUB2","Cub Lake",532,"Presettlement_paleon",43,0
+"CUB2","Cub Lake",532,"Radiocarbon_rc_1635",780,1
+"CUB2","Cub Lake",532,"Radiocarbon_rc_1636",1160,1
+"CUB2","Cub Lake",532,"Radiocarbon_rc_1637",2440,1
+"CUB2","Cub Lake",532,"Radiocarbon_rc_1638",4030,1
+"CUB2","Cub Lake",532,"Radiocarbon_rc_1639",8220,1
+"DEMONTLK","Demont Lake",679,"Core top_1849",0,0
+"DEMONTLK","Demont Lake",679,"Presettlement_paleon",110,0
+"DEMONTLK","Demont Lake",679,"Radiocarbon_1851",640,1
+"DEMONTLK","Demont Lake",679,"Radiocarbon_1852",3935,1
+"DEMONTLK","Demont Lake",679,"Radiocarbon_1853",7055,1
+"DEMONTLK","Demont Lake",679,"Radiocarbon_1854",10770,1
+"DEMONTLK","Demont Lake",679,"Radiocarbon_1855",11410,1
+"FRAINSLK","Frains Lake",847,"Core top_2359",10,0
+"FRAINSLK","Frains Lake",847,"Presettlement_paleon",110,0
+"FRAINSLK","Frains Lake",847,"Radiocarbon_2361",1240,1
+"FRAINSLK","Frains Lake",847,"Radiocarbon_2362",1740,1
+"FRAINSLK","Frains Lake",847,"Radiocarbon_2363",4620,1
+"FRAINSLK","Frains Lake",847,"Radiocarbon_2364",8000,1
+"FRAINSLK","Frains Lake",847,"Radiocarbon_2365",9600,1
+"FRAINSLK","Frains Lake",847,"Radiocarbon_2366",9960,1
+"FRAINSLK","Frains Lake",847,"Radiocarbon_2367",12570,1
+"GREENLK","Green Lake",982,"Core top_2712",-22,0
+"GREENLK","Green Lake",982,"Radiocarbon_2713",4215,1
+"GREENLK","Green Lake",982,"Radiocarbon_rc_2714",10645,1
+"GREENLK","Green Lake",982,"Radiocarbon_rc_2715",14015,1
+"KITCHNER","Kitchner Lake",1524,"Core top_3629",-30,0
+"KITCHNER","Kitchner Lake",1524,"Presettlement_paleon",90,0
+"KITCHNER","Kitchner Lake",1524,"Radiocarbon_rc_3631",3615,1
+"KITCHNER","Kitchner Lake",1524,"Radiocarbon_rc_3632",5210,1
+"KITCHNER","Kitchner Lake",1524,"Radiocarbon_rc_3633",9470,1
+"LAKE16","Lake Sixteen",1580,"Core top_3806",0,0
+"LAKE16","Lake Sixteen",1580,"Radiocarbon_3807",3030,1
+"LAKE16","Lake Sixteen",1580,"Radiocarbon_3808",3780,1
+"LAKE16","Lake Sixteen",1580,"Radiocarbon_3809",5805,1
+"LAKE16","Lake Sixteen",1580,"Radiocarbon_3810",7630,1
+"LAKE16","Lake Sixteen",1580,"Radiocarbon_3811",10690,1
+"LAKE27","Lake 27",1581,"Radiocarbon_rc_3813",155,1
+"LAKE27","Lake 27",1581,"Presettlement_paleon",43,0
+"LAKE27","Lake 27",1581,"Radiocarbon_rc_3814",715,1
+"LAKE27","Lake 27",1581,"Radiocarbon_rc_3815",3350,1
+"LOSTLAKE","Lost Lake",1665,"Core top_4356",0,0
+"LOSTLAKE","Lost Lake",1665,"Presettlement_paleon",43,0
+"RYERSE","Ryerse Lake",2318,"Radiocarbon_6218",870,1
+"RYERSE","Ryerse Lake",2318,"Radiocarbon_6219",2700,1
+"RYERSE","Ryerse Lake",2318,"Radiocarbon_6220",4060,1
+"RYERSE","Ryerse Lake",2318,"Radiocarbon_6221",6200,1
+"RYERSE","Ryerse Lake",2318,"Radiocarbon_6222",8670,1
+"RYERSE","Ryerse Lake",2318,"Radiocarbon_6223",8960,1
+"SPIRIT","Spirit Lake",2586,"Core top_6718",-20,0
+"SPIRIT","Spirit Lake",2586,"Presettlement_paleon",99,0
+"SPIRIT","Spirit Lake",2586,"Radiocarbon_6720",1080,1
+"SPIRIT","Spirit Lake",2586,"Radiocarbon_6721",2855,1
+"SPIRIT","Spirit Lake",2586,"Radiocarbon_6722",4525,1
+"SPIRIT","Spirit Lake",2586,"Radiocarbon_6723",5565,1
+"SPIRIT","Spirit Lake",2586,"Radiocarbon_6724",8105,1
+"SPIRIT","Spirit Lake",2586,"Radiocarbon_6725",11060,1
+"VESTABRG","Vestaburg Bog",3831,"Core top_8448",0,0
+"VESTABRG","Vestaburg Bog",3831,"Presettlement_paleon",110,0
+"WINTERGR","Wintergreen Lake",2961,"Core top_7478",-20,0
+"WINTERGR","Wintergreen Lake",2961,"Presettlement_paleon",110,0
+"WINTERGR","Wintergreen Lake",2961,"Radiocarbon_7481",2450,1
+"WINTERGR","Wintergreen Lake",2961,"Radiocarbon_7482",3375,1
+"WINTERGR","Wintergreen Lake",2961,"Radiocarbon_7483",5500,1
+"WINTERGR","Wintergreen Lake",2961,"Radiocarbon_7484",8945,1
+"WINTERGR","Wintergreen Lake",2961,"Radiocarbon_7485",9740,1
+"WINTERGR","Wintergreen Lake",2961,"Radiocarbon_7486",11425,1
+"WINTERGR","Wintergreen Lake",2961,"Radiocarbon_7487",11920,1
+"WINTERGR","Wintergreen Lake",2961,"Radiocarbon_7488",13195,1
+"WOLVERIN","Wolverine Lake",3032,"Core top_7536",-30,0
+"WOLVERIN","Wolverine Lake",3032,"Presettlement_paleon",43,0
+"WOLVERIN","Wolverine Lake",3032,"Radiocarbon_7537",2250,1
+"WOLVERIN","Wolverine Lake",3032,"Radiocarbon_7538",5040,1
+"WOLVERIN","Wolverine Lake",3032,"Radiocarbon_7539",6670,1
+"WOLVERIN","Wolverine Lake",3032,"Radiocarbon_7540",7940,1
+"WOLVERIN","Wolverine Lake",3032,"Radiocarbon_7541",9980,1
+"YELLOWDG","Yellow Dog Pond",3047,"Core top_7632",0,0
+"YELLOWDG","Yellow Dog Pond",3047,"Radiocarbon_7634",2170,1
+"YELLOWDG","Yellow Dog Pond",3047,"Radiocarbon_7635",2475,1
+"YELLOWDG","Yellow Dog Pond",3047,"Radiocarbon_7636",2760,1
+"YELLOWDG","Yellow Dog Pond",3047,"Radiocarbon_7637",3050,1
+"YELLOWDG","Yellow Dog Pond",3047,"Radiocarbon_7638",4390,1
+"YELLOWDG","Yellow Dog Pond",3047,"Radiocarbon_7639",5175,1
+"YELLOWDG","Yellow Dog Pond",3047,"Radiocarbon_7640",7440,1
+"YELLOWDG","Yellow Dog Pond",3047,"Radiocarbon_7641",8050,1
+"YELLOWDG","Yellow Dog Pond",3047,"Radiocarbon_7642",9100,1
+"CANYONMI","Canyon Lake",15682,"Core top_34063",-20,0
+"CANYONMI","Canyon Lake",15682,"Radiocarbon_34064",1690,1
+"CANYONMI","Canyon Lake",15682,"Radiocarbon_34065",2830,1
+"CANYONMI","Canyon Lake",15682,"Radiocarbon_34066",4630,1
+"CANYONMI","Canyon Lake",15682,"Radiocarbon_34067",5600,1
+"CANYONMI","Canyon Lake",15682,"Radiocarbon_34068",6740,1
+"CANYONMI","Canyon Lake",15682,"Radiocarbon_34069",8275,1
+"CANYONMI","Canyon Lake",15682,"Radiocarbon_34070",8665,1
+"CANYONMI","Canyon Lake",15682,"Radiocarbon_34071",9725,1
+"LTDOLLAR","Little Dollar Lake",12001,"Core top_17376",-29,0
+"LTDOLLAR","Little Dollar Lake",12001,"Presettlement_paleon",104,0
+"LTDOLLAR","Little Dollar Lake",12001,"Radiocarbon_17379",5890,1
+"IRWINSMT","Irwin Smith Bog",13047,"Core top_18510",-60,0
+"IRWINSMT","Irwin Smith Bog",13047,"Presettlement_paleon",43,0
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18512",680,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18513",820,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18514",1070,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18515",1730,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18516",2060,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18517",2630,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18518",1680,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18519",3790,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18520",4237,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18521",4510,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18522",4330,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18523",4370,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18524",4424,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18525",4460,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18526",4650,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18527",4560,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18528",4640,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18529",5540,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18530",4820,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18531",5150,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18532",5810,1
+"IRWINSMT","Irwin Smith Bog",13047,"Radiocarbon_18533",6090,1
+"GLIMML1","Glimmerglass Lake",13097,"Core top_30226",-43,0
+"GLIMML1","Glimmerglass Lake",13097,"Radiocarbon_30221",3180,1
+"GLIMML1","Glimmerglass Lake",13097,"Radiocarbon_30222",4685,1
+"GLIMML1","Glimmerglass Lake",13097,"Radiocarbon_30223",5045,1
+"GLIMML1","Glimmerglass Lake",13097,"Radiocarbon_30224",8200,1
+"GLIMML1","Glimmerglass Lake",13097,"Radiocarbon_30225",9740,1
+"TOWER1","Tower Lake",14410,"Core top_30752",-54,0
+"TOWER1","Tower Lake",14410,"Radiocarbon_30753",2400,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30754",3409,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30755",3580,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30756",4160,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30757",4290,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30758",4480,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30759",4750,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30760",4701,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30761",5594,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30762",6756,1
+"TOWER1","Tower Lake",14410,"Radiocarbon_30763",7904,1
+"TOWER4","Tower Lake",14443,"Core top_30805",-55,0
+"TOWER4","Tower Lake",14443,"Radiocarbon_30806",464,1
+"TOWER6","Tower Lake",14889,"Core top_31760",-56,0
+"TOWER6","Tower Lake",14889,"Radiocarbon_31761",398,1
+"TOWER6","Tower Lake",14889,"Radiocarbon_31762",1796,1
+"TOWER7","Tower Lake",17993,"Core top_38358",-56,0
+"TOWER7","Tower Lake",17993,"Radiocarbon_38355",965,1
+"TOWER7","Tower Lake",17993,"Radiocarbon_38356",1772,1
+"TOWER7","Tower Lake",17993,"Radiocarbon_38357",2220,1
+"NELSONMI","Nelson Lake",14933,"Core top_31859",-46,0
+"NELSONMI","Nelson Lake",14933,"Radiocarbon_31860",0,1
+"NELSONMI","Nelson Lake",14933,"Ambrosia rise_31861",50,0
+"NELSONMI","Nelson Lake",14933,"Radiocarbon_31862",1090,1
+"NELSONMI","Nelson Lake",14933,"Radiocarbon_31863",2840,1
+"NELSONMI","Nelson Lake",14933,"Radiocarbon_31864",2750,1
+"NELSONMI","Nelson Lake",14933,"Radiocarbon_31865",3930,1
+"NELSONMI","Nelson Lake",14933,"Radiocarbon_31866",5590,1
+"NELSONMI","Nelson Lake",14933,"Radiocarbon_31867",6710,1
+"MUDLKMI","Mud Lake",15032,"Core top_32220",-49,0
+"MUDLKMI","Mud Lake",15032,"Ambrosia rise_32221",100,0
+"MUDLKMI","Mud Lake",15032,"Radiocarbon_32222",1400,1
+"MUDLKMI","Mud Lake",15032,"Radiocarbon_32223",2530,1
+"MUDLKMI","Mud Lake",15032,"Radiocarbon_32224",4640,1
+"MUDLKMI","Mud Lake",15032,"Radiocarbon_32225",5830,1
+"MUDLKMI","Mud Lake",15032,"Radiocarbon_32226",6990,1
+"MUDLKMI","Mud Lake",15032,"Radiocarbon_32227",7460,1
+"MUDLKMI","Mud Lake",15032,"Radiocarbon_32228",8700,1
+"LILYMI","Lily Lake",15035,"Core top_32238",-42,0
+"LILYMI","Lily Lake",15035,"Radiocarbon_32239",2140,1
+"LILYMI","Lily Lake",15035,"Radiocarbon_32240",2690,1
+"LILYMI","Lily Lake",15035,"Radiocarbon_32241",3695,1
+"LILYMI","Lily Lake",15035,"Radiocarbon_32242",5465,1
+"LILYMI","Lily Lake",15035,"Radiocarbon_32243",7900,1
+"LILYMI","Lily Lake",15035,"Radiocarbon_32244",9420,1
+"ESOLDIER","East Soldier Lake",15309,"Core top_39633",-29,0
+"ESOLDIER","East Soldier Lake",15309,"Radiocarbon_39629",2800,1
+"ESOLDIER","East Soldier Lake",15309,"Radiocarbon_39630",5150,1
+"ESOLDIER","East Soldier Lake",15309,"Radiocarbon_39631",8450,1
+"ESOLDIER","East Soldier Lake",15309,"Radiocarbon_39632",8185,1
+"GUARD","Guard Lake",15311,"Core top_33307",-28,0
+"GUARD","Guard Lake",15311,"Radiocarbon_33308",2785,1
+"TROUTLBG","Trout Lake Bog",15316,"Core top_33309",-29,0
+"TROUTLBG","Trout Lake Bog",15316,"Radiocarbon_33310",3325,1
+"COWDEN","Cowden Lake",15487,"Core top_33673",-54,0
+"COWDEN","Cowden Lake",15487,"Radiocarbon_33674",154,1
+"COWDEN","Cowden Lake",15487,"Radiocarbon_33675",823,1
+"COWDEN","Cowden Lake",15487,"Radiocarbon_33676",2546,1
+"HICKSMI","Hicks Lake",15492,"Core top_33682",-54,0
+"HICKSMI","Hicks Lake",15492,"Radiocarbon_33683",154,1
+"HICKSMI","Hicks Lake",15492,"Radiocarbon_33684",857,1
+"HICKSMI","Hicks Lake",15492,"Radiocarbon_33685",2714,1
+"MORRIMI","Morrison Lake",15511,"Core top_33711",-54,0
+"MORRIMI","Morrison Lake",15511,"Radiocarbon_33712",154,1
+"MORRIMI","Morrison Lake",15511,"Radiocarbon_33713",2000,1
+"MORRIMI","Morrison Lake",15511,"Radiocarbon_33714",2055,1
+"BUCKMI","Buck Lake",15660,"Core top_34011",-33,0
+"BUCKMI","Buck Lake",15660,"Settlement_34012",80,0
+"BUCKMI","Buck Lake",15660,"Radiocarbon_34013",2940,1
+"BUCKMI","Buck Lake",15660,"Radiocarbon_34014",3350,1
+"BUCKMI","Buck Lake",15660,"Radiocarbon_34015",5150,1
+"BUCKMI","Buck Lake",15660,"Radiocarbon_34016",5700,1
+"KERRMI","Kerr Lake",15916,"Core top_34846",-44,0
+"KERRMI","Kerr Lake",15916,"Radiocarbon_34847",7520,1
+"CROOKEDN","Crooked Lake",15919,"Core top_34851",-44,0
+"CROOKEDN","Crooked Lake",15919,"Radiocarbon_34852",1750,1
+"CROOKEDN","Crooked Lake",15919,"Radiocarbon_34853",3285,1
+"CROOKEDN","Crooked Lake",15919,"Radiocarbon_34854",5220,1
+"CROOKEDN","Crooked Lake",15919,"Radiocarbon_34855",6465,1
+"CROOKEDN","Crooked Lake",15919,"Radiocarbon_34856",10110,1
+"JAYLAKE","Jay Lake",15922,"Core top_34857",-46,0
+"JAYLAKE","Jay Lake",15922,"Radiocarbon_34858",810,1
+"JAYLAKE","Jay Lake",15922,"Radiocarbon_34859",1820,1
+"JAYLAKE","Jay Lake",15922,"Radiocarbon_34860",4730,1
+"JAYLAKE","Jay Lake",15922,"Radiocarbon_34861",6070,1
+"JAYLAKE","Jay Lake",15922,"Radiocarbon_34862",8440,1
+"JAYLAKE","Jay Lake",15922,"Radiocarbon_34863",8440,1
+"JAYLAKE","Jay Lake",15922,"Radiocarbon_34864",9280,1
+"LORRAINE","Lorraine Lake",17404,"Core top_37502",-30,0
+"LORRAINE","Lorraine Lake",17404,"Ambrosia rise_37503",100,0
+"LORRAINE","Lorraine Lake",17404,"Radiocarbon_37504",2705,1
+"LORRAINE","Lorraine Lake",17404,"Radiocarbon_37505",4583,1
+"LORRAINE","Lorraine Lake",17404,"Radiocarbon_37506",7020,1
+"LORRAINE","Lorraine Lake",17404,"Radiocarbon_37507",9500,1
+"PENEGOR","Penegor Lake",17406,"Core top_37522",-35,0
+"PENEGOR","Penegor Lake",17406,"Ambrosia rise_37523",80,0
+"PENEGOR","Penegor Lake",17406,"Radiocarbon_37524",3070,1
+"PENEGOR","Penegor Lake",17406,"Radiocarbon_37525",4550,1
+"PENEGOR","Penegor Lake",17406,"Radiocarbon_37526",5440,1
+"PENEGOR","Penegor Lake",17406,"Radiocarbon_37527",7190,1
+"PENEGOR","Penegor Lake",17406,"Radiocarbon_37528",8670,1

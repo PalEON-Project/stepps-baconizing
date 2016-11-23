@@ -1,0 +1,278 @@
+"handle","name","dataset_id","pol_age_min","pol_age_max","age_type","bacon","gc_age_min","gc_age_max","reason","new","amb_rise"
+"ALLIE","Lake Allie","29",-12,478,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"HELLSKIT","Hell's Kitchen Lake","3131",2,2040,"Varve years BP",TRUE,-10,2046,NA,FALSE,FALSE
+"LAKEMARY","Lake Mary","3473",200,10345,"Radiocarbon years BP",TRUE,200,9460,NA,FALSE,FALSE
+"BADMED","Bad Medicine Lake","223",-9,223,"Radiocarbon years BP",TRUE,-15,76,NA,FALSE,FALSE
+"BBASS","Black Bass Lake","241",0,1994,"Radiocarbon years BP",TRUE,-15,80,NA,FALSE,FALSE
+"BECKMAN","Beckman Lake","249",0,10412,"Radiocarbon years BP",TRUE,0,94,NA,FALSE,FALSE
+"BECKMNBG","Beckman Lake","3062",-29,429,"Radiocarbon years BP",TRUE,-29,94,NA,FALSE,FALSE
+"BIGJOHN","Big John Pond","272",-31,5374,"Radiocarbon years BP",TRUE,-31,3310,NA,FALSE,FALSE
+"BILLYS","Billy's Lake","275",-24,9949,"Radiocarbon years BP",TRUE,-24,9760,NA,FALSE,FALSE
+"BLANDIN","Blandin Pond","280",-28,696,"Radiocarbon years BP",TRUE,-32,81,NA,FALSE,FALSE
+"BLUMOUND","Blue Mounds Creek","287",0,10322,"Radiocarbon years BP",TRUE,0,10485,NA,FALSE,FALSE
+"BOBLAKE","Bob Lake","296",-9,495,"Radiocarbon years BP",TRUE,-15,92,NA,FALSE,FALSE
+"BOGD","Bog D Pond","298",-10,10296,"Radiocarbon years BP",TRUE,-13,8560,NA,FALSE,FALSE
+"BOSSUOT","Bossuot Lake","305",-13,467,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"BURNTSDE","Burntside Lake","325",-24,904,"Radiocarbon years BP",TRUE,-24,69,NA,FALSE,FALSE
+"CAMP11LK","Camp 11 Lake","332",0,10355,"Radiocarbon years BP",TRUE,0,10200,NA,FALSE,FALSE
+"CAMPBELL","Campbell Lake","334",-12,343,"Radiocarbon years BP",TRUE,-15,96,NA,FALSE,FALSE
+"CEDARBLK","Cedar Bog","352",-10,11056,"Radiocarbon years BP",TRUE,-10,7880,NA,FALSE,FALSE
+"CHIPPEWA","Chippewa Bog","369",797,10024,"Radiocarbon years BP",TRUE,1200,9540,NA,FALSE,FALSE
+"CINDY","Cindy Pond","382",-9,495,"Radiocarbon years BP",TRUE,-15,72,NA,FALSE,FALSE
+"MNGRCL","Cottonwood Lake","515",-12,165,"Radiocarbon years BP",TRUE,-15,82,NA,FALSE,FALSE
+"CRAZY","Crazy Pond","521",-9,552,"Radiocarbon years BP",TRUE,-15,75,NA,FALSE,FALSE
+"CUB2","Cub Lake","532",23,9354,"Radiocarbon years BP",TRUE,20,8220,NA,FALSE,FALSE
+"DALTON","Dalton Lake","545",-12,256,"Radiocarbon years BP",TRUE,-15,81,NA,FALSE,FALSE
+"DARKLAKE","Dark Lake","546",10,930,"Varve years BP",TRUE,10,930,NA,FALSE,FALSE
+"DEMONTLK","Demont Lake","679",0,11500,"Radiocarbon years BP",TRUE,0,11410,NA,FALSE,FALSE
+"DEVILSWI","Devils Lake","684",-4,14342,"Calibrated radiocarbon years BP",TRUE,0,12580,NA,FALSE,FALSE
+"DISTRHFT","Disterhaft Farm Bog","3081",500,15467,"Radiocarbon years BP",TRUE,99,15560,NA,FALSE,FALSE
+"DOGFISH","Dogfish Lake","717",-24,189,"Radiocarbon years BP",TRUE,-24,55,NA,FALSE,FALSE
+"EASTTWIN","East Twin Lake","781",-5,915,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"EGGERT","Eggert Lake","786",-12,433,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"FAITH","Faith Pond","817",-12,291,"Radiocarbon years BP",TRUE,-15,78,NA,FALSE,FALSE
+"FARQUAR","Farquar Lake","822",-12,419,"Radiocarbon years BP",TRUE,-15,96,NA,FALSE,FALSE
+"FAWNLAKE","Fawn Lake","824",-10,602,"Radiocarbon years BP",TRUE,-15,87,NA,FALSE,FALSE
+"FOXPOND","Fox Pond","846",-13,2759,"Radiocarbon years BP",TRUE,-15,75,NA,FALSE,FALSE
+"FRAINSLK","Frains Lake","847",0,17665,"Radiocarbon years BP",TRUE,10,12570,NA,FALSE,FALSE
+"FRENCH","French Lake","850",10,3524,"Radiocarbon years BP",TRUE,10,3495,NA,FALSE,FALSE
+"GASS","Gass Lake","860",0,15612,"Radiocarbon years BP",TRUE,0,11760,NA,FALSE,FALSE
+"GEORGE","George Lake","869",-12,1500,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"GOLDSMTH","Goldsmith Lake","967",-9,608,"Radiocarbon years BP",TRUE,-15,92,NA,FALSE,FALSE
+"GREENLK","Green Lake","982",200,12765,"Radiocarbon years BP",TRUE,-22,14015,NA,FALSE,FALSE
+"GRICE","Grice Pond","990",-6,650,"Radiocarbon years BP",TRUE,-15,75,NA,FALSE,FALSE
+"HANSEN","Hansen Marsh","1004",-15,14000,"Radiocarbon years BP",TRUE,-15,10735,NA,FALSE,FALSE
+"HEMOPOND","Hemo Pond","1032",-13,123,"Radiocarbon years BP",TRUE,-15,76,NA,FALSE,FALSE
+"HORSE","Blocknic Lake [Horse Pond]","1109",-11,251,"Radiocarbon years BP",TRUE,-15,79,NA,FALSE,FALSE
+"HOSTAGE","Hostage Lake","1111",-30,4630,"Radiocarbon years BP",TRUE,-30,3485,NA,FALSE,FALSE
+"HUGLAKE","Hug Lake","1134",-14,370,"Radiocarbon years BP",TRUE,-20,65,NA,FALSE,FALSE
+"IRVIN","Irvin Lake","1153",-32,12000,"Radiocarbon years BP",TRUE,-32,7500,NA,FALSE,FALSE
+"JACOBSN2","Jacobson Lake","3138",18,9000,"Radiocarbon years BP",TRUE,0,7210,NA,FALSE,FALSE
+"MNSHBL","Jones Lake","15274",-6,491,"Calendar years BP",TRUE,-13,94,NA,FALSE,FALSE
+"KEGAN","Kegan Lake","1446",-11,216,"Radiocarbon years BP",TRUE,-15,96,NA,FALSE,FALSE
+"KELLHOL1","Kellys Hollow","1447",-29,10000,"Radiocarbon years BP",TRUE,-29,7700,NA,FALSE,FALSE
+"KELLHOL2","Kellys Hollow","3452",-29,10730,"Radiocarbon years BP",TRUE,-29,6580,NA,FALSE,FALSE
+"KELLNERS","Kellners Lake","1448",-23,14094,"Radiocarbon years BP",TRUE,-26,13970,NA,FALSE,FALSE
+"KIRCHNR1","Kirchner Marsh","1520",182,11786,"Radiocarbon years BP",TRUE,-9,11760,NA,FALSE,FALSE
+"KIRCHNR2","Kirchner Marsh","3455",10,12237,"Radiocarbon years BP",TRUE,0,11942,NA,FALSE,FALSE
+"KITCHNER","Kitchner Lake","1524",-21,11019,"Radiocarbon years BP",TRUE,-30,9470,NA,FALSE,FALSE
+"KOTIRANT","Kotiranta Lake","1548",150,14970,"Radiocarbon years BP",TRUE,150,13480,NA,FALSE,FALSE
+"KRYZ","Kryzewinski Lake","1552",-12,325,"Radiocarbon years BP",TRUE,-15,80,NA,FALSE,FALSE
+"LAKE27","Lake 27","1581",100,3263,"Radiocarbon years BP",TRUE,43,3350,NA,FALSE,FALSE
+"LAKEANN","Lake Ann","1584",-12,314,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"LAKEANNF","Lake Ann","3468",791,10547,"Radiocarbon years BP",TRUE,-30,7420,NA,FALSE,FALSE
+"LAKECARL","Lake Carlson","1588",11,12209,"Radiocarbon years BP",TRUE,9,97,NA,FALSE,FALSE
+"LEWISLK","Lewis Lake","1629",-12,359,"Radiocarbon years BP",TRUE,-15,93,NA,FALSE,FALSE
+"LILYLAKE","Lily Lake (US:Minnesota)","1633",0,14679,"Radiocarbon years BP",TRUE,0,11770,NA,FALSE,FALSE
+"LITTBASS","Little Bass Lake","1639",0,10614,"Radiocarbon years BP",TRUE,0,10660,NA,FALSE,FALSE
+"LITTLPIN","Little Pine Lake","1643",10,690,"Varve years BP",TRUE,10,690,NA,FALSE,FALSE
+"LKCLDSH","Lake of the Clouds","3482",208,10050,"Varve years BP",TRUE,71,10050,NA,FALSE,FALSE
+"LOSTLAKE","Lost Lake","1665",0,10036,"Radiocarbon years BP",TRUE,0,43,NA,FALSE,FALSE
+"STWDARK2","Stewart's Dark Lake","3781",482,10649,"Radiocarbon years BP",TRUE,1770,10570,NA,FALSE,FALSE
+"MARTINPD","Martin Pond","1708",0,10909,"Radiocarbon years BP",TRUE,0,72,NA,FALSE,FALSE
+"MCCRANEY","McCraney Lake","1720",-12,257,"Radiocarbon years BP",TRUE,-15,75,NA,FALSE,FALSE
+"MENDOTAC","Lake Mendota","1735",0,11469,"Radiocarbon years BP",TRUE,0,11770,NA,FALSE,FALSE
+"MENDOTAD","Lake Mendota","3488",75,14136,"Radiocarbon years BP",TRUE,0,10990,NA,FALSE,FALSE
+"MINNIEN","Lake Minnie","1757",3,6534,"Radiocarbon years BP",TRUE,0,72,NA,FALSE,FALSE
+"MINNIEO","Lake Minnie","3492",1,11581,"Radiocarbon years BP",TRUE,0,8140,NA,FALSE,FALSE
+"MUDLKMN1","Mud Lake","1777",-12,285,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"MUDLKMN2","Mud Lake (US:Minnesota:Hubbard)","1778",-30,3631,"Radiocarbon years BP",TRUE,-30,2870,NA,FALSE,FALSE
+"MURPHY","Murphy Lake","1781",-13,311,"Radiocarbon years BP",TRUE,-15,96,NA,FALSE,FALSE
+"MYRTLE","Myrtle Lake","1786",0,11000,"Radiocarbon years BP",TRUE,0,11120,NA,FALSE,FALSE
+"ONAMIA","Lake Onamia","1830",-9,1093,"Radiocarbon years BP",TRUE,-15,80,NA,FALSE,FALSE
+"ONDRISPD","Ondris Pond","1831",-15,2118,"Radiocarbon years BP",TRUE,-15,1535,NA,FALSE,FALSE
+"PGONIABG","Pogonia Bog Pond","3541",-24,167,"Radiocarbon years BP",TRUE,-24,95,NA,FALSE,FALSE
+"POGONIA","Pogonia Bog Pond","3558",-24,11117,"Radiocarbon years BP",TRUE,-24,11190,NA,FALSE,FALSE
+"THRDBGW","Third Lake","3788",50,3215,"Radiocarbon years BP",TRUE,50,50,NA,FALSE,FALSE
+"PENNINGT","Pennington Lake","1884",-12,495,"Radiocarbon years BP",TRUE,-15,93,NA,FALSE,FALSE
+"PETERSL","Peterson Slough","1891",-30,3466,"Radiocarbon years BP",TRUE,-30,3010,NA,FALSE,FALSE
+"PLEASAMN","Pleasant Lake","1955",-8,1245,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"PORTAGE","Portage Lake","1966",12,11780,"Radiocarbon years BP",TRUE,0,9780,NA,FALSE,FALSE
+"RADTKE","Radtke Lake","2011",0,11483,"Radiocarbon years BP",TRUE,0,11460,NA,FALSE,FALSE
+"REICHOW","Reichow Pond","2051",-8,645,"Radiocarbon years BP",TRUE,-15,79,NA,FALSE,FALSE
+"REIDEL","Reidel Lake","2053",-31,11610,"Radiocarbon years BP",TRUE,-34,11630,NA,FALSE,FALSE
+"RHOLL","Rholl Lake","2062",-9,722,"Radiocarbon years BP",TRUE,-15,78,NA,FALSE,FALSE
+"RICEMNB","Rice Lake","3568",-15,4297,"Radiocarbon years BP",TRUE,-18,1930,NA,FALSE,FALSE
+"ROSSBURG","Rossburg Bog","2290",2000,12264,"Radiocarbon years BP",TRUE,2000,10100,NA,FALSE,FALSE
+"RUBYLAKE","Ruby Lake","2309",10,810,"Varve years BP",TRUE,10,810,NA,FALSE,FALSE
+"RUTZLAKE","Rutz Lake","2314",-3,11838,"Radiocarbon years BP",TRUE,-15,12000,NA,FALSE,FALSE
+"RYERSE","Ryerse Lake","2318",603,8923,"Radiocarbon years BP",TRUE,870,8960,NA,FALSE,FALSE
+"SEDIVY","Sedivy Lake","2354",-13,124,"Radiocarbon years BP",TRUE,-15,79,NA,FALSE,FALSE
+"SEIDEL02","Seidel","3620",32,11227,"Radiocarbon years BP",TRUE,-20,104,NA,FALSE,FALSE
+"SHAGAWA","Shagawa Lake","2375",-18,1950,"Radiocarbon years BP",TRUE,-20,1935,NA,FALSE,FALSE
+"SILVERMN","Silver Lake","2383",-13,279,"Radiocarbon years BP",TRUE,-15,94,NA,FALSE,FALSE
+"SISEEBA","Siseebakwet South","2394",-28,632,"Radiocarbon years BP",TRUE,-32,81,NA,FALSE,FALSE
+"SOLUM","Solum Lake","2581",-12,229,"Radiocarbon years BP",TRUE,-15,80,NA,FALSE,FALSE
+"SOSTANCH","South Stanchfield Lake","2584",-14,131,"Radiocarbon years BP",TRUE,-15,98,NA,FALSE,FALSE
+"SPECTACL","Spectacle Lake","2585",-12,359,"Radiocarbon years BP",TRUE,-15,93,NA,FALSE,FALSE
+"SPIRIT","Spirit Lake","2586",-20,11767,"Radiocarbon years BP",TRUE,-20,11060,NA,FALSE,FALSE
+"STCATHER","St. Catherines Lake","2600",11,266,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"STONE","Stone Lake","2605",-9,682,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"SUNFISH","Sunfish Lake","2613",-12,544,"Radiocarbon years BP",TRUE,-15,97,NA,FALSE,FALSE
+"TAMARACK","Tamarack Creek","2624",0,4500,"Radiocarbon years BP",TRUE,0,4410,NA,FALSE,FALSE
+"TERHELL","Quallen Lake [Terhell Pond]","2638",-8,10487,"Radiocarbon years BP",TRUE,-10,4270,NA,FALSE,FALSE
+"THOMPSON","Thompson Pond","2640",6,10175,"Radiocarbon years BP",TRUE,0,79,NA,FALSE,FALSE
+"TOENJES","Toenjes Lake","2648",-13,310,"Radiocarbon years BP",TRUE,-15,94,NA,FALSE,FALSE
+"TWINMN1","Twin Lakes","2881",-13,287,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"UPGRAVEN","Upper Graven Lake","2888",12,11000,"Radiocarbon years BP",TRUE,-34,10310,NA,FALSE,FALSE
+"VESTABRG","Vestaburg Bog","3831",0,20200,"Radiocarbon years BP",TRUE,0,110,NA,FALSE,FALSE
+"WEBERLK","Weber Lake","3837",10,15000,"Radiocarbon years BP",TRUE,10,56,NA,FALSE,FALSE
+"WENTZEL","Wentzel's Pond","2948",-30,3249,"Radiocarbon years BP",TRUE,-30,2425,NA,FALSE,FALSE
+"WHITLIL1","White Lily Lake","2952",-12,359,"Radiocarbon years BP",TRUE,-15,95,NA,FALSE,FALSE
+"WINTERGR","Wintergreen Lake","2961",-20,12786,"Radiocarbon years BP",TRUE,-20,13195,NA,FALSE,FALSE
+"WOLSFELD","Wolsfeld Lake","3031",-25,13864,"Calibrated radiocarbon years BP",TRUE,-25,13864,NA,FALSE,FALSE
+"WOLVERIN","Wolverine Lake","3032",100,10115,"Radiocarbon years BP",TRUE,-30,9980,NA,FALSE,FALSE
+"WOODLAKE","Wood Lake","3035",0,13101,"Radiocarbon years BP",TRUE,0,13000,NA,FALSE,FALSE
+"YELLOWDG","Yellow Dog Pond","3047",0,9137,"Radiocarbon years BP",TRUE,0,9100,NA,FALSE,FALSE
+"CANYONMI","Canyon Lake","15682",-10,11320,"Calibrated radiocarbon years BP",TRUE,-20,9725,NA,FALSE,FALSE
+"SOUHERON","South Heron Lake","10970",-10,145,"Calendar years BP",TRUE,-13,92,NA,FALSE,FALSE
+"OCHEDA","Ocheda Lake","10971",-10,124,"Calendar years BP",TRUE,-13,82,NA,FALSE,FALSE
+"BLOMFORD","Blomford Lake","10973",-20,1322,"Calendar years BP",TRUE,-30,96,NA,FALSE,FALSE
+"FAWNANMN","Fawn Lake","10974",-26,403,"Calendar years BP",TRUE,-30,95,NA,FALSE,FALSE
+"FROVOLD","Frovold Lake","10975",-20,334,"Calendar years BP",TRUE,-30,83,NA,FALSE,FALSE
+"GOOSEMN","Goose Lake","10976",-17,217,"Calendar years BP",TRUE,-28,94,NA,FALSE,FALSE
+"OLSONMN","Olson Lake","10977",-28,2063,"Calendar years BP",TRUE,-28,80,NA,FALSE,FALSE
+"RNDGROVE","Round Grove Lake","10983",-22,330,"Calendar years BP",TRUE,-28,95,NA,FALSE,FALSE
+"LTDOLLAR","Little Dollar Lake","12001",-20,6840,"Calibrated radiocarbon years BP",TRUE,-29,5890,NA,FALSE,FALSE
+"MNLYC2","Cottonwood Lake","12005",-11,816,"Calendar years BP",TRUE,-20,86,NA,FALSE,FALSE
+"MONSON","Monson Lake","12006",-27,176,"Calendar years BP",TRUE,-30,93,NA,FALSE,FALSE
+"DEANS","Deans Lake","12007",0,733,"Calendar years BP",TRUE,-29,96,NA,FALSE,FALSE
+"EMILY","Lake Emily","12008",-12,211,"Calendar years BP",TRUE,-29,96,NA,FALSE,FALSE
+"PERCHMN","Perch Lake","12009",-27,201,"Calendar years BP",TRUE,-29,79,NA,FALSE,FALSE
+"CHUBLAKE","Chub Lake","12010",-9,427,"Calendar years BP",TRUE,-29,96,NA,FALSE,FALSE
+"MNDLLR","Lake Rachel","12011",-30,672,"Calendar years BP",TRUE,-30,84,NA,FALSE,FALSE
+"ZIEBELL","Ziebell Lake","12012",-32,483,"Calendar years BP",TRUE,-32,79,NA,FALSE,FALSE
+"MNDLML","Mud Lake","12013",-28,326,"Calendar years BP",TRUE,-30,84,NA,FALSE,FALSE
+"LYBECK","Lybeck Lake","12014",-32,235,"Calendar years BP",TRUE,-32,83,NA,FALSE,FALSE
+"UNION","Union Lake","12015",-27,525,"Calendar years BP",TRUE,-30,84,NA,FALSE,FALSE
+"EVRHRTLK","Everhart Lake","12024",-27,363,"Calendar years BP",TRUE,-30,96,NA,FALSE,FALSE
+"SHARKEY","Sharkey Lake","13029",65,12082,"Calibrated radiocarbon years BP",TRUE,-51,10255,NA,FALSE,TRUE
+"KIMBLE","Kimble Pond","13032",-48,12254,"Calibrated radiocarbon years BP",TRUE,-51,10570,NA,FALSE,FALSE
+"IRWINSMT","Irwin Smith Bog","13047",-22,7213,"Calibrated radiocarbon years BP",TRUE,-60,6090,NA,FALSE,FALSE
+"WESTOLAF","West Olaf Lake","13051",-25,8633,"Calibrated radiocarbon years BP",TRUE,80,8140,NA,FALSE,FALSE
+"OAKGLEN","Oak Glen Lake","13056",-29,199,"Calendar years BP",TRUE,-29,96,NA,FALSE,FALSE
+"CAMPLAKE","Camp Lake","13057",-27,381,"Calendar years BP",TRUE,-30,93,NA,FALSE,FALSE
+"ADELINE","Adeline Lake","13060",-54,2080,"Calibrated radiocarbon years BP",TRUE,-61,3860,NA,FALSE,FALSE
+"ELEVENS","Elevenses Lake","13069",-54,2090,"Calibrated radiocarbon years BP",TRUE,-55,3410,NA,FALSE,FALSE
+"ESKALAKE","Eska Lake","13071",-35,2135,"Calibrated radiocarbon years BP",TRUE,-60,3200,NA,FALSE,FALSE
+"FALLISON","Fallison Lake","13073",-51,2138,"Calibrated radiocarbon years BP",TRUE,-55,7010,NA,FALSE,FALSE
+"GLIMML1","Glimmerglass Lake","13097",52,11678,"Calibrated radiocarbon years BP",TRUE,-43,9740,NA,FALSE,FALSE
+"BASSK","Bass Lake","14270",77,1173,"Calendar years BP",TRUE,-42,1100,NA,FALSE,TRUE
+"AMBER","Amber Lake","14631",85,965,"Calendar years BP",TRUE,-43,970,NA,FALSE,TRUE
+"CAMP","Camp Lake","14633",102,1537,"Calendar years BP",TRUE,-43,1650,NA,FALSE,TRUE
+"ANDERSLK","Anderson Lake","202",10058,10742,"Radiocarbon years BP",TRUE,10350,10800,NA,TRUE,FALSE
+"MNBELG","George Lake","15245",-10,275,"Calendar years BP",TRUE,-13,90,NA,TRUE,TRUE
+"HORSHOHA","Horseshoe Lake","1110",8055,13042,"Radiocarbon years BP",TRUE,8100,12330,NA,TRUE,FALSE
+"KYLENLK","Kylen Lake","1564",8406,15900,"Radiocarbon years BP",TRUE,8410,15850,NA,TRUE,FALSE
+"LAKE16","Lake Sixteen","1580",2206,11769,"Radiocarbon years BP",TRUE,0,10690,NA,TRUE,FALSE
+"LKCLDSA","Lake of the Clouds","1649",8714,11400,"Varve years BP",TRUE,9250,11400,NA,TRUE,FALSE
+"NELSONPD","Nelson Pond","1794",5497,7770,"Radiocarbon years BP",TRUE,5540,7245,NA,TRUE,FALSE
+"SEIDEL01","Seidel","2355",8420,12930,"Radiocarbon years BP",TRUE,8680,11620,NA,TRUE,FALSE
+"WILWRDPD","Willow River Pond","2956",4818,8003,"Radiocarbon years BP",TRUE,5160,7890,NA,TRUE,FALSE
+"WOLFCRK","Wolf Creek","3029",9000,20658,"Radiocarbon years BP",TRUE,9150,20500,NA,TRUE,FALSE
+"ALBERTL3","Albert Lea Lake","15248",9,317,"Calendar years BP",TRUE,-46,90,NA,TRUE,TRUE
+"SALLIE","Lake Sallie","14403",-18,135,"Calendar years BP",TRUE,-20,70,NA,TRUE,TRUE
+"TOWER1","Tower Lake","14410",1697,8775,"Calibrated radiocarbon years BP",TRUE,-54,7904,NA,TRUE,FALSE
+"TOWER4","Tower Lake","14443",-18,457,"Calibrated radiocarbon years BP",TRUE,-55,464,NA,TRUE,FALSE
+"TOWER6","Tower Lake","14889",532,1683,"Calibrated radiocarbon years BP",TRUE,-56,1796,NA,TRUE,FALSE
+"TOWER7","Tower Lake","17993",2113,2203,"Calibrated radiocarbon years BP",TRUE,-56,2220,NA,TRUE,FALSE
+"MNPPJL","Johnson Lake","14435",-26,450,"Calendar years BP",TRUE,-30,90,NA,TRUE,TRUE
+"HELLHOLE","Hell Hole Lake","14446",-50,1967,"Calibrated radiocarbon years BP",TRUE,-54,3779,NA,TRUE,FALSE
+"LILY","Lily Lake","14535",69,652,"Calibrated radiocarbon years BP",TRUE,-45,710,NA,TRUE,TRUE
+"KELLYDUD","Kelly-Dudley Lake","14537",17,7180,"Calibrated radiocarbon years BP",TRUE,-38,5700,NA,TRUE,TRUE
+"MARTHA","Martha Lake","14539",89,3841,"Calibrated radiocarbon years BP",TRUE,-44,2580,NA,TRUE,TRUE
+"MINNREG","Minnreg","14626",43,753,"Calendar years BP",TRUE,-42,800,NA,TRUE,TRUE
+"CRYSTAL","Crystal Lake","14635",62,1815,"Calendar years BP",TRUE,-44,1910,NA,TRUE,TRUE
+"FISHL","Fish Lake","14637",87,826,"Calendar years BP",TRUE,-42,760,NA,TRUE,TRUE
+"FISHS","Fish Lake","14639",183,1710,"Calendar years BP",TRUE,-44,1780,NA,TRUE,TRUE
+"EAGLEL","Eagle Lake","14641",87,1974,"Calendar years BP",TRUE,-45,1680,NA,TRUE,TRUE
+"EMILY_NE","Lake Emily, Northeast Basin","14643",27,839,"Calendar years BP",TRUE,-45,930,NA,TRUE,TRUE
+"FULLER","Fuller Lake","14645",52,1718,"Calendar years BP",TRUE,-43,1900,NA,TRUE,TRUE
+"NELSONMI","Nelson Lake","14933",-46,6901,"Calibrated radiocarbon years BP",TRUE,-46,6710,NA,TRUE,TRUE
+"MUDLKMI","Mud Lake","15032",-49,10316,"Calibrated radiocarbon years BP",TRUE,-49,8700,NA,TRUE,TRUE
+"LILYMI","Lily Lake","15035",1057,10259,"Calibrated radiocarbon years BP",TRUE,-42,9420,NA,TRUE,FALSE
+"MNCLEB","Elk Lake","15167",-28,182,"Calendar years BP",TRUE,-28,80,NA,TRUE,TRUE
+"MNCLEC","Elk Lake","15168",-28,128,"Calendar years BP",TRUE,-28,80,NA,TRUE,TRUE
+"MNCLE4","Elk Lake","15169",-24,168,"Calendar years BP",TRUE,-28,80,NA,TRUE,TRUE
+"MNCLED","Elk Lake","15219",-18,100,"Calendar years BP",TRUE,-20,60,NA,TRUE,TRUE
+"MNCLEL","Elk Lake","15269",12,158,"Calendar years BP",TRUE,58,169,NA,TRUE,TRUE
+"MNBCSC","St. Clair Lake","15228",-18,126,"Calendar years BP",TRUE,-20,80,NA,TRUE,TRUE
+"MNCLSQ","Ozawindib Lake","15252",-19,935,"Calibrated radiocarbon years BP",TRUE,-23,790,NA,TRUE,TRUE
+"MNCHLH","Little Horseshoe Lake","15254",-27,313,"Calendar years BP",TRUE,-30,70,NA,TRUE,TRUE
+"MNOTCL","Cora Lake","15256",-26,401,"Calendar years BP",TRUE,-29,80,NA,TRUE,TRUE
+"MNCVTL","Tamarack Lake","15266",-27,111,"Calendar years BP",TRUE,-27,100,NA,TRUE,TRUE
+"MNHBLS","LaSalle Lake","15270",-14,223,"Varve years BP",TRUE,-14,223,NA,TRUE,FALSE
+"MNWSSO","Saint Olaf Lake","15273",-27,195,"Calendar years BP",TRUE,-29,95,NA,TRUE,TRUE
+"WILLIAMJ","Williams Lake","15281",-43,10787,"Calibrated radiocarbon years BP",TRUE,-43,7680,NA,TRUE,FALSE
+"MNHNLL","Long Lake","15294",-27,2902,"Calibrated radiocarbon years BP",TRUE,-29,2477,NA,TRUE,TRUE
+"EMRICK","Emrick Lake","15302",-54,11113,"Calibrated radiocarbon years BP",TRUE,-54,11600,NA,TRUE,FALSE
+"ESOLDIER","East Soldier Lake","15309",12,9469,"Calibrated radiocarbon years BP",TRUE,-29,8450,NA,TRUE,FALSE
+"GUARD","Guard Lake","15311",451,2939,"Calibrated radiocarbon years BP",TRUE,-28,2785,NA,TRUE,FALSE
+"TROUTLBG","Trout Lake Bog","15316",-29,3870,"Calibrated radiocarbon years BP",TRUE,-29,3325,NA,TRUE,FALSE
+"MNHNWB","Wolsfeld Woods Marsh","15318",-25,1503,"Calibrated radiocarbon years BP",TRUE,-25,905,NA,TRUE,TRUE
+"DEEPLAKE","Deep Lake","15403",143,8214,"Calibrated radiocarbon years BP",TRUE,-40,10700,NA,TRUE,FALSE
+"ADVENTUR","Adventure Lake","15460",-54,100,"Calendar years BP",TRUE,-54,100,NA,TRUE,TRUE
+"BENACH","Benach Lake","15463",-54,100,"Calendar years BP",TRUE,-54,100,NA,TRUE,TRUE
+"BLUEJ","BlueJ Lake","15477",-55,100,"Calendar years BP",TRUE,-55,100,NA,TRUE,TRUE
+"BROZIE","Brozie Lake","15478",-51,100,"Calendar years BP",TRUE,-51,100,NA,TRUE,TRUE
+"CAMPTWO","Camp Two Lake","15479",-54,100,"Calendar years BP",TRUE,-54,100,NA,TRUE,TRUE
+"COWDEN","Cowden Lake","15487",156,2344,"Calibrated radiocarbon years BP",TRUE,-54,2546,NA,TRUE,FALSE
+"FERRY01","Ferry Lake","15489",-48,1992,"Calibrated radiocarbon years BP",TRUE,-50,2237,NA,TRUE,FALSE
+"HICKSMI","Hicks Lake","15492",70,2672,"Calibrated radiocarbon years BP",TRUE,-54,2714,NA,TRUE,FALSE
+"MORRIMI","Morrison Lake","15511",107,2247,"Calibrated radiocarbon years BP",TRUE,-54,2055,NA,TRUE,FALSE
+"BUCKMI","Buck Lake","15660",-34,8393,"Calibrated radiocarbon years BP",TRUE,-33,5700,NA,TRUE,TRUE
+"HEMLOCK","Hemlock Lake","15740",-32,10717,"Calibrated radiocarbon years BP",TRUE,-32,9230,NA,TRUE,TRUE
+"WARNERWI","Warner Lake","15882",-52,1836,"Calibrated radiocarbon years BP",TRUE,-54,1910,NA,TRUE,FALSE
+"KERRMI","Kerr Lake","15916",865,8621,"Calibrated radiocarbon years BP",TRUE,-44,7520,NA,TRUE,FALSE
+"CROOKEDN","Crooked Lake","15919",-12,10136,"Calibrated radiocarbon years BP",TRUE,-44,10110,NA,TRUE,FALSE
+"JAYLAKE","Jay Lake","15922",36,10360,"Calibrated radiocarbon years BP",TRUE,-46,9280,NA,TRUE,FALSE
+"OPINES","Lake O' Pines","15925",-38,11704,"Calibrated radiocarbon years BP",TRUE,-46,11050,NA,TRUE,FALSE
+"QUALLY","Qually Pond","15965",1379,12281,"Calibrated radiocarbon years BP",TRUE,-12,11740,NA,TRUE,FALSE
+"ITASCAMB","Itasca Bison Kill Site","15989",9825,10685,"Calibrated radiocarbon years BP",TRUE,9360,9690,NA,TRUE,FALSE
+"LIMABOG","Lima Bog","16129",-20,14226,"Calibrated radiocarbon years BP",TRUE,-30,10180,NA,TRUE,FALSE
+"CAPITOLA","Capitola Lake","17304",-6,9557,"Calibrated radiocarbon years BP",TRUE,-35,6970,NA,TRUE,FALSE
+"BEAVERWI","Beaver Lake","17387",-30,5894,"Calibrated radiocarbon years BP",TRUE,-30,5290,NA,TRUE,TRUE
+"STEELMN","Steel Lake","17396",-50,12289,"Calibrated radiocarbon years BP",TRUE,-50,41190,NA,TRUE,FALSE
+"LORRAINE","Lorraine Lake","17404",-30,11460,"Calibrated radiocarbon years BP",TRUE,-30,9500,NA,TRUE,TRUE
+"PENEGOR","Penegor Lake","17406",-35,9675,"Calibrated radiocarbon years BP",TRUE,-35,8670,NA,TRUE,TRUE
+"FOXMN","Fox Lake","19834",-11,9120,"Radiocarbon years BP",TRUE,-52,8220,NA,TRUE,FALSE
+"LITSHING","Little Shingobee Lake","17947",2441,12831,"Radiocarbon years BP",TRUE,-48,16230,NA,TRUE,FALSE
+"MADELIA","Madelia","19812",10542,16496,"Calibrated radiocarbon years BP",TRUE,9300,12650,NA,TRUE,FALSE
+"ANDRUSLK","Andrus Lake","205",-33,141,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"BROWNLK","Brown Lake","313",-31,80,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"BROWNSBY","Brown's Bay, Lake Minnetonka","314",-32,584,"Calendar years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"CAMP12LK","Camp 12 Lake","333",-33,177,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"DENTONLK","Denton Lake","681",-33,118,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"DISTER59","Disterhaft Farm Bog","700",699,13840,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"DUNNIGAN","Dunnigan Lake","774",-33,237,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"HUSTLER","Hustler Lake","1138",-33,180,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"IOLABOG","Iola Bog","1151",117,11676,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"MABEL","Lake Mabel","1685",-14,70,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"MCNRNY2A","McNearny Lake","1725",-23,241,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"MCNRNY3A","McNearny Lake","3485",-23,157,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"MCNRNY4A","McNearny Lake","3486",-27,340,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"NELSLK","Nels Lake","1793",-33,97,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"OTTOMLK","Otto Mielke Lake","1840",-32,286,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"THIRDLK","Third Lake","3784",150,9977,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"THRDBGN","Third Lake","3786",292,1600,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"RICEMNA","Rice Lake","2066",-14,6760,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"STONTAM1","Stone Lake Tamarack Swamp","2607",202,10761,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"STONTAM2","Stone Lake Tamarack Swamp","3780",150,346,"Radiocarbon years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"LASTLAKE","Last Lake","12004",-24,870,"Calendar years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"MNFRAL","Albert Lea Lake","12016",-27,209,"Calendar years BP",FALSE,NA,NA,NA,FALSE,FALSE
+"ALMORA1","Almora Lake","30",3716,11290,"Radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"ANDREE","Andree Bog","204",8970,11333,"Radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"BLKHOOF","Blackhoof Site","282",9750,10795,"Radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"ERNSTPIT","Ernst Brother's Pit","806",7646,13409,"Radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"JACOBSN1","Jacobson Lake","1163",6160,10800,"Radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"LAKEANNH","Lake Ann","3469",4846,13327,"Radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"WHITLILY","White Lily Lake","3841",8000,16150,"Radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"NORPOL","Norwood","19316",12483,15388,"Calibrated radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"ITASCALC","Itasca Bison Kill Site","15985",3575,8664,"Calendar years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"ITASCAMC","Itasca Bison Kill Site","15992",7688,8899,"Calibrated radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"ITASCAMD","Itasca Bison Kill Site","15998",3147,7419,"Calibrated radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"ITASCAT2","Itasca Bison Kill Site","16002",5484,7033,"Calibrated radiocarbon years BP",FALSE,NA,NA,NA,TRUE,FALSE
+"LKCLDSSW","Lake of the Clouds","3483",-20,960,"Varve years BP",NA,NA,NA,NA,FALSE,NA
+"LAKEMINA","Lake Mina","14839",50,830,"Varve years BP",NA,NA,NA,NA,TRUE,NA
+"LONE","LONE","CLH5",-50,2065,"CLH",TRUE,43,3710,NA,FALSE,TRUE
+"LILY04","LILY04","CLH4",-54,2214,"CLH",TRUE,-54,2893,NA,FALSE,TRUE
