@@ -36,7 +36,7 @@ bibliography: baconizing.bib
 
 # Introduction
 
-```{r load_libraries, echo=FALSE, message=FALSE, results='hide'}
+```{r load_libraries, echo=FALSE, message=FALSE, warnings = FALSE, results='hide'}
 
 library(neotoma, verbose = FALSE)
 library(plyr, verbose = FALSE)
