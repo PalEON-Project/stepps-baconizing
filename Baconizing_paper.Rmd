@@ -102,78 +102,16 @@ To understand he importance of developing new models we need to first show that 
 
 ```{r, linear-fake, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
 
-oldest <- seq(1000, 21000, by = 1000)
-depths <- 0:100
+source('R/figures/compare_recalibrations.R')
 
-model.recal <- function(max.age, depths){
-  # This is plotting out the changes between actual and interpolated dates when ages 
-  # are directly recalibrated.  It's mostly just to 
-  ages <- seq(71, max.age, length.out = length(depths))
-  calibed <- BchronCalibrate(ages, 
-                             ageSds = rep(1, length(ages)), 
-                             calCurves = rep('intcal13', length(ages)))
-  
-  from.calib <- sapply(calibed, function(x)weighted.mean(x$ageGrid, x$densities))
-  lin.model <- approx(x = depths[c(1, length(depths))], 
-                      y = from.calib[c(1, length(depths))],
-                      xout = depths)
-  data.frame(depths  = depths,
-             direct  = from.calib,
-             linear  = lin.model$y,
-             max.age = factor(max.age))
+if ('comp_recal.rds' %in% list.files('data/output')) {
+  comp_recal <- readRDS('data/output/comp_recal.rds')
+} else {
+  comp_recal <- compare_recalibrations()
+  saveRDS(comp_recal, file = 'data/output/comp_recal.rds')
 }
 
-out.tests <- ldply(oldest, model.recal, depths = depths)
-
-out.tests$diff <- out.tests$direct - out.tests$linear
-
-direct <- ggplot(out.tests, aes(x = direct, y = linear, color = max.age)) +
-            geom_line() +
-            scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
-            scale_y_continuous(limits = c(0, 21000), 
-                               expand = c(0, 0)) +
-            xlab('Direct Recalibration') +
-            ylab('Linear Model with\n Recalibration') +
-  theme_bw() +
-        theme(axis.title.x = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-        legend.position = 'none',
-        axis.title.y = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-        axis.ticks = element_blank(),
-        axis.text.x = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14),
-        axis.text.y = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14))
-
-diff  <- ggplot(out.tests, aes(x = linear, y = diff, color = max.age)) +
-            geom_line() +
-            scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
-            geom_hline(aes(yintercept = 0)) +
-            xlab('Linear Model with Recalibration') +
-            ylab('Model Difference') +
-  theme_bw() +
-        theme(axis.title.x = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-              legend.position = 'none',
-        axis.title.y = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-        axis.ticks = element_blank(),
-        axis.text.x = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14),
-        axis.text.y = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14))
-
-grid.arrange(direct, diff)
-
+comp_recal
 ```
 
 **Figure 2**. *The difference between directly calibrating radiocarbon ages from an existing model and rebuilding age models using linear interpolatation from calibrated radiocarbon ages.  Negative values result when the rebuilt model provides older dates than the directly calibrated dates.  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages obtained from a dataset with linearly interpolated dates reported in radiocarbon years.*
@@ -204,7 +142,7 @@ basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = handle)) +
                                     face = 'italic', 
                                     size = 14))
 
-
+# This code block outputs the age models for each record and oututs 
 # for (i in unique(new.chrons$handle)) {
 #   if (!paste0(gsub('/', '_', i), '.png') %in% list.files('figures/recal_test/')) {
 #     cat(i, '\n')
