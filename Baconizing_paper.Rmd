@@ -44,6 +44,9 @@ library(reshape2, verbose = FALSE)
 library(mgcv, verbose = FALSE)
 library(Bchron, verbose = FALSE)
 library(viridis, verbose = FALSE)
+library(dplyr, verbose = FALSE)
+
+version <- 0.1
 
 ```
 
@@ -87,31 +90,9 @@ The transition from age models using only radiocarbon years to those with calibr
 
 ```{r, plot.chron.change, fig.width=6, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
 
-library(dplyr)
+source('R/figures/ageplot_histogram.R')
 
-meta.table_short <- meta.table %>% group_by(id) %>% filter(year == max(year)) %>% unique()
-
-# TODO: Because there are defaults for each model type some of these records have multiple
-#       entries, for example, both calibrated and uncalibrated ages.  Need to pick the best.
-
-ggplot(na.omit(meta.table_short), aes(x = year, fill = chron)) + geom_bar() +
-  scale_x_continuous(limits = c(1948, 2014), expand = c(0,0)) + 
-  scale_y_continuous(limits = c(0, 30), expand = c(0,0)) + 
-  xlab('Publication Year') + 
-  ylab('Core Count') +
-  theme(axis.title.x = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-        axis.title.y = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-        axis.ticks = element_blank(),
-        axis.text.x = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14),
-        axis.text.y = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14))
+chronology_type_histogram(meta.table)
 
 ```
 
