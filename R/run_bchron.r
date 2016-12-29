@@ -4,22 +4,23 @@ require(fields)
 require(sp)
 require('Bchron')
 
+source('R/config.r')
 source('R/utils/helpers.r')
 
-setup = FALSE
-version = 5
+# setup = FALSE
+# version = 5
+# 
+# if (setup){
+#   # remove files from any previous runs
+#   unlink('Cores/*/*.txt')
+#   unlink('Cores/*/*.out')
+#   unlink('Cores/*/*.bacon')
+#   unlink('Cores/*/*.pdf')
+#   source('setup_bacon.r')
+# }
 
-if (setup){
-  # remove files from any previous runs
-  unlink('Cores/*/*.txt')
-  unlink('Cores/*/*.out')
-  unlink('Cores/*/*.bacon')
-  unlink('Cores/*/*.pdf')
-  source('setup_bacon.r')
-}
-
-bacon_params <- read.csv(paste0('data/bacon_params_umw_v', version, '.csv'), header=TRUE, sep=',')
-site_data    <- read.csv(paste0('data/pollen_site_meta_umw_v', version, '.csv'), header=TRUE, sep=',')
+bacon_params <- read.csv(paste0('data/bacon_params_v', version, '.csv'), header=TRUE, sep=',')
+site_data    <- read.csv(paste0('data/pollen_meta_thick_v', version, '.csv'), header=TRUE, sep=',')
 
 ncores = nrow(bacon_params)
 
@@ -29,13 +30,14 @@ ncores = nrow(bacon_params)
 # 241 breaks things - error
 
 # run_bchron <- function(site_params){
-for (i in 242:ncores){
+for (i in 167:ncores){
   print(paste0(i, '; ', bacon_params[i,]$handle))
   
   site_params = bacon_params[i,]
   
   # check for suitability
-  if (site_params$suit==1){
+  # if (site_params$suit==1){
+  if (site_data$bchron[i]){
     
     # find hiatus depth
     geochron = read.table(sprintf('Cores/%s/%s.csv', site_params$handle, site_params$handle), sep=',', header=TRUE)  
@@ -67,6 +69,14 @@ for (i in 242:ncores){
     write.table(post, paste0('.', "/Cores/", site_params$handle, "/", 
                              site_params$handle, "_bchron_samples.csv"), sep=',', col.names = TRUE, row.names = FALSE)
     
+    predict_geo = predict(test, 
+                          newPositions = geochron$depth)
+    
+    post = data.frame(labid=geochron$labid, depths=geochron$depth, t(predict_geo))
+    write.table(post, paste0('.', "/Cores/", site_params$handle, "/", 
+                             site_params$handle, "_bchron_geo_samples.csv"), sep=',', col.names = TRUE, row.names = FALSE)
+    
+    
     bacon_params[i,]$success = TRUE
     
   }
@@ -78,8 +88,7 @@ fnames = list.files('Cores', '*_bchron.pdf', recursive=TRUE)
 fname_str = sapply(fnames, function(x) paste0('Cores/', x))
 fname_str = paste(fname_str, collapse = ' ')
 
-ver=1
-sys_str = paste0("gs -sDEVICE=pdfwrite -o bchron_plots_v", ver, ".pdf ", fname_str)
+sys_str = paste0("gs -sDEVICE=pdfwrite -o bchron_plots_v", version, ".pdf ", fname_str)
 system(sys_str)
 
 

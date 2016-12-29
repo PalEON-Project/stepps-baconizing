@@ -1,4 +1,4 @@
-write_agefile_stepps <- function (download, survey.year, path, corename, site.id) 
+write_agefile_stepps <- function (download, survey.year, path, corename, site.id, stepps=FALSE) 
 {
   if (!file.exists(paste0(path, "/Cores"))) {
     stop(paste0("Core directory must exist.  There is no directory at ", 
@@ -15,15 +15,49 @@ write_agefile_stepps <- function (download, survey.year, path, corename, site.id
     #                                        verbose = FALSE)
     
     # use uncalibrated RC dates; sometimes not default
+    if (site.id %in% c(2309, 14839, 3131)){
+      stop(paste0("varve core with no recorded depths ", 
+                  "unable to fit age-depth model"))
+    }
+    
     if (site.id == 12001){
       #       chron.controls <- get_chroncontrol(chronologyid = 6346, 
       #                                          verbose = FALSE)
       chron.controls <- get_chroncontrol(6346, 
                                          verbose = FALSE)
-    } else if (site.id == 3131) {
-      chron.controls <- get_chroncontrol(1407, verbose = FALSE)
-      chron.controls$chron.control$control.type = as.vector(chron.controls$chron.control$control.type)
-      chron.controls$chron.control$control.type[1] = 'Core top'
+      # } else if (site.id == 3131) {
+      #   chron.controls <- get_chroncontrol(1407, verbose = FALSE)
+      #   chron.controls$chron.control$control.type = as.vector(chron.controls$chron.control$control.type)
+      #   chron.controls$chron.control$control.type[1] = 'Core top'
+      # } else if (site.id == 2309){
+      #   # RUBY LAKE; varve
+      #   chron.controls <- get_chroncontrol(1078, verbose = FALSE)
+      # } else if (site.id == 14839){
+      #   # LAKE MINA; varve
+      #   mina <- get_download(14839)[[1]]$sample.meta
+      #   chron.controls <- list(chron.control=data.frame(depth=mina$depth, 
+      #                                                   age=mina$age, 
+      #                                                   age.young=mina$age.younger, 
+      #                                                   chron.control.id=mina$sample.id, 
+      #                                                   control.type=rep('varve', nrow(mina))))
+      # } else if (site.id == 3131){
+      #   chron.controls <- get_chroncontrol(1408, verbose = FALSE)
+    } else if (site.id == 1649){
+      # LAKE OF THE CLOUDS; varve
+      dat <- get_download(1649)[[1]]$sample.meta
+      chron.controls <- list(chron.control=data.frame(depth=dat$depth,
+                                                      age=dat$age,
+                                                      age.young=dat$age - 100,
+                                                      chron.control.id=dat$sample.id,
+                                                      control.type=rep('varve', nrow(dat))))
+    } else if (site.id == 3483){
+      # LAKE OF THE CLOUDS 2; varve
+      dat <- get_download(3483)[[1]]$sample.meta
+      chron.controls <- list(chron.control=data.frame(depth=dat$depth,
+                                                      age=dat$age,
+                                                      age.young=dat$age - 200,
+                                                      chron.control.id=dat$sample.id,
+                                                      control.type=rep('varve', nrow(dat))))
     } else {
       chron.controls <- get_chroncontrol(download$sample.meta$chronology.id[1], 
                                          verbose = FALSE)
@@ -42,10 +76,17 @@ write_agefile_stepps <- function (download, survey.year, path, corename, site.id
     #                         "Lead-210", "Radiocarbon, calibrated")
     
     # no lead for now
-    stepps_controls = c("Radiocarbon", "Radiocarbon, reservoir correction", 
-                        "Radiocarbon, average of two or more dates", "Core top", 
-                        "Radiocarbon, calibrated", "Annual laminations (varves)",
-                        "Radiocarbon, calibrated from calendar years")
+    if (stepps){
+      stepps_controls = c("Radiocarbon", "Radiocarbon, reservoir correction", 
+                          "Radiocarbon, average of two or more dates", "Core top", 
+                          "Radiocarbon, calibrated", "Annual laminations (varves)",
+                          "Radiocarbon, calibrated from calendar years")
+    } else {
+      stepps_controls = c("Radiocarbon", "Radiocarbon, reservoir correction", 
+                          "Radiocarbon, average of two or more dates", "Core top", 
+                          "Radiocarbon, calibrated", "Annual laminations (varves)",
+                          "Radiocarbon, calibrated from calendar years", "Lead-210")
+    }
     
     pre_depths = read.csv(file='data/cal_data_mid_depth_v4.csv', stringsAsFactors=FALSE)
     # cal_ids    = read.csv(file='data/pollen_meta_2014-05-01.csv', stringsAsFactors=FALSE)
@@ -102,7 +143,7 @@ write_agefile_stepps <- function (download, survey.year, path, corename, site.id
       # deal with zero error lead-210 dates
       lead.cond <- types == 'Lead-210'
       if ( (sum(lead.cond)>0) & (any(chron[lead.cond, 'error'] == 0)) ) {
-        chron = set_lead_error(chron, types)
+        chron = lead_error_paleon(chron, types)
       }
       
       top.cond <- types == "Core top" 
@@ -155,7 +196,7 @@ write_agefile_stepps <- function (download, survey.year, path, corename, site.id
       # dataset ID 982: Green Lake; top 10cm collapsed upon extrution
       # dataset ID 369: Chippewa Bog; no core top
       # dataset ID 3473: Lake Mary; no surface sample
-      if ( ( as.character(site.id) %in% pre_depths$id) & !(site.id %in% c(1548, 982, 369, 3473)) ){
+      if ( ( as.character(site.id) %in% pre_depths$id) & !(site.id %in% c(1548, 982, 369, 3473, 3482)) ){
         labid = 'Presettlement_paleon'
         #         age   = 1850
         
@@ -188,12 +229,17 @@ write_agefile_stepps <- function (download, survey.year, path, corename, site.id
         gc_age_min = min(chron$age[!is.na(chron$age)])
         dates    = "RC, CT, or presett"
       } else if ((length(chron$age[!is.na(chron$age)]) > 1) & sum(lead.cond)>0) {
-        run_flag = FALSE
+        if (stepps){
+          run_flag = FALSE
+          print("Lead dates, run flag set to FALSE.")
+        } else {
+          run_flag = TRUE
+          print("Lead dates, run flag set to TRUE.")
+        }
         ndates   = length(chron$age[!is.na(chron$age)])
         gc_age_max = max(chron$age[!is.na(chron$age)])
         gc_age_min = min(chron$age[!is.na(chron$age)])
         dates    = "Lead"
-        print("Lead dates, run flag set to FALSE.")
       } else {
         run_flag = FALSE
         ndates   = 0

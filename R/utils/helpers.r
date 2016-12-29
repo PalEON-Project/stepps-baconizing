@@ -30,7 +30,50 @@ get_survey_year <- function(pollen_meta){
   return(pollen_meta)
 }
 
-set_lead_error <- function(chron, types){
+lead_error_paleon <- function(chron, types){
+
+  lead.cond <- types == 'Lead-210'
+  
+  ages = data.frame(age = chron[lead.cond & (chron[lead.cond, 'error'] == 0), 'age'])
+  # chron[lead.cond & (chron[lead.cond, 'error'] == 0), 'error'] = ceiling(exp(as.vector(predict(model, ages)))/2)
+  
+    
+  geochron_tables <- readRDS('data/output/all_geochron_tables.rds')
+  
+  widen <- function(x) {
+    data.frame(x$dataset$site.data[,1:5], x$geochron)
+  }
+  
+  wide_table <- do.call(rbind.data.frame, lapply(geochron_tables, widen))
+  
+  library(dplyr)
+  
+  leads <- wide_table %>% filter(geo.chron.type %in% "Lead-210")
+  
+  # There are some ages with improperly named age types.
+  leads$age[leads$age.type %in% "Calendar years AD/BC" & leads$age > 500] <- 1950 - 
+    leads$age[leads$age.type %in% "Calendar years AD/BC" & leads$age > 500]
+  
+  leads = leads[leads$e.older > 0, ]
+  
+  # # None of the ages reported as Calendar years BP are wrong.
+  # library(ggplot2)
+  
+  lead_model <- glm(log(e.older)~age, data=leads)
+  data_ages=data.frame(age=ages)
+  p_ages = predict(lead_model, data_ages)
+  
+  chron[lead.cond & (chron[lead.cond, 'error'] == 0), 'error'] = ceiling(exp(p_ages))
+  
+  # plot(ages$age, exp(p), type='l')
+  # points(leads$age, leads$e.older)
+  # # points(leads$age[which(leads$site.id==10429)], leads$e.older[which(leads$site.id==10429)], col='blue', pch=19)
+
+  return(chron)
+}
+
+
+lead_error_binford <- function(chron, types){
   
   x = c(10, 100, 150)
   y = c(1.5, 15, 85)
@@ -78,12 +121,13 @@ run.bacon <- function(site.params){
       
     if (any(substr(geochron$labid, 1, 4) == 'Pres') & nrow(geochron) > 2){
       
-      if (which(substr(geochron$labid, 1, 4) == 'Pres') == nrow(geochron)){
+      # determine which bacon parameters to input
+      if (which(substr(geochron$labid, 1, 4) == 'Pres') == nrow(geochron)){ # if preset is the last sample
         hiatus.depth       = NA
         acc.mean.val       = site.params$acc.mean.mod
         acc.shape.val      = site.params$acc.shape.mod      
         site.params$hiatus = 0
-      } else if (which(substr(geochron$labid, 1, 4) == 'Pres') == 1){
+      } else if (which(substr(geochron$labid, 1, 4) == 'Pres') == 1){ # if preset is the first sample
         hiatus.depth       = NA
         acc.mean.val       = site.params$acc.mean.old
         acc.shape.val      = site.params$acc.shape.old      
@@ -95,12 +139,12 @@ run.bacon <- function(site.params){
         site.params$hiatus = 1
       }
       
-    } else if (any(substr(geochron$labid, 1, 4) == 'Pres') & nrow(geochron) == 2) {
+    } else if (any(substr(geochron$labid, 1, 4) == 'Pres') & nrow(geochron) == 2) { # if preset and only two geochron samples, use modern priors
       hiatus.depth       = NA
       acc.mean.val       = site.params$acc.mean.mod
       acc.shape.val      = site.params$acc.shape.mod      
       site.params$hiatus = 0
-    } else if (!any(substr(geochron$labid, 1, 4) == 'Pres')) {
+    } else if (!any(substr(geochron$labid, 1, 4) == 'Pres')) { # if no preset then use historical priors 
       hiatus.depth       = NA
       acc.mean.val       = site.params$acc.mean.old
       acc.shape.val      = site.params$acc.shape.old      
@@ -166,6 +210,19 @@ run.bacon <- function(site.params){
       
       write.table(post, paste0('.', "/Cores/", site.params$handle, "/", 
                                site.params$handle, "_", site.params$thick, "_samples.csv"), sep=',', col.names = TRUE, row.names = FALSE)
+      
+      samples = matrix(0, nrow = length(geochron$depth), ncol = iters)
+      colnames(samples) = paste0('iter', rep(1:iters))
+      for (j in 1:length(geochron$depth)){    
+        #         samples[j,] = Bacon.Age.d(depths[j]) 
+        samples[j,] = bacon_age_posts(d=geochron$depth[j], b.depths=depths.bacon, out=output, thick=site.params$thick)
+      }
+      
+      post = data.frame(labid=geochron$labid, depths=geochron$depth, samples)
+      
+      write.table(post, paste0('.', "/Cores/", site.params$handle, "/", 
+                               site.params$handle, "_", site.params$thick, "_geo_samples.csv"), sep=',', col.names = TRUE, row.names = FALSE)
+      
       site.params$success = 1
       
     } else {

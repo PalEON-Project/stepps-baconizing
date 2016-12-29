@@ -4,12 +4,15 @@ library(maps)
 
 source('R/utils/compile_lists.r')
 source('R/utils/build_pollen_ts_helpers.r')
+source('R/config.r')
 
 # my_date = "2015-03-23"
-my_date = "2016-05-13"
-draws_version = 'v8'
-pol_version = '5'
+# my_date = "2016-05-13"
+draws_version = 'v9'
+pol_version = '6'
 version = '1'
+add_varves = TRUE
+model     = 'Bacon'
 
 ndraws = 500 # number of posterior samples 
 
@@ -21,7 +24,7 @@ bacon_out_path = '../stepps-baconizing'
 
 states = c('wisconsin', 'minnesota', 'michigan:north', 'michigan:south')
 
-pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_all_thicks_umw_v', pol_version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
+pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_thick_v', pol_version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
 pollen_meta = pollen_meta[pollen_meta$bacon == TRUE,]
 # pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE, stringsAsFactors=FALSE, sep=',')
 # pollen_meta = split_mi(pollen_meta, longlat=TRUE)
@@ -35,8 +38,9 @@ pollen.equiv    = read.csv("pollen.equiv.csv", stringsAsFactors=F, sep=',', row.
 
 # thicks = read.csv('../stepps-baconizing/bacon.fit.thick.csv')
 
-ids_neo   = as.numeric(pollen_meta$id[which(substr(pollen_meta$id, 1, 3) != 'CLH')])
-state_neo = pollen_meta$state2[which(substr(pollen_meta$id, 1, 3) != 'CLH')]
+ids   = as.numeric(pollen_meta$id[which(substr(pollen_meta$id, 1, 3) != 'CLH')])
+state = pollen_meta$state2[which(substr(pollen_meta$id, 1, 3) != 'CLH')]
+nsites = length(ids)
 
 # ids_clh   = pollen_meta$id[which(substr(pollen_meta$id, 1, 3) == 'CLH')]
 
@@ -50,12 +54,12 @@ if (file.exists(paste0('data/pollen_list_v', pol_version, '.rdata'))){
 } 
 if (!file.exists(paste0('data/pollen_list_v', pol_version, '.rdata'))|(length(ids_neo)!=length(pol))){
   
-  nsites = length(ids_neo)
+  nsites = length(ids)
   
   # download and save the raw data
   pol_raw = list()
   for (i in 1:nsites){ 
-    id = ids_neo[i]
+    id = ids[i]
     print(id)
     # if (id == 1394) id = 15274
     pol_raw[[i]] = get_download(id)
@@ -84,6 +88,48 @@ if (!file.exists(paste0('data/pollen_list_v', pol_version, '.rdata'))|(length(id
   
 } 
 
+
+# load list containing pollen counts
+# will load object called pollen2k
+# the first time takes a while to pull from Neotoma
+pol = NA
+if (file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))) {
+  # loads object pollen2k
+  load(paste0('data/pol_stepps_', my_date, '.rdata')) 
+} 
+if (!file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))|(length(ids)!=length(pol))){
+  
+  # download and save the raw data
+  pol = list()
+  for (i in 1:nsites){ 
+    print(i)
+    
+    # if (id == 1394) id = 15274
+    
+    pol[[i]] = get_download(ids[i])[[1]]
+  }  
+  save(pol, file=paste0('data/pol_', my_date, '.rdata'))
+  
+  # miss = list()
+  # aggregate the taxa
+  pol_stepps = list()
+  for (i in 1:nsites){  
+    print(i)
+    convert1 = compile_list_neotoma(pol[[i]], 'Stepps', pollen.equiv)
+    
+    #     out = compile_list_neotoma(pollen2k_raw[[i]][[1]], 'Stepps')
+    #     convert1 = out[[1]]
+    #     miss[[i]] = out[[2]]
+    
+    #pollen2k[[i]] = compile_list_stepps(convert1, list.name='all', pollen.equiv.stepps, cf = TRUE, type = TRUE)
+    pol_stepps[[i]] = compile_list_stepps(convert1, list.name='must_have', pollen.equiv.stepps, cf = TRUE, type = TRUE)
+    pol_stepps[[i]]$dataset$site.data$state = state[i]
+  }
+  
+  save(pol_stepps, file=paste0('data/pol_stepps_', my_date, '.rdata'))
+  
+} 
+
 taxa = sort(unique(pollen.equiv.stepps$must_have))
 taxa = taxa[!is.na(taxa)]
 
@@ -91,10 +137,10 @@ taxa = taxa[!is.na(taxa)]
 # Read _samples.csv files and compute posterior means
 ###########################################################################################################
 
+pol = pol_stepps
+
 bchron = TRUE
-
 nsites = length(pol)
-
 pollen_ts  = list()
 
 for (i in 1:nsites){  
@@ -145,7 +191,7 @@ for (i in 1:nsites){
   
   draws = sample(seq(1,ncol(age_bacon)), size=ndraws)
   age_post_bacon = age_bacon[,draws]
-  colnames(age_post_bacon) = sapply(seq(1,ndraws), function(x) paste0("draw", x))
+  colnames(age_post_bacon) = sapply(seq(1,ndraws), function(x) paste0("bacon_draw", x))
   
   age_bacon = apply(age_bacon, 1, mean)
   
@@ -160,11 +206,19 @@ for (i in 1:nsites){
       
       age_bchron = age_bchron[age_bchron$depths %in% depth, ]
       depth_bchron = age_bchron$depths
-      
       age_bchron = age_bchron[,-1]
+      
+      draws = sample(seq(1,ncol(age_bchron)), size=ndraws)
+      
+      age_post_bchron = age_bchron[,draws]
+      colnames(age_post_bchron) = sapply(seq(1,ndraws), function(x) paste0("bchron_draw", x))
+      
       age_bchron  = apply(age_bchron, 1, mean)
     } else {
       age_bchron = NA
+      age_post_bchron = data.frame(matrix(NA, nrow=1, ncol=ndraws))
+      colnames(age_post_bchron) = sapply(seq(1,ndraws), function(x) paste0("bchron_draw", x))
+      
     }
   }
   
@@ -175,6 +229,10 @@ for (i in 1:nsites){
                     long     = long, 
                     state    = state, 
                     altitude = altitude)
+  
+  if (all(is.na(meta))){
+    print(paste0("problem with site", i))
+  }
   
   if (sum(x$sample.meta$depth %in% depth) == 1) {
     ncounts = 1
@@ -190,7 +248,7 @@ for (i in 1:nsites){
     }
     
     if (bchron){
-      pollen_ts = rbind(pollen_ts, cbind(meta, age_bacon, age_bchron, age_default, depth, counts)) 
+      pollen_ts = rbind(pollen_ts, cbind(meta, age_bacon, age_bchron, age_default, age_post_bacon, age_post_bchron, depth, counts)) 
     } else {
       pollen_ts = rbind(pollen_ts, cbind(meta, age_bacon, age_post_bacon, age_default, depth, counts)) 
     }
@@ -201,20 +259,79 @@ for (i in 1:nsites){
 }
 
 ###########################################################################################################
+# add varves if desired
+###########################################################################################################
+if (add_varves){
+  
+  vids = c(2309, 14839, 3131)
+  state_v = state_neo[match(vids, ids)]
+  state_v[2] = "minnesota" # lake mina
+  
+  for (i in 1:length(vids)){
+    x = get_download(vids[i])[[1]]
+    
+    convert1 = compile_list_neotoma(x, 'Stepps', pollen.equiv)
+    x = compile_list_stepps(convert1, list.name='must_have', pollen.equiv.stepps, cf = TRUE, type = TRUE)
+    
+    id       = x$dataset$dataset.meta$dataset.id
+    lat      = x$dataset$site.data$lat
+    long     = x$dataset$site.data$long
+    altitude = x$dataset$site.data$elev
+    state    = state_v[i]
+    handle   = x$dataset$dataset.meta$collection.handle
+    sitename = gsub("[ ']", "", as.vector(x$dataset$site.data$site.name))
+    
+    counts  = x$counts
+    age_default = x$sample.meta$age 
+    age_bacon = age_default # not really bacon ages ...
+    
+    age_post_bacon = replicate(ndraws, age_bacon)
+    colnames(age_post_bacon) = sapply(seq(1,ndraws), function(x) paste0("bacon_draw", x))
+    
+    age_bchron = age_default # not really bacon ages ...
+    
+    age_post_bchron = replicate(ndraws, age_bchron)
+    colnames(age_post_bchron) = sapply(seq(1,ndraws), function(x) paste0("bchron_draw", x))
+    
+    meta = data.frame(id       = id, 
+                      sitename = sitename, 
+                      #handle   = handle, 
+                      lat      = lat, 
+                      long     = long, 
+                      state    = state, 
+                      altitude = altitude)
+    
+    meta = meta[rep(1, nrow(counts)),] 
+    depth = rep(NA, nrow(counts))
+    # pollen_ts = rbind(pollen_ts, cbind(meta, age_bacon, age_post_bacon, age_default, depth, counts)) 
+    pollen_ts = rbind(pollen_ts, cbind(meta, age_bacon, age_bchron, age_default, age_post_bacon, age_post_bchron, depth, counts)) 
+  }
+}
+
+
+###########################################################################################################
 # write the data; still thinking about the best way to do this!
 ###########################################################################################################
 
 # write.table(pollen_ts, file=paste('data/pollen_ts_bacon_', Sys.Date(), '.csv', sep=''), quote=FALSE, row.names=FALSE)
 
-write.table(pollen_ts, file=paste0('data/sediment_ages_', version, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
+write.table(pollen_ts, file=paste0('data/sediment_ages_v', version, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
 
-# # try splitting out the draws into RDS
-# bacon_draws = pollen_ts[,grep('draw', colnames(pollen_ts))]
-# 
-# for (i in 1:ncol(bacon_draws)) {
-#   saveRDS(bacon_draws[,i], file=paste0('data/bacon_ages/draw', i, '.rds'))
-# }
-# 
+# try splitting out the draws into RDS
+bacon_draws = pollen_ts[,grep('bacon_draw', colnames(pollen_ts))]
+
+for (i in 1:ncol(bacon_draws)) {
+  saveRDS(bacon_draws[,i], file=paste0('data/bacon_ages/draw', i, '.rds'))
+}
+
+# try splitting out the draws into RDS
+bchron_draws = pollen_ts[,grep('bchron_draw', colnames(pollen_ts))]
+
+for (i in 1:ncol(bchron_draws)) {
+  saveRDS(bchron_draws[,i], file=paste0('data/bchron_ages/draw', i, '.rds'))
+}
+
+#
 # 
 # pollen_ts_meta = pollen_ts[,-(grep('draw', colnames(pollen_ts)))]
 # write.table(pollen_ts_meta, file=paste0('data/bacon_ages/pollen_ts_bacon_meta_', version, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
