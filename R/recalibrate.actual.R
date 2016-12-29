@@ -121,4 +121,3 @@ if (!'new.chrons.RDS' %in% list.files('data/output')) {
 } else {
   new.chrons <- readRDS('data/output/new.chrons.RDS')
 }
-
