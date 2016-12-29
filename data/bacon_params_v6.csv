@@ -14,7 +14,7 @@
 "BOBLAKE",296,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "BOGD",298,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,5,NA
 "BOSSUOT",305,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
-"BROWNSBY",314,3.02,15,0.53,0.9,4,0.7,NA,5,"Calendar years BP",FALSE,FALSE,0,NA
+"BROWNSBY",314,3.02,15,0.53,0.9,4,0.7,NA,5,"Calendar years BP",FALSE,TRUE,13,NA
 "BURNTSDE",325,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "CAMPBELL",334,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "CEDARBLK",352,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,4,NA
@@ -23,7 +23,7 @@
 "CRAZY",521,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "DALTON",545,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "DOGFISH",717,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
-"DUNNIGAN",774,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
+"DUNNIGAN",774,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,15,NA
 "EASTTWIN",781,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "EGGERT",786,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "FAITH",817,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
@@ -40,7 +40,7 @@
 "HORSHOHA",1110,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,5,NA
 "HOSTAGE",1111,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,4,NA
 "HUGLAKE",1134,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
-"HUSTLER",1138,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
+"HUSTLER",1138,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,12,NA
 "IRVIN",1153,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,7,NA
 "JACOBSN1",1163,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
 "JACOBSN2",3138,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,4,NA
@@ -59,7 +59,7 @@
 "LILYLAKE",1633,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,9,NA
 "LITTBASS",1639,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,7,NA
 "LKCLDSA",1649,3.02,15,0.53,0.9,4,0.7,NA,5,"Varve years BP",FALSE,FALSE,0,NA
-"LKCLDSH",3482,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,29,NA
+"LKCLDSH",3482,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,28,NA
 "LKCLDSSW",3483,3.02,15,0.53,0.9,4,0.7,NA,5,"Varve years BP",FALSE,FALSE,0,NA
 "MABEL",1685,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
 "MARTINPD",1708,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
@@ -70,7 +70,7 @@
 "MUDLKMN2",1778,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,5,NA
 "MURPHY",1781,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "MYRTLE",1786,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,7,NA
-"NELSLK",1793,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
+"NELSLK",1793,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,16,NA
 "NELSONPD",1794,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "ONAMIA",1830,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "ONDRISPD",1831,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,4,NA
@@ -186,13 +186,13 @@
 "FOXMN",19834,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,6,NA
 "LITSHING",17947,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,22,NA
 "MADELIA",19812,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
-"HELLSKIT",3131,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
+"HELLSKIT",3131,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,NA,NA
 "LAKEMARY",3473,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,4,NA
 "BLUMOUND",287,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
-"BROWNLK",313,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
-"CAMP12LK",333,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
+"BROWNLK",313,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,12,NA
+"CAMP12LK",333,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,15,NA
 "DARKLAKE",546,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
-"DENTONLK",681,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
+"DENTONLK",681,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,14,NA
 "DEVILSWI",684,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,12,NA
 "DISTER59",700,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
 "DISTRHFT",3081,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,5,NA
@@ -207,9 +207,9 @@
 "STWDARK2",3781,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
 "MENDOTAC",1735,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,7,NA
 "MENDOTAD",3488,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
-"OTTOMLK",1840,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
+"OTTOMLK",1840,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,11,NA
 "RADTKE",2011,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,9,NA
-"RUBYLAKE",2309,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
+"RUBYLAKE",2309,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,NA,NA
 "SEIDEL01",2355,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,4,NA
 "SEIDEL02",3620,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
 "TAMARACK",2624,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
@@ -234,7 +234,7 @@
 "BEAVERWI",17387,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,4,NA
 "LONESTAR",19931,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,12,NA
 "LILY04",19933,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,14,NA
-"ANDRUSLK",205,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
+"ANDRUSLK",205,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,13,NA
 "CAMP11LK",332,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,13,NA
 "CHIPPEWA",369,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,4,NA
 "CUB2",532,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,7,NA
@@ -245,9 +245,9 @@
 "LAKE16",1580,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
 "LAKE27",1581,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,4,NA
 "LOSTLAKE",1665,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
-"MCNRNY2A",1725,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
-"MCNRNY3A",3485,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
-"MCNRNY4A",3486,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,FALSE,0,NA
+"MCNRNY2A",1725,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,11,NA
+"MCNRNY3A",3485,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,11,NA
+"MCNRNY4A",3486,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,9,NA
 "RYERSE",2318,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
 "SPIRIT",2586,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,8,NA
 "VESTABRG",3831,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,2,NA
@@ -274,8 +274,8 @@
 "BUCKMI",15660,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,6,NA
 "KERRMI",15916,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,2,NA
 "CROOKEDN",15919,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,6,NA
-"CROOKEDR",20695,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,FALSE,0,NA
-"CROOKEDU",20697,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,FALSE,0,NA
+"CROOKEDR",20695,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,16,NA
+"CROOKEDU",20697,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,14,NA
 "JAYLAKE",15922,3.02,15,0.53,0.9,4,0.7,NA,5,"Calibrated radiocarbon years BP",FALSE,TRUE,8,NA
 "LORRAINE",17404,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,6,NA
 "PENEGOR",17406,3.02,15,0.53,0.9,4,0.7,NA,5,"Radiocarbon years BP",FALSE,TRUE,7,NA
