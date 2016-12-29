@@ -3,7 +3,7 @@ library(ggplot2)
 library(maps)
 
 source('utils/compile_list_stepps.r')
-source('utils/build_pollen_ts_helpers.r')
+# source('utils/build_pollen_ts_helpers.r')
 
 ###########################################################################################################
 # user inputs
