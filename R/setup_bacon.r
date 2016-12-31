@@ -135,6 +135,10 @@ for(i in 1:nsites){
     bacon_params$suit[i] = FALSE
   }
   
+  # these are varves that we want to skip
+  if (site.id %in% c(3131, 2309, 14839, 546, 1643, 2309)){
+    bacon_params$suit[i] = FALSE
+  }
   # curl breaks without this
   # Sys.sleep(3)
 }

@@ -53,24 +53,6 @@ for (i in 1:ncores){
 
 i_check = which(setts == TRUE)
 #############################################################################################
-
-# run bacon!
-all_thicks = TRUE
-
-if (all_thicks){
-  thicks = c(5, 10, 15, 20)
-  # thicks = c(15, 20)
-} else {
-  thicks = read.csv('bacon.fit.thick.csv')$thick
-}
-
-
-# i_check = which(bacon_params$dataset.id %in% site_data$dataset_id[which(site_data$amb_rise == TRUE)])
-# i_check = which(bacon_params$dataset.id %in% c(14626, 14933, 15032, 15269, 15660))
-
-
-# write.table(t(colnames(bacon_params)), file=paste0('bacon.fit.hiatus_', thick,'.csv'), sep=',', append=FALSE, col.names=FALSE, row.names=FALSE)
-
 run_batch <- function(ncores, thicks, bacon_params, suff){
   
   # write.table(t(colnames(bacon_params)), file=paste0('bacon.fit.hiatus_', suff,'.csv'), sep=',', append=FALSE, col.names=FALSE, row.names=FALSE)
@@ -89,8 +71,13 @@ run_batch <- function(ncores, thicks, bacon_params, suff){
     site.params$mem.mean     = 0.5
     site.params$thick        = thick
     
-    # this site has a crazy high accumulation rate
+    # HANSEN has a crazy high accumulation rate
     if (site.params$dataset.id == 1004){
+      site.params$acc.mean.old = 100
+    }
+    
+    # KERR LAKE has a crazy high accumulation rate
+    if (site.params$dataset.id == 15916){
       site.params$acc.mean.old = 100
     }
     
@@ -101,17 +88,21 @@ run_batch <- function(ncores, thicks, bacon_params, suff){
   }
 }
 
-# for (i in 1:ncores) {
-#   thick = thicks[i]
-#   run_batch(ncores, thick, bacon_params, suff=as.character(thick))
-# }
+# only rerun for certain thicks
+pollen_meta_v6 <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_thick_v6.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
+thicks = pollen_meta_v6$thick[match(bacon_params$dataset.id, pollen_meta_v6$id)]
 
-# # run_batch(ncores, thicks$thick, bacon_params, suff='opt')
-# thicks = c(5, 10, 15, 20)
-thicks=c(5)
-for (thick in thicks) {
+for (i in 1:ncores) {
+  thick = thicks[i]
   run_batch(ncores, thick, bacon_params, suff=as.character(thick))
 }
+
+# # # run_batch(ncores, thicks$thick, bacon_params, suff='opt')
+# # thicks = c(5, 10, 15, 20)
+# thicks=c(5)
+# for (thick in thicks) {
+#   run_batch(ncores, thick, bacon_params, suff=as.character(thick))
+# }
 
 # after we choose the thicknesses, make the pdf of plots
 pollen_meta_v6 <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_thick_v6.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
@@ -127,34 +118,3 @@ pollen_meta_v6 = pollen_meta_v6[substr(pollen_meta_v6$id, 1, 3) != 'CLH', ]
 
 pollen_meta$thick = pollen_meta_v6$thick[match(pollen_meta$id, as.numeric(pollen_meta_v6$id))]
 write.table(pollen_meta, file=paste0('data/pollen_meta_thick_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
-
-# # pollen_meta[is.na(match(pollen_meta$id, as.numeric(pollen_meta_v3$id))),]
-# # 
-# # pollen_meta[is.na(match(pollen_meta$id, as.numeric(pollen_meta_v3$id))),]
-# 
-# pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_all_thicks_umw_v', version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
-# 
-# 
-# # fix this!!!
-# # compile all individual pdfs into one pdf
-# thick = 'opt'
-# fnames = pollen_meta$handle
-# thick = pollen_meta$thick
-# # meta = data.frame(fname=fnames, thick=thicks[which(bacon_params$suit == 1),'thick'])
-# # fname_str = sapply(cbind(fnames, thick), function(x) paste0('Cores/', x, '/', x, '_', ,'.pdf'))
-# 
-# fnames_all = list.files(path = "Cores", pattern = ".*.pdf", all.files = TRUE,
-#            full.names = FALSE, recursive = TRUE, include.dirs = TRUE)
-# fnames_all = paste0('Cores/', fnames_all)
-# 
-# 
-# fname_str = apply(cbind(fnames, thick), 1, function(x) paste0('Cores/', x[1], '/', x[1], '_', x[2],'.pdf'))
-# fname_str = fname_str[fname_str %in% fnames_all]
-# fname_str = paste(fname_str, collapse = ' ')
-# 
-# sys_str = paste0("gs -sDEVICE=pdfwrite -o bacon_fit_plots_hiatus_v", version, ".pdf ", fname_str)
-# system(sys_str)
-# 
-# 
-# ## write.table(bacon_params, file='bacon_params.csv', col.names=TRUE)
-# # system("gs -sDEVICE=pdfwrite -o bacon_fit_plots_hiatus.pdf Cores/*/*.pdf")
