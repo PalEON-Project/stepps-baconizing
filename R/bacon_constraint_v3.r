@@ -8,7 +8,7 @@ source('R/utils/helpers.r')
 source('R/utils/compile_lists.r')
 
 # load list containing pollen counts
-pollen_meta <- read.csv('data/pollen_meta_thick_v6.csv', header=TRUE, stringsAsFactors=FALSE, sep=',')
+pollen_meta <- read.csv('data/pollen_meta_thick_v7.csv', header=TRUE, stringsAsFactors=FALSE, sep=',')
 # pollen_meta = pollen_meta[pollen_meta$bacon == TRUE,]
 
 # pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE)
@@ -27,11 +27,11 @@ pol=list()
 # load list containing pollen counts
 # will load object called pol
 # the first time takes a while to pull from Neotoma
-if (file.exists(paste0('data/pol_', my_date, '.rdata'))) {
+if (file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))) {
   # loads object pol
-  load(paste0('data/pol_', my_date, '.rdata'))
+  load(paste0('data/pol_stepps_', my_date, '.rdata'))
 } 
-if (!file.exists(paste0('data/pol_', my_date, '.rdata'))|(length(ids)!=length(pol))){
+if (!file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))|(length(ids)!=length(pol))){
   
   nsites = length(ids)
   
@@ -43,7 +43,7 @@ if (!file.exists(paste0('data/pol_', my_date, '.rdata'))|(length(ids)!=length(po
     # if (id == 1394) id = 15274
     pol_raw[[i]] = get_download(id)
   }  
-  save(pol_raw, file=paste0('data/pol_raw_', Sys.Date(), '.rdata'))
+  save(pol_raw, file=paste0('data/pol_', Sys.Date(), '.rdata'))
   
   
   # miss = list()
@@ -62,7 +62,7 @@ if (!file.exists(paste0('data/pol_', my_date, '.rdata'))|(length(ids)!=length(po
     pol[[i]]$dataset$site.data$state = pollen_meta$state2[i]
   }
   
-  save(pol, file=paste0('data/pol_', Sys.Date(), '.rdata'))
+  save(pol, file=paste0('data/pol_stepps_', Sys.Date(), '.rdata'))
   
 } 
 
@@ -110,7 +110,7 @@ for (i in 1:ncores){
 
 # age_con = age_con[age_con$id != 1004,]
 
-write.table(age_con, file=paste0('data/pol_ages_', version, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
+write.table(age_con, file=paste0('data/pol_ages_bacon_v', version, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
 
 
 # find min and max geochron and pollen ages
@@ -154,7 +154,7 @@ for (i in 1:ncores){
 
 # age_con = age_con[age_con$id != 1004,]
 
-write.table(age_con, file=paste0('data/pol_ages_bchron_', version, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
+write.table(age_con, file=paste0('data/pol_ages_bchron_v', version, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
 
 
 ############################################################################################################################################

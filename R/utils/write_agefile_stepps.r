@@ -58,8 +58,20 @@ write_agefile_stepps <- function (download, survey.year, path, corename, site.id
                                                       age.young=dat$age - 200,
                                                       chron.control.id=dat$sample.id,
                                                       control.type=rep('varve', nrow(dat))))
+    } else if (site.id == 2888){
+      # UPGRAVEN
+      chron.controls <- get_chroncontrol(1295, verbose = FALSE)
     } else {
-      chron.controls <- get_chroncontrol(download$sample.meta$chronology.id[1], 
+      prec = read.csv('data/neotoma_age-model-precedence.csv', header=TRUE)
+      
+      age_types = sapply(download$chronologies, function(x) x$age.type[1])
+      best_default = which.min(prec$precedence[match(age_types, prec$age_type)])
+      
+      if (best_default > 1){
+        print(paste0("Adjusted default! Previous default was in ", age_types[1]))
+      }
+      
+      chron.controls <- get_chroncontrol(download$chronologies[best_default][[1]]$chronology.id[1], 
                                          verbose = FALSE)
     }
     if (nrow(chron.controls$chron.control) < 2) {
