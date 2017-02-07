@@ -76,7 +76,7 @@ site_age_data <- data.frame(handle      = sapply(pol, function(x)x$dataset$datas
                             dataset_id  = sapply(pol, function(x)x$dataset$dataset.meta$dataset.id),
                             pol_age_min = sapply(pol, function(x) min(x$sample.meta$age)),
                             pol_age_max = sapply(pol, function(x) max(x$sample.meta$age)),
-                            age_type    = sapply(pol, function(x) max(x$sample.meta$age.type)),
+                            age_type    = sapply(pol, function(x) x$sample.meta$age.type[1]),
                             bacon      = rep(NA, nsites),
                             gc_age_min = rep(NA, nsites),
                             gc_age_max = rep(NA, nsites),
@@ -111,6 +111,13 @@ for(i in 1:nsites){
   print(site.handle)
   site.id <- as.numeric(as.vector(bacon_params$dataset.id[i]))
   
+  # these are varves that we want to skip
+  if (site.id == 1649){
+    print("Site has manual reservoir corrections. Do not alter Bacon chron control file!")
+    bacon_params$suit[i] = TRUE
+    next
+  }
+  
   download    = pol[[i]]
   survey.year = pollen_meta$set.year[i]
   path        = '.'
@@ -144,7 +151,7 @@ for(i in 1:nsites){
 }
 
 # check to see why some fail
-bacon_params[bacon_params$suit==FALSE,]
+bacon_params[bacon_params$suit==FALSE,c(1,2,11,14)]
 bacon_params[bacon_params$suit==TRUE,c(1,2,11)]
 # 
 # why are some NA

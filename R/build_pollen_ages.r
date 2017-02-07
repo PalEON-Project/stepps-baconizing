@@ -8,8 +8,8 @@ source('R/config.r')
 
 # my_date = "2015-03-23"
 # my_date = "2016-05-13"
-draws_version = 'v9'
-pol_version = '6'
+draws_version = 'v10'
+pol_version = '7'
 version = '1'
 add_varves = TRUE
 model     = 'Bacon'
@@ -25,7 +25,7 @@ bacon_out_path = '../stepps-baconizing'
 states = c('wisconsin', 'minnesota', 'michigan:north', 'michigan:south')
 
 pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_thick_v', pol_version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
-pollen_meta = pollen_meta[pollen_meta$bacon == TRUE,]
+# pollen_meta = pollen_meta[pollen_meta$bacon == TRUE,]
 # pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE, stringsAsFactors=FALSE, sep=',')
 # pollen_meta = split_mi(pollen_meta, longlat=TRUE)
 
@@ -41,53 +41,6 @@ pollen.equiv    = read.csv("pollen.equiv.csv", stringsAsFactors=F, sep=',', row.
 ids   = as.numeric(pollen_meta$id[which(substr(pollen_meta$id, 1, 3) != 'CLH')])
 state = pollen_meta$state2[which(substr(pollen_meta$id, 1, 3) != 'CLH')]
 nsites = length(ids)
-
-# ids_clh   = pollen_meta$id[which(substr(pollen_meta$id, 1, 3) == 'CLH')]
-
-# load list containing pollen counts
-# will load object called pollen_dat
-# the first time takes a while to pull from Neotoma
-if (file.exists(paste0('data/pollen_list_v', pol_version, '.rdata'))){
-  # loads object pollen_dat
-  # load(paste0('data/pol_', my_date, '.rdata'))
-  load(paste0('data/pollen_list_v', pol_version, '.rdata'))
-} 
-if (!file.exists(paste0('data/pollen_list_v', pol_version, '.rdata'))|(length(ids_neo)!=length(pol))){
-  
-  nsites = length(ids)
-  
-  # download and save the raw data
-  pol_raw = list()
-  for (i in 1:nsites){ 
-    id = ids[i]
-    print(id)
-    # if (id == 1394) id = 15274
-    pol_raw[[i]] = get_download(id)
-    Sys.sleep(1)
-  }  
-  save(pol_raw, file=paste0('data/pollen_raw_', pol_version, '.rdata'))
-  
-  
-  # miss = list()
-  # aggregate the taxa
-  pol = list()
-  for (i in 1:nsites){  
-    print(i)
-    convert1 = compile_list_neotoma(pol_raw[[i]][[1]], 'Stepps', pollen.equiv)
-    
-#     out = compile_list_neotoma(pollen2k_raw[[i]][[1]], 'Stepps')
-#     convert1 = out[[1]]
-#     miss[[i]] = out[[2]]
-    
-    #pollen2k[[i]] = compile_list_stepps(convert1, list.name='all', pollen.equiv.stepps, cf = TRUE, type = TRUE)
-    pol[[i]] = compile_list_stepps(convert1, list.name='must_have', pollen.equiv.stepps, cf = TRUE, type = TRUE)
-    pol[[i]]$dataset$site.data$state = state_neo[i]
-  }
-  
-  save(pol, file=paste0('data/pollen_list_v', pol_version, '.rdata'))
-  
-} 
-
 
 # load list containing pollen counts
 # will load object called pollen2k
@@ -106,9 +59,9 @@ if (!file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))|(length(ids)!=le
     
     # if (id == 1394) id = 15274
     
-    pol[[i]] = get_download(ids[i])[[1]]
+    pol[[i]] = get_download(ids[i])
   }  
-  save(pol, file=paste0('data/pol_', my_date, '.rdata'))
+  save(pol, file=paste0('data/pol_', Sys.Date(), '.rdata'))
   
   # miss = list()
   # aggregate the taxa
@@ -126,7 +79,8 @@ if (!file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))|(length(ids)!=le
     pol_stepps[[i]]$dataset$site.data$state = state[i]
   }
   
-  save(pol_stepps, file=paste0('data/pol_stepps_', my_date, '.rdata'))
+  save(pol_stepps, file=paste0('data/pol_stepps_', Sys.Date(), '.rdata'))
+  print("Update my_date in config file!")
   
 } 
 
@@ -137,7 +91,7 @@ taxa = taxa[!is.na(taxa)]
 # Read _samples.csv files and compute posterior means
 ###########################################################################################################
 
-pol = pol_stepps
+# pol = pol_stepps
 
 bchron = TRUE
 nsites = length(pol)
@@ -149,6 +103,12 @@ for (i in 1:nsites){
   x = pol[[i]]
   
   id       = x$dataset$dataset.meta$dataset.id
+  
+  if (id %in% vids){
+    print("Skipping varve core.")
+    next
+  }
+  
   lat      = x$dataset$site.data$lat
   long     = x$dataset$site.data$long
   altitude = x$dataset$site.data$elev
@@ -263,9 +223,12 @@ for (i in 1:nsites){
 ###########################################################################################################
 if (add_varves){
   
-  vids = c(2309, 14839, 3131)
-  state_v = state_neo[match(vids, ids)]
-  state_v[2] = "minnesota" # lake mina
+  prec = read.csv('data/neotoma_age-model-precedence.csv', header=TRUE)
+  
+  # vids read in from config file
+  # vids = c(3131, 2309, 14839, 546, 1643, 2309, 1649)
+  vids = varves$id
+  state_v = varves$state
   
   for (i in 1:length(vids)){
     x = get_download(vids[i])[[1]]
@@ -282,7 +245,18 @@ if (add_varves){
     sitename = gsub("[ ']", "", as.vector(x$dataset$site.data$site.name))
     
     counts  = x$counts
-    age_default = x$sample.meta$age 
+    
+    # age_types = sapply(x$chronologies, function(x) x$age.type[1])
+    # best_default = which.min(prec$precedence[match(age_types, prec$age_type)])
+    # 
+    # if (best_default > 1){
+    #   print(paste0("Adjusted default! Previous default was in ", age_types[1]))
+    # }
+    # 
+    # # chron.controls <- get_chroncontrol(x$chronologies[best_default][[1]]$chronology.id[1], 
+    # #                                    verbose = FALSE)
+    
+    age_default = x$chronologies[[varves$chron[i]]]$age 
     age_bacon = age_default # not really bacon ages ...
     
     age_post_bacon = replicate(ndraws, age_bacon)
@@ -308,14 +282,19 @@ if (add_varves){
   }
 }
 
+pollen_ts = pollen_ts[!is.na(pollen_ts$id),]
 
 ###########################################################################################################
 # write the data; still thinking about the best way to do this!
 ###########################################################################################################
 
 # write.table(pollen_ts, file=paste('data/pollen_ts_bacon_', Sys.Date(), '.csv', sep=''), quote=FALSE, row.names=FALSE)
-
-write.table(pollen_ts, file=paste0('data/sediment_ages_v', version, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
+if (add_varves){
+  suff='_varves'
+} else {
+  suff=''
+}
+write.table(pollen_ts, file=paste0('data/sediment_ages_v', pol_version, suff, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
 
 # try splitting out the draws into RDS
 bacon_draws = pollen_ts[,grep('bacon_draw', colnames(pollen_ts))]

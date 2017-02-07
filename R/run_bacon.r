@@ -53,23 +53,24 @@ for (i in 1:ncores){
 
 i_check = which(setts == TRUE)
 #############################################################################################
-run_batch <- function(ncores, thicks, bacon_params, suff){
+run_batch <- function(bacon_params, suff){
   
   # write.table(t(colnames(bacon_params)), file=paste0('bacon.fit.hiatus_', suff,'.csv'), sep=',', append=FALSE, col.names=FALSE, row.names=FALSE)
   
-  if (length(thicks == 1)) {thicks = rep(thicks, ncores)}
+  # if (length(thicks == 1)) {thicks = rep(thicks, ncores)}
   
-  for(i in 1:ncores){
+  for(i in 1:nrow(bacon_params)){
     #for(i in ids_rerun){
-    
-    thick = thicks[i]
     
     print(i)
     site.params <- bacon_params[i,]
+    if (!(site.params$bacon)){next}
+    thick = site.params$thick
+    suff = thick
     
     site.params$mem.strength = 2
     site.params$mem.mean     = 0.5
-    site.params$thick        = thick
+    # site.params$thick        = thick
     
     # HANSEN has a crazy high accumulation rate
     if (site.params$dataset.id == 1004){
@@ -91,11 +92,13 @@ run_batch <- function(ncores, thicks, bacon_params, suff){
 # only rerun for certain thicks
 pollen_meta_v6 <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_thick_v6.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
 thicks = pollen_meta_v6$thick[match(bacon_params$dataset.id, pollen_meta_v6$id)]
-
-for (i in 1:ncores) {
-  thick = thicks[i]
-  run_batch(ncores, thick, bacon_params, suff=as.character(thick))
-}
+bacon_params$thick = pollen_meta_v6$thick[match(bacon_params$dataset.id, pollen_meta_v6$id)]
+bacon_params$bacon = pollen_meta_v6$bacon[match(bacon_params$dataset.id, pollen_meta_v6$id)]
+# 
+# for (i in 1:ncores) {
+#   thick = thicks[i]
+run_batch(bacon_params, suff=NULL)
+# }
 
 # # # run_batch(ncores, thicks$thick, bacon_params, suff='opt')
 # # thicks = c(5, 10, 15, 20)

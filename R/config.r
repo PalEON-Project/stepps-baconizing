@@ -1,4 +1,6 @@
-version = 6
+version = 7
+my_date = "2017-01-07"
 
-my_date = "2016-11-21"
-
+varves = read.csv('data/varves.csv', stringsAsFactors=FALSE)
+vids   = varves$id
+states_vs = varves$state
