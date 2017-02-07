@@ -194,7 +194,12 @@ run.bacon <- function(site.params){
       
       if ( (min(depths) < min(depths.bacon)) | (max(depths) > max(depths.bacon)) ){
         depths = depths[depths > min(depths.bacon)]
-        depths = depths[(depths - max(depths.bacon)) < 100]
+        depths = depths[(depths - max(depths.bacon)) < 500]
+        
+        if (any((depths - max(depths.bacon)) > 500)) {
+          print('Samples that are more than 500 cm in depth past the last stratigraphic date exist! 
+                Ages of these samples will not be estimated.')
+        }
       }
       
       iters   = nrow(output)

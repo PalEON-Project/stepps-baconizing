@@ -1,14 +1,14 @@
 
 source('R/config.r')
 
-# pollen_thick <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_all_thicks_umw_v5.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
+# pollen_thick <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_thick_v6.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
 # 
 # # match with previous thicknessnes to get started (or redo all)
 # pollen_meta$thick = pollen_thick$thick[match(pollen_meta$id, pollen_thick$id)]
 # pollen_meta$bacon = site_data$bacon[match(pollen_meta$id, site_data$dataset_id)]
 # write.csv(pollen_meta, paste0('data/pollen_meta_v', version, '.csv'))
 # write.csv(pollen_meta, paste0('data/pollen_meta_thick_v', version, '.csv'))
-
+# 
 pollen_meta = read.csv(paste0('data/pollen_meta_thick_v', version, '.csv'))
 
 # fix this!!!
