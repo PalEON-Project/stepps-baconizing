@@ -1,6 +1,8 @@
 library(neotoma)
 library(ggplot2)
 library(maps)
+library(dplyr)
+library(purrr)
 
 source('R/utils/compile_lists.r')
 source('R/utils/build_pollen_ts_helpers.r')
@@ -8,74 +10,68 @@ source('R/config.r')
 
 # my_date = "2015-03-23"
 # my_date = "2016-05-13"
-draws_version = 'v10'
-pol_version = '7'
-version = '1'
-add_varves = TRUE
-model     = 'Bacon'
+draws_version  <- 'v10'
+pol_version    <- '7'
+version        <- '1'
+add_varves     <- TRUE
+model          <- 'Bacon'
 
-ndraws = 500 # number of posterior samples 
+ndraws         <- 500 # number of posterior samples 
 
-bacon_out_path = '../stepps-baconizing'
+bacon_out_path <- '../stepps-baconizing'
 
 ###########################################################################################################
 # user inputs
 ###########################################################################################################
 
-states = c('wisconsin', 'minnesota', 'michigan:north', 'michigan:south')
+states      <- c('wisconsin', 
+                 'minnesota', 
+                 'michigan:north', 
+                 'michigan:south')
 
 pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_thick_v', pol_version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
-# pollen_meta = pollen_meta[pollen_meta$bacon == TRUE,]
-# pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE, stringsAsFactors=FALSE, sep=',')
-# pollen_meta = split_mi(pollen_meta, longlat=TRUE)
 
 # read in dictionaries
-pollen.equiv.stepps = read.csv("pollen.equiv.stepps.csv", stringsAsFactors=F)
-pollen.equiv    = read.csv("pollen.equiv.csv", stringsAsFactors=F, sep=',', row.names=NULL)
+pollen.equiv.stepps <- read.csv("pollen.equiv.stepps.csv", stringsAsFactors = F)
+pollen.equiv        <- read.csv("pollen.equiv.csv", stringsAsFactors = F, 
+                                sep = ',', row.names = NULL)
 
-# clh_meta   <- read.csv('data/hotchkiss_lynch_calcote_meta_v0.1.csv', header=TRUE)
-# clh_counts <- read.csv('data/hotchkiss_lynch_calcote_counts_v0.1.csv', header=TRUE, stringsAsFactors=FALSE)
-
-# thicks = read.csv('../stepps-baconizing/bacon.fit.thick.csv')
-
-ids   = as.numeric(pollen_meta$id[which(substr(pollen_meta$id, 1, 3) != 'CLH')])
-state = pollen_meta$state2[which(substr(pollen_meta$id, 1, 3) != 'CLH')]
-nsites = length(ids)
+ids    <- as.numeric(pollen_meta$id[which(substr(pollen_meta$id, 1, 3) != 'CLH')])
+state  <- pollen_meta$state2[which(substr(pollen_meta$id, 1, 3) != 'CLH')]
+nsites <- length(ids)
 
 # load list containing pollen counts
 # will load object called pollen2k
 # the first time takes a while to pull from Neotoma
 pol = NA
+
 if (file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))) {
   # loads object pollen2k
   load(paste0('data/pol_stepps_', my_date, '.rdata')) 
 } 
-if (!file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))|(length(ids)!=length(pol))){
+
+if (! paste0('pol_stepps_', my_date, '.rds') %in% list.files('data') | (length(ids)!=length(pol))){
   
   # download and save the raw data
-  pol = list()
-  for (i in 1:nsites){ 
-    print(i)
-    
-    # if (id == 1394) id = 15274
-    
-    pol[[i]] = get_download(ids[i])
-  }  
-  save(pol, file=paste0('data/pol_', Sys.Date(), '.rdata'))
+
+  pol <- neotoma::get_download(ids)
+
+  saveRDS(pol, file=paste0('data/pol_stepps_', Sys.Date(), '.rds'))
   
   # miss = list()
   # aggregate the taxa
   pol_stepps = list()
-  for (i in 1:nsites){  
-    print(i)
-    convert1 = compile_list_neotoma(pol[[i]], 'Stepps', pollen.equiv)
+  
+  pollen_stepps <- pol %>% 
+    map(function(x) compile_list_neotoma(x, 'Stepps', pollen.equiv)) %>% 
+    map(function(x) compile_list_stepps(x, 
+                                        list.name='must_have', 
+                                        pollen.equiv.stepps, 
+                                        cf = TRUE, 
+                                        type = TRUE))
     
-    #     out = compile_list_neotoma(pollen2k_raw[[i]][[1]], 'Stepps')
-    #     convert1 = out[[1]]
-    #     miss[[i]] = out[[2]]
+    dff <- map2_df(pollen_stepps, states, ~ mutate(.x, state = .y))
     
-    #pollen2k[[i]] = compile_list_stepps(convert1, list.name='all', pollen.equiv.stepps, cf = TRUE, type = TRUE)
-    pol_stepps[[i]] = compile_list_stepps(convert1, list.name='must_have', pollen.equiv.stepps, cf = TRUE, type = TRUE)
     pol_stepps[[i]]$dataset$site.data$state = state[i]
   }
   
@@ -317,6 +313,3 @@ for (i in 1:ncol(bchron_draws)) {
 # 
 # # # check with older version
 # # pollen_meta_old = read.table(file=paste0('data/bacon_ages/pollen_ts_bacon_meta_v2.csv'), sep=',', header=TRUE)
-
-
-
