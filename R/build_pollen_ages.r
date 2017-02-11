@@ -10,9 +10,8 @@ source('R/config.r')
 
 # my_date = "2015-03-23"
 # my_date = "2016-05-13"
-draws_version  <- 'v10'
+
 pol_version    <- '7'
-version        <- '1'
 add_varves     <- TRUE
 model          <- 'Bacon'
 
@@ -47,7 +46,7 @@ pol = NA
 
 if (file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))) {
   # loads object pollen2k
-  load(paste0('data/pol_stepps_', my_date, '.rdata')) 
+  load(paste0('data/pol_stepps_', my_date, '.rdata'))
 } 
 
 if (! paste0('pol_stepps_', my_date, '.rds') %in% list.files('data') | (length(ids)!=length(pol))){

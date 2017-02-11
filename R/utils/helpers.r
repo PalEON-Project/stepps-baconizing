@@ -1,33 +1,37 @@
-pollen_to_albers <- function(coord, rescale=1e6){
+pollen_to_albers <- function(coord, proj4 = '+proj=longlat +ellps=WGS84', rescale=1e6){
+  #' Convert latlong coordinates to Albers Gt Lakes St Lawrence
+  #' 
+  #' @param coord A set of coordinates as either a \code{matrix} or \code{data.frame}.
+  #' @param proj4 The \code{proj4} projection string for the original coordinates.
+  #' @param rescale Rescales coordinate values to different units (default is 1000 km).
+  #' @return A matrix with dimensions equal to \code{coord}.
+
+  sp::coordinates(coord) <- ~ long + lat
+  sp::proj4string(coord) <- sp::CRS(proj4)
   
-  coordinates(coord) <- ~ long + lat
-  proj4string(coord) <- CRS('+proj=longlat +ellps=WGS84')
+  output <- sp::spTransform(coord, sp::CRS('+init=epsg:3175')) %>% 
+    sp::coordinates()/rescale
+
+  colnames(output) <- c('x', 'y')
   
-  coordA <- spTransform(coord, CRS('+init=epsg:3175'))
-  coordA <- as.matrix(data.frame(coordA))/rescale
-  
-  colnames(coordA) <- c('x', 'y')
-  
-  return(coordA)
+  return(output)
 }
 
-get_survey_year <- function(pollen_meta){
-  
-  pls <- raster('data/age_of_sample.tif')
-#   plot(pls)
+get_survey_year <- function(coords, state){
+  #' Pull year of survey from the PLS data
+  #' 
+  #' @param coords a data frame or matrix with columns `lat` and `long`.
+  #' @param state A character
+  #' @return The date of sampling for records in the upper Midwest.
 
-  coord  = data.frame(long=pollen_meta$long, lat= pollen_meta$lat)
-  coordA = pollen_to_albers(coord, rescale=1)
+  pls <- raster::raster('data/age_of_sample.tif')
 
-  set.year <- extract(pls, coordA)
+  set_year <- raster::extract(pls, pollen_to_albers(coords, rescale=1))
   
-  set.year[is.na(set.year) & pollen_meta$state == 'michigan:north'] = 1860
-  set.year[is.na(set.year) & pollen_meta$state == 'michigan:south'] = 1840
+  set_year[is.na(set_year) & state == 'michigan:north'] = 1860
+  set_year[is.na(set_year) & state == 'michigan:south'] = 1840
   
-  pollen_meta <- cbind(pollen_meta, coordA)
-  pollen_meta$set.year <- set.year
-  
-  return(pollen_meta)
+  return(set_year)
 }
 
 lead_error_paleon <- function(chron, types){
@@ -382,7 +386,7 @@ split_mi <- function(meta, longlat){
     for (i in 1:length(idx.na)){
       print(i)
       idx = idx.na[i]
-      dmat = rdist(as.matrix(centers_ll[idx,], nrow=1) , as.matrix(centers, ncol=2))
+      dmat = fields::rdist(as.matrix(centers_ll[idx,], nrow=1) , as.matrix(centers, ncol=2))
       min.val = dmat[1,which.min(dmat[which(dmat>1e-10)])]
       idx_close = which(dmat == min.val)
       #     print(as.vector(meta$state[idx]))

@@ -1,6 +1,5 @@
 prec = read.csv('data/neotoma_age-model-precedence.csv', header=TRUE)
 
-
 source('R/config.r')
 
 # vids read in from config file
