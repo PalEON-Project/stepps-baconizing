@@ -1,3 +1,4 @@
+
 #  The goal of this script is to write two objects:
 #  site_age_data and bacon_params.  Everything else is not needed in the global environment.
 
@@ -125,7 +126,7 @@ setup_bacon <- function(my_date, version) {
     } else {
       bacon_params$suit[i] = FALSE
     }
-    
+
     # these are varves that we want to skip
     if (site.id %in% c(3131, 2309, 14839, 546, 1643, 2309)){
       bacon_params$suit[i] = FALSE
