@@ -14,14 +14,11 @@ source('Bacon.R')
 source('R/utils/helpers.r')
 source('R/utils/write_agefile_stepps.r')
 
-# pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE)
-# pollen_meta <- get_survey_year(pollen_meta)
-# # for some reason the datasetID changed for Jones Lake
-# pollen_meta[pollen_meta$datasetID == 1394, 'datasetID'] = 15274
-# # for some reason the datasetID changed for Canyon Lake
-# pollen_meta[pollen_meta$datasetID == 3055, 'datasetID'] = 15682
-# ids_old = pollen_meta$datasetID
+# old note about dataset id changes
+# dataset id change for Jones Lake: old=1394, new=15274
+# dataset id change for Canyon Lake: old=3055, new=15682
 
+# determine if any new sites not included in the previous data pull
 gpids <- get_table(table.name='GeoPoliticalUnits')
 gpid = c(gpids[which(gpids$GeoPoliticalName == 'Minnesota'),1],
          gpids[which(gpids$GeoPoliticalName == 'Wisconsin'),1],
@@ -39,52 +36,46 @@ nsites  = length(ids)
 # will load object called pollen2k
 # the first time takes a while to pull from Neotoma
 pol = NA
-if (file.exists(paste0('data/pol_', my_date, '.rdata'))) {
+if (file.exists(paste0('data/pol_', version, '.rdata'))) {
   # loads object pollen2k
-  load(paste0('data/pol_', my_date, '.rdata')) 
+  load(paste0('data/pol_', version, '.rdata')) 
 } 
-if (!file.exists(paste0('data/pol_', my_date, '.rdata'))|(length(ids)!=length(pol))){
+if (!file.exists(paste0('data/pol_', version, '.rdata'))|(length(ids)!=length(pol))){
   
   # download and save the raw data
   pol = list()
   for (i in 1:nsites){ 
     print(i)
-    
-    # if (id == 1394) id = 15274
-    
     pol[[i]] = get_download(ids[i])[[1]]
   }  
-  save(pol, file=paste0('data/pol_', my_date, '.rdata'))
+  save(pol, file=paste0('data/pol_', version, '.rdata'))
 } 
 
 # extract the meta data
-pollen_meta = data.frame(id     = sapply(pol, function(x) x$dataset$dataset.meta$dataset.id), 
-                         handle  = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
-                         lat     = sapply(pol, function(x) x$dataset[[1]]$lat),
-                         long    = sapply(pol, function(x) x$dataset[[1]]$long))
+pollen_meta = data.frame(dataset_id = sapply(pol, function(x) x$dataset$dataset.meta$dataset.id), 
+                         name        = sapply(pol, function(x)x$dataset$site.data$site.name),
+                         handle      = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
+                         lat         = sapply(pol, function(x) x$dataset[[1]]$lat),
+                         long        = sapply(pol, function(x) x$dataset[[1]]$long),
+                         state       = rep(NA),
+                         age_type    = sapply(pol, function(x) x$sample.meta$age.type[1]),
+                         bacon       = rep(NA, nsites),
+                         amb_rise    = rep(NA),
+                         pol_age_min = sapply(pol, function(x) min(x$sample.meta$age)),
+                         pol_age_max = sapply(pol, function(x) max(x$sample.meta$age)),
+                         gc_age_min = rep(NA, nsites),
+                         gc_age_max = rep(NA, nsites),
+                         reason     = rep(NA, nsites),
+                         new        = rep(NA, nsites)
+                         )
+# get the state, and then split mi:up and mi:lp
 pollen_meta$state = map.where(database="state", x=pollen_meta$long, y=pollen_meta$lat)
-
-pollen_meta = split_mi(pollen_meta, longlat=TRUE)
+pollen_meta       = split_mi(pollen_meta, longlat=TRUE)
 pollen_meta$state = pollen_meta$state2
+# get the mininum survey year, used to assign date to presettlement samples
 pollen_meta       = get_survey_year(pollen_meta)
 
-write.table(pollen_meta, file=paste0('data/pollen_meta_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
-
-
-# create meta data object
-site_age_data <- data.frame(handle      = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
-                            name        = sapply(pol, function(x)x$dataset$site.data$site.name),
-                            dataset_id  = sapply(pol, function(x)x$dataset$dataset.meta$dataset.id),
-                            pol_age_min = sapply(pol, function(x) min(x$sample.meta$age)),
-                            pol_age_max = sapply(pol, function(x) max(x$sample.meta$age)),
-                            age_type    = sapply(pol, function(x) x$sample.meta$age.type[1]),
-                            bacon      = rep(NA, nsites),
-                            gc_age_min = rep(NA, nsites),
-                            gc_age_max = rep(NA, nsites),
-                            reason     = rep(NA, nsites),
-                            new        = rep(NA, nsites),
-                            amb_rise   = rep(NA))
-
+# do we need this still?
 # generate object that contains bacon inputs for each core
 bacon_params <- data.frame(handle = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
                            dataset.id = sapply(pol, function(x)x$dataset$dataset.meta$dataset.id),
@@ -129,13 +120,14 @@ for(i in 1:nsites){
                                      survey.year = pollen_meta$set.year[i], 
                                      path        = '.', 
                                      corename    = site.handle, 
-                                     site.id     = site.id))
+                                     site.id     = site.id,
+                                     stepps      = TRUE))
   
   if (!class(bacon_out)=='try-error'){
-    site_age_data$bacon[i]      = bacon_out$run_flag
-    site_age_data$gc_age_max[i] = bacon_out$gc_age_max
-    site_age_data$gc_age_min[i] = bacon_out$gc_age_min
-    site_age_data$amb_rise[i]   = bacon_out$amb_rise
+    pollen_meta$bacon[i]      = bacon_out$run_flag
+    pollen_meta$gc_age_max[i] = bacon_out$gc_age_max
+    pollen_meta$gc_age_min[i] = bacon_out$gc_age_min
+    pollen_meta$amb_rise[i]   = bacon_out$amb_rise
     
     bacon_params$suit[i]   = bacon_out$run_flag
     bacon_params$ndates[i] = bacon_out$ndates
@@ -156,11 +148,11 @@ bacon_params[bacon_params$suit==FALSE,c(1,2,11,14)]
 bacon_params[bacon_params$suit==TRUE,c(1,2,11)]
 # 
 # why are some NA
-site_age_data[which(is.na(site_age_data$bacon)),]
+pollen_meta[which(is.na(pollen_meta$bacon)),]
 # 
-# which(site_age_data$bacon == FALSE)
-# site_age_data[which(site_age_data$bacon == FALSE),]
-site_age_data[which(site_age_data$bacon == TRUE),]
+# which(pollen_meta$bacon == FALSE)
+# pollen_meta[which(pollen_meta$bacon == FALSE),]
+pollen_meta[which(pollen_meta$bacon == TRUE),]
 
-write.table(site_age_data, file=paste0('data/pollen_site_age_meta_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
+write.table(pollen_meta, file=paste0('data/pollen_meta_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
 write.table(bacon_params, file=paste0('data/bacon_params_v', version, '.csv'), col.names=TRUE, row.names=FALSE, sep=',')
