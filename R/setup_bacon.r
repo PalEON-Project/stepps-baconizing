@@ -106,7 +106,8 @@ for(i in 1:nsites){
   # these are varves that we want to skip
   if (site.id == 1649){
     print("Site has manual reservoir corrections. Do not alter Bacon chron control file!")
-    bacon_params$suit[i] = TRUE
+    bacon_params$suit[i] = FALSE
+    pollen_meta$bacon[i] = FALSE
     next
   }
   
@@ -138,6 +139,7 @@ for(i in 1:nsites){
   # these are varves that we want to skip
   if (site.id %in% vids){
     bacon_params$suit[i] = FALSE
+    pollen_meta$bacon[i] = FALSE
   }
   # curl breaks without this
   # Sys.sleep(3)
