@@ -3,7 +3,7 @@
 
 #  Note, put this code in a directory with a Bacon.R file and a Cores directory.
 
-setup_bacon <- function(my_date) {
+setup_bacon <- function(my_date, version) {
   #' Generate the core files used by Bacon to run the age models.
   #' @param my_date Version control for the pollen data.
   #' @return This function returns nothing, but writes two objects to file.
@@ -87,7 +87,6 @@ setup_bacon <- function(my_date) {
                              ndates        = NA,
                              success       = NA,
                              stringsAsFactors = FALSE)
-  
   
   # write the chron control files for bacon
   for(i in 1:nsites){ 

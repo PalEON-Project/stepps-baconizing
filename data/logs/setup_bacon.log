@@ -1,0 +1,450 @@
+[1] 1
+[1] "ANDRUSLK"
+[1] "Lead dates, run flag set to TRUE."
+[1] "CAMP11LK"
+[1] "CHIPPEWA"
+[1] "CUB2"
+[1] "DEMONTLK"
+[1] "FRAINSLK"
+[1] "GREENLK"
+[1] "KITCHNER"
+[1] "LAKE16"
+[1] "LAKE27"
+[1] "LOSTLAKE"
+[1] "MCNRNY2A"
+[1] "Lead dates, run flag set to TRUE."
+[1] "MCNRNY3A"
+[1] "Lead dates, run flag set to TRUE."
+[1] "MCNRNY4A"
+[1] "Lead dates, run flag set to TRUE."
+[1] "RYERSE"
+[1] "SPIRIT"
+[1] "VESTABRG"
+[1] "WINTERGR"
+[1] "WOLVERIN"
+[1] "YELLOWDG"
+[1] "CANYONMI"
+[1] "LTDOLLAR"
+[1] "IRWINSMT"
+[1] "GLIMML1"
+[1] "TOWER1"
+[1] "TOWER4"
+[1] "TOWER6"
+[1] "TOWER7"
+[1] "NELSONMI"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Radiocarbon Ambrosia rise
+[1] "MUDLKMI"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon
+[1] "LILYMI"
+[1] "ESOLDIER"
+[1] "GUARD"
+[1] "TROUTLBG"
+[1] "COWDEN"
+[1] "HICKSMI"
+[1] "MORRIMI"
+[1] "BUCKMI"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon Biostratigraphic, pollen
+[1] "KERRMI"
+[1] "CROOKEDN"
+[1] "CROOKEDR"
+[1] "Lead dates, run flag set to TRUE."
+[1] "CROOKEDU"
+[1] "Lead dates, run flag set to TRUE."
+[1] "JAYLAKE"
+[1] "LORRAINE"
+[1] "Adjusted default! Previous default was in Radiocarbon years BP"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+4 Levels: Radiocarbon, reservoir correction, calibrated ... Ambrosia rise
+[1] "PENEGOR"
+[1] "Adjusted default! Previous default was in Radiocarbon years BP"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon, calibrated
+[1] "SRHODY"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon, calibrated
+[1] "MINDEN"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon, calibrated
+[1] "ALLIE"
+[1] "ALMORA1"
+[1] "ANDERSLK"
+[1] "Why can BACON only write a limited number of characters?!?!"
+[1] "ANDREE"
+[1] "Why can BACON only write a limited number of characters?!?!"
+[1] "BADMED"
+[1] "BBASS"
+[1] "BECKMAN"
+[1] "BECKMNBG"
+[1] "BIGJOHN"
+[1] "BILLYS"
+[1] "BLANDIN"
+[1] "BLKHOOF"
+[1] "BOBLAKE"
+[1] "BOGD"
+[1] "BOSSUOT"
+[1] "BROWNSBY"
+[1] "Lead dates, run flag set to TRUE."
+[1] "BURNTSDE"
+[1] "CAMPBELL"
+[1] "CEDARBLK"
+[1] "CINDY"
+[1] "MNGRCL"
+[1] "CRAZY"
+[1] "DALTON"
+[1] "DOGFISH"
+[1] "DUNNIGAN"
+[1] "Lead dates, run flag set to TRUE."
+[1] "EASTTWIN"
+[1] "EGGERT"
+[1] "FAITH"
+[1] "FARQUAR"
+[1] "FAWNLAKE"
+[1] "FOXPOND"
+[1] "FRENCH"
+[1] "GEORGE"
+[1] "MNBELG"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon
+[1] "GOLDSMTH"
+[1] "GRICE"
+[1] "HEMOPOND"
+[1] "HORSE"
+[1] "HORSHOHA"
+[1] "HOSTAGE"
+[1] "HUGLAKE"
+[1] "HUSTLER"
+[1] "Lead dates, run flag set to TRUE."
+[1] "IRVIN"
+[1] "JACOBSN1"
+[1] "JACOBSN2"
+[1] "MNSHBL"
+[1] "KEGAN"
+[1] "KIRCHNR1"
+[1] "KIRCHNR2"
+[1] "KOTIRANT"
+[1] "KRYZ"
+[1] "KYLENLK"
+[1] "LAKEANN"
+[1] "LAKEANNF"
+[1] "LAKEANNH"
+[1] "LAKECARL"
+[1] "LEWISLK"
+[1] "LILYLAKE"
+[1] "LITTBASS"
+[1] "LKCLDSA"
+[1] "Site has manual reservoir corrections. Do not alter Bacon chron control file!"
+[1] "LKCLDSH"
+[1] "LKCLDSSW"
+[1] "MABEL"
+[1] "MARTINPD"
+[1] "MCCRANEY"
+[1] "MINNIEN"
+[1] "MINNIEO"
+[1] "MUDLKMN1"
+[1] "MUDLKMN2"
+[1] "MURPHY"
+[1] "MYRTLE"
+[1] "NELSLK"
+[1] "Lead dates, run flag set to TRUE."
+[1] "NELSONPD"
+[1] "ONAMIA"
+[1] "ONDRISPD"
+[1] "PGONIABG"
+[1] "POGONIA"
+[1] "THIRDLK"
+[1] "THRDBGN"
+[1] "THRDBGW"
+[1] "PENNINGT"
+[1] "PETERSL"
+[1] "PLEASAMN"
+[1] "PORTAGE"
+[1] "REICHOW"
+[1] "REIDEL"
+[1] "RHOLL"
+[1] "RICEMNA"
+[1] "RICEMNB"
+[1] "ROSSBURG"
+[1] "RUTZLAKE"
+[1] "SEDIVY"
+[1] "SHAGAWA"
+[1] "SILVERMN"
+[1] "SISEEBA"
+[1] "SOLUM"
+[1] "SOSTANCH"
+[1] "SPECTACL"
+[1] "STCATHER"
+[1] "STONE"
+[1] "STONTAM1"
+[1] "STONTAM2"
+[1] "SUNFISH"
+[1] "TERHELL"
+[1] "THOMPSON"
+[1] "TOENJES"
+[1] "TWINMN1"
+[1] "UPGRAVEN"
+[1] "WEBERLK"
+[1] "WENTZEL"
+[1] "WHITLIL1"
+[1] "WHITLILY"
+[1] "WILWRDPD"
+[1] "WOLFCRK"
+[1] "WOLSFELD"
+[1] "Adjusted default! Previous default was in Radiocarbon years BP"
+[1] "SOUHERON"
+[1] "OCHEDA"
+[1] "BLOMFORD"
+[1] "FAWNANMN"
+[1] "FROVOLD"
+[1] "GOOSEMN"
+[1] "OLSONMN"
+[1] "RNDGROVE"
+[1] "LASTLAKE"
+[1] "MNLYC2"
+[1] "MONSON"
+[1] "DEANS"
+[1] "EMILY"
+[1] "PERCHMN"
+[1] "CHUBLAKE"
+[1] "MNDLLR"
+[1] "ZIEBELL"
+[1] "MNDLML"
+[1] "LYBECK"
+[1] "UNION"
+[1] "MNFRAL"
+[1] "ALBERTL3"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise
+[1] "EVRHRTLK"
+[1] "SHARKEY"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon, calibrated
+[1] "KIMBLE"
+[1] "WESTOLAF"
+[1] "OAKGLEN"
+[1] "CAMPLAKE"
+[1] "BASSK"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon, calibrated
+[1] "SALLIE"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Stratigraphic Ambrosia rise
+[1] "MNPPJL"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise
+[1] "LILY"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "KELLYDUD"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "MARTHA"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "NORPOL"
+[1] "MINNREG"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "AMBER"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon, calibrated
+[1] "CAMP"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon, calibrated
+[1] "CRYSTAL"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "FISHL"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "FISHS"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "EAGLEL"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "EMILY_NE"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "FULLER"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon Radiocarbon
+[1] "LAKEMINA"
+[1] "ELKGR-89"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Biostratigraphic
+[1] "Dropping biostratigraphic marker"
+[1] "MNCLEB"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise
+[1] "MNCLEC"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise
+[1] "MNCLE4"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise
+[1] "MNCLED"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Sediment stratigraphic
+[1] "MNCLEL"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Ambrosia rise Annual laminations (varves)
+[1] "Why can BACON only write a limited number of characters?!?!"
+[1] "MNBCSC"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon
+[1] "MNCLSQ"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon
+[1] "MNCHLH"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise
+[1] "MNOTCL"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise
+[1] "MNCVTL"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon
+[1] "MNHBLS"
+[1] "Why can BACON only write a limited number of characters?!?!"
+[1] "MNWSSO"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise
+[1] "WILLIAMJ"
+[1] "MNHNLL"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon
+[1] "MNHNWB"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon
+[1] "DEEPLAKE"
+[1] "QUALLY"
+[1] "ITASCALC"
+[1] "ITASCAMB"
+[1] "ITASCAMC"
+[1] "ITASCAMD"
+[1] "ITASCAT2"
+[1] "STEELMN"
+[1] "FOXMN"
+[1] "LITSHING"
+[1] "MADELIA"
+[1] "Adjusted default! Previous default was in Radiocarbon years BP"
+[1] "HELLSKIT"
+[1] "LAKEMARY"
+[1] "BLUMOUND"
+[1] "BROWNLK"
+[1] "Lead dates, run flag set to TRUE."
+[1] "CAMP12LK"
+[1] "Lead dates, run flag set to TRUE."
+[1] "DARKLAKE"
+[1] "Why can BACON only write a limited number of characters?!?!"
+[1] "DENTONLK"
+[1] "Lead dates, run flag set to TRUE."
+[1] "DEVILSWI"
+[1] "Adjusted default! Previous default was in Radiocarbon years BP"
+[1] "DISTER59"
+[1] "DISTRHFT"
+[1] "ERNSTPIT"
+[1] "GASS"
+[1] "HANSEN"
+[1] "IOLABOG"
+[1] "KELLHOL1"
+[1] "KELLHOL2"
+[1] "KELLNERS"
+[1] "LITTLPIN"
+[1] "Why can BACON only write a limited number of characters?!?!"
+[1] "STWDARK2"
+[1] "MENDOTAC"
+[1] "MENDOTAD"
+[1] "OTTOMLK"
+[1] "Lead dates, run flag set to TRUE."
+[1] "RADTKE"
+[1] "RUBYLAKE"
+[1] "SEIDEL01"
+[1] "SEIDEL02"
+[1] "TAMARACK"
+[1] "WOODLAKE"
+[1] "ADELINE"
+[1] "ELEVENS"
+[1] "ESKALAKE"
+[1] "FALLISON"
+[1] "HELLHOLE"
+[1] "EMRICK"
+[1] "ADVENTUR"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon
+[1] "BENACH"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon
+[1] "BLUEJ"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon
+[1] "BROZIE"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon
+[1] "CAMPTWO"
+[1] "Keeping European settlement horizon"
+[1] European settlement horizon
+Levels: Core top European settlement horizon
+[1] "FERRY01"
+[1] "HEMLOCK"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon
+[1] "WARNERWI"
+[1] "OPINES"
+[1] "LIMABOG"
+[1] "CAPITOLA"
+[1] "BEAVERWI"
+[1] "Adjusted default! Previous default was in Radiocarbon years BP"
+[1] "Keeping Ambrosia rise"
+[1] Ambrosia rise
+Levels: Core top Ambrosia rise Radiocarbon, reservoir correction Radiocarbon
+[1] "LONESTAR"
+[1] "LILY04"
+NULL

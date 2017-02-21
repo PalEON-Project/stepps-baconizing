@@ -24,7 +24,7 @@ get_survey_year <- function(coords, state){
   #' @param state A character
   #' @return The date of sampling for records in the upper Midwest.
 
-  pls <- raster::raster('data/age_of_sample.tif')
+  pls <- raster::raster('data/input/age_of_sample.tif')
 
   set_year <- raster::extract(pls, pollen_to_albers(coords, rescale=1))
   

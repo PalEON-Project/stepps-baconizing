@@ -7,6 +7,9 @@ output: html_document
 
 ```{r}
 
+# I've tried as much as possible to call the packages explicitly from within the function calls.
+# This may not be an exhaustive list of all the packages used.
+
 require(neotoma)
 require(maps)
 require(fields)
@@ -21,12 +24,12 @@ require(rgdal)
 draws_version  <- 'v10'
 pol_version    <- '7'
 
-version = 7
-my_date = "2017-01-07"
+version        <- 7
+my_date        <- "2017-01-07"
 
-varves = read.csv('data/varves.csv', stringsAsFactors=FALSE)
-vids   = varves$id
-states_vs = varves$state
+varves         <- read.csv('data/varves.csv', stringsAsFactors=FALSE)
+vids           <- varves$id
+states_vs      <- varves$state
 
 ```
 
@@ -38,10 +41,16 @@ This function creates all the required folders for Bacon runs within the `Cores`
 
 The function itself has no output, it just writes the files.  It might make more sense to have it pass things out and then write, but I dunno.
 
-```{r}
+```{r setup_bacon, results='hide', message=FALSE, warning=FALSE}
+
 source('R/setup_bacon.r')
 
-setup_bacon(my_date)
+# All output is going to a file in the `logs` directory.
+sink(file("data/logs/setup_bacon.log", open = "wt"))
+
+setup_bacon(my_date, version = version)
+
+sink(file = NULL)
 
 ```
 
