@@ -8,10 +8,7 @@ source('R/utils/compile_lists.r')
 source('R/utils/build_pollen_ts_helpers.r')
 source('R/config.r')
 
-# my_date = "2015-03-23"
-# my_date = "2016-05-13"
-
-pol_version    <- '7'
+# pol_version    <- '7'
 add_varves     <- TRUE
 model          <- 'Bacon'
 
@@ -28,15 +25,15 @@ states      <- c('wisconsin',
                  'michigan:north', 
                  'michigan:south')
 
-pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_thick_v', pol_version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
+pollen_meta <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_v', version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
 
 # read in dictionaries
 pollen.equiv.stepps <- read.csv("pollen.equiv.stepps.csv", stringsAsFactors = F)
 pollen.equiv        <- read.csv("pollen.equiv.csv", stringsAsFactors = F, 
                                 sep = ',', row.names = NULL)
 
-ids    <- as.numeric(pollen_meta$id[which(substr(pollen_meta$id, 1, 3) != 'CLH')])
-state  <- pollen_meta$state2[which(substr(pollen_meta$id, 1, 3) != 'CLH')]
+ids    <- pollen_meta$dataset_id
+state  <- pollen_meta$state
 nsites <- length(ids)
 
 # load list containing pollen counts
@@ -44,23 +41,19 @@ nsites <- length(ids)
 # the first time takes a while to pull from Neotoma
 pol = NA
 
-if (file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))) {
+if (file.exists(paste0('data/pollen_stepps_', version, '.rdata'))) {
   # loads object pollen2k
-  load(paste0('data/pol_stepps_', my_date, '.rdata'))
+  load(paste0('data/pollen_stepps_', version, '.rdata'))
 } 
-
-if (! paste0('pol_stepps_', my_date, '.rds') %in% list.files('data') | (length(ids)!=length(pol))){
+if (! paste0('pol_stepps_', version, '.rds') %in% list.files('data') | (length(ids)!=length(pol))){
   
   # download and save the raw data
-
   pol <- neotoma::get_download(ids)
-
-  saveRDS(pol, file=paste0('data/pol_stepps_', Sys.Date(), '.rds'))
+  saveRDS(pol, file=paste0('data/pol_stepps_', version, '.rds'))
   
   # miss = list()
   # aggregate the taxa
-  pol_stepps = list()
-  
+  pollen_stepps = list()
   pollen_stepps <- pol %>% 
     map(function(x) compile_list_neotoma(x, 'Stepps', pollen.equiv)) %>% 
     map(function(x) compile_list_stepps(x, 
@@ -69,14 +62,12 @@ if (! paste0('pol_stepps_', my_date, '.rds') %in% list.files('data') | (length(i
                                         cf = TRUE, 
                                         type = TRUE))
     
-    dff <- map2_df(pollen_stepps, states, ~ mutate(.x, state = .y))
-    
-    pol_stepps[[i]]$dataset$site.data$state = state[i]
-  }
-  
-  save(pol_stepps, file=paste0('data/pol_stepps_', Sys.Date(), '.rdata'))
-  print("Update my_date in config file!")
-  
+    # dff <- map2_df(pollen_stepps, state, ~ mutate(.x, state = .y))
+    for (i in 1:length(pollen_stepps)){
+      pollen_stepps[[i]]$dataset$site.data$state = state[i]
+    }
+  save(pollen_stepps, file=paste0('data/pollen_stepps_', version, '.rdata'))
+  print("Update version in config file!")
 } 
 
 taxa = sort(unique(pollen.equiv.stepps$must_have))
