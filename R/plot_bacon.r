@@ -1,15 +1,7 @@
 
 source('R/config.r')
 
-# pollen_thick <- read.csv(paste0('../stepps-baconizing/data/pollen_meta_thick_v6.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
-# 
-# # match with previous thicknessnes to get started (or redo all)
-# pollen_meta$thick = pollen_thick$thick[match(pollen_meta$id, pollen_thick$id)]
-# pollen_meta$bacon = site_data$bacon[match(pollen_meta$id, site_data$dataset_id)]
-# write.csv(pollen_meta, paste0('data/pollen_meta_v', version, '.csv'))
-# write.csv(pollen_meta, paste0('data/pollen_meta_thick_v', version, '.csv'))
-# 
-pollen_meta = read.csv(paste0('data/pollen_meta_thick_v', version, '.csv'))
+pollen_meta = read.csv(paste0('data/pollen_meta_v', version, '.csv'))
 
 # fix this!!!
 # compile all individual pdfs into one pdf
@@ -22,8 +14,13 @@ fnames_all = list.files(path = "Cores", pattern = ".*.pdf", all.files = TRUE,
                         full.names = FALSE, recursive = TRUE, include.dirs = TRUE)
 fnames_all = paste0('Cores/', fnames_all)
 
-
-fname_str = apply(data.frame(as.vector(fnames), thick), 1, function(x) paste0('Cores/', x[1], '/', x[1], '_', x[2],'.pdf'))
+fname_str = vector(length=length(fnames))
+for (i in 1:length(fnames)){
+  fname_str[i] = paste0('Cores/', fnames[i], '/', fnames[i], '_', thick[i],'.pdf')
+}
+# did not work; puts space in front of 5
+# fname_str = apply(data.frame(as.vector(fnames), thick), 1, 
+#                   function(x) paste0('Cores/', x[1], '/', x[1], '_', x[2],'.pdf'))
 fname_str = fname_str[fname_str %in% fnames_all]
 fname_str = paste(fname_str, collapse = ' ')
 

@@ -10,12 +10,18 @@ pollen_to_albers <- function(coord, rescale=1e6){
   
   return(coordA)
 }
+# 
+# 
+# pdf('figures/early_sample_year.pdf')
+# pls <- raster('data/age_raster.tif')
+# plot(pls, xlim=c(0,1000000), ylim=c(600000, 1500000))
+# dev.off()
 
 get_survey_year <- function(pollen_meta){
   
-  pls <- raster('data/age_of_sample.tif')
-#   plot(pls)
-
+  # pls <- raster('data/age_of_sample.tif')
+  pls <- raster('data/age_raster.tif')
+  
   coord  = data.frame(long=pollen_meta$long, lat= pollen_meta$lat)
   coordA = pollen_to_albers(coord, rescale=1)
 
@@ -116,6 +122,8 @@ run.bacon <- function(site.params){
   # check for suitability
   if (site.params$suit==1){
     
+    thick = site.params$thick
+    
     # find hiatus depth
     geochron = read.table(sprintf('Cores/%s/%s.csv', site.params$handle, site.params$handle), sep=',', header=TRUE)  
       
@@ -194,12 +202,7 @@ run.bacon <- function(site.params){
       
       if ( (min(depths) < min(depths.bacon)) | (max(depths) > max(depths.bacon)) ){
         depths = depths[depths > min(depths.bacon)]
-        depths = depths[(depths - max(depths.bacon)) < 500]
-        
-        if (any((depths - max(depths.bacon)) > 500)) {
-          print('Samples that are more than 500 cm in depth past the last stratigraphic date exist! 
-                Ages of these samples will not be estimated.')
-        }
+        depths = depths[(depths - max(depths.bacon)) < 100]
       }
       
       iters   = nrow(output)
