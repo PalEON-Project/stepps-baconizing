@@ -4,6 +4,7 @@ require(maps)
 require(fields)
 require(raster)
 require(rgdal)
+library(dplyr)
 
 # sp is required by raster, loaded by default
 # require(sp)
@@ -143,7 +144,7 @@ for(i in 1:nsites){
   }
   
   # these are varves that we want to skip
-  if (site.id %in% c(3131, 2309, 14839, 546, 1643, 2309)){
+  if (site.id %in% vids){
     bacon_params$suit[i] = FALSE
   }
   # curl breaks without this
@@ -160,13 +161,6 @@ site_age_data[which(is.na(site_age_data$bacon)),]
 # which(site_age_data$bacon == FALSE)
 # site_age_data[which(site_age_data$bacon == FALSE),]
 site_age_data[which(site_age_data$bacon == TRUE),]
-# 
-# length(which(site_age_data$bacon == TRUE))
-# site_age_data$dataset.id[which(site_age_data$bacon == TRUE)] %in% ids_old
-# sum(site_age_data$dataset.id[which(site_age_data$bacon == TRUE)] %in% ids_old)
-# 
-# site_age_data$new = !(site_age_data$dataset_id %in% ids_old)
-# site_age_data     = site_age_data[with(site_age_data, order(-bacon, new)),]
 
 write.table(site_age_data, file=paste0('data/pollen_site_age_meta_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
 write.table(bacon_params, file=paste0('data/bacon_params_v', version, '.csv'), col.names=TRUE, row.names=FALSE, sep=',')
