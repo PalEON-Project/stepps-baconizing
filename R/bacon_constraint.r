@@ -8,7 +8,7 @@ source('R/utils/helpers.r')
 source('R/utils/compile_lists.r')
 
 # load list containing pollen counts
-pollen_meta <- read.csv('data/pollen_meta_thick_v7.csv', header=TRUE, stringsAsFactors=FALSE, sep=',')
+pollen_meta <- read.csv(paste0('data/pollen_meta_v', version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
 # pollen_meta = pollen_meta[pollen_meta$bacon == TRUE,]
 
 # pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE)
@@ -21,17 +21,17 @@ pollen_meta <- read.csv('data/pollen_meta_thick_v7.csv', header=TRUE, stringsAsF
 pollen.equiv.stepps = read.csv("../stepps-data/pollen.equiv.stepps.csv", stringsAsFactors=F)
 pollen.equiv    = read.csv("../stepps-data/pollen.equiv.csv", stringsAsFactors=F, sep=',', row.names=NULL)
 
-ids = pollen_meta$id
+ids = pollen_meta$dataset_id
 
 pol=list()
 # load list containing pollen counts
 # will load object called pol
 # the first time takes a while to pull from Neotoma
-if (file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))) {
+if (file.exists(paste0('data/pollen_stepps_', version, '.rdata'))) {
   # loads object pol
-  load(paste0('data/pol_stepps_', my_date, '.rdata'))
+  load(paste0('data/pollen_stepps_', version, '.rdata'))
 } 
-if (!file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))|(length(ids)!=length(pol))){
+if (!file.exists(paste0('data/pollen_stepps_', version, '.rdata'))|(length(ids)!=length(pol))){
   
   nsites = length(ids)
   
@@ -43,7 +43,7 @@ if (!file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))|(length(ids)!=le
     # if (id == 1394) id = 15274
     pol_raw[[i]] = get_download(id)
   }  
-  save(pol_raw, file=paste0('data/pol_', Sys.Date(), '.rdata'))
+  save(pol_raw, file=paste0('data/pollen_', version, '.rdata'))
   
   
   # miss = list()
@@ -62,37 +62,53 @@ if (!file.exists(paste0('data/pol_stepps_', my_date, '.rdata'))|(length(ids)!=le
     pol[[i]]$dataset$site.data$state = pollen_meta$state2[i]
   }
   
-  save(pol, file=paste0('data/pol_stepps_', Sys.Date(), '.rdata'))
+  save(pol, file=paste0('data/pollen_stepps_', version, '.rdata'))
   
 } 
 
-# bacon.params <- read.csv('bacon.params.csv', header=TRUE, sep=',')
-# thicks = read.csv('bacon.fit.thick.csv')$thick
-
+# FIXME: add x and y, and bchron geo_min, geo_max, and geo_ps
 # find min and max geochron and pollen ages
 ncores = nrow(pollen_meta)
 age_con = data.frame(id=numeric(0), 
                      handle=character(0), 
                      geo_age_max=numeric(0), 
                      geo_age_min=numeric(0),
+                     geo_age_ps=numeric(0),
+                     set_year_default=numeric(0),
+                     set_type=character(0),
                      pol_age_max=numeric(0),
                      pol_age_min=numeric(0)) 
 for (i in 1:ncores){
   print(i)
   
-  if (is.na(pollen_meta[i, 'bacon'])){
+  handle = pollen_meta[i,'handle']
+  id     = pollen_meta[i,'dataset_id']
+  thick  = pollen_meta[i,'thick']
+  
+  if (is.na(pollen_meta[i, 'bacon'])|is.na(thick)){
     next
   }
   
-  handle = pollen_meta[i,'handle']
-  id     = pollen_meta[i,'id']
-  thick  = pollen_meta[i,'thick']
   # find hiatus depth
   if (pollen_meta[i, 'bacon'] == TRUE){
     geo_samples = read.table(paste0('Cores/', handle, '/', handle, '_', thick, '_geo_samples.csv'), sep=',', header=TRUE)
 
     geo_age_min = mean(as.numeric(geo_samples[1, 2:ncol(geo_samples)]))
     geo_age_max = mean(as.numeric(geo_samples[nrow(geo_samples), 2:ncol(geo_samples)]))
+    
+    if (any(substr(geo_samples$labid, 1, 4) %in% c('Pres', 'Ambr', 'Sett'))){
+      idx = which(substr(geo_samples$labid, 1, 4) %in% c('Pres', 'Ambr', 'Sett'))
+
+      print(idx)
+      set_type = as.vector(geo_samples$labid[idx])
+      depth_ps = geo_samples[idx, 'depths']
+      # geo_age_ps = mean(as.numeric(geo_samples[idx, 2:ncol(geo_samples)]))
+      geo_age_ps = quantile(as.numeric(geo_samples[idx, 2:ncol(geo_samples)]), probs=c(0.5))
+      
+      set_year_default = read.table(paste0('Cores/', handle, '/', handle, '.csv'), sep=',', header=TRUE)[idx,'age']
+    } else {
+      set_year_default = NA
+    }
     
     pol_samples = read.table(paste0('Cores/', handle, '/', handle, '_', thick, '_samples.csv'), sep=',', header=TRUE)
     
@@ -103,9 +119,12 @@ for (i in 1:ncores){
                                handle=handle, 
                                geo_age_max=geo_age_max, 
                                geo_age_min=geo_age_min, 
+                               geo_age_ps=geo_age_ps,
+                               set_year_default=set_year_default,
+                               set_type=set_type,
                                pol_age_max=pol_age_max, 
                                pol_age_min=pol_age_min))
-  }  
+  }
 }
 
 # age_con = age_con[age_con$id != 1004,]
