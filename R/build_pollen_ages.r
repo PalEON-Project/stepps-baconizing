@@ -80,13 +80,13 @@ taxa = taxa[!is.na(taxa)]
 # pol = pol_stepps
 
 bchron = TRUE
-nsites = length(pol)
+nsites = length(pollen_stepps)
 pollen_ts  = list()
 
 for (i in 1:nsites){  
   print(i)
   
-  x = pol[[i]]
+  x = pollen_stepps[[i]]
   
   id       = x$dataset$dataset.meta$dataset.id
   
@@ -110,8 +110,8 @@ for (i in 1:nsites){
   
   age_default = x$sample.meta$age 
   
-  thick = pollen_meta$thick[pollen_meta$id == id]
-  thick_handle = pollen_meta$handle[pollen_meta$id == id]
+  thick = pollen_meta$thick[pollen_meta$dataset_id == id]
+  thick_handle = pollen_meta$handle[pollen_meta$dataset_id == id]
   
   if (!is.na(thick)){
     fname = sprintf('%s/Cores/%s/%s_%s_samples.csv', bacon_out_path, thick_handle, thick_handle, thick)
@@ -280,20 +280,22 @@ if (add_varves){
 } else {
   suff=''
 }
-write.table(pollen_ts, file=paste0('data/sediment_ages_v', pol_version, suff, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
+write.table(pollen_ts, file=paste0('data/sediment_ages_v', version, suff, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
 
 # try splitting out the draws into RDS
 bacon_draws = pollen_ts[,grep('bacon_draw', colnames(pollen_ts))]
 
 for (i in 1:ncol(bacon_draws)) {
-  saveRDS(bacon_draws[,i], file=paste0('data/bacon_ages/draw', i, '.rds'))
+  dir.create(paste0('data/bacon_ages_v', version), showWarnings = FALSE)
+  saveRDS(bacon_draws[,i], file=paste0('data/bacon_ages_v', version,'/draw', i, '.rds'))
 }
 
 # try splitting out the draws into RDS
 bchron_draws = pollen_ts[,grep('bchron_draw', colnames(pollen_ts))]
 
 for (i in 1:ncol(bchron_draws)) {
-  saveRDS(bchron_draws[,i], file=paste0('data/bchron_ages/draw', i, '.rds'))
+  dir.create(paste0('data/bchron_ages_v', version), showWarnings = FALSE)
+  saveRDS(bchron_draws[,i], file=paste0('data/bchron_ages_v', version, '/draw', i, '.rds'))
 }
 
 #

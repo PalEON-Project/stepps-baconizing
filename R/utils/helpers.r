@@ -206,7 +206,7 @@ run.bacon <- function(site.params){
       
       if ( (min(depths) < min(depths.bacon)) | (max(depths) > max(depths.bacon)) ){
         depths = depths[depths > min(depths.bacon)]
-        depths = depths[(depths - max(depths.bacon)) < 100]
+        # depths = depths[(depths - max(depths.bacon)) < 100]
       }
       
       iters   = nrow(output)

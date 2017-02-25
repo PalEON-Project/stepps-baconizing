@@ -2,6 +2,7 @@ require(neotoma)
 require(plyr)
 require(raster)
 library(Bchron)
+library(ggplot2)
 
 source('R/config.r')
 source('R/utils/helpers.r')
@@ -10,12 +11,6 @@ source('R/utils/compile_lists.r')
 # load list containing pollen counts
 pollen_meta <- read.csv(paste0('data/pollen_meta_v', version, '.csv'), header=TRUE, stringsAsFactors=FALSE, sep=',')
 # pollen_meta = pollen_meta[pollen_meta$bacon == TRUE,]
-
-# pollen_meta <- read.csv('data/pollen_meta_2014-07-22.csv', header=TRUE)
-# pollen_meta <- get_survey_year(pollen_meta)
-# 
-# # for some reason the datasetID changed for Jones Lake
-# pollen_meta[pollen_meta$datasetID == 1394, 'datasetID'] = 15274
 
 # read in dictionaries
 pollen.equiv.stepps = read.csv("../stepps-data/pollen.equiv.stepps.csv", stringsAsFactors=F)
@@ -53,10 +48,6 @@ if (!file.exists(paste0('data/pollen_stepps_', version, '.rdata'))|(length(ids)!
     print(i)
     convert1 = compile_list_neotoma(pol_raw[[i]][[1]], 'Stepps', pollen.equiv)
     
-    #     out = compile_list_neotoma(pol_raw[[i]][[1]], 'Stepps')
-    #     convert1 = out[[1]]
-    #     miss[[i]] = out[[2]]
-    
     #pol[[i]] = compile_list_stepps(convert1, list.name='all', pollen.equiv.stepps, cf = TRUE, type = TRUE)
     pol[[i]] = compile_list_stepps(convert1, list.name='must_have', pollen.equiv.stepps, cf = TRUE, type = TRUE)
     pol[[i]]$dataset$site.data$state = pollen_meta$state2[i]
@@ -75,6 +66,7 @@ age_con = data.frame(id=numeric(0),
                      geo_age_min=numeric(0),
                      geo_age_ps=numeric(0),
                      set_year_default=numeric(0),
+                     set_depth=numeric(0),
                      set_type=character(0),
                      pol_age_max=numeric(0),
                      pol_age_min=numeric(0)) 
@@ -100,8 +92,8 @@ for (i in 1:ncores){
       idx = which(substr(geo_samples$labid, 1, 4) %in% c('Pres', 'Ambr', 'Sett'))
 
       print(idx)
-      set_type = as.vector(geo_samples$labid[idx])
-      depth_ps = geo_samples[idx, 'depths']
+      set_type  = as.vector(geo_samples$labid[idx])
+      set_depth = geo_samples[idx, 'depths']
       # geo_age_ps = mean(as.numeric(geo_samples[idx, 2:ncol(geo_samples)]))
       geo_age_ps = quantile(as.numeric(geo_samples[idx, 2:ncol(geo_samples)]), probs=c(0.5))
       
@@ -121,6 +113,7 @@ for (i in 1:ncores){
                                geo_age_min=geo_age_min, 
                                geo_age_ps=geo_age_ps,
                                set_year_default=set_year_default,
+                               set_depth=set_depth,
                                set_type=set_type,
                                pol_age_max=pol_age_max, 
                                pol_age_min=pol_age_min))
@@ -179,106 +172,97 @@ write.table(age_con, file=paste0('data/pol_ages_bchron_v', version, '.csv'), quo
 ############################################################################################################################################
 ## ages of pre-settlement sample
 ############################################################################################################################################
-# find depth span to determine if there is a minimum number of thicknesses that work
-ncores = nrow(pollen_meta)
-age_ps = data.frame(id=numeric(0), 
-                     handle=character(0), 
-                     type = character(0),
-                     depth_ps = numeric(0),
-                     geo_age_ps=numeric(0), 
-                     set_year_default=numeric(0),
-                     x=numeric(0),
-                     y=numeric(0)) 
-amb = rep(FALSE, ncores)
-for (i in 1:ncores){
-  print(i)
-  
-  if (is.na(pollen_meta[i, 'bacon'])){
-    next
-  }
-  
-  
-  handle = pollen_meta[i,'handle']
-  id     = pollen_meta[i,'id']
-  thick  = pollen_meta[i,'thick']
-  # find hiatus depth
-  if (pollen_meta[i, 'bacon'] == TRUE){
-    labids = read.table(paste0('Cores/', handle, '/', handle, '.csv'), sep=',', header=TRUE)[,1]
-    
-    if (any(substr(labids, 1, 4) %in% c('Pres', 'Ambr', 'Sett'))){
-      # if (any(substr(labids, 1, 4) %in% c('Presettlement_paleon', 'Ambrosia rise', 'Settlement'))){
-      # idx = which(labids %in% c('Presettlement_paleon', 'Ambrosia rise', 'Settlement'))
-      
-      idx = which(substr(labids, 1, 4) %in% c('Pres', 'Ambr', 'Sett'))
-      
-      print(idx)
-      amb[i] = TRUE
-      
-      geo_samples = read.table(paste0('Cores/', handle, '/', handle, '_', thick, '_geo_samples.csv'), sep=',', header=TRUE)
-      
-      depth_ps = geo_samples[idx, 'depths']
-      # geo_age_ps = mean(as.numeric(geo_samples[idx, 2:ncol(geo_samples)]))
-      geo_age_ps = quantile(as.numeric(geo_samples[idx, 2:ncol(geo_samples)]), probs=c(0.025, 0.5, 0.975))
-      
-      
-      # chron_control = get_chroncontrol(id)
-      # Sys.sleep(3)
-      
-      # idx_def = which(substr(chron_control[[1]]$control.type, 1, 4) %in% c('Pres', 'Ambr', 'Sett'))
-      # if (length(idx>0)){
-      #   set_year_default=chron_control[[1]][idx_def,'age'] 
-      # } else {
-      #   set_year_default = NA
-      # }
-      
-      # need to fix this
-      if (any(pol[[i]]$sample.meta$depth == geo_samples$depth[idx])){
-        set_age_default=pol[[i]]$sample.meta$age[which(pol[[i]]$sample.meta$depth == geo_samples$depth[idx])]
-      } else {
-        set_year_default = NA
-      }
-      
-      age_ps = rbind(age_ps, data.frame(id=id, 
-                                        handle=handle, 
-                                        type=as.vector(labids[idx]),
-                                        depth_ps = as.vector(depth_ps),
-                                        geo_age_ps=geo_age_ps[2], 
-                                        geo_age_lb=geo_age_ps[1], 
-                                        geo_age_ub=geo_age_ps[3], 
-                                        set_age_default=set_age_default,
-                                        x=pollen_meta[i,'x'], 
-                                        y=pollen_meta[i,'y']))
-    }
-  }  
-}
+# # find depth span to determine if there is a minimum number of thicknesses that work
+# ncores = nrow(pollen_meta)
+# age_ps = data.frame(id=numeric(0), 
+#                      handle=character(0), 
+#                      type = character(0),
+#                      depth_ps = numeric(0),
+#                      geo_age_ps=numeric(0), 
+#                      set_year_default=numeric(0),
+#                      x=numeric(0),
+#                      y=numeric(0)) 
+# amb = rep(FALSE, ncores)
+# for (i in 1:ncores){
+#   print(i)
+#   
+#   if (is.na(pollen_meta[i, 'bacon'])){
+#     next
+#   }
+#   
+#   
+#   handle = pollen_meta[i,'handle']
+#   id     = pollen_meta[i,'id']
+#   thick  = pollen_meta[i,'thick']
+#   # find hiatus depth
+#   if (pollen_meta[i, 'bacon'] == TRUE){
+#     labids = read.table(paste0('Cores/', handle, '/', handle, '.csv'), sep=',', header=TRUE)[,1]
+#     
+#     if (any(substr(labids, 1, 4) %in% c('Pres', 'Ambr', 'Sett'))){
+#       # if (any(substr(labids, 1, 4) %in% c('Presettlement_paleon', 'Ambrosia rise', 'Settlement'))){
+#       # idx = which(labids %in% c('Presettlement_paleon', 'Ambrosia rise', 'Settlement'))
+#       
+#       idx = which(substr(labids, 1, 4) %in% c('Pres', 'Ambr', 'Sett'))
+#       
+#       print(idx)
+#       amb[i] = TRUE
+#       
+#       geo_samples = read.table(paste0('Cores/', handle, '/', handle, '_', thick, '_geo_samples.csv'), sep=',', header=TRUE)
+#       
+#       depth_ps = geo_samples[idx, 'depths']
+#       # geo_age_ps = mean(as.numeric(geo_samples[idx, 2:ncol(geo_samples)]))
+#       geo_age_ps = quantile(as.numeric(geo_samples[idx, 2:ncol(geo_samples)]), probs=c(0.025, 0.5, 0.975))
+#       
+#       
+#       # chron_control = get_chroncontrol(id)
+#       # Sys.sleep(3)
+#       
+#       # idx_def = which(substr(chron_control[[1]]$control.type, 1, 4) %in% c('Pres', 'Ambr', 'Sett'))
+#       # if (length(idx>0)){
+#       #   set_year_default=chron_control[[1]][idx_def,'age'] 
+#       # } else {
+#       #   set_year_default = NA
+#       # }
+#       
+#       # need to fix this
+#       if (any(pol[[i]]$sample.meta$depth == geo_samples$depth[idx])){
+#         set_age_default=pol[[i]]$sample.meta$age[which(pol[[i]]$sample.meta$depth == geo_samples$depth[idx])]
+#       } else {
+#         set_year_default = NA
+#       }
+#       
+#       age_ps = rbind(age_ps, data.frame(id=id, 
+#                                         handle=handle, 
+#                                         type=as.vector(labids[idx]),
+#                                         depth_ps = as.vector(depth_ps),
+#                                         geo_age_ps=geo_age_ps[2], 
+#                                         geo_age_lb=geo_age_ps[1], 
+#                                         geo_age_ub=geo_age_ps[3], 
+#                                         set_age_default=set_age_default,
+#                                         x=pollen_meta[i,'x'], 
+#                                         y=pollen_meta[i,'y']))
+#     }
+#   }  
+# }
 
 par(mfrow=c(1,1))
-hist(age_ps$geo_age_ps)
+hist(age_con$geo_age_ps)
 
-summary(age_ps$geo_age_ps)
-age_ps[which(age_ps$geo_age_ps > 1000),]
+summary(age_con$geo_age_ps)
+age_con[which(age_con$geo_age_ps > 1000),]
 
-# age_ps = age_ps[age_ps$id != 1004,]
-
-age_ps$set_year = 1950 - pollen_meta$set.year[match(age_ps$id, pollen_meta$id)]
-
-write.table(age_ps, file=paste0('data/pol_age_ps_v', version, '.csv'), quote=FALSE, row.names=FALSE, sep=',')
-
-library(ggplot2)
-
-pdf('figures/settlement_ages.pdf')
-plot(age_ps$geo_age_ps, age_ps$set_year, pch=19, xlab='Bacon', ylab='PLS (Bacon inputs)', ylim=c(0,200))
+pdf('figures/settlement_ages_bacon.pdf')
+plot(age_con$geo_age_ps, age_con$set_year_default, pch=19, xlab='Bacon', ylab='PLS (Bacon inputs)', ylim=c(0,200))
 abline(a=0, b=1, col='grey', lty=2)
 dev.off()
 
+# plot(age_con$set_year_default, age_ps$set_year, pch=19, xlab='Neotoma', ylab='PLS (Bacon inputs)', ylim=c(0,200))
+# abline(a=0, b=1, col='grey', lty=2)
 
-plot(age_ps$set_age_default, age_ps$set_year, pch=19, xlab='Neotoma', ylab='PLS (Bacon inputs)', ylim=c(0,200))
-abline(a=0, b=1, col='grey', lty=2)
-
-ggplot(data=age_ps) + geom_point(data=age_ps, aes(y=age_ps$geo_age_ps, x=age_ps$set_year)) + 
-  # geom_point(data=age_ps, aes(y=age_ps$geo_age_ps, x=age_ps$set_age_default), colour='blue') + 
-  geom_errorbar(aes(x=age_ps$set_year, ymin=age_ps$geo_age_lb, ymax=age_ps$geo_age_ub)) + 
-  ylab('Bacon age') + xlab('Settlement year') +coord_cartesian(ylim=c(-100,500))
+# ggplot(data=age_ps) + geom_point(data=age_ps, aes(y=age_ps$geo_age_ps, x=age_ps$set_year)) + 
+#   # geom_point(data=age_ps, aes(y=age_ps$geo_age_ps, x=age_ps$set_age_default), colour='blue') + 
+#   geom_errorbar(aes(x=age_ps$set_year, ymin=age_ps$geo_age_lb, ymax=age_ps$geo_age_ub)) + 
+#   ylab('Bacon age') + xlab('Settlement year') +coord_cartesian(ylim=c(-100,500))
 
 library(reshape2)
 library(tidyr)

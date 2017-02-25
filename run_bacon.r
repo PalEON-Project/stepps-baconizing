@@ -53,7 +53,7 @@ pollen_meta  <- read.csv(paste0('data/pollen_meta_v', version, '.csv'), header=T
 # 
 # i_check = which(setts == TRUE)
 #############################################################################################
-run_batch <- function(bacon_params, suff){
+run_batch <- function(bacon_params){
 
   for(i in 1:nrow(bacon_params)){
     #for(i in ids_rerun){
@@ -61,8 +61,9 @@ run_batch <- function(bacon_params, suff){
     print(i)
     site.params <- bacon_params[i,]
     if (!(site.params$bacon)){next}
-    thick = site.params$thick
-    suff = thick
+    if (is.na(site.params$thick)){next}
+    # thick = site.params$thick
+    # suff = thick
     
     site.params$mem.strength = 2
     site.params$mem.mean     = 0.5
@@ -85,7 +86,7 @@ bacon_params$thick = pollen_meta_v6$thick[match(bacon_params$dataset.id, pollen_
 pollen_meta$thick  = pollen_meta_v6$thick[match(bacon_params$dataset.id, pollen_meta_v6$id)]
 bacon_params$bacon = pollen_meta$bacon[match(bacon_params$dataset.id, pollen_meta$dataset_id)]
 
-run_batch(bacon_params, suff=NULL)
+run_batch(bacon_params)
 
 # overwrite pollen_meta file?
 write.table(pollen_meta, file=paste0('data/pollen_meta_v', version ,'.csv'), col.names=TRUE, row.names=FALSE, sep=',')
