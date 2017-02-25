@@ -2,7 +2,7 @@
 ## compare ages
 #################################################################################################################################################
 version = 1
-pollen_ts <- read.csv(file = paste0('data/sediment_ages_', version, '.csv'))
+pollen_ts <- readr::read_csv(file = paste0('data/sediment_ages_v', version, '.0_varves.csv'))
 
 pollen_ages <- pollen_ts %>% 
   dplyr::select(id, sitename, age_bacon, age_bchron, age_default) %>% 

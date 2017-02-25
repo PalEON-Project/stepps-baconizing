@@ -41,6 +41,7 @@ library(mgcv, verbose = FALSE)
 library(Bchron, verbose = FALSE)
 library(viridis, verbose = FALSE)
 library(dplyr, verbose = FALSE)
+library(readr)
 
 version <- 0.1
 
