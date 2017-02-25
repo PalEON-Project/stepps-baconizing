@@ -48,7 +48,7 @@ version <- 0.1
 
 Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings [@brewer2012paleoecoinformatics;@uhen2013card]. As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record. Paleoecologists have been aware of limitations in age modeling capabilities for some time, and the issues that these limitations cause are well noted [@grimm2009magnitude;@liu2012temporal].  
 
-Recent efforts with the European Pollen Database have focused on standardizing age models across the database [@giesecke2014towards]. These models used the software Clam [@blaauw2010methods], as did efforts with the North American Pollen Database [@blois2011methodological].  In both these cases, models were regenerated for records, although [something needed here.] 
+Recent efforts have focused on standardizing age models across the database [@giesecke2014towards], establishing regional benchmarks [@blois2011methodological;flantua2016geochronological]. European models used the software Clam [@blaauw2010methods], as did efforts with the North American Pollen Database [@blois2011methodological]. 
 
 As more and more ecologists are turning to the paleoecological record, and as we try to do more with what we have, the limitations of extant age models become more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research [@blaauw2012out].
 
@@ -121,6 +121,8 @@ Direct recalibration of ages does occur within the Neotoma ecosystem.  For examp
 ```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
 
 source('R/recalibrate.actual.R', echo = FALSE)
+
+new.chrons <- new.chrons %>% filter(!core %in% c("Chalko Lake", "Aghnaghak", "Pittsburg Basin", "Lac a l'Ange", "Marl Pond", "Cheyenne Bottoms", "San Agustin Plains"))
 
 basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = handle)) + 
             geom_line() +
@@ -338,9 +340,11 @@ We run Bacon, we run BChron and we keep the original model outputs.  We comare t
 
 ### ^210^Pb Errors
 
-
+<!-- This is intended to compare  the uncertainties, from Bacon, for 210Pb dates with unassigned uncertainties, to the uncertainties from bacon for the 210Pb dates for assigned 210Pb dates. The point is, that we need to know whethr interpolation is baised high or low. -->
 
 ### Expert Elicitation
+
+
 
 ## Bacon Settings
 
