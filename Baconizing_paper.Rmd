@@ -227,13 +227,13 @@ Bacon requires that all chronological markers be associated with defined errors.
 geochron_tables <- readRDS('data/output/all_geochron_tables.rds')
 
 widen <- function(x) {
-  data.frame(x$dataset$site.data[,1:5],
+  data.frame(x$dataset$site.data,
              x$geochron,
              row.names = NULL)
 }
 
 wide_table <- geochron_tables %>% 
-  map(widen) %>% bind_rows
+  purrr::map(widen) %>% bind_rows
 
 leads <- wide_table %>% filter(geo.chron.type %in% "Lead-210")
 
@@ -366,13 +366,17 @@ Modern	3.02	     5.70	      0.53     1.6
 
 ### Section Thickness
 
-The results here will show a table (or histogram, or plot) of section thicknesses vs total core lengths.  Maybe there's a relationship here?
+```{r, message = FALSE, warning = FALSE, error = FALSE}
 
-```{r}
+source('R/thick_model.R')
 
-# Read in all the settings files and look for the section thickness, then compare against the cores.
+model_plot <- allan_thick()
 
+model_plot[[1]]
 ```
+
+Total core thickness shows a relationship to total core age (Figure).  There is a general relationship between age and depth.
+
 
 ## Model Comparison
 

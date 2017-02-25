@@ -5,7 +5,7 @@ version = 1
 pollen_ts <- read.csv(file = paste0('data/sediment_ages_', version, '.csv'))
 
 pollen_ages <- pollen_ts %>% 
-  select(id, sitename, age_bacon, age_bchron, age_default) %>% 
+  dplyr::select(id, sitename, age_bacon, age_bchron, age_default) %>% 
   filter(!id == 3131 & sitename %in% unique(gsub(" ", "", new.chrons[,1])))
 
 pollen_ages$diff_bacon <- pollen_ages$age_bacon - pollen_ages$age_default
