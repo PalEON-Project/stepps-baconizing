@@ -30,9 +30,15 @@ system(sys_str)
 fnames_all = list.files(path = "Cores", pattern = ".*.csv", all.files = TRUE,
                         full.names = FALSE, recursive = TRUE, include.dirs = TRUE)
 fnames_all = paste0('Cores/', fnames_all)
-fname_str = apply(data.frame(as.vector(fnames), thick), 1, function(x) paste0('Cores/', x[1], '/', x[1], '_', x[2],'_samples.csv'))
-fname_str = fname_str[fname_str %in% fnames_all]
 
+fname_str = vector(length=length(fnames))
+for (i in 1:length(fnames)){
+  fname_str[i] = paste0('Cores/', fnames[i], '/', fnames[i], '_', thick[i],'_samples.csv')
+}
+# fname_str = apply(data.frame(as.vector(fnames), thick), 1, 
+#                   function(x) paste0('Cores/', x[1], '/', x[1], '_', x[2],'_samples.csv'))
+
+fname_str = fname_str[fname_str %in% fnames_all]
 
 fname_sub = strsplit(fname_str, "\\/|\\ ")
 fname_sub = paste(unlist(lapply(fname_sub, function(x) x[[3]])), collapse = ' ')

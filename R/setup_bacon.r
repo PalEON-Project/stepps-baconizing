@@ -36,19 +36,18 @@ nsites  = length(ids)
 # will load object called pollen2k
 # the first time takes a while to pull from Neotoma
 pol = NA
-if (file.exists(paste0('data/pol_', version, '.rdata'))) {
-  # loads object pollen2k
-  load(paste0('data/pol_', version, '.rdata')) 
+if (file.exists(paste0('data/pollen_', version, '.rdata'))) {
+  load(paste0('data/pollen_', version, '.rdata')) 
 } 
-if (!file.exists(paste0('data/pol_', version, '.rdata'))|(length(ids)!=length(pol))){
+if (!file.exists(paste0('data/pollen_', version, '.rdata'))|(length(ids)!=length(pollen))){
   
   # download and save the raw data
-  pol = list()
+  pollen = list()
   for (i in 1:nsites){ 
     print(i)
-    pol[[i]] = get_download(ids[i])[[1]]
+    pollen[[i]] = get_download(ids[i])[[1]]
   }  
-  save(pol, file=paste0('data/pol_', version, '.rdata'))
+  save(pollen, file=paste0('data/pollen_', version, '.rdata'))
 } 
 
 # extract the meta data
@@ -73,7 +72,7 @@ pollen_meta$state = map.where(database="state", x=pollen_meta$long, y=pollen_met
 pollen_meta       = split_mi(pollen_meta, longlat=TRUE)
 pollen_meta$state = pollen_meta$state2
 # get the mininum survey year, used to assign date to presettlement samples
-pollen_meta       = get_survey_year(pollen_meta)
+pollen_meta$set.year = get_survey_year(pollen_meta, pollen_meta$state)
 
 # do we need this still?
 # generate object that contains bacon inputs for each core
