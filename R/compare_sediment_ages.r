@@ -4,6 +4,13 @@
 version = 1
 pollen_ts <- readr::read_csv(file = paste0('data/sediment_ages_v', version, '.0_varves.csv'))
 
+
+# Many of these lakes depend
+pollen_ts <- pollen_ts %>% filter(!sitename %in% c('VestaburgBog', 'BeckmanLake', 'LakeCarlson',
+                                                   'MartinPond', 'LakeMinnie',
+                                                   'ThompsonPond', 'WeberLake',
+                                                   'ElkLake', 'Seidel', 'LostLake'))
+
 pollen_ages <- pollen_ts %>% 
   dplyr::select(id, sitename, age_bacon, age_bchron, age_default) %>% 
   filter(!id == 3131 & sitename %in% unique(gsub(" ", "", new.chrons[,1])))

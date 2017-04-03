@@ -390,11 +390,7 @@ Recalibrating ages from with `Bacon()` and `BChron()` show bimodal distribution 
 #  USE BCHRON CALIBRATE TO FIX THE AGES in RCDates
 source('R/compare_sediment_ages.r')
 
-ggplot(long_df, aes(x = age_default, y = value)) +
-  geom_point(aes(color = variable), alpha = 0.1) +
-  scale_color_viridis(discrete = TRUE) +
-  coord_cartesian(ylim = c(-2000, 2500), xlim = c(-100, 15000), expand = c(0, 0)) +
-  geom_smooth() +
+ggplot(pollen_ages, aes(x = diff_bacon, y = diff_bcron)) + geom_point(alpha=0.3) + geom_path(aes(group = id)) + geom_abline(intercept = 0, slope = 1) +
   theme_bw() +
   xlab("Existing Age Model") +
   ylab("Model Offset") +
