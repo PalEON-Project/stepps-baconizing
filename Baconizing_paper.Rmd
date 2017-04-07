@@ -20,8 +20,7 @@ output:
 
 csl: elsevier-harvard.csl
 bibliography: baconizing.bib
-abstract: |
-There's a lot we don't know about making age models for paleoecological records.  One thing we do know, it's a pain, and most people don't know how to do it, and there's not many resources out there for figuring it out on your own.  We did it, and we're telling you all the decisions we made, so you can make some decisions too.
+abstract: There's a lot we don't know about making age models for paleoecological records.  One thing we do know, it's a pain, and most people don't know how to do it, and there's not many resources out there for figuring it out on your own.  We did it, and we're telling you all the decisions we made, so you can make some decisions too.
 ---
 
 *[120ch] This paper build new age models using Bacon and then looks at the stuff that happens when we do it.*
@@ -195,7 +194,7 @@ diff <- ggplot(new.chrons, aes(x = age.lin, y = diff)) +
                                       size = 18),
           axis.ticks = element_blank(),
           axis.text.x = element_text(family = 'serif', 
-                                      face = 'italic', 
+                                      face = 'italic',
                                       size = 14),
           axis.text.y = element_text(family = 'serif', 
                                       face = 'italic', 
