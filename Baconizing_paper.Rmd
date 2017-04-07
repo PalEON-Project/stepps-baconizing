@@ -62,10 +62,8 @@ all_downloads <- north_american_cores(version)
 if (paste0('pubs_v', version, '.rds') %in% list.files('data/output')) {
   pubs <- readRDS(paste0('data/output/pubs_v', version, '.rds'))
 } else {
- 
   pubs <- neotoma::get_publication(all_downloads)
- 
- saveRDS(pubs, file = paste0('data/output/pubs_v', version, '.rds'))
+  saveRDS(pubs, file = paste0('data/output/pubs_v', version, '.rds'))
 }
 
 meta.table       <- do.call(rbind.data.frame, 
