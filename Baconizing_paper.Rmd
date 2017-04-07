@@ -40,7 +40,8 @@ library(mgcv, verbose = FALSE)
 library(Bchron, verbose = FALSE)
 library(viridis, verbose = FALSE)
 library(dplyr, verbose = FALSE)
-library(readr)
+library(readr, verbose = FALSE)
+library(gridExtra, verbose = FALSE)
 
 version <- 0.1
 
@@ -56,11 +57,15 @@ As more and more ecologists are turning to the paleoecological record, and as we
 
 source('R/getNAcores.R')
 
-if ('pubs.rds' %in% list.files('data/output')) {
-  pubs <- readRDS('data/output/pubs.rds')
+all_downloads <- north_american_cores(version)
+
+if (paste0('pubs_v', version, '.rds') %in% list.files('data/output')) {
+  pubs <- readRDS(paste0('data/output/pubs_v', version, '.rds'))
 } else {
- pubs <- neotoma::get_publication(all.downloads)
- saveRDS(pubs, file = 'data/output/pubs.rds')
+ 
+  pubs <- neotoma::get_publication(all_downloads)
+ 
+ saveRDS(pubs, file = paste0('data/output/pubs_v', version, '.rds'))
 }
 
 meta.table       <- do.call(rbind.data.frame, 
@@ -69,7 +74,7 @@ meta.table       <- do.call(rbind.data.frame,
                               metas[which.max(metas$year),]
                             }))
 
-chron <- sapply(all.downloads, function(x)x$sample.meta$age.type[1])
+chron <- sapply(all_downloads, function(x)x$sample.meta$age.type[1])
 
 meta.table$chron <- NA
 meta.table$chron <- chron[rownames(meta.table)]

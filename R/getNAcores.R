@@ -1,30 +1,27 @@
-#  Pull all North American Sites:
-library(Bchron)
-library(neotoma)
-library(plyr)
-library(ggplot2)
-library(gridExtra)
-
-if('all.downloads.RData' %in% list.files('data/output')){
-  gpid.table <- get_table("GeoPoliticalUnits")
+#' @title Pull all North American Pollen sites from Neotoma
+#' @param version The version number of the run.
+#' @description This code takes the current version number of the paper, and then searches for all sites with pollen data within North America, returning the \code{download} objects associated with those sites.
+#' @return A long \code{download_list} for all pollen sites in North America.
+#' 
+north_american_cores <- function(version) {
   
-  na.sites <- match(c('Canada', 'United States', 'Mexico'), gpid.table$GeoPoliticalName)
+  gpid_table <- neotoma::get_table("GeoPoliticalUnits") %>% 
+    filter(GeoPoliticalName %in% c('Canada', 'United States', 'Mexico')) %>% 
+    select(GeoPoliticalID) %>% 
+    unlist %>% 
+    map(~ neotoma::get_dataset(gpid = .x, datasettype = 'pollen'))
   
-  na.datasets <- llply(gpid.table$GeoPoliticalID[na.sites], function(x)get_dataset(datasettype = 'pollen', gpid = x))
+  na_datasets <- neotoma::bind(neotoma::bind(gpid_table[[1]], gpid_table[[2]]), gpid_table[[3]])
   
-  all.datasets <- bind(bind(na.datasets[[1]], na.datasets[[2]]), na.datasets[[3]])
-  
-  load('data/output/all.downloads.RData')
-} else{
-  gpid.table <- get_table("GeoPoliticalUnits")
-  
-  na.sites <- match(c('Canada', 'United States', 'Mexico'), gpid.table$GeoPoliticalName)
-  
-  na.datasets <- llply(gpid.table$GeoPoliticalID[na.sites], function(x)get_dataset(datasettype = 'pollen', gpid = x))
-  
-  all.datasets <- bind(bind(na.datasets[[1]], na.datasets[[2]]), na.datasets[[3]])
-  
-  all.downloads <- get_download(all.datasets)
-  
-  save(all.downloads, file = 'data/output/all.downloads.RData')
+  if(paste0('all_downloads_v', version, '.rds') %in% list.files('data/output')){
+    
+    all_downloads <- readRDS('data/output/all.downloads.rds')
+    
+  } else{
+    
+    all_downloads <- get_download(na_datasets, verbose = FALSE)
+    
+    saveRDS(all_downloads, file = paste0('data/output/all_downloads_v', version, '.rds'))
+  }
+  return(all_downloads)
 }
