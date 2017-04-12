@@ -238,8 +238,8 @@ wide_table <- geochron_tables %>%
 leads <- wide_table %>% filter(geo.chron.type %in% "Lead-210")
 
 # There are some ages with improperly named age types.
-leads$age[leads$age.type %in% "Calendar years AD/BC" & leads$age > 500] <- 1950 - 
-  leads$age[leads$age.type %in% "Calendar years AD/BC" & leads$age > 500]
+leads$age[!is.na(leads$age) & leads$age > 500] <- 1950 - 
+  leads$age[!is.na(leads$age) & leads$age > 500]
 
 # None of the ages reported as Calendar years BP are wrong.
 
