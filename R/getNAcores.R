@@ -15,7 +15,7 @@ north_american_cores <- function(version) {
   
   if(paste0('all_downloads_v', version, '.rds') %in% list.files('data/output')){
     
-    all_downloads <- readRDS('data/output/all.downloads.rds')
+    all_downloads <- readRDS(paste0('data/output/all_downloads_v', version, '.rds'))
     
   } else{
     
