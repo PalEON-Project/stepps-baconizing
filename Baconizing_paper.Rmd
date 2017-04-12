@@ -102,14 +102,14 @@ flexible]
 
 source('R/figures/compare_recalibrations.R')
 
-if ('comp_recal.rds' %in% list.files('data/output')) {
-  comp_recal <- readRDS('data/output/comp_recal.rds')
+if (paste0('comp_recal_v', version, '.rds') %in% list.files('data/output')) {
+  comp_recal <- readRDS(paste0('data/output/comp_recal_v', version, '.rds'))
 } else {
   comp_recal <- compare_recalibrations()
-  saveRDS(comp_recal, file = 'data/output/comp_recal.rds')
+  saveRDS(comp_recal, file = paste0('data/output/comp_recal_v', version, '.rds'))
 }
 
-comp_recal
+plot(comp_recal)
 ```
 
 **Figure 2**. *The difference between directly calibrating radiocarbon ages from an existing model and rebuilding age models using linear interpolatation from calibrated radiocarbon ages.  Negative values result when the rebuilt model provides older dates than the directly calibrated dates.  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages obtained from a dataset with linearly interpolated dates reported in radiocarbon years.*
@@ -207,7 +207,7 @@ grid.arrange(basic, diff)
 
 **Figure 3**. *Direct recalibration of dates within Neotoma pollen records against semi-automated linear interpolation and calibration.  Here we use the chronological controls of the default age model, calibrate chronological controls reported in radiocarbon years, and then use linear interpolation.  Any records with age-reversals were rejected to simplify this illustrative example.*
 
-Comparing re-calibrated age models against directly calibrated dates highlights two issues. The first is the possibility of systematic offsets for large-scale research projects, the second is the need for direct intervention and systematic rules-based chronology construction in synthesis work.  Gieseke *et al*. [-@giesecke2014towards] undertook a broad-scale reconstruction of European records based on prior reported chronologies in an effort to facilitate broad-scale reconstruction of patterns and processes of vegetation change in Europe [@brewer2016late].  Blois *et al*. [-@blois2011methodological] undertook the same process for eastern North America.  Each of these were labor intensive and resulted in the construction of multiple new age models.  **This paper builds on work from Dawson *et al*. [@ref], that did something.**
+Comparing re-calibrated age models against directly calibrated dates highlights two issues. The first is the possibility of systematic offsets for large-scale research projects, the second is the need for direct intervention and systematic rules-based chronology construction in synthesis work.  Gieseke *et al*. [-@giesecke2014towards] undertook a broad-scale reconstruction of European records based on prior reported chronologies in an effort to facilitate broad-scale reconstruction of patterns and processes of vegetation change in Europe [@brewer2016late].  Blois *et al*. [-@blois2011methodological] undertook the same process for eastern North America.  Each of these were labor intensive and resulted in the construction of multiple new age models.  This paper builds on work from Dawson *et al*. [@dawson2016quantifying], which rebuilt existing age models using the Bacon framework, by explicitly detailling the steps neccessary to reconstruct a large number of models, and by quantifying the effects of decisions on aggregate outcomes, in the process of rebuilding models.
 
 ## Limitions of linear/classical models vs Baysian efforts.
 
