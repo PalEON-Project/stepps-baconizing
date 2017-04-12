@@ -23,8 +23,6 @@ bibliography: baconizing.bib
 abstract: There's a lot we don't know about making age models for paleoecological records.  One thing we do know, it's a pain, and most people don't know how to do it, and there's not many resources out there for figuring it out on your own.  We did it, and we're telling you all the decisions we made, so you can make some decisions too.
 ---
 
-*[120ch] This paper build new age models using Bacon and then looks at the stuff that happens when we do it.*
-
 \pagebreak
 
 # Introduction
