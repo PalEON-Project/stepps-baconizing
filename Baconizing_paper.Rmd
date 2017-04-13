@@ -333,7 +333,37 @@ We run Bacon, we run BChron using the default settings for the method and we kee
 
 ### ^210^Pb Errors
 
-<!-- This is intended to compare  the uncertainties, from Bacon, for 210Pb dates with unassigned uncertainties, to the uncertainties from bacon for the 210Pb dates for assigned 210Pb dates. The point is, that we need to know whethr interpolation is baised high or low. -->
+```{r, lead_comparison, results = 'hide', echo = FALSE, warning=FALSE}
+
+source('R/lead_ages.R')
+comp_doc <- compare_lead()
+
+comp_doc[[1]]
+```
+
+
+```{r, error_by_age, results = 'hide', echo = FALSE, warning=FALSE}
+
+lead_out <- comp_doc[[2]]
+
+ggplot(data = lead_out) + 
+  geom_point(aes(x = 1950 - age, y = bacon_error1), alpha = 0.7) +
+  geom_point(aes(x = 1950 - age, y = e.older), color = 'red', alpha = 0.5) +
+  coord_cartesian(xlim=c(2000, 1700), ylim=c(0, 200), expand = c(0,0)) +
+  scale_x_reverse()
+
+```
+
+When we examine the Bacon uncertainties around the 210Pb dates 
+
+```{r}
+drop_outlier <- lead_out %>% filter(bacon_error1 < 200)
+
+diff <- t.test(drop_outlier$bacon_error1, drop_outlier$e.older, paired = TRUE)
+
+```
+
+We can see from these results that the Bacon estimates are, on average, smaller than the ^210^Pb error estimates, when we remove outliers.  This is perhaps a function of the tight constraint that Bacon adds to the estimates (is it a function of the confidence interval?) because Bacon considers the erors as part of a process, the stacked estimates result in a tighter confidence interval.
 
 ### Expert Elicitation
 

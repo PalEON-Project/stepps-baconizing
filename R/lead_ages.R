@@ -1,4 +1,4 @@
-library(dplyr)
+#' 
 
 compare_lead <- function() {
   geochron_tables <- readRDS('data/output/all_geochron_tables.rds')
@@ -47,20 +47,21 @@ compare_lead <- function() {
   
   bacon_bound <- leads %>% purrr::by_row(pull_age, .collate = 'cols')
   
-  ggplot(bacon_bound) + 
-    geom_point(aes(x = 1950 - age, y = bacon_age1)) +
-    geom_abline(slope = 1) +
+  lead_plot <- ggplot(bacon_bound) + 
+    geom_abline(slope = 1, alpha = 0.4) +
     geom_errorbar(aes(x = 1950 - age,
                       ymin = bacon_age1 - bacon_error1,
-                      ymax = bacon_age1 + bacon_error1)) +
+                      ymax = bacon_age1 + bacon_error1), alpha = 0.7) +
     geom_errorbarh(aes(y = bacon_age1,
                        xmax = 1950 - age + e.young,
                        xmin = 1950 - age - e.older,
-                       x = 1950 - age)) +
+                       x = 1950 - age), alpha = 0.7) +
+    geom_point(aes(x = 1950 - age, y = bacon_age1), alpha = 0.9) +
     theme_bw() +
-    coord_equal(xlim = c(1800, 2000), ylim = c(1800, 2000)) +
+    coord_equal(xlim = c(1800, 2000), ylim = c(1800, 2000), expand = c(0,0)) +
     xlab('Reported 210Pb Age') +
     ylab('Bacon Estimated Age')
   
+  return(list(plot = lead_plot, data = bacon_bound))
   
 }
