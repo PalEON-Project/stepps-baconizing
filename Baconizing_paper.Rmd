@@ -47,7 +47,7 @@ version <- 0.1
 
 Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings [@brewer2012paleoecoinformatics;@uhen2013card]. As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record. Paleoecologists have been aware of limitations in age modeling capabilities for some time, and the issues that these limitations cause are well noted [@grimm2009magnitude;@liu2012temporal].  
 
-Recent efforts have focused on standardizing age models across the database [@giesecke2014towards], establishing regional benchmarks [@blois2011methodological;flantua2016geochronological]. European models used the software Clam [@blaauw2010methods], as did efforts with the North American Pollen Database [@blois2011methodological]. 
+Recent efforts have focused on standardizing age models across the database [@giesecke2014towards], establishing regional benchmarks [@blois2011methodological;@flantua2016geochronological]. European models used the software Clam [@blaauw2010methods], as did efforts with the North American Pollen Database [@blois2011methodological]. 
 
 As more and more ecologists are turning to the paleoecological record, and as we try to do more with what we have, the limitations of extant age models become more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research [@blaauw2012out].
 
@@ -211,9 +211,9 @@ Comparing re-calibrated age models against directly calibrated dates highlights 
 
 ## Limitions of linear/classical models vs Baysian efforts.
 
-Large scale data analysis across heterogeneous data can be complex, thus the use of harmonized age models, that integrate ideas about the underlying mechanics of the processes linking depth and time become important [@blauuw2011].  Developments since Blois *et al*. [-@blois2011methodological], and workshops such as the PAGES-sponsored **Neotoma Belfast Meeting** (what was this called) [@grimm2014working] have begun the process of outlining the methods required to undertake large-scale efforts to re-build age models.
+Large scale data analysis across heterogeneous data can be complex, thus the use of harmonized age models, that integrate ideas about the underlying mechanics of the processes linking depth and time become important [@blaauw2011flexible].  Developments since Blois *et al*. [-@blois2011methodological], and workshops such as the PAGES-sponsored Age Models, Chronologies, and Databases Workshop [@grimm2014working] have begun the process of outlining the methods required to undertake large-scale efforts to re-build age models.
 
-Here we present the results of one such excersise.  In this paper we outline the decision making process around the parameter selection for the age models, we summarize differences between the original chronologies and the new chronologies, we higlight differences between chronologies generated using two age model types and highlight best practices for chronologies within large-scale synthesis.  We also identify limitations of current methods, that could serve to improve chronology construction in the future.
+Here we present the results of one such excercise.  In this paper we outline the decision making process around the parameter selection for the age models, we summarize differences between the original chronologies and the new chronologies, we higlight differences between chronologies generated using two age model types and highlight best practices for chronologies within large-scale synthesis.  We also identify limitations of current methods, that could serve to improve chronology construction in the future.
 
 # Methods
 
@@ -226,70 +226,9 @@ Bacon requires that all chronological markers be associated with defined errors.
 ```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
 geochron_tables <- readRDS('data/output/all_geochron_tables.rds')
 
-widen <- function(x) {
-  data.frame(x$dataset$site.data,
-             x$geochron,
-             row.names = NULL)
-}
+source('R/lead_plotting.R')
 
-wide_table <- geochron_tables %>% 
-  purrr::map(widen) %>% bind_rows
-
-leads <- wide_table %>% filter(geo.chron.type %in% "Lead-210")
-
-# There are some ages with improperly named age types.
-leads$age[!is.na(leads$age) & leads$age > 500] <- 1950 - 
-  leads$age[!is.na(leads$age) & leads$age > 500]
-
-# None of the ages reported as Calendar years BP are wrong.
-
-lead_smooth <- ggplot(leads %>% filter(e.older > 0), aes(x = age, y = e.older)) +
-  geom_point(alpha = 0.3) + 
-  geom_smooth(aes(x = age, y = e.older)) +
-  coord_cartesian(xlim = c(-60, 200), ylim = c(0, 150), expand = c(0, 0)) +
-  scale_y_sqrt() +
-  xlab("Years Before Present") +
-  ylab("Error - SD") +
-  theme_bw() +
-        theme(axis.title.x = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-              legend.position = 'none',
-        axis.title.y = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-        axis.ticks = element_blank(),
-        axis.text.x = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14),
-        axis.text.y = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14))
-
-
-lead_na <- ggplot(leads[is.na(leads$e.older),], aes(x = age)) + 
-  geom_histogram(fill = 'red', alpha = 0.5, color = 'black') +
-  xlab("Years Before Present") +
-  ylab("Unassigned Samples") +
-  
-  theme_bw() +
-        theme(axis.title.x = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-              legend.position = 'none',
-        axis.title.y = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-        axis.ticks = element_blank(),
-        axis.text.x = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14),
-        axis.text.y = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14))
-
-
-grid.arrange(lead_smooth, lead_na, ncol = 1)
+lead_plots(geochron_tables)
 
 ```
 
@@ -301,7 +240,7 @@ The *Ambrosia* rise is a well known phenomenon in the eastern United States, and
 
 For a summary of the settlement horizon elicitation exercise, see the calibration paper [@dawson2016quantifying].
 
-To generate the prediction data set, we would like to make use of the elicitation exercise results in order to include an additional stratigraphic marker in the chronological control tables. To do this, we need to be able to assign pre-settlement ages that correspond with the expert-determined pre-settlement depths with some confidence. From the PLS data, we have corresponding sample year for all sampled location. Within each grid cell, we determined the maximum sampling year, and then our pre-settlement age was determined by subtracting 50 from this value. The period of settlement across the upper Midwestern United States spanned from 1820 - 1910 [@goring2016presett], providing a potential period of settlement spanning nearly 100 years, thus we applied an age uncertainty (stanadrd deviation) of 50 years for the settlement marker, around the date of survey for the grid cell within which the core was located.  Ideally, methods would provide the opportunity to include asymmetric uncertainty, since, in the case of the settlement horizon, we know the minimum age, but not the most recent age of potential settlement.
+To generate the prediction data set, we would like to make use of the elicitation exercise results in order to include an additional stratigraphic marker in the chronological control tables. To do this, we need to be able to assign pre-settlement ages that correspond with the expert-determined pre-settlement depths with some confidence. From the PLS data, we have corresponding sample year for all sampled location. Within each grid cell, we determined the maximum sampling year, and then our pre-settlement age was determined by subtracting 50 from this value. The period of settlement across the upper Midwestern United States spanned from 1820 - 1910 [@goring2016novel], providing a potential period of settlement spanning nearly 100 years, thus we applied an age uncertainty (stanadrd deviation) of 50 years for the settlement marker, around the date of survey for the grid cell within which the core was located.  Ideally, methods would provide the opportunity to include asymmetric uncertainty, since, in the case of the settlement horizon, we know the minimum age, but not the most recent age of potential settlement.
 
 Five cores were located within grid cells without digitized PLS data. In these cases, we look to the surrounding grid cells to estimate the maximum sampling year. In the upper peninsula of Michigan, there was a single site for which there was no PLS data, which was assigned a maximum sampling year of 1860. The four remaining grid cells in which there were cores but no PLS data were in the lower peninsula of Michigan, and were assigned a maximum year of sampling of 1840.
 
@@ -329,8 +268,6 @@ We run Bacon, we run BChron using the default settings for the method and we kee
 
 ## Age Controls
 
-
-
 ### ^210^Pb Errors
 
 ```{r, lead_comparison, results = 'hide', echo = FALSE, warning=FALSE}
@@ -341,32 +278,29 @@ comp_doc <- compare_lead()
 comp_doc[[1]]
 ```
 
-
 ```{r, error_by_age, results = 'hide', echo = FALSE, warning=FALSE}
 
 lead_out <- comp_doc[[2]]
 
-ggplot(data = lead_out) + 
-  geom_point(aes(x = 1950 - age, y = bacon_error1), alpha = 0.7) +
-  geom_point(aes(x = 1950 - age, y = e.older), color = 'red', alpha = 0.5) +
-  coord_cartesian(xlim=c(2000, 1700), ylim=c(0, 200), expand = c(0,0)) +
-  scale_x_reverse()
+drop_outlier <- lead_out %>% 
+  filter(bacon_error1 < 200) %>% 
+  select(site.name, age, bacon_error1, e.older) %>% na.omit()
+
+ggplot(data = drop_outlier) + 
+  geom_point(aes(x = age, y = bacon_error1), alpha = 0.7, size = 2) +
+  geom_point(aes(x = age, y = e.older), color = 'red', alpha = 0.7, size = 2) +
+  geom_segment(aes(x = age, xend = age, y = bacon_error1, yend = e.older, color = site.name), alpha = 0.5) +
+  coord_equal(xlim=c(-50, 100), ylim=c(0, 100), expand = c(0,0)) +
+  xlab('Years Before Present') +
+  ylab('Model Uncertainty') +
+  annotate("text", x = -25, y = 80, label = "Bacon Uncertainty") +
+  annotate("text", x = -25, y = 75, label = "210Pb Uncertainty", color = "red")
 
 ```
 
-When we examine the Bacon uncertainties around the 210Pb dates 
-
-```{r}
-drop_outlier <- lead_out %>% filter(bacon_error1 < 200)
-
-diff <- t.test(drop_outlier$bacon_error1, drop_outlier$e.older, paired = TRUE)
-
-```
-
-We can see from these results that the Bacon estimates are, on average, smaller than the ^210^Pb error estimates, when we remove outliers.  This is perhaps a function of the tight constraint that Bacon adds to the estimates (is it a function of the confidence interval?) because Bacon considers the erors as part of a process, the stacked estimates result in a tighter confidence interval.
+Bacon uncertainty estimates within the chronologies are consistently larger than the ^210^Pb error estimates for the point samples.  For some records the uncertainty is much higher, while for others the difference in uncertainty is lower.  It is worth noting that only three records have completely paired ^210^Pb records.  I'm not sure why.
 
 ### Expert Elicitation
-
 
 
 ## Bacon Settings
@@ -389,13 +323,14 @@ Modern	3.02	     5.70	      0.53     1.6
 
 ### Section Thickness
 
-```{r, message = FALSE, warning = FALSE, error = FALSE}
+```{r, get_thickness, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
 
 source('R/thick_model.R')
 
 model_plot <- allan_thick()
 
 model_plot[[1]]
+
 ```
 
 Total core thickness shows a relationship to total core age (Figure).  There is a general relationship between age and depth.
@@ -436,9 +371,11 @@ ggplot(pollen_ages, aes(x = diff_bacon, y = diff_bcron)) + geom_point(alpha=0.3)
 
 ## Limitations of current models
 
-Challenge | Solution
-----------| ------------ |
-
+| Challenge | Solution |
+| ---------- | ------------ |
+| Age uncertainties vary in their distributions. |  Allow uncertainty models to include other distributions, including truncated distributions. |
+| Age models require significant oversight |  Codify certain decisions, provide testing suites for fit parameters. |
+|   |   |
 
 # Discussion
 
