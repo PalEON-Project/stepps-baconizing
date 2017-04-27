@@ -13,7 +13,7 @@ output:
     theme: journal
     toc: yes
     toc_float: yes
-    highlight: tango
+    fig_caption: yes
   pdf_document:
     toc: yes
     toc_depth: '3'
@@ -21,18 +21,16 @@ output:
     reference_docx: styles/word_template.docx
     toc: yes
     toc_depth: '3'
+highlight: tango
 geometry: margin=1in
 fontfamily: mathpazo
 fontsize: 11pt
 csl: elsevier-harvard.csl
 bibliography: baconizing.bib
-abstract: > 
-Well constructed chronologies are critical to reliable paleoecological inference.  The systematic construction of age models from the Neotoma Paleoecological Database provides the opportunity to examine the assumptions and decisions involved in model construction.  We use the Bacon age modeling software, implemented in R and attempt to catalogue the decision-making process neccessary for chronology development.  This paper addresses ^210^Pb uncertainty, the treatment of inflection points in sedimentation rates, the use of *Ambrosia* as a biostratigraphic marker in North America, settings for accumulation rates, memory parameters, section and thicknesses within Bacon, and ultimately compare Bacon outputs to outputs from the `BChron` R package.
-The resulting age models show that section thickness generally increases with absolute model age.  As indicated in Goring et al. (2012) near-modern samples have higher accumulation rates, this shift happens rapidly within upper sediments and must be accounted for in the Bacon model settings.  Reported ^210^Pb age uncertainties within the model framework are, most often, significantly lower than the estimated model uncertainties.  Within legacy records, where ^210^Pb dates are unreported, modeled ^210^Pb uncertainties based on reported dates, provide a reasonable framework for re-building chronologies.
+abstract: Well constructed chronologies are critical to reliable paleoecological inference.  The systematic construction of age models from the Neotoma Paleoecological Database provides the opportunity to examine the assumptions and decisions involved in model construction.  We use the Bacon age modeling software, implemented in R and attempt to catalogue the decision-making process neccessary for chronology development.  This paper addresses ^210^Pb uncertainty, the treatment of inflection points in sedimentation rates, the use of *Ambrosia* as a biostratigraphic marker in North America, settings for accumulation rates, memory parameters, section and thicknesses within Bacon, and ultimately compare Bacon outputs to outputs from the `BChron` R package. <br>The resulting age models show that section thickness generally increases with absolute model age.  As indicated in Goring et al. (2012) near-modern samples have higher accumulation rates, this shift happens rapidly within upper sediments and must be accounted for in the Bacon model settings.  Reported ^210^Pb age uncertainties within the model framework are, most often, significantly lower than the estimated model uncertainties.  Within legacy records, where ^210^Pb dates are unreported, modeled ^210^Pb uncertainties based on reported dates, provide a reasonable framework for re-building chronologies.
 keywords: chronology, geochronology, paleoecology, age-models, Bacon, 210Pb, 14C, radiocarbon
+dev: svg
 ---
-
-\pagebreak
 
 # Introduction
 
@@ -94,7 +92,7 @@ The development of the first IntCal curve was a major milestone in paleoecologic
 
 The transition from age models using only radiocarbon years to those with calibrated radiocarbon years within Neotoma is dramatic.  The final radiocarbon model appears to be from 1998, following this we see no more radiocarbon models.  Along with this transition, we are seeing a second transition from simple linear models to more complex models using flexible Bayesian methods.  A critical question then becomes, when faced with records generated using only uncalibrated dates, should we calibrate radiocarbon dates, generate age models *de novo*, or ignore the records altogether?
 
-```{r, plot.chron.change, fig.width=6, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
+```{r, plot.chron.change, fig.width=6, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
 
 source('R/figures/ageplot_histogram.R')
 
@@ -107,7 +105,7 @@ chronology_type_histogram(meta.table)
 To understand the importance of developing new chronologies, it is important to understand that there can be a significant difference in interpreted ages when either, chronological control points are re-calibrated and a model is generated using those calibrated controls, or, the interpolated ages from a model are directly re-calibrated from radiocarbon years to calendar years before present.  While not the prefered method, direct recalibration of interpolated ages does occur within the Neotoma ecosystem.  For example, the temporal search function within the Neotoma Explorer (http://apps.neotomadb.org/explorer), Tilia (http://tiliait.org) and the Neotoma API (http://api.neotomadb.org) all use a lookup table that directly recalibrates ages in radiocarbon years.  However, this process results in systematic biases in both synthetic data (Figure 2) and in the actual Neotoma data (Figure 3).
 flexible]
 
-```{r, linear-fake, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
+```{r, linear-fake, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
 
 source('R/figures/compare_recalibrations.R')
 
@@ -127,7 +125,7 @@ plot(comp_recal)
      Pittsburg Basin, Aghnaghak and Chalco Lake, all have systematically large or small
      estimates for ages. -->
 
-```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
+```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
 
 source('R/recalibrate.actual.R', echo = FALSE)
 
@@ -232,7 +230,7 @@ Here we present the results of one such excercise.  In this paper we outline the
 
 Bacon requires that all chronological markers be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma was entered without error reporting.  Of the 398 ^210^Pb markers in Neotoma, 148 have no error reported.  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and the integer ceiling taken) to obtain standard deviations to be used in the Bacon model.
 
-```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
+```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
 geochron_tables <- readRDS('data/output/all_geochron_tables.rds')
 
 source('R/lead_plotting.R')
@@ -240,7 +238,7 @@ source('R/lead_plotting.R')
 lead_plots(geochron_tables)
 
 ```
-
+**Figure 4.** *Reported uncertainty for ^210^Pb dates within Neotoma, by age, with the total count of unassigned samples by age bin (lower).  Estimated uncertainty, using a model relating reported ^210^Pb uncertainty to age, is then assigned to all ^210^Pb dates with unreported uncertainty.* 
 ### Expert elicitation exercise to identify settlement horizon
 
 Age estimates of pollen samples, and in some cases their uncertainty, can be estimated using an age-depth model determined by a combination of the chronological controls. To determine which sample best represents pre-settlement times, it is possible to select the sample closest in age but not younger than the time of settlement. Instead, we rely on the existence of a biostratigraphic signal corresponding with the time of interest. During European settlement, land-clearances led to noticeable increases in certain agricultural indicators that is reflected in the pollen records, especially *Ambrosia* [@mcandrews1988human]. This change in the relative abundance of Ambrosia, referred to as the *Ambrosia* rise, can be used to identify a reasonably representative presettlement assemblage that justifiable precedes major land clearance - here the pre-settlement pollen sample is defined to be the sample immediately prior to the first pollen sample that reflects the *Ambrosia* rise. We deal with some of the uncertainty associated with the identification of a biostratigraphic marker by: 1) avoiding the need to assign a date to our representative pre-settlement assemblage, and 2) using expert elicitation to reduce expert bias.
@@ -279,13 +277,14 @@ We run Bacon, we run BChron using the default settings for the method and we kee
 
 ### ^210^Pb Errors
 
-```{r, lead_comparison, results = 'hide', echo = FALSE, warning=FALSE}
+```{r, lead_comparison, results = 'hide', echo = FALSE, warning=FALSE, dev='svg'}
 
 source('R/lead_ages.R')
 comp_doc <- compare_lead()
 
 comp_doc[[1]]
 ```
+**Figure 5**. *Reported and estimated ^210^Pb ages from the Bacon models show strong accordance, for the most part.  Uncertainties within the constructed Bacon models at the depths of the ^210^Pb samples show higher uncertainty, which likely reflects the influence of the model itself since the autoregressive nature of the model, the influence of the memory parameter, and the nature of the Bayesian model itself.*
 
 ```{r, error_by_age, results = 'hide', echo = FALSE, warning=FALSE}
 
@@ -332,7 +331,7 @@ Modern	3.02	     5.70	      0.53     1.6
 
 ### Section Thickness
 
-```{r, get_thickness, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
+```{r, get_thickness, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE, dev = 'svg'}
 
 source('R/thick_model.R')
 
