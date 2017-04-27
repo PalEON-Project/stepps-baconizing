@@ -10,10 +10,11 @@ output:
     code_folding: show
     keep_md: yes
     number_sections: yes
-    theme: journal
+    theme: readable
     toc: yes
     toc_float: yes
     fig_caption: yes
+    self_contained: yes
   pdf_document:
     toc: yes
     toc_depth: '3'
@@ -22,9 +23,6 @@ output:
     toc: yes
     toc_depth: '3'
 highlight: tango
-geometry: margin=1in
-fontfamily: mathpazo
-fontsize: 11pt
 csl: elsevier-harvard.csl
 bibliography: baconizing.bib
 abstract: Well constructed chronologies are critical to reliable paleoecological inference.  The systematic construction of age models from the Neotoma Paleoecological Database provides the opportunity to examine the assumptions and decisions involved in model construction.  We use the Bacon age modeling software, implemented in R and attempt to catalogue the decision-making process neccessary for chronology development.  This paper addresses ^210^Pb uncertainty, the treatment of inflection points in sedimentation rates, the use of *Ambrosia* as a biostratigraphic marker in North America, settings for accumulation rates, memory parameters, section and thicknesses within Bacon, and ultimately compare Bacon outputs to outputs from the `BChron` R package. <br>The resulting age models show that section thickness generally increases with absolute model age.  As indicated in Goring et al. (2012) near-modern samples have higher accumulation rates, this shift happens rapidly within upper sediments and must be accounted for in the Bacon model settings.  Reported ^210^Pb age uncertainties within the model framework are, most often, significantly lower than the estimated model uncertainties.  Within legacy records, where ^210^Pb dates are unreported, modeled ^210^Pb uncertainties based on reported dates, provide a reasonable framework for re-building chronologies.
@@ -306,6 +304,8 @@ ggplot(data = drop_outlier) +
 
 ```
 
+**Figure**. *For the three cores within the region with reported ^210^Pb and reconstructed Bacon uncertainties we see consistently higher uncertaintites for the Bacon uncertainties, although the magnitude of the difference varies by record.  Fish Lake shows the smallest difference, while Brown's Bay shows the largest difference.*
+
 Bacon uncertainty estimates within the chronologies are consistently larger than the ^210^Pb error estimates for the point samples.  For some records the uncertainty is much higher, while for others the difference in uncertainty is lower.  It is worth noting that only three records have completely paired ^210^Pb records.  I'm not sure why.
 
 ### Expert Elicitation
@@ -342,7 +342,6 @@ model_plot[[1]]
 ```
 
 Total core thickness shows a relationship to total core age (Figure).  There is a general relationship between age and depth.
-
 
 ## Model Comparison
 
