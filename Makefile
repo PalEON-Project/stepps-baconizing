@@ -3,7 +3,6 @@
 # Simon Goring
 #########################
 
-
 bacon: Baconizing_paper.Rmd
 	Rscript -e 'rmarkdown::render("$<")'
 	

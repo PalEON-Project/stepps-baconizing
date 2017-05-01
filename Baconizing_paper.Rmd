@@ -82,7 +82,7 @@ meta.table$chron <- chron[rownames(meta.table)]
 
 ```
 
-The Neotoma database [@grimm2008neotoma] contains `r length(get_dataset(datasettype="pollen", ageold = 2000, ageyoung = -70))` global pollen records that can be used for paleoecological analysis.  These records have been obtained from publications that span a time period from  `r min(meta.table$year, na.rm=TRUE)` to `r max(meta.table$year, na.rm=TRUE)`, with more than half the records coming from before 1983.  For pollen records that are not "modern", sample age is obtained from a chronology constructed using classical [@blaauw2010methods] or Bayesian [@blaauw2011flexible; @buck2000bayesian;@blaauw2005radiocarbon;@ramsey1995radiocarbon] methods using dated material including radiocarbon (^14^C) and other radiometric dates (*e.g.* ^210^Pb, ^137^Cs). 
+The Neotoma database [@grimm2008neotoma] contains `r length(get_dataset(datasettype="pollen", ageold = 2000, ageyoung = -70))` global pollen records that can be used for paleoecological analysis.  These records have been obtained from publications that span a time period from  `r min(meta.table$year, na.rm=TRUE)` to `r max(meta.table$year, na.rm=TRUE)`, with more than half the records coming from before 1983.  For pollen records that are not "modern", sample age is obtained from a chronology constructed using classical [@blaauw2010methods] or Bayesian [@blaauw2011flexible; @buck2000bayesian;@blaauw2005radiocarbon;@ramsey1995radiocarbon] methods using dated material including radiocarbon (^14^C) and other radiometric dates (*e.g.* ^210^Pb, ^137^Cs).
 
 Chronologies are developed using dated stratigraphic control points from within a cores, which may be geochronological (dated material), geostratigraphic (e.g., the “modern” core top), and sometimes biostratigraphic (changes in pollen assemblages associated with dated changes on the landscape). Geochronological control point ages are often uncertain due to analytical errors during the laboratory radiocarbon dating process [@ward1978procedures], the conversion of radiocarbon to calendar years [@reimer2013selection], and potential differences between the ages of macrofossil material and age of sediment [@blois2011methodological]. Geostratigrahic markers may have fewer sources of uncertainty -- the core top age is assumed to be the year of sampling -- although sedimentary mixing of the upper sediment during sampling does introduce some uncertainty. Finally, biostratigraphic control points are determined by the examination (usually visual) of changes in pollen assemblages throughout a core. However, time series of pollen counts are noisy, and in practice identifying changes in composition is both difficult and subjective [@dawson2016quantifying]. There remains uncertainty in the identification of compositional shifts related to the chronological/stratigraphic sampling density [@liu2012temporal], and, in the case of landscape-scale phenomena such as the mid-Holocene Hemlock decline [@bennett2002determining;@davis1981outbreaks], the need to assign temporal bounds to the landscape-scale phenomenon that caused the compositional shift.
 
@@ -101,7 +101,6 @@ chronology_type_histogram(meta.table)
 **Figure 1**.  *Number and type of default chronologies for pollen records in the Neotoma Paleoecological Database based on the original year of publication for the dataset.  Within Neotoma the default dataset chronology may be updated by subsequent researchers when this information is provided to a data steward.*
 
 To understand the importance of developing new chronologies, it is important to understand that there can be a significant difference in interpreted ages when either, chronological control points are re-calibrated and a model is generated using those calibrated controls, or, the interpolated ages from a model are directly re-calibrated from radiocarbon years to calendar years before present.  While not the prefered method, direct recalibration of interpolated ages does occur within the Neotoma ecosystem.  For example, the temporal search function within the Neotoma Explorer (http://apps.neotomadb.org/explorer), Tilia (http://tiliait.org) and the Neotoma API (http://api.neotomadb.org) all use a lookup table that directly recalibrates ages in radiocarbon years.  However, this process results in systematic biases in both synthetic data (Figure 2) and in the actual Neotoma data (Figure 3).
-flexible]
 
 ```{r, linear-fake, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
 
@@ -236,7 +235,9 @@ source('R/lead_plotting.R')
 lead_plots(geochron_tables)
 
 ```
+
 **Figure 4.** *Reported uncertainty for ^210^Pb dates within Neotoma, by age, with the total count of unassigned samples by age bin (lower).  Estimated uncertainty, using a model relating reported ^210^Pb uncertainty to age, is then assigned to all ^210^Pb dates with unreported uncertainty.* 
+
 ### Expert elicitation exercise to identify settlement horizon
 
 Age estimates of pollen samples, and in some cases their uncertainty, can be estimated using an age-depth model determined by a combination of the chronological controls. To determine which sample best represents pre-settlement times, it is possible to select the sample closest in age but not younger than the time of settlement. Instead, we rely on the existence of a biostratigraphic signal corresponding with the time of interest. During European settlement, land-clearances led to noticeable increases in certain agricultural indicators that is reflected in the pollen records, especially *Ambrosia* [@mcandrews1988human]. This change in the relative abundance of Ambrosia, referred to as the *Ambrosia* rise, can be used to identify a reasonably representative presettlement assemblage that justifiable precedes major land clearance - here the pre-settlement pollen sample is defined to be the sample immediately prior to the first pollen sample that reflects the *Ambrosia* rise. We deal with some of the uncertainty associated with the identification of a biostratigraphic marker by: 1) avoiding the need to assign a date to our representative pre-settlement assemblage, and 2) using expert elicitation to reduce expert bias.
@@ -282,6 +283,7 @@ comp_doc <- compare_lead()
 
 comp_doc[[1]]
 ```
+
 **Figure 5**. *Reported and estimated ^210^Pb ages from the Bacon models show strong accordance, for the most part.  Uncertainties within the constructed Bacon models at the depths of the ^210^Pb samples show higher uncertainty, which likely reflects the influence of the model itself since the autoregressive nature of the model, the influence of the memory parameter, and the nature of the Bayesian model itself.*
 
 ```{r, error_by_age, results = 'hide', echo = FALSE, warning=FALSE}
@@ -304,11 +306,12 @@ ggplot(data = drop_outlier) +
 
 ```
 
-**Figure**. *For the three cores within the region with reported ^210^Pb and reconstructed Bacon uncertainties we see consistently higher uncertaintites for the Bacon uncertainties, although the magnitude of the difference varies by record.  Fish Lake shows the smallest difference, while Brown's Bay shows the largest difference.*
+**Figure 6**. *For the three cores within the region with reported ^210^Pb and reconstructed Bacon uncertainties we see consistently higher uncertaintites for the Bacon uncertainties, although the magnitude of the difference varies by record.  Fish Lake shows the smallest difference, while Brown's Bay shows the largest difference.*
 
 Bacon uncertainty estimates within the chronologies are consistently larger than the ^210^Pb error estimates for the point samples.  For some records the uncertainty is much higher, while for others the difference in uncertainty is lower.  It is worth noting that only three records have completely paired ^210^Pb records.  I'm not sure why.
 
 ### Expert Elicitation
+
 
 
 ## Bacon Settings
@@ -319,7 +322,7 @@ Accumulation rates for records in the region show clear differentiation between 
 
 ![](figures/acc_rate_dists.png)
 
-**Figure 4**. *Sediment accumulation rates for cores in the study region with samples in the last 200 years (in calibrated radiocarbon years, with 0 at 1950 CE).  A clear break can be seen across the records.*
+**Figure 7**. *Sediment accumulation rates for cores in the study region with samples in the last 200 years (in calibrated radiocarbon years, with 0 at 1950 CE).  A clear break can be seen across the records.*
 
 *Table 1*. The estimates from the accumulation rates.
 
@@ -340,6 +343,8 @@ model_plot <- allan_thick()
 model_plot[[1]]
 
 ```
+
+**Figure 8**. Thickness vs age.
 
 Total core thickness shows a relationship to total core age (Figure).  There is a general relationship between age and depth.
 
@@ -376,17 +381,20 @@ ggplot(pollen_ages, aes(x = diff_bacon, y = diff_bcron)) + geom_point(alpha=0.3)
 
 **Figure**. *Recalibrated and reconstructed models.*
 
-## Limitations of current models
-
-| Challenge | Solution |
-| ---------- | ------------ |
-| Age uncertainties vary in their distributions. |  Allow uncertainty models to include other distributions, including truncated distributions. |
-| Age models require significant oversight |  Codify certain decisions, provide testing suites for fit parameters. |
-|   |   |
 
 # Discussion
 
-There are some broad patterns, and some specific comments.
+This approach has shown what large-scale synthetic teams need to consider.  It shows the importance of partnering with community-data resources & 
+
+
+## Current Challenges & Next Steps
+
+| Challenge | Solution |
+| ------------------- | -------------------------------------- |
+| Age uncertainties vary in the shape of their distributions. |  Allow uncertainty models to include other distributions, including truncated distributions. |
+| Age models require significant oversight |  Codify certain decisions, provide testing suites for fit parameters. |
+| Accumulation rates change through time but priors are fixed. | The current solution is to use 'zero-length' hiatuses, which serve to reset the accumulation rate, but allowing models of change based on empirical studies would improve fit. |
+|    |    |
 
 # Conclusions
 
