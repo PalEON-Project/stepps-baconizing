@@ -1,5 +1,9 @@
 lead_plots <- function(geochron_tables) {
 
+  binford <- data.frame(age = -60 + c(10, 100, 150),
+                        nf_mn  = c(1, 10, 80)/2,
+                        nf_mx  = c(2, 20, 90)/2)
+  
   widen <- function(x) {
     data.frame(x$dataset$site.data,
                x$geochron,
@@ -18,9 +22,13 @@ lead_plots <- function(geochron_tables) {
   
   # None of the ages reported as Calendar years BP are wrong.
   
-  lead_smooth <- ggplot(leads %>% filter(e.older > 0), aes(x = age, y = e.older)) +
-    geom_point(alpha = 0.3) + 
-    geom_smooth(aes(x = age, y = e.older)) +
+  filter_data <- leads %>% filter(e.older > 0)
+  
+  lead_smooth <- ggplot() +
+    geom_rect(data = binford, aes(xmin = age - 5, xmax = age + 5, 
+                                  ymin = nf_mn, ymax = nf_mx), fill = 'red') +
+    geom_point(data = filter_data, aes(x = age, y = e.older), alpha = 0.3) + 
+    geom_smooth(data = filter_data, aes(x = age, y = e.older), method = 'glm', method.args = list(family = 'poisson')) +
     coord_cartesian(xlim = c(-60, 200), ylim = c(0, 150), expand = c(0, 0)) +
     scale_y_sqrt() +
     xlab("Years Before Present") +
@@ -40,7 +48,6 @@ lead_plots <- function(geochron_tables) {
           axis.text.y = element_text(family = 'serif', 
                                      face = 'italic', 
                                      size = 14))
-  
   
   lead_na <- ggplot(leads[is.na(leads$e.older),], aes(x = age)) + 
     geom_histogram(fill = 'red', alpha = 0.5, color = 'black') +
