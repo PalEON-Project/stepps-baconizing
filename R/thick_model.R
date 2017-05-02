@@ -1,12 +1,26 @@
 allan_thick <- function() {
   thickness <- readr::read_csv('data/pollen_meta_v1.0.csv')
 
-  thick_model <- ggplot(aes(x = thick, y = pol_age_max), data = thickness) + 
-    geom_point() + 
-    geom_smooth() +
+  thick <- thickness %>% purrr::by_row(function(x){
+    dir  <- paste0('Cores/',x$handle, '/')
+    file <- paste0(x$handle, '_depths.txt')
+    if(file %in% list.files(dir)) {
+      depths <- readr::read_delim(paste0(dir, file), 
+                                  delim = ',',
+                                  col_names = FALSE)
+      output <- diff(range(depths))
+    } else {
+      output <- NA
+    }
+    return(data.frame(core_length= as.numeric(output)))}, .collate = 'cols') %>% 
+    select(name, handle, thick, core_length1)
+  
+  thick_model <- ggplot(aes(x = thick, y = core_length1), data = thick) + 
+    geom_jitter(alpha = 0.4, width=.2) +
+    geom_smooth(method = 'gam', method.args = list(family = 'poisson', k = 2), se = TRUE) +
     theme_bw() +
-    xlab("Best-Fit Model Section Thickness") +
-    ylab("Maximum Core Age") +
+    xlab("Best-Fit Model Section Thickness (cm)") +
+    ylab("Core Length (cm)") +
     theme(axis.title.x = element_text(family = 'serif', 
                                       face = 'bold.italic', 
                                       size = 18),
@@ -22,7 +36,7 @@ allan_thick <- function() {
                                      face = 'italic', 
                                      size = 14))
   
-  model <- gam(pol_age_max ~ s(thick, k = 3), data = thickness)
+  model <- gam(pol_age_max ~ s(thick, k = 3), family = 'poisson', data = thickness)
   
   return(list(plot = thick_model, model = model))
   
