@@ -1,7 +1,10 @@
 
 chronology_type_histogram <- function(meta.table) {
   
-  meta.table_short <- meta.table %>% group_by(id) %>% filter(year == max(year) & !is.na(chron)) %>% unique()
+  meta.table_short <- meta.table %>% 
+    group_by(id) %>% 
+    filter(year == max(year) & !is.na(chron)) %>% 
+    unique()
   
   # TODO: Because there are defaults for each model type some of these records have multiple
   # entries, for example, both calibrated and uncalibrated ages.  Need to pick the best.

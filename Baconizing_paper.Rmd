@@ -69,16 +69,30 @@ if (paste0('pubs_v', version, '.rds') %in% list.files('data/output')) {
   saveRDS(pubs, file = paste0('data/output/pubs_v', version, '.rds'))
 }
 
-meta.table       <- do.call(rbind.data.frame, 
-                            lapply(pubs, function(x){
-                              metas <- do.call(rbind.data.frame, lapply(x, '[[', 'meta'))
-                              metas[which.max(metas$year),]
-                            }))
+meta.table <- pubs %>% 
+  map(function(x){
+    metas <- do.call(rbind.data.frame, 
+                     lapply(x, '[[', 'meta'))
+    output <- metas[which.min(metas$year),]
+    if(nrow(output) == 0) {
+      output <- data.frame(id = NA, 
+                           pub.type = NA, 
+                           year = NA,
+                           citation = NA)}
+    return(output)}) %>% 
+  bind_rows
 
-chron <- sapply(all_downloads, function(x)x$sample.meta$age.type[1])
+chron <- sapply(all_downloads, function(x){
+  types <- sapply(x$chronologies, function(x) x$age.type[1])
+  age_types <- types[which.min(match(types, c("Calendar years BP",
+                                              "Varve years BP",
+                                              "Calibrated radiocarbon years BP",
+                                              "Radiocarbon years BP")))]
+  if(length(age_types) == 0) { age_types <- NA }
+  return(age_types)})
 
 meta.table$chron <- NA
-meta.table$chron <- chron[rownames(meta.table)]
+meta.table$chron <- chron
 
 ```
 
@@ -204,6 +218,8 @@ diff <- ggplot(new.chrons, aes(x = age.lin, y = diff)) +
           axis.text.y = element_text(family = 'serif', 
                                       face = 'italic', 
                                       size = 14))
+
+ggsave(file = 'figures/difference.svg', plot = diff, width = 5, height = 2)
 
 grid.arrange(basic, diff)
 
