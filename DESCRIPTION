@@ -26,7 +26,8 @@ Imports:
     dplyr,
     readr,
     gridExtra,
-    knitr
+    knitr,
+    svglite
 Suggests:
 
 RoxygenNote: 5.0.1

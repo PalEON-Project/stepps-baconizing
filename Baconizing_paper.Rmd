@@ -112,6 +112,11 @@ chronology_type_histogram(meta.table)
 
 ```
 
+<object type="image/svg+xml" data="figures/histograms_cleaned.svg">
+  Histograms of age model types against year of publication 
+  <!-- fallback image in CSS -->
+</object>
+
 **Figure 1**.  *Number and type of default chronologies for pollen records in the Neotoma Paleoecological Database based on the original year of publication for the dataset.  Within Neotoma the default dataset chronology may be updated by subsequent researchers when this information is provided to a data steward.*
 
 To understand the importance of developing new chronologies, it is important to understand that there can be a significant difference in interpreted ages when either, chronological control points are re-calibrated and a model is generated using those calibrated controls, or, the interpolated ages from a model are directly re-calibrated from radiocarbon years to calendar years before present.  While not the prefered method, direct recalibration of interpolated ages does occur within the Neotoma ecosystem.  For example, the temporal search function within the Neotoma Explorer (http://apps.neotomadb.org/explorer), Tilia (http://tiliait.org) and the Neotoma API (http://api.neotomadb.org) all use a lookup table that directly recalibrates ages in radiocarbon years.  However, this process results in systematic biases in both synthetic data (Figure 2) and in the actual Neotoma data (Figure 3).

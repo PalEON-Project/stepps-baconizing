@@ -24,9 +24,9 @@ chronology_type_histogram <- function(meta.table) {
   meta.table_short <- meta.table_short %>% na.omit
   
   plot_out <- ggplot(na.omit(meta.table_short), aes(x = year, fill = chron)) + 
-    geom_histogram(binwidth = 1) +
-    scale_x_continuous(limits = c(1948, 2014), expand = c(0,0)) + 
-    scale_y_continuous(limits = c(0, 30), expand = c(0,0)) + 
+    geom_histogram(binwidth = 2, color = 'black') +
+    scale_x_continuous(limits = c(1948, 2014), expand = c(0,0), breaks = seq(1950, 2010, by = 10)) + 
+    scale_y_continuous(limits = c(0, 50), expand = c(0,0)) + 
     scale_fill_viridis(guide = guide_legend(title = "Chronology"), 
                       discrete = TRUE) +
     xlab('Publication Year') + 
@@ -45,6 +45,9 @@ chronology_type_histogram <- function(meta.table) {
           axis.text.y = element_text(family = 'serif', 
                                      face = 'italic', 
                                      size = 14))
-  return(plot_out)
+  
+  ggsave(filename = 'figures/histograms.svg', plot_out, width = 10, height = 4)
+  
+  return(NULL)
 
 }
