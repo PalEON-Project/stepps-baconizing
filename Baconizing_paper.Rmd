@@ -150,10 +150,18 @@ if (paste0('comp_recal_v', version, '.rds') %in% list.files('data/output')) {
 
 source('R/recalibrate.actual.R', echo = FALSE)
 
-new.chrons <- new.chrons %>% filter(!core %in% c("Chalko Lake", "Aghnaghak", "Pittsburg Basin", "Lac a l'Ange", "Marl Pond", "Cheyenne Bottoms", "San Agustin Plains"))
+age_seq <- seq(1000, 21000, by = 1000)
 
-basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = handle)) + 
-            geom_line() +
+new.chrons <- new.chrons %>%  
+  filter(!core %in% c("Chalko Lake", "Aghnaghak", "Pittsburg Basin", 
+                      "Lac à l'Ange", "Marl Pond", "Cheyenne Bottoms", 
+                      "San Agustin Plains")) %>% 
+  group_by(handle) %>% 
+  mutate(max = findInterval(max(age.lin, na.rm = TRUE), age_seq)) %>% 
+  na.omit
+
+basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin)) + 
+            geom_path(aes(group = handle, color = factor(max))) +
             scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
             scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0)) +
         theme_bw() +
@@ -195,7 +203,7 @@ basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin, color = handle)) +
 
 # Build an age model with a knot every 500 years:
 diff.model <- gam(diff ~ s(age.lin, k = 42), 
-                  data = na.omit(new.chrons))
+                  data = new.chrons)
 
 diff.pred <- predict(diff.model,
                      newdata = data.frame(age.lin = seq(0, 21000, by = 10)),
@@ -205,7 +213,7 @@ diff.data <- data.frame(age = seq(0, 21000, by = 10),
                         pred = diff.pred[[1]], 
                         se   = diff.pred[[2]])
 
-diff <- ggplot(new.chrons, aes(x = age.lin, y = diff)) +
+diff <- ggplot(new.chrons, aes(x = age.lin, y = diff, color = handle)) +
             geom_point(alpha = 0.2) +
             geom_line(data = diff.data, aes(x = age, y = pred), col = 'red', size = 2) +
             scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
@@ -229,9 +237,7 @@ diff <- ggplot(new.chrons, aes(x = age.lin, y = diff)) +
                                       face = 'italic', 
                                       size = 14))
 
-ggsave(file = 'figures/difference.svg', plot = diff, width = 5, height = 2)
-
-grid.arrange(basic, diff)
+ggsave(file = 'figures/difference.svg', plot = diff, width = 9, height = 2.5)
 
 ```
 
