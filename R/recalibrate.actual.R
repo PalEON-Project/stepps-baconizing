@@ -1,16 +1,20 @@
 #  Get all the chronologies and rebuild as before:
 
-if (!'chronologies.RData' %in% list.files('data/output/')) {
+if (!'chronologies.rds' %in% list.files('data/output/')) {
   chronologies <- list()
   
   for (i in 1:length(all_downloads)) {
-    chronologies <- try(get_chroncontrol(all_downloads))
+    chronologies[[i]] <- try(get_chroncontrol(all_downloads[[i]]), silent = TRUE)
+    flush.console()
+    if ('try-error' %in% class(chronologies[[i]])) {
+      chronologies[[i]] <- list(empty = NA)
+    }
   }
   
-  save(chronologies, file = 'data/chronologies.RData')
+  saveRDS(chronologies, file = 'data/output/chronologies.rds')
 
 } else{
-  load('data/chronologies.RData')
+  load('data/output/chronologies.rds')
 }
 
 rebuild <- function(x){
@@ -98,7 +102,7 @@ rebuild <- function(x){
 #  This is just to debug, so I can see where errors occur.
 #  for(i in 1:length(chronologies))rebuild(i)
 
-if (!'new.chrons.RDS' %in% list.files('data/output')) {
+if (!'new.chrons.rds' %in% list.files('data/output')) {
   # Build the chronologies.  This then saves to a file so we don't have to re-run it every time.
   
   new.chrons <- (1:length(chronologies)) %>% 
@@ -116,8 +120,8 @@ if (!'new.chrons.RDS' %in% list.files('data/output')) {
       return(test)}) %>% 
     bind_rows
 
-  saveRDS(new.chrons, file = 'data/output/new.chrons.RDS')
+  saveRDS(new.chrons, file = 'data/output/new.chrons.rds')
 
 } else {
-  new.chrons <- readRDS('data/output/new.chrons.RDS')
+  new.chrons <- readRDS('data/output/new.chrons.rds')
 }

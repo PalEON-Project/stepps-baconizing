@@ -132,22 +132,6 @@ if (paste0('comp_recal_v', version, '.rds') %in% list.files('data/output')) {
   saveRDS(comp_recal, file = paste0('data/output/comp_recal_v', version, '.rds'))
 }
 
-```
-
-<object type="image/svg+xml" data="figures/agediff_plot_final.svg">
-  Differences between age models and direct recalibration.
-  <!-- fallback image in CSS -->
-</object>
-
-
-**Figure 2**. *The difference between (a) directly calibrating (red arrows) radiocarbon ages from an existing model (black dashed line) and (b) rebuilding age models using linear interpolatation (red dashed line) from calibrated radiocarbon ages (red line).  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages.*
-
-<!-- check Lac a l'Ange and Marl Pond, also Cheyenne Bottoms, San Agustin Plains, 
-     Pittsburg Basin, Aghnaghak and Chalco Lake, all have systematically large or small
-     estimates for ages. -->
-
-```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
-
 source('R/recalibrate.actual.R', echo = FALSE)
 
 age_seq <- seq(1000, 21000, by = 1000)
@@ -213,11 +197,15 @@ diff.data <- data.frame(age = seq(0, 21000, by = 10),
                         pred = diff.pred[[1]], 
                         se   = diff.pred[[2]])
 
-diff <- ggplot(new.chrons, aes(x = age.lin, y = diff, color = handle)) +
-            geom_point(alpha = 0.2) +
-            geom_line(data = diff.data, aes(x = age, y = pred), col = 'red', size = 2) +
+diff <- ggplot() +
+            geom_point(data = new.chrons, 
+                       aes(x = age.lin, y = diff, color = as.factor(max))) +
+            geom_ribbon(data = diff.data, 
+                        aes(x = age, ymax = pred + se * 1.96, 
+                            ymin = pred - se * 1.96), 
+                        color = 'red', alpha = 0.5) +
             scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
-            scale_y_continuous(limits = c(-1000, 1000), expand = c(0, 0)) +
+            scale_y_continuous(limits = c(-2000, 2000), expand = c(0, 0)) +
             geom_hline(aes(yintercept = 0)) +
             xlab('Linear Model with Recalibration') +
             ylab('Model Difference') +
@@ -241,7 +229,14 @@ ggsave(file = 'figures/difference.svg', plot = diff, width = 9, height = 2.5)
 
 ```
 
-**Figure 3**. *Direct recalibration of dates within Neotoma pollen records against semi-automated linear interpolation and calibration.  Here we use the chronological controls of the default age model, calibrate chronological controls reported in radiocarbon years, and then use linear interpolation.  Any records with age-reversals were rejected to simplify this illustrative example.*
+
+<object type="image/svg+xml" data="figures/agediff_plot_final.svg">
+  Differences between age models and direct recalibration.
+  <!-- fallback image in CSS -->
+</object>
+
+
+**Figure 2**. *The difference between (a) directly calibrating (red arrows) radiocarbon ages from an existing model (black dashed line) and (b) rebuilding age models using linear interpolatation (red dashed line) from calibrated radiocarbon ages (red line).  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages. (d) Using the chronological controls of the default age model from Neotoma records, calibrate chronological controls reported in radiocarbon years, and then use linear interpolation.  Any records with age-reversals were rejected to simplify this illustrative example.*
 
 Comparing re-calibrated age models against directly calibrated dates highlights two issues. The first is the possibility of systematic offsets for large-scale research projects, the second is the need for direct intervention and systematic rules-based chronology construction in synthesis work.  Gieseke *et al*. [-@giesecke2014towards] undertook a broad-scale reconstruction of European records based on prior reported chronologies in an effort to facilitate broad-scale reconstruction of patterns and processes of vegetation change in Europe [@brewer2016late].  Blois *et al*. [-@blois2011methodological] undertook the same process for eastern North America.  Each of these were labor intensive and resulted in the construction of multiple new age models.  This paper builds on work from Dawson *et al*. [@dawson2016quantifying], which rebuilt existing age models using the Bacon framework, by explicitly detailling the steps neccessary to reconstruct a large number of models, and by quantifying the effects of decisions on aggregate outcomes, in the process of rebuilding models.
 
