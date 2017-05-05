@@ -132,7 +132,6 @@ if (paste0('comp_recal_v', version, '.rds') %in% list.files('data/output')) {
   saveRDS(comp_recal, file = paste0('data/output/comp_recal_v', version, '.rds'))
 }
 
-plot(comp_recal)
 ```
 
 <object type="image/svg+xml" data="figures/agediff_plot_final.svg">
@@ -141,7 +140,7 @@ plot(comp_recal)
 </object>
 
 
-**Figure 2**. *The difference between directly calibrating radiocarbon ages from an existing model and rebuilding age models using linear interpolatation from calibrated radiocarbon ages.  Negative values result when the rebuilt model provides older dates than the directly calibrated dates.  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages obtained from a dataset with linearly interpolated dates reported in radiocarbon years.*
+**Figure 2**. *The difference between (a) directly calibrating (red arrows) radiocarbon ages from an existing model (black dashed line) and (b) rebuilding age models using linear interpolatation (red dashed line) from calibrated radiocarbon ages (red line).  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages.*
 
 <!-- check Lac a l'Ange and Marl Pond, also Cheyenne Bottoms, San Agustin Plains, 
      Pittsburg Basin, Aghnaghak and Chalco Lake, all have systematically large or small
