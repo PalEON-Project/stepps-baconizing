@@ -5,7 +5,7 @@ compare_recalibrations <- function() {
   
   model.recal <- function(max.age, depths){
     # This is plotting out the changes between actual and interpolated dates when ages 
-    # are directly recalibrated.  It's mostly just to 
+    # are directly recalibrated.
     ages <- seq(71, max.age, length.out = length(depths))
     calibed <- BchronCalibrate(ages, 
                                ageSds = rep(1, length(ages)), 
@@ -24,29 +24,6 @@ compare_recalibrations <- function() {
   out.tests <- ldply(oldest, model.recal, depths = depths)
   
   out.tests$diff <- out.tests$direct - out.tests$linear
-  
-  direct <- ggplot(out.tests, aes(x = direct, y = linear, color = max.age)) +
-    geom_line() +
-    scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
-    scale_y_continuous(limits = c(0, 21000), 
-                       expand = c(0, 0)) +
-    xlab('Direct Recalibration') +
-    ylab('Linear Model with\n Recalibration') +
-    theme_bw() +
-    theme(axis.title.x = element_text(family = 'serif', 
-                                      face = 'bold.italic', 
-                                      size = 18),
-          legend.position = 'none',
-          axis.title.y = element_text(family = 'serif', 
-                                      face = 'bold.italic', 
-                                      size = 18),
-          axis.ticks = element_blank(),
-          axis.text.x = element_text(family = 'serif', 
-                                     face = 'italic', 
-                                     size = 14),
-          axis.text.y = element_text(family = 'serif', 
-                                     face = 'italic', 
-                                     size = 14))
   
   diff  <- ggplot(out.tests, aes(x = linear, y = diff, color = max.age)) +
     geom_line() +
@@ -70,5 +47,7 @@ compare_recalibrations <- function() {
                                      face = 'italic', 
                                      size = 14))
   
-  return(grid.arrange(direct, diff))
+  ggsave(filename = 'figures/agediff_plot.svg', diff)
+  
+  return(NULL)
 }
