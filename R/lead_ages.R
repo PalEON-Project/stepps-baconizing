@@ -57,10 +57,24 @@ compare_lead <- function() {
                        xmin = 1950 - age - e.older,
                        x = 1950 - age), alpha = 0.7) +
     geom_point(aes(x = 1950 - age, y = bacon_age1), alpha = 0.9) +
-    theme_bw() +
     coord_equal(xlim = c(1800, 2000), ylim = c(1800, 2000), expand = c(0,0)) +
     xlab('Reported 210Pb Age') +
-    ylab('Bacon Estimated Age')
+    ylab('Bacon Estimated Age') +
+    theme_bw() +
+    theme(axis.title.x = element_text(family = 'serif', 
+                                      face = 'bold.italic', 
+                                      size = 18),
+          axis.title.y = element_text(family = 'serif', 
+                                      face = 'bold.italic', 
+                                      size = 18),
+          axis.ticks = element_blank(),
+          axis.text.x = element_text(family = 'serif', 
+                                     face = 'italic', 
+                                     size = 14),
+          axis.text.y = element_text(family = 'serif', 
+                                     face = 'italic', 
+                                     size = 14))
+  
   
   return(list(plot = lead_plot, data = bacon_bound))
   
