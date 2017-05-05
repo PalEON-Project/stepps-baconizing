@@ -14,7 +14,7 @@ if (!'chronologies.rds' %in% list.files('data/output/')) {
   saveRDS(chronologies, file = 'data/output/chronologies.rds')
 
 } else{
-  load('data/output/chronologies.rds')
+  readRDS('data/output/chronologies.rds')
 }
 
 rebuild <- function(x){

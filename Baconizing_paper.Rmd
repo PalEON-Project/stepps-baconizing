@@ -230,7 +230,7 @@ ggsave(file = 'figures/difference.svg', plot = diff, width = 9, height = 2.5)
 ```
 
 
-<object type="image/svg+xml" data="figures/agediff_plot_final.svg">
+<object type="image/svg+xml" data="figures/agediff_plot_final.svg" style="width: 100%;height: 100%;">
   Differences between age models and direct recalibration.
   <!-- fallback image in CSS -->
 </object>
