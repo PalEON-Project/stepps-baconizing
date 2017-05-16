@@ -45,7 +45,7 @@ compare_lead <- function() {
     
   }
   
-  bacon_bound <- leads %>% by_row(pull_age, .collate = 'cols')
+  bacon_bound <- leads %>% purrrlyr::by_row(pull_age, .collate = 'cols')
   
   lead_plot <- ggplot(bacon_bound) + 
     geom_abline(slope = 1, alpha = 0.4) +

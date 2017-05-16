@@ -15,3 +15,4 @@ r_packages:
   - dplyr
   - readr
   - gridExtra
+  - purrrlyr

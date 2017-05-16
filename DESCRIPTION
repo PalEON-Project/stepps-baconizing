@@ -27,7 +27,8 @@ Imports:
     readr,
     gridExtra,
     knitr,
-    svglite
+    svglite,
+    purrrlyr
 Suggests:
 
 RoxygenNote: 5.0.1
