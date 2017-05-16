@@ -23,8 +23,8 @@ output:
     toc: yes
     toc_depth: '3'
 highlight: tango
-csl: elsevier-harvard.csl
-bibliography: baconizing.bib
+csl: styles/elsevier-harvard.csl
+bibliography: styles/baconizing.bib
 abstract: Well constructed chronologies are critical to reliable paleoecological inference.  The systematic construction of age models from the Neotoma Paleoecological Database provides the opportunity to examine the assumptions and decisions involved in model construction.  We use the Bacon age modeling software, implemented in R and attempt to catalogue the decision-making process neccessary for chronology development.  This paper addresses ^210^Pb uncertainty, the treatment of inflection points in sedimentation rates, the use of *Ambrosia* as a biostratigraphic marker in North America, settings for accumulation rates, memory parameters, section and thicknesses within Bacon, and ultimately compare Bacon outputs to outputs from the `BChron` R package. <br>The resulting age models show that section thickness generally increases with absolute model age.  As indicated in Goring et al. (2012) near-modern samples have higher accumulation rates, this shift happens rapidly within upper sediments and must be accounted for in the Bacon model settings.  Reported ^210^Pb age uncertainties within the model framework are, most often, significantly lower than the estimated model uncertainties.  Within legacy records, where ^210^Pb dates are unreported, modeled ^210^Pb uncertainties based on reported dates, provide a reasonable framework for re-building chronologies.
 keywords: chronology, geochronology, paleoecology, age-models, Bacon, 210Pb, 14C, radiocarbon
 dev: svg
