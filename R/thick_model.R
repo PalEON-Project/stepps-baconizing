@@ -1,7 +1,7 @@
 allan_thick <- function() {
   thickness <- readr::read_csv('data/pollen_meta_v1.0.csv')
 
-  thick <- thickness %>% purrr::by_row(function(x){
+  thick <- thickness %>% purrrlyr::by_row(function(x){
     dir  <- paste0('Cores/',x$handle, '/')
     file <- paste0(x$handle, '_depths.txt')
     if(file %in% list.files(dir)) {
