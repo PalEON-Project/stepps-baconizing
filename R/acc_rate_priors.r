@@ -5,11 +5,11 @@ library(MASS)
 library(ggplot2)
 
 # load Bchron
-source('utils/calibrate.R')
+source('R/utils/calibrate.R')
 
 # meta data; includes list of sites
-bacon_params = read.csv('bacon.params.csv', header=TRUE, sep=',')
-ncores       = nrow(bacon_params)
+bacon_params   = read.csv('data/bacon_params_v1.0.csv', header=TRUE, sep=',', stringsAsFactors=FALSE)
+ncores = nrow(bacon_params)
 
 get_type_accs <- function(chron, handle){
   
@@ -23,7 +23,7 @@ get_type_accs <- function(chron, handle){
   return(data.frame(site=site, depth=depth, thick=thick, age=age, rate=rate, cc=cc))
 }
 
-accs      = list()
+accs      = data.frame(site=character(0), depth=numeric(0), thick=numeric(0), age=numeric(0), rate=numeric(0), cc=numeric(0))
 core_tops = list()
 
 wmean_date <- function(x) sum(x$ageGrid*x$densities / sum(x$densities))
@@ -36,10 +36,13 @@ for(i in 1:ncores){
   
   if (site_params$suit){  
     
-    if (!(file.exists(sprintf('Cores/%s/%s.csv', site_params$handle, site_params$handle)))) {
+    print("site suitable")
+    
+    if(!(file.exists(sprintf('Cores/%s/%s.csv', site_params$handle, site_params$handle)))) {
+     print(paste0("No file exists for site ", site_params$handle))
      next 
     } 
-    
+
     chron = read.table(sprintf('Cores/%s/%s.csv', site_params$handle, site_params$handle), sep=',', header=TRUE)
     
     if ( any(substr(chron$labid, 1, 4) == 'Core') ){
@@ -97,12 +100,12 @@ p1 <- ggplot(data=accs) + geom_point(aes(x=age_sqrt, y=rate_sqrt, colour=factor(
   xlab('Age (years)') + ylab('Rate (yr/cm)') + theme_bw()
 print(p1)
 
-p1 <- ggplot(data=accs) + geom_point(aes(x=age_sqrt, y=rate_sqrt, colour=factor(era)), alpha=0.4) + 
-  geom_boxplot(aes(x=age_sqrt, y=rate_sqrt, group=factor(era)), stat='boxplot', alpha=0.4) + geom_vline(xintercept=10, linetype=2)+
-  scale_colour_manual(values=c('blue', 'black'), labels=c('historical', 'modern'), name='Era') +
-  scale_fill_manual(values=c('blue', 'black'), labels=c('historical', 'modern'), name='Era') +
-  xlab('Age (years)') + ylab('Rate (yr/cm)') + theme_bw()
-print(p1)
+# p1 <- ggplot(data=accs) + geom_point(aes(x=age_sqrt, y=rate_sqrt, colour=factor(era)), alpha=0.4) + 
+#   geom_boxplot(aes(x=age_sqrt, y=rate_sqrt, group=factor(era)), stat='boxplot', alpha=0.4) + geom_vline(xintercept=10, linetype=2)+
+#   scale_colour_manual(values=c('blue', 'black'), labels=c('historical', 'modern'), name='Era') +
+#   scale_fill_manual(values=c('blue', 'black'), labels=c('historical', 'modern'), name='Era') +
+#   xlab('Age (years)') + ylab('Rate (yr/cm)') + theme_bw()
+# print(p1)
 
 
 ggplotcore_tops = as.data.frame(core_tops)
@@ -115,17 +118,17 @@ var(accs$rate[(accs$age>=100) & (accs$rate>0) & (accs$age<=2000)], na.rm=TRUE)
 
 summary(accs$rate[accs$rate>0])
 
-pdf(file='figures/accumulation_rates_vs_age.pdf', width=8, height=6)
-plot(sqrt(accs$age), sqrt(accs$rate), xlab='Age (YBP)', ylab='Rate (yr/cm)')
-points(sqrt(accs$age[accs$age<100]), sqrt(accs$rate[accs$age<100]), col='blue', pch=19)
-legend('topright', legend=c('Modern', 'Historical'), pch=c(19, 1), col=c('blue', 'black'))
-dev.off()
-
-pdf(file='figures/accumulation_rates_vs_depth.pdf', width=8, height=6)
-plot(accs$depth, accs$rate, xlab='Depth (cm)', ylab='Rate (yr/cm)')
-points(accs$depth[accs$age<100], accs$rate[accs$age<100], col='blue', pch=19)
-legend('topright', legend=c('Modern', 'Historical'), pch=c(19, 1), col=c('blue', 'black'))
-dev.off()
+# pdf(file='figures/accumulation_rates_vs_age.pdf', width=8, height=6)
+# plot(sqrt(accs$age), sqrt(accs$rate), xlab='Age (YBP)', ylab='Rate (yr/cm)')
+# points(sqrt(accs$age[accs$age<100]), sqrt(accs$rate[accs$age<100]), col='blue', pch=19)
+# legend('topright', legend=c('Modern', 'Historical'), pch=c(19, 1), col=c('blue', 'black'))
+# dev.off()
+# 
+# pdf(file='figures/accumulation_rates_vs_depth.pdf', width=8, height=6)
+# plot(accs$depth, accs$rate, xlab='Depth (cm)', ylab='Rate (yr/cm)')
+# points(accs$depth[accs$age<100], accs$rate[accs$age<100], col='blue', pch=19)
+# legend('topright', legend=c('Modern', 'Historical'), pch=c(19, 1), col=c('blue', 'black'))
+# dev.off()
 
 # modern rate gamma parameters
 accs.mod = accs[accs$age<100,]
