@@ -270,6 +270,8 @@ ggsave(file = 'figures/difference.svg', plot = diff, width = 9, height = 2.5)
 
 # Methods
 
+Estimating age-depth relationships requires that several decisions be made about suitable chronological controls, as well as model class and inputs. The objective of this work was to estimate the ages of pollen samples with uncertainty. There are several suitable tools and models that can be used to obtain these estimates, including Bacon, Bchron, and Oxcal (are there others?). Here we work with Bacon because it 1) implements a Bayesian framework that estimates sample age posteriors, 2) is widely used in the paloecological community, and 3) accounts for some of the key components in the sediment deposition and accumulation process. Using Bacon to estimate age-depth relationships requires the specification of: 1) chronological controls, which include radiometric dates, biostratigraphic markers, and their uncertainty, 2) priors on the accumulation rate and memory, 3) input values for variable that define the resolution and structure of the divisions of the sediment core. To ensure a consistent methodology among sediment core in the UMW domain, we developed a set of standard decisions that are described below.
+
 ## Chronological Uncertainty
 
 ### Dealing with zero-value ^210^Pb errors
