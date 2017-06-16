@@ -52,6 +52,7 @@ abstract: Well constructed chronologies are critical to reliable paleoecological
 ```{r load_libraries, echo=FALSE, message=FALSE, warnings = FALSE, results='hide'}
 
 library(purrr, verbose = FALSE)
+library(purrrlyr, verbose = FALSE)
 library(ggplot2, verbose = FALSE)
 library(neotoma, verbose = FALSE)
 library(plyr, verbose = FALSE)
@@ -390,7 +391,9 @@ Bacon uncertainty estimates within the chronologies are consistently larger than
 
 ### Expert Elicitation
 
+```{r}
 
+```
 
 ## Bacon Settings
 
@@ -424,7 +427,7 @@ model_plot[[1]]
 
 **Figure 8**. Thickness vs age.
 
-Total core thickness shows a relationship to total core age (Figure).  There is a general relationship between age and depth.
+Total core thickness shows a relationship to total core length (Figure).  There is a general relationship between age and depth.
 
 ## Model Comparison
 
@@ -464,6 +467,7 @@ ggplot(pollen_ages, aes(x = diff_bacon, y = diff_bcron)) + geom_point(alpha=0.3)
 
 This approach has shown what large-scale synthetic teams need to consider.  It shows the importance of partnering with community-data resources & 
 
+A challenge for paleoecologists is that site level effects can often play a significant role in sediment accumulation, pollen accumulation and the interpretation of model results.  When working with aggregate data it is possible to lose sight of these site level effects, and the potential benefits of doing batch runs with the latest software might make a researcher overlook the peculiarities associated with individual records.  Knowing the data well and taking time to examine results in the context of the original publications is critical to evaluating the quality of a record.  In this exercise a number of records were rejected, a number of records had modifications made and some peculiar records were retained based on documetation within the primary litaerature.  There is no alternative to knowing your data well.
 
 ## Current Challenges & Next Steps
 
@@ -472,7 +476,10 @@ This approach has shown what large-scale synthetic teams need to consider.  It s
 | Age uncertainties vary in the shape of their distributions. |  Allow uncertainty models to include other distributions, including truncated distributions. |
 | Age models require significant oversight |  Codify certain decisions, provide testing suites for fit parameters. |
 | Accumulation rates change through time but priors are fixed. | The current solution is to use 'zero-length' hiatuses, which serve to reset the accumulation rate, but allowing models of change based on empirical studies would improve fit. |
-|    |    |
+| Parameter values can have significant, but unintuitive effects on model fit   | Allowing models to accept vectors of possible values may improve fit and provide a better understanding of the interacting relationships between model parameters.   |
+| Ensuring that model outputs are clear and the decisions made about parameters are justified.  | Improved uptake of reproducible workflows and use of provenance tools. |
+
+Point to BChron as another option, Bacon STAN model, UColo Age Model Thing (CSciBox - https://www.cs.colorado.edu/~lizb/cscience.html) and geochronR.
 
 # Conclusions
 
