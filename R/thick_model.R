@@ -13,14 +13,27 @@ allan_thick <- function() {
       output <- NA
     }
     return(data.frame(core_length= as.numeric(output)))}, .collate = 'cols') %>% 
-    select(name, handle, thick, core_length1)
+    select(name, handle, thick, pol_age_max, age_type, core_length1)
   
-  thick_model <- ggplot(aes(x = thick, y = core_length1), data = thick) + 
-    geom_jitter(alpha = 0.4, width=.2) +
-    geom_smooth(method = 'gam', method.args = list(family = 'poisson', k = 2), se = TRUE) +
+  uncalib <- thick$age_type %in% "Radiocarbon years BP" & 
+    thick$pol_age_max < 46000 &
+    thick$pol_age_max > 75
+  
+  recalib <- BchronCalibrate(thick$pol_age_max[uncalib],
+                             rep(100, sum(uncalib)),
+                             calCurves = rep('intcal13', sum(uncalib)))
+  
+  re_ages <- recalib %>% map(function(x)sum(x$ageGrid * x$densities)) %>% unlist
+  
+  thick$pol_age_max[uncalib] <- re_ages
+                    
+  thick_model <- ggplot(aes(x = core_length1, y = thick), data = thick) + 
+    geom_jitter(alpha = 0.4, height = 0.5) +
+    geom_smooth(method = 'glm', method.args = list(family = 'Gamma'), se = TRUE) +
     theme_bw() +
-    xlab("Best-Fit Model Section Thickness (cm)") +
-    ylab("Core Length (cm)") +
+    xlab("Maximum Core Depth (cm)") +
+    ylab("Best-Fit Model Section Thickness (cm)") +
+    coord_cartesian(ylim = c(4, 21), expand = FALSE) +
     theme(axis.title.x = element_text(family = 'serif', 
                                       face = 'bold.italic', 
                                       size = 18),

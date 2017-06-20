@@ -26,10 +26,12 @@ lead_plots <- function(geochron_tables) {
   
   lead_smooth <- ggplot() +
     geom_rect(data = binford, aes(xmin = age - 5, xmax = age + 5, 
-                                  ymin = nf_mn, ymax = nf_mx), fill = 'red') +
+                                  ymin = nf_mn, ymax = nf_mx), fill = 'red', alpha = 0.2) +
+    geom_rect(data = binford, aes(xmin = age - 5, xmax = age + 5, 
+                                  ymin = nf_mn, ymax = nf_mx), fill = NA, color = 'black') +
     geom_point(data = filter_data, aes(x = age, y = e.older), alpha = 0.3) + 
     geom_smooth(data = filter_data, aes(x = age, y = e.older), method = 'glm', method.args = list(family = 'poisson')) +
-    coord_cartesian(xlim = c(-60, 200), ylim = c(0, 150), expand = c(0, 0)) +
+    coord_cartesian(xlim = c(-70, 200), ylim = c(0, 150), expand = c(0, 0)) +
     scale_y_sqrt() +
     xlab("Years Before Present") +
     ylab("Error - SD") +
