@@ -277,11 +277,12 @@ ggsave(file = 'figures/difference.svg', plot = diff, width = 9, height = 2.5)
 Bacon requires that all chronological markers be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma was entered without error reporting.  Of the 398 ^210^Pb markers in Neotoma, 148 have no error reported.  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and the integer ceiling taken) to obtain standard deviations to be used in the Bacon model.
 
 ```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
-geochron_tables <- readRDS('data/output/all_geochron_tables.rds')
+
+all_geochron <- readRDS(paste0('data/output/all_geochron_v', version, '.rds'))
 
 source('R/lead_plotting.R')
 
-lead_plots(geochron_tables)
+lead_plots(all_geochron)
 
 ```
 
