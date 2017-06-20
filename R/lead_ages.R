@@ -1,5 +1,3 @@
-#' 
-
 compare_lead <- function() {
   geochron_tables <- readRDS('data/output/all_geochron_tables.rds')
   
