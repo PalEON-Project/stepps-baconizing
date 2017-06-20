@@ -23,5 +23,18 @@ north_american_cores <- function(version) {
     
     saveRDS(all_downloads, file = paste0('data/output/all_downloads_v', version, '.rds'))
   }
+  if(paste0('all_geochron_v', version, '.rds') %in% list.files('data/output')){
+    
+    all_geochron <- readRDS(paste0('data/output/all_geochron_v', version, '.rds'))
+    
+  } else{
+    all_sites <- all_downloads %>% get_site
+    
+    all_geochron <- get_geochron(all_sites, verbose = TRUE)
+    
+    saveRDS(all_geochron, file = paste0('data/output/all_geochron_v', version, '.rds'))
+  
+  }
+  
   return(all_downloads)
 }
