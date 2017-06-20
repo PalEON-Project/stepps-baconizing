@@ -4,48 +4,55 @@
 
 
 
-Researchers are increasingly using large paleoecological databases, either in their entirety, or as localized data subsets, to either undertake synthetic analysis, or to add breadth to their new findings [@brewer2012paleoecoinformatics;@uhen2013card]. As many paleoecologists are aware however, the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record. Paleoecologists have been aware of limitations in age modeling capabilities for some time, and the issues that these limitations cause are well noted [@grimm2009magnitude;@liu2012temporal].  
+Paleoecological research is increasingly dependent on large paleoecological databases to store and acquire data. These databases facilitate analysis over large spatio-temporal scales, but also on smaller local scales, and provide the opportunity to more easily undertake synthetic analysis and extend current understanding [@brewer2012paleoecoinformatics;@uhen2013card]. Most records stored in paleoecological databases contain data from paleo-ecological or -climate proxy samples and the chronology or ages of these samples, which is usually the result of the application of an age-depth model. It is often the case that paleoecologists wish to make inference about processes through time, and in this case the chronology assigned to a sedimentary archive can strongly affect the interpretation of a record. Paleoecologists have been aware of the varying methodologies and limitations in age modeling capabilities for some time, and the issues that these limitations cause are well noted [@grimm2009magnitude;@liu2012temporal].  
 
-Recent efforts have focused on standardizing age models across the database [@giesecke2014towards], establishing regional benchmarks [@blois2011methodological;@flantua2016geochronological]. European models used the software Clam [@blaauw2010methods], as did efforts with the North American Pollen Database [@blois2011methodological]. 
+As a step towards methodological consistency, recent efforts have focused on standardizing age models for records within a database [@giesecke2014towards] and establishing regional benchmarks [@blois2011methodological;@flantua2016geochronological]. European models used the software Clam [@blaauw2010methods], as did efforts with the North American Pollen Database [@blois2011methodological]. Towards methodological soundness, the paleoecological community has begun to recognized the value in explicitly accounting for uncertainty in processes. Recent developments in age modelling include several ...Something about advances in age-depth methods since the line or spline? With the development of tools that account for uncertainty comes the need for databases to store these uncertainty estimates; while this is not yet possible... 
 
-As more and more ecologists are turning to the paleoecological record, and as we try to do more with what we have, the limitations of extant age models become more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research [@blaauw2012out].
+As ecologists increasingly rely on paleoecological records to infer past ecosytem change, and analyses increase in complexity and/or scale, the limitations of extant age models become more problematic.  Indeed, it is possible to wiggle match many different patterns, and the flexibility in modeling age-depth relationships can introduce additional "researcher degrees of freedom" that might lead to greater rates of false-positive relationships in paleoecological research [@blaauw2012out]. The reliability of extant age models may be questionable for at least two reasons: 1) the lack robust of uncertainty quantification, and 2) their construction was carried out in radiocarbon years.
+
+<!-- What is this last sentence in above paragraph trying to say? Needs clarification -->
+
+Reliable sediment age estimates require the accurate dating of high quality stratigraphic control points, well supported conversion from radiometric (often radiocarbon) to calendar years, robust and reliable models that reflect, as best as possible, the underlying process of sediment deposition and accumulation, and clear quantification of uncertainty that is able to take into account measurement and modelling uncertainty.
+
+Chronology construction is dependant on the availability of dated stratigraphic control points from a sediment core. These control points may be geochronological (dated material), geostratigraphic (e.g., the “modern” core top), and sometimes biostratigraphic (changes in pollen assemblages associated with dated changes on the landscape). Geochronological control point ages are often uncertain due to analytical errors during the laboratory radiocarbon dating process [@ward1978procedures], the conversion of radiocarbon to calendar years [@reimer2013selection], and potential differences between the ages of macrofossil material and age of sediment [@blois2011methodological]. Geostratigrahic markers may have fewer sources of uncertainty -- the core top age is assumed to be the year of sampling -- although sedimentary mixing of the upper sediment during sampling does introduce some uncertainty. Finally, biostratigraphic control points are determined by the examination (usually visual) of changes in pollen assemblages throughout a core. However, time series of pollen counts are noisy, and in practice identifying changes in composition is both difficult and subjective [@dawson2016quantifying]. There remains uncertainty in the identification of compositional shifts related to the chronological/stratigraphic sampling density [@liu2012temporal], and, in the case of landscape-scale phenomena such as the mid-Holocene Hemlock decline [@bennett2002determining;@davis1981outbreaks], the need to assign temporal bounds to the landscape-scale phenomenon that caused the compositional shift.
+
+The development of the first radiocarbon calibration curve (i.e. IntCal) was a major milestone in paleoecological analysis [@hughen1998intcal98]. The calibration curve (i.e. IntCal98, and subsequent iterations) allowed for the association of radiocarbon years with calendar years, based on material with known ages and associated ^14^C dates. The relationship between radiocarbon and calendar years is complex and non-linear, and given this complexity the calibration curve is an important tool that has contributed to improved chronology development. However, chronologies constructed prior to the development of the radiocarbon curve may have been performed in radiocarbon years.
+
+A few sentences about sedimentation. Simon or Jack?
+
+Working with chronologies presents a challenge because there can be a significant difference in estimated sample age when stratigraphic control points are re-calibrated to calendar years and then used to generate an age-model (re-calibrated age models) versus when the age-model is developed in radiocarbon years and modelled sample ages are then re-calibrated to calendar years (direct recalibration). Comparing re-calibrated age models against directly calibrated dates highlights two issues. The first is the possibility of systematic offsets for large-scale research projects, the second is the need for direct intervention and systematic rules-based chronology construction in synthesis work.  Gieseke *et al*. [-@giesecke2014towards] undertook a broad-scale reconstruction of European records based on prior reported chronologies in an effort to facilitate broad-scale reconstruction of patterns and processes of vegetation change in Europe [@brewer2016late].  Blois *et al*. [-@blois2011methodological] undertook the same process for eastern North America.  Each of these were labor intensive and resulted in the construction of multiple new age models.  
 
 
 
-The Neotoma database [@grimm2008neotoma] contains 1864 global pollen records that can be used for paleoecological analysis.  These records have been obtained from publications that span a time period from  1948 to 2016, with more than half the records coming from before 1983.  For pollen records that are not "modern", sample age is obtained from a chronology constructed using classical [@blaauw2010methods] or Bayesian [@blaauw2011flexible; @buck2000bayesian;@blaauw2005radiocarbon;@ramsey1995radiocarbon] methods using dated material including radiocarbon (^14^C) and other radiometric dates (*e.g.* ^210^Pb, ^137^Cs). 
+Here we focus on the standardization and uncertainty quantification for the upper Midwestern United States using records from the Neotoma Paleoecology Database. The Neotoma database [@grimm2008neotoma] contains 1903 global pollen records that can be used for paleoecological analysis.  These records have been obtained from publications that span a time period from  1908 to 2016, with more than half the records coming from before 1983.  For pollen records that are not "modern", sample age is obtained from a chronology constructed using classical [@blaauw2010methods] or Bayesian [@blaauw2011flexible; @buck2000bayesian;@blaauw2005radiocarbon;@ramsey1995radiocarbon] methods using dated material including radiocarbon (^14^C) and other radiometric dates (*e.g.* ^210^Pb, ^137^Cs).
 
-Chronologies are developed using dated stratigraphic control points from within a cores, which may be geochronological (dated material), geostratigraphic (e.g., the “modern” core top), and sometimes biostratigraphic (changes in pollen assemblages associated with dated changes on the landscape). Geochronological control point ages are often uncertain due to analytical errors during the laboratory radiocarbon dating process [@ward1978procedures], the conversion of radiocarbon to calendar years [@reimer2013selection], and potential differences between the ages of macrofossil material and age of sediment [@blois2011methodological]. Geostratigrahic markers may have fewer sources of uncertainty -- the core top age is assumed to be the year of sampling -- although sedimentary mixing of the upper sediment during sampling does introduce some uncertainty. Finally, biostratigraphic control points are determined by the examination (usually visual) of changes in pollen assemblages throughout a core. However, time series of pollen counts are noisy, and in practice identifying changes in composition is both difficult and subjective [@dawson2016quantifying]. There remains uncertainty in the identification of compositional shifts related to the chronological/stratigraphic sampling density [@liu2012temporal], and, in the case of landscape-scale phenomena such as the mid-Holocene Hemlock decline [@bennett2002determining;@davis1981outbreaks], the need to assign temporal bounds to the landscape-scale phenomenon that caused the compositional shift.
+While not the prefered method, direct recalibration of interpolated ages does occur within the Neotoma ecosystem.  For example, the temporal search function within the Neotoma Explorer (http://apps.neotomadb.org/explorer), Tilia (http://tiliait.org) and the Neotoma API (http://api.neotomadb.org) all use a lookup table that directly recalibrates ages in radiocarbon years.  However, this process results in systematic biases in both synthetic data (Figure 2) and in the actual Neotoma data (Figure 3).
 
-The development of the first IntCal curve was a major milestone in paleoecological analysis [@hughen1998intcal98].  IntCal98, and subsequent itterations, allowed researchers to move from radiocarbon years to calibrated radiocarbon years using material of known age and associated ^14^C dates to build a calibration curve.  Because radiocarbon years are not equivalent to calendar years, and because the relationship is non-linear, the use of calibration curves have provided researchers with an important tool to help improve model chronologies.  However, across the Neotoma database (here we refer to North America only), many records within the database still record chronologies using only radiocarbon years (Figure 1). 
+However, across the Neotoma database (here we refer to North America only), many records within the database still record chronologies using only radiocarbon years (Figure 1). The transition from age models using only radiocarbon years to those with calibrated radiocarbon years within Neotoma is dramatic.  The final radiocarbon model appears to be from 1998, following this we see no more radiocarbon models.  Along with this transition, we are seeing a second transition from simple linear models to more complex models using flexible Bayesian methods.  A critical question then becomes, when faced with records generated using only uncalibrated dates, should we calibrate radiocarbon dates, generate age models *de novo*, or ignore the records altogether?
 
-The transition from age models using only radiocarbon years to those with calibrated radiocarbon years within Neotoma is dramatic.  The final radiocarbon model appears to be from 1998, following this we see no more radiocarbon models.  Along with this transition, we are seeing a second transition from simple linear models to more complex models using flexible Bayesian methods.  A critical question then becomes, when faced with records generated using only uncalibrated dates, should we calibrate radiocarbon dates, generate age models *de novo*, or ignore the records altogether?
+In the paper we take the position that develping new age models based on recalibrated stratigraphic control points that account for uncertainty is the ideal approach. However, large scale data analysis across heterogeneous data can be complex, thus the use of harmonized age models, that integrate ideas about the underlying mechanics of the processes linking depth and time become important [@blaauw2011flexible].  Developments since Blois *et al*. [-@blois2011methodological], and workshops such as the PAGES-sponsored Age Models, Chronologies, and Databases Workshop [@grimm2014working] have begun the process of outlining the methods required to undertake large-scale efforts to re-build age models. 
 
-![](Baconizing_paper_files/figure-html/plot.chron.change-1.svg)<!-- -->
+This paper builds on work from Dawson *et al*. [@dawson2016quantifying], which rebuilt existing age models using the Bacon framework, by explicitly detailling the steps neccessary to reconstruct a large number of models, and by quantifying the effects of decisions on aggregate outcomes, in the process of rebuilding models. In this paper we outline the decision making process around the parameter selection for the age models, we summarize differences between the original chronologies and the new chronologies, we higlight differences between chronologies generated using two age model types and highlight best practices for chronologies within large-scale synthesis.  We also identify limitations of current methods, that could serve to improve chronology construction in the future.
 
-**Figure 1**.  *Number and type of default chronologies for pollen records in the Neotoma Paleoecological Database based on the original year of publication for the dataset.  Within Neotoma the default dataset chronology may be updated by subsequent researchers when this information is provided to a data steward.*
 
-To understand the importance of developing new chronologies, it is important to understand that there can be a significant difference in interpreted ages when either, chronological control points are re-calibrated and a model is generated using those calibrated controls, or, the interpolated ages from a model are directly re-calibrated from radiocarbon years to calendar years before present.  While not the prefered method, direct recalibration of interpolated ages does occur within the Neotoma ecosystem.  For example, the temporal search function within the Neotoma Explorer (http://apps.neotomadb.org/explorer), Tilia (http://tiliait.org) and the Neotoma API (http://api.neotomadb.org) all use a lookup table that directly recalibrates ages in radiocarbon years.  However, this process results in systematic biases in both synthetic data (Figure 2) and in the actual Neotoma data (Figure 3).
-flexible]
 
-![](Baconizing_paper_files/figure-html/linear-fake-1.svg)<!-- -->
 
-**Figure 2**. *The difference between directly calibrating radiocarbon ages from an existing model and rebuilding age models using linear interpolatation from calibrated radiocarbon ages.  Negative values result when the rebuilt model provides older dates than the directly calibrated dates.  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages obtained from a dataset with linearly interpolated dates reported in radiocarbon years.*
+<object type="image/svg+xml" data="figures/histograms_cleaned.svg">
+  Histograms of age model types against year of publication 
+  <!-- fallback image in CSS -->
+</object>
 
-<!-- check Lac a l'Ange and Marl Pond, also Cheyenne Bottoms, San Agustin Plains, 
-     Pittsburg Basin, Aghnaghak and Chalco Lake, all have systematically large or small
-     estimates for ages. -->
+**Figure 1**.  *Number and type of default chronologies for North American pollen records in the Neotoma Paleoecological Database based on the original year of publication for the dataset.  Within Neotoma the default dataset chronology may be updated by subsequent researchers when this information is provided to a data steward.*
 
-![](Baconizing_paper_files/figure-html/unnamed-chunk-1-1.svg)<!-- -->
 
-**Figure 3**. *Direct recalibration of dates within Neotoma pollen records against semi-automated linear interpolation and calibration.  Here we use the chronological controls of the default age model, calibrate chronological controls reported in radiocarbon years, and then use linear interpolation.  Any records with age-reversals were rejected to simplify this illustrative example.*
 
-Comparing re-calibrated age models against directly calibrated dates highlights two issues. The first is the possibility of systematic offsets for large-scale research projects, the second is the need for direct intervention and systematic rules-based chronology construction in synthesis work.  Gieseke *et al*. [-@giesecke2014towards] undertook a broad-scale reconstruction of European records based on prior reported chronologies in an effort to facilitate broad-scale reconstruction of patterns and processes of vegetation change in Europe [@brewer2016late].  Blois *et al*. [-@blois2011methodological] undertook the same process for eastern North America.  Each of these were labor intensive and resulted in the construction of multiple new age models.  This paper builds on work from Dawson *et al*. [@dawson2016quantifying], which rebuilt existing age models using the Bacon framework, by explicitly detailling the steps neccessary to reconstruct a large number of models, and by quantifying the effects of decisions on aggregate outcomes, in the process of rebuilding models.
+<object type="image/svg+xml" data="figures/agediff_plot_final.svg" style="width: 100%;height: 100%;">
+  Differences between age models and direct recalibration.
+  <!-- fallback image in CSS -->
+</object>
 
-## Limitions of linear/classical models vs Baysian efforts.
 
-Large scale data analysis across heterogeneous data can be complex, thus the use of harmonized age models, that integrate ideas about the underlying mechanics of the processes linking depth and time become important [@blaauw2011flexible].  Developments since Blois *et al*. [-@blois2011methodological], and workshops such as the PAGES-sponsored Age Models, Chronologies, and Databases Workshop [@grimm2014working] have begun the process of outlining the methods required to undertake large-scale efforts to re-build age models.
-
-Here we present the results of one such excercise.  In this paper we outline the decision making process around the parameter selection for the age models, we summarize differences between the original chronologies and the new chronologies, we higlight differences between chronologies generated using two age model types and highlight best practices for chronologies within large-scale synthesis.  We also identify limitations of current methods, that could serve to improve chronology construction in the future.
+**Figure 2**. *The difference between (a) directly calibrating (red arrows) radiocarbon ages from an existing model (black dashed line) and (b) rebuilding age models using linear interpolatation (red dashed line) from calibrated radiocarbon ages (red line).  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages. (d) Using the chronological controls of the default age model from Neotoma records, calibrate chronological controls reported in radiocarbon years, and then use linear interpolation.  Any records with age-reversals were rejected to simplify this illustrative example.*
 
 # Methods
 
@@ -55,8 +62,10 @@ Here we present the results of one such excercise.  In this paper we outline the
 
 Bacon requires that all chronological markers be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma was entered without error reporting.  Of the 398 ^210^Pb markers in Neotoma, 148 have no error reported.  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and the integer ceiling taken) to obtain standard deviations to be used in the Bacon model.
 
-![](Baconizing_paper_files/figure-html/unnamed-chunk-2-1.svg)<!-- -->
+![](Baconizing_paper_files/figure-html/unnamed-chunk-1-1.svg)<!-- -->
+
 **Figure 4.** *Reported uncertainty for ^210^Pb dates within Neotoma, by age, with the total count of unassigned samples by age bin (lower).  Estimated uncertainty, using a model relating reported ^210^Pb uncertainty to age, is then assigned to all ^210^Pb dates with unreported uncertainty.* 
+
 ### Expert elicitation exercise to identify settlement horizon
 
 Age estimates of pollen samples, and in some cases their uncertainty, can be estimated using an age-depth model determined by a combination of the chronological controls. To determine which sample best represents pre-settlement times, it is possible to select the sample closest in age but not younger than the time of settlement. Instead, we rely on the existence of a biostratigraphic signal corresponding with the time of interest. During European settlement, land-clearances led to noticeable increases in certain agricultural indicators that is reflected in the pollen records, especially *Ambrosia* [@mcandrews1988human]. This change in the relative abundance of Ambrosia, referred to as the *Ambrosia* rise, can be used to identify a reasonably representative presettlement assemblage that justifiable precedes major land clearance - here the pre-settlement pollen sample is defined to be the sample immediately prior to the first pollen sample that reflects the *Ambrosia* rise. We deal with some of the uncertainty associated with the identification of a biostratigraphic marker by: 1) avoiding the need to assign a date to our representative pre-settlement assemblage, and 2) using expert elicitation to reduce expert bias.
@@ -96,15 +105,22 @@ We run Bacon, we run BChron using the default settings for the method and we kee
 ### ^210^Pb Errors
 
 ![](Baconizing_paper_files/figure-html/lead_comparison-1.svg)<!-- -->
+
 **Figure 5**. *Reported and estimated ^210^Pb ages from the Bacon models show strong accordance, for the most part.  Uncertainties within the constructed Bacon models at the depths of the ^210^Pb samples show higher uncertainty, which likely reflects the influence of the model itself since the autoregressive nature of the model, the influence of the memory parameter, and the nature of the Bayesian model itself.*
 
-![](Baconizing_paper_files/figure-html/error_by_age-1.png)<!-- -->
 
-**Figure**. *For the three cores within the region with reported ^210^Pb and reconstructed Bacon uncertainties we see consistently higher uncertaintites for the Bacon uncertainties, although the magnitude of the difference varies by record.  Fish Lake shows the smallest difference, while Brown's Bay shows the largest difference.*
+
+<object type="image/svg+xml" data="figures/lead_comp_final.svg">
+  Comparison of 210Pb dates measured and reconstructed error at those depths. 
+  <!-- fallback image in CSS -->
+</object>
+
+**Figure 6**. *For the three cores within the region with both reported ^210^Pb and reconstructed Bacon uncertainties we see consistently higher uncertaintites for the Bacon uncertainties, although the magnitude of the difference varies by record.  Fish Lake shows the smallest difference, while reconstructed ages for Brown's Bay shows the largest difference.  Crooked Lake shows strong variability in the magnitude of the difference, even among adjacent age samples.*
 
 Bacon uncertainty estimates within the chronologies are consistently larger than the ^210^Pb error estimates for the point samples.  For some records the uncertainty is much higher, while for others the difference in uncertainty is lower.  It is worth noting that only three records have completely paired ^210^Pb records.  I'm not sure why.
 
 ### Expert Elicitation
+
 
 
 ## Bacon Settings
@@ -115,7 +131,7 @@ Accumulation rates for records in the region show clear differentiation between 
 
 ![](figures/acc_rate_dists.png)
 
-**Figure 4**. *Sediment accumulation rates for cores in the study region with samples in the last 200 years (in calibrated radiocarbon years, with 0 at 1950 CE).  A clear break can be seen across the records.*
+**Figure 7**. *Sediment accumulation rates for cores in the study region with samples in the last 200 years (in calibrated radiocarbon years, with 0 at 1950 CE).  A clear break can be seen across the records.*
 
 *Table 1*. The estimates from the accumulation rates.
 
@@ -129,7 +145,9 @@ Modern	3.02	     5.70	      0.53     1.6
 
 ![](Baconizing_paper_files/figure-html/get_thickness-1.svg)<!-- -->
 
-Total core thickness shows a relationship to total core age (Figure).  There is a general relationship between age and depth.
+**Figure 8**. Thickness vs age.
+
+Total core thickness shows a relationship to total core length (Figure).  There is a general relationship between age and depth.
 
 ## Model Comparison
 
@@ -141,17 +159,24 @@ Recalibrating ages from with `Bacon()` and `BChron()` show bimodal distribution 
 
 **Figure**. *Recalibrated and reconstructed models.*
 
-## Limitations of current models
-
-| Challenge | Solution |
-| ---------- | ------------ |
-| Age uncertainties vary in their distributions. |  Allow uncertainty models to include other distributions, including truncated distributions. |
-| Age models require significant oversight |  Codify certain decisions, provide testing suites for fit parameters. |
-|   |   |
 
 # Discussion
 
-There are some broad patterns, and some specific comments.
+This approach has shown what large-scale synthetic teams need to consider.  It shows the importance of partnering with community-data resources & 
+
+A challenge for paleoecologists is that site level effects can often play a significant role in sediment accumulation, pollen accumulation and the interpretation of model results.  When working with aggregate data it is possible to lose sight of these site level effects, and the potential benefits of doing batch runs with the latest software might make a researcher overlook the peculiarities associated with individual records.  Knowing the data well and taking time to examine results in the context of the original publications is critical to evaluating the quality of a record.  In this exercise a number of records were rejected, a number of records had modifications made and some peculiar records were retained based on documetation within the primary litaerature.  There is no alternative to knowing your data well.
+
+## Current Challenges & Next Steps
+
+| Challenge | Solution |
+| ------------------- | -------------------------------------- |
+| Age uncertainties vary in the shape of their distributions. |  Allow uncertainty models to include other distributions, including truncated distributions. |
+| Age models require significant oversight |  Codify certain decisions, provide testing suites for fit parameters. |
+| Accumulation rates change through time but priors are fixed. | The current solution is to use 'zero-length' hiatuses, which serve to reset the accumulation rate, but allowing models of change based on empirical studies would improve fit. |
+| Parameter values can have significant, but unintuitive effects on model fit   | Allowing models to accept vectors of possible values may improve fit and provide a better understanding of the interacting relationships between model parameters.   |
+| Ensuring that model outputs are clear and the decisions made about parameters are justified.  | Improved uptake of reproducible workflows and use of provenance tools. |
+
+Point to BChron as another option, Bacon STAN model, UColo Age Model Thing (CSciBox - https://www.cs.colorado.edu/~lizb/cscience.html) and geochronR.
 
 # Conclusions
 
