@@ -26,6 +26,8 @@ allan_thick <- function() {
   re_ages <- recalib %>% map(function(x)sum(x$ageGrid * x$densities)) %>% unlist
   
   thick$pol_age_max[uncalib] <- re_ages
+  
+  thick_glm <- anova(glm(thick ~ core_length1, data = thick), test = "F")
                     
   thick_model <- ggplot(aes(x = core_length1, y = thick), data = thick) + 
     geom_jitter(alpha = 0.4, height = 0.5) +
@@ -51,6 +53,6 @@ allan_thick <- function() {
   
   model <- gam(pol_age_max ~ s(thick, k = 3), family = 'poisson', data = thickness)
   
-  return(list(plot = thick_model, model = model))
+  return(list(plot = thick_model, model = model, glm = thick_glm))
   
 }

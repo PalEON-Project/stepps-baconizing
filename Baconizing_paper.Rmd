@@ -316,10 +316,6 @@ Bacon works by diving a core into sections whose width are determined by the use
 
 Dividing a core into sections is an approximation of time discretization, abstracted through the process of deposition.  While consistent section widths across all cores (and thus consistent discretization) should be a goal, in practice, the internal unmeasurable variability in sedimentation rates, and uncertainty in the models themselves, makes the implementation of consistent section thicknesses difficult.  To provide prescriptive widths, but still allow flexibility as needed in the Bacon modelling, each core was run with widths of 5, 10, 15 and 20cm.  Model fit was assessed visually, and the best fit model was subsequently chosen to be the default calibrated age model for that core.
 
-## Bacon Model Comparison
-
-We run Bacon, we run BChron using the default settings for the method and we keep the data from the original model outputs.  Outputs for all models are shown and contrasted, in particular, uncertainty and age estimates.
-
 # Results
 
 ## Age Controls
@@ -416,53 +412,22 @@ Modern	3.02	     5.70	      0.53     1.6
 
 ### Section Thickness
 
-```{r, get_thickness, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE, dev = 'svg'}
+```{r, get_thickness, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
 
 source('R/thick_model.R')
-
 model_plot <- allan_thick()
+
+```
+
+Bacon models were fit with section thicknesses for values of 5, 10, 15 and 20cm for each core.  For each section thickness the section thickness with the best fit model was chosen.  A generalized linear model using a gamma family shows a significant relationship between total core length and best-fit section thickness ($F_{1.241}$ = `r model_plot$glm$F`, p > 0.001).  This relationship indicates the general principle of wider section thicknesses for Bacon models on longer cores holds generally, but, the distribution of best-fit thicknesses (Figure 8) also appears to indicate that many shorter cores are well served by wide section thicknesses.  The model itself accounts for only 26% of total deviance, and should be treated as indicative, but not prescriptive.
+
+```{r, plot_thicknessmodel, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE, dev = 'svg'}
 
 model_plot[[1]]
 
 ```
 
-**Figure 8**. Thickness vs age.
-
-Total core thickness shows a relationship to total core length (Figure).  There is a general relationship between age and depth.
-
-## Model Comparison
-
-Recalibrating ages from with `Bacon()` and `BChron()` show bimodal distribution of age differences.  One set of recalibrated models show almost no change, while others show a continuously increasing offset with increasing time.
-
-<!-- SJG - I think this is because some of these ages are in radiocarbon years. -->
-
-```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE}
-
-#  USE BCHRON CALIBRATE TO FIX THE AGES in RCDates
-source('R/compare_sediment_ages.r')
-
-ggplot(pollen_ages, aes(x = diff_bacon, y = diff_bcron)) + geom_point(alpha=0.3) + geom_path(aes(group = id)) + geom_abline(intercept = 0, slope = 1) +
-  theme_bw() +
-  xlab("Existing Age Model") +
-  ylab("Model Offset") +
-  theme(axis.title.x = element_text(family = 'serif', 
-                            face = 'bold.italic', 
-                            size = 18),
-  axis.title.y = element_text(family = 'serif', 
-                            face = 'bold.italic', 
-                            size = 18),
-  axis.ticks = element_blank(),
-  axis.text.x = element_text(family = 'serif', 
-                            face = 'italic', 
-                            size = 14),
-  axis.text.y = element_text(family = 'serif', 
-                            face = 'italic', 
-                            size = 14))
-
-```
-
-**Figure**. *Recalibrated and reconstructed models.*
-
+**Figure 8**. *Bacon section thickness as a function of total core length for best-fit Bacon models on each of the 282 sediment cores with reconstructed age models from the upper Midwestern United States used in this study.  A curve (blue line) fit with a generalized linear model with gamma family indicates the predicted relationship between maximum core depth and the best-fit core thickness (gray shading represents 1 standard error).*
 
 # Discussion
 
