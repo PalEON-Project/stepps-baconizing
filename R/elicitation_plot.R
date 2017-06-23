@@ -1,7 +1,8 @@
 ## Expert Elicitation
 
 expert_elicitation <- function(x) {
-     version <- 1
+
+  version <- 1
   
     all_sites <- readr::read_csv('data/pollen_meta_v1.0.csv')
   elicitation <- readr::read_csv('data/input/pollen_meta_2014-05-01_compiled.csv')
@@ -36,4 +37,5 @@ expert_elicitation <- function(x) {
    }
    
    elicit$bacon_age <- by_row(elicit, test_ages)$`.out` %>% unlist
+   
 }
