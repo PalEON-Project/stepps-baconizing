@@ -119,6 +119,10 @@ Bacon uncertainty estimates within the chronologies are consistently larger than
 
 
 
+On average, the original modeled ages were older than the biostratigraphic ages assigned based on the dates for Public Land Surveys in the vicinity of the focal lakes.  Bacon models showed better affinity to the assigned biostratigraphic dates based on expert identification of the *Ambrosia* rise in the region.  This age differential means that Bacon models are, on average, 44 years younger at the settlement horizon.
+
+![](Baconizing_paper_files/figure-html/unnamed-chunk-2-1.svg)<!-- -->
+
 ## Bacon Settings
 
 ### Accumulation Rate Priors

@@ -1,6 +1,6 @@
 ## Expert Elicitation
 
-expert_elicitation <- function(x) {
+expert_elicitation <- function() {
 
   version <- 1
   
@@ -22,20 +22,85 @@ expert_elicitation <- function(x) {
    site_names <- all_downloads %>% map_chr(function(x) x$dataset$site$site.name)
    
    test_ages <- function(x) {
-     if(x$depth_inc > 1 & x$id %in% pollen_ts$id) {
+     
+     handles <- sapply(all_downloads, function(x)x$dataset$dataset.meta$collection.handle)
+     
+     if(x$depth_inc > 1 & x$id %in% pollen_ts$id & x$handle %in% handles) {
+       
       orig   <- all_downloads[[match(x$handle, handles)]]$sample.meta$age[x$depth_inc]
       atype  <- all_downloads[[match(x$handle, handles)]]$sample.meta$age.type[1]
       
       output <- pollen_ts %>% 
         filter(id %in% x$id) %>% 
         filter(row_number() %in% x$depth_inc) %>% 
-        select(contains("bacon")) %>% unlist %>% mean(na.rm=TRUE)
-      output <- 1950 - output
+        select(dplyr::contains("bacon")) %>% unlist %>% mean(na.rm=TRUE)
+      
+      output <- data.frame(bacon = 1950 - output, original = 1950 - orig, type = atype)
+     
      } else {
-       output <- NA
+       output <- data.frame(bacon = NA, original = NA, type = NA)
      }
    }
    
-   elicit$bacon_age <- by_row(elicit, test_ages)$`.out` %>% unlist
+   recal <- by_row(elicit, test_ages)$`.out` %>% bind_rows
+   
+   plot_table <- data.frame(  original = c(recal$original, recal$bacon),
+                            settlement = c(elicit$sett_age, elicit$sett_age),
+                                 class = c(rep(c('Settlement to Original',
+                                                 'Settlement to Bacon'), each = nrow(elicit))))
+
+   plot_table$class <- factor(plot_table$class, levels = c('Settlement to Original',
+                                                           'Settlement to Bacon'))
+
+   output_plot <- ggplot(plot_table %>% filter(original > 1000 & settlement > 1000), 
+                         aes(x = settlement, y = original)) + 
+     geom_point() +
+     facet_wrap(~class) +
+     coord_cartesian(xlim = c(1820, 1920), ylim = c(1200, 2000), expand = FALSE) +
+     geom_abline(slope = 1, intercept = 0) +
+     geom_smooth(method = 'lm') +
+     xlab("Assigned Settlement Age Control") +
+     ylab("Modeled Age") +
+     theme_bw() +
+     theme(axis.title.x = element_text(family = 'serif', 
+                                       face = 'bold.italic', 
+                                       size = 18),
+           legend.position = 'none',
+           axis.title.y = element_text(family = 'serif', 
+                                       face = 'bold.italic', 
+                                       size = 18),
+           axis.ticks = element_blank(),
+           axis.text.x = element_text(family = 'serif', 
+                                      face = 'italic', 
+                                      size = 14),
+           axis.text.y = element_text(family = 'serif', 
+                                      face = 'italic', 
+                                      size = 14))
+
+   orig_bacon <- ggplot(recal %>% filter(bacon > 100 & original > 1000), 
+                        aes(x = original, y = bacon)) + 
+     geom_point() +
+     geom_abline(slope = 1, intercept = 0) +
+     geom_smooth(method = 'lm') +
+     xlab("Original Age Model") +
+     ylab("Bacon Age Model") +
+     theme_bw() +
+     theme(axis.title.x = element_text(family = 'serif', 
+                                       face = 'bold.italic', 
+                                       size = 18),
+           legend.position = 'none',
+           axis.title.y = element_text(family = 'serif', 
+                                       face = 'bold.italic', 
+                                       size = 18),
+           axis.ticks = element_blank(),
+           axis.text.x = element_text(family = 'serif', 
+                                      face = 'italic', 
+                                      size = 14),
+           axis.text.y = element_text(family = 'serif', 
+                                      face = 'italic', 
+                                      size = 14))
+   
+   
+   return(list(output_plot, orig_bacon))
    
 }
