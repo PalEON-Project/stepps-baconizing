@@ -1,6 +1,6 @@
 "labid","age","error","depth","cc"
-"Core top_30506",-42,1,2,0
-"Settlement_30507",90,10,43,0
-"Radiocarbon_cal_30508",480,50,NA,0
-"Radiocarbon_cal_30509",930,40,NA,0
-"Radiocarbon_cal_30510",1100,50,NA,0
+"Core top_30514",-42,1,2,0
+"Settlement_30515",90,10,43,0
+"Radiocarbon_30511",480,50,77,1
+"Radiocarbon_30512",930,40,153,1
+"Radiocarbon_30513",1100,50,201,1
