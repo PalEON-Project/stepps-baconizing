@@ -1,12 +1,12 @@
 "labid","age","error","depth","cc"
-"Core top_41102",-50,1,0,0
-"Ambrosia rise_41103",100,20,29.5,0
-"Radiocarbon_41104",970,40,91,1
-"Radiocarbon_41105",1520,50,129,1
-"Radiocarbon_41106",2210,40,171,1
-"Radiocarbon_41107",2670,40,215,1
-"Radiocarbon_41108",3640,40,275,1
-"Radiocarbon_41109",4230,40,305,1
-"Radiocarbon_41110",4460,40,328,1
-"Radiocarbon_41111",6010,40,375,1
-"Radiocarbon_41112",9350,55,465,1
+"Core top_41091",-50,5,0,0
+"Ambrosia rise_41092",100,20,29.5,0
+"Radiocarbon_cal_41093",921,133,91,0
+"Radiocarbon_cal_41094",1408,102,129,0
+"Radiocarbon_cal_41095",2179,61,171,0
+"Radiocarbon_cal_41096",2770,26,215,0
+"Radiocarbon_cal_41097",3945,112,275,0
+"Radiocarbon_cal_41098",4829,183,305,0
+"Radiocarbon_cal_41099",5046,173,328,0
+"Radiocarbon_cal_41100",6830,101,375,0
+"Radiocarbon_cal_41101",10559,265,465,0
