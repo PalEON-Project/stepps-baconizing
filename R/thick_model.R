@@ -13,7 +13,7 @@ allan_thick <- function() {
       output <- NA
     }
     return(data.frame(core_length= as.numeric(output)))}, .collate = 'cols') %>% 
-    select(name, handle, thick, pol_age_max, age_type, core_length1)
+    dplyr::select(name, handle, thick, pol_age_max, age_type, core_length1)
   
   uncalib <- thick$age_type %in% "Radiocarbon years BP" & 
     thick$pol_age_max < 46000 &
