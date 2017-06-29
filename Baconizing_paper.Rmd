@@ -411,12 +411,8 @@ Accumulation rates for records in the region show clear differentiation between 
 
 source('R/acc_rate_priors.r')
 
-# meta data; includes list of sites
-bacon_params   = read.csv('data/bacon_params_v1.0.csv', header=TRUE, sep=',', stringsAsFactors=FALSE)
-ncores = nrow(bacon_params)
-
-accs <- get_accs(bacon_params)
 p1   <- plot_acc_rates(accs)
+plot(p1)
 
 ```
 

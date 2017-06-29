@@ -7,6 +7,10 @@ library(ggplot2)
 # load Bchron
 source('R/utils/calibrate.R')
 
+# meta data; includes list of sites
+bacon_params   = read.csv('data/bacon_params_v1.0.csv', header=TRUE, sep=',', stringsAsFactors=FALSE)
+ncores = nrow(bacon_params)
+
 get_type_accs <- function(chron, handle){
   
   rate  =  diff(chron$age)/diff(chron$depth)
@@ -26,17 +30,12 @@ get_accs <- function(bacon_params){
   accs      = data.frame(site=character(0), depth=numeric(0), thick=numeric(0), age=numeric(0), rate=numeric(0), cc=numeric(0))
   core_tops = list()
   
-  
   lead_sites <- data.frame(site=character(0), siteid=numeric(0), max_age=numeric(0), presett=numeric())
   
   for(i in 1:ncores){
-    
-    print(i)
+  
     site_params <- bacon_params[i,]
-    
     if (site_params$suit){  
-      
-      print("site suitable")
       
       if(!(file.exists(sprintf('Cores/%s/%s.csv', site_params$handle, site_params$handle)))) {
         print(paste0("No file exists for site ", site_params$handle))
@@ -45,7 +44,7 @@ get_accs <- function(bacon_params){
       
       chron = read.table(sprintf('Cores/%s/%s.csv', site_params$handle, site_params$handle), sep=',', header=TRUE)
       if ( any(substr(chron$labid, 1, 4) == 'Core') ){
-        print(chron[which(substr(chron$labid, 1, 4) == 'Core'),])
+        # print(chron[which(substr(chron$labid, 1, 4) == 'Core'),])
         core_tops = rbind(core_tops, data.frame(site=site_params$handle, chron[which(substr(chron$labid, 1, 4) == 'Core'),]))
       }
       if (any(substr(chron$labid,1,4) == 'Lead')){
@@ -79,6 +78,9 @@ get_accs <- function(bacon_params){
   }
   
   # remove negative rates (reversals)
+  accs = accs[!is.na(accs$rate),]
+  
+  # remove negative rates (reversals)
   accs = accs[accs$rate>0,]
   
   # remove really large outliers
@@ -87,21 +89,36 @@ get_accs <- function(bacon_params){
   accs$era = rep(NA, nrow(accs))
   accs$era[accs$age<100] = "modern"
   accs$era[accs$age>=100] = "historical"
-  return(accs)
-}
-
-plot_acc_rates <- function(accs){
   
   accs$age_sqrt = sqrt(abs(accs$age))*sign(accs$age)
   accs$rate_sqrt = sqrt(accs$rate)
+  
+  return(accs)
+}
+
+library(gridExtra)
+
+plot_acc_rates <- function(accs){
   
   p1 <- ggplot(data=accs) + geom_point(aes(x=age_sqrt, y=rate_sqrt, colour=factor(era)), alpha=0.4) + 
     geom_boxplot(aes(x=age_sqrt, y=rate_sqrt, group=factor(era)), stat='boxplot', alpha=0.4) + geom_vline(xintercept=10, linetype=2)+
     scale_colour_manual(values=c('black', 'grey11'), labels=c('historical', 'modern'), name='Era') +
     scale_fill_manual(values=c('black', 'grey11'), labels=c('historical', 'modern'), name='Era') +
     xlab('Age (years)') + ylab('Rate (yr/cm)') + theme_bw()
-  return(p1)
+  
+  p2 <- ggplot(data=accs) + geom_density(aes(x=rate_sqrt, fill=factor(era)), alpha=0.4) +
+    # scale_colour_manual(values=c('blue', 'black'), labels=c('historical', 'modern'), name='Era') +
+    # scale_fill_manual(values=c('blue', 'black'), labels=c('historical', 'modern'), name='Era') +
+    xlab('Rate (year/cm)') + ylab('Count') + theme_bw() + guides(fill=guide_legend(title="Era"))
+  # print(p1)
+  
+  return(grid.arrange(p1, p2))
 }
+
+accs <- get_accs(bacon_params)
+
+
+
 
 # p1 <- ggplot(data=accs) + geom_point(aes(x=age_sqrt, y=rate_sqrt, colour=factor(era)), alpha=0.4) + 
 #   geom_boxplot(aes(x=age_sqrt, y=rate_sqrt, group=factor(era)), stat='boxplot', alpha=0.4) + geom_vline(xintercept=10, linetype=2)+
