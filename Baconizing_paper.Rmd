@@ -7,6 +7,13 @@ author:
   name: Simon Goring (co-authored)
 bibliography: styles/baconizing.bib
 output:
+  word_document:
+    reference_docx: styles/word_template.docx
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
   html_document:
     code_folding: show
     fig_caption: yes
@@ -16,13 +23,6 @@ output:
     theme: readable
     toc: yes
     toc_float: yes
-  pdf_document:
-    toc: yes
-    toc_depth: '3'
-  word_document:
-    reference_docx: styles/word_template.docx
-    toc: yes
-    toc_depth: '3'
 dev: svg
 highlight: tango
 keywords: chronology, geochronology, paleoecology, age-models, Bacon, 210Pb, 14C,
