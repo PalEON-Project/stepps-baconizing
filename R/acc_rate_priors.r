@@ -8,8 +8,8 @@ library(ggplot2)
 source('R/utils/calibrate.R')
 
 # meta data; includes list of sites
-bacon_params   = read.csv('data/bacon_params_v1.0.csv', header=TRUE, sep=',', stringsAsFactors=FALSE)
-ncores = nrow(bacon_params)
+bacon_params <- read.csv('data/bacon_params_v1.0.csv', header=TRUE, sep=',', stringsAsFactors=FALSE)
+ncores       <- nrow(bacon_params)
 
 get_type_accs <- function(chron, handle){
   
@@ -90,8 +90,8 @@ get_accs <- function(bacon_params){
   accs$era[accs$age<100] = "modern"
   accs$era[accs$age>=100] = "historical"
   
-  accs$age_sqrt = sqrt(abs(accs$age))*sign(accs$age)
-  accs$rate_sqrt = sqrt(accs$rate)
+  accs$age_sqrt = abs(accs$age)*sign(accs$age)
+  accs$rate_sqrt = accs$rate
   
   return(accs)
 }
@@ -100,25 +100,61 @@ library(gridExtra)
 
 plot_acc_rates <- function(accs){
   
-  p1 <- ggplot(data=accs) + geom_point(aes(x=age_sqrt, y=rate_sqrt, colour=factor(era)), alpha=0.4) + 
-    geom_boxplot(aes(x=age_sqrt, y=rate_sqrt, group=factor(era)), stat='boxplot', alpha=0.4) + geom_vline(xintercept=10, linetype=2)+
-    scale_colour_manual(values=c('black', 'grey11'), labels=c('historical', 'modern'), name='Era') +
-    scale_fill_manual(values=c('black', 'grey11'), labels=c('historical', 'modern'), name='Era') +
-    xlab('Age (years)') + ylab('Rate (yr/cm)') + theme_bw()
+  p1 <- ggplot(data = accs) + 
+    geom_point(aes(x = age_sqrt, y = rate_sqrt, colour = factor(era)), 
+               alpha = 0.4) + 
+    geom_boxplot(aes(x = age_sqrt, y = rate_sqrt, group = factor(era)), 
+                 stat = 'boxplot', alpha = 0.4,
+                 outlier.color = NA, varwidth = TRUE, coef = 2) + 
+    coord_cartesian(expand = FALSE) +
+    scale_x_sqrt() +
+    scale_y_sqrt() +
+    geom_vline(xintercept=100, linetype=2) + # had to square this value!
+    scale_colour_manual(values=c('black', 'red'), labels=c('historical', 'modern'), name='Era') +
+    scale_fill_manual(values=c('black', 'red'), labels=c('historical', 'modern'), name='Era') +
+    xlab('Interval Midpoint Age \n(calibrated Radiocarbon Years)') + ylab('Accumulation Rate (yr/cm)') + 
+    theme_bw() +
+    theme(axis.title.x = element_text(family = 'serif', 
+                                      face = 'bold.italic', 
+                                      size = 18),
+          axis.title.y = element_text(family = 'serif', 
+                                      face = 'bold.italic', 
+                                      size = 18),
+          axis.ticks = element_blank(),
+          axis.text.x = element_text(family = 'serif', 
+                                     face = 'italic', 
+                                     size = 14),
+          axis.text.y = element_text(family = 'serif', 
+                                     face = 'italic', 
+                                     size = 14))
   
-  p2 <- ggplot(data=accs) + geom_density(aes(x=rate_sqrt, fill=factor(era)), alpha=0.4) +
+  p2 <- ggplot(data=accs) + 
+    geom_density(aes(x=rate_sqrt, fill=factor(era)), alpha=0.4) +
+    coord_cartesian(expand = FALSE) +
+    scale_x_sqrt() +
     # scale_colour_manual(values=c('blue', 'black'), labels=c('historical', 'modern'), name='Era') +
     # scale_fill_manual(values=c('blue', 'black'), labels=c('historical', 'modern'), name='Era') +
-    xlab('Rate (year/cm)') + ylab('Count') + theme_bw() + guides(fill=guide_legend(title="Era"))
-  # print(p1)
+    xlab('Rate (year/cm)') + ylab('Count') + 
+    theme_bw() + 
+    guides(fill=guide_legend(title="Era")) +
+    theme(axis.title.x = element_text(family = 'serif', 
+                                      face = 'bold.italic', 
+                                      size = 18),
+          axis.title.y = element_text(family = 'serif', 
+                                      face = 'bold.italic', 
+                                      size = 18),
+          axis.ticks = element_blank(),
+          axis.text.x = element_text(family = 'serif', 
+                                     face = 'italic', 
+                                     size = 14),
+          axis.text.y = element_text(family = 'serif', 
+                                     face = 'italic', 
+                                     size = 14))
   
   return(grid.arrange(p1, p2))
 }
 
 accs <- get_accs(bacon_params)
-
-
-
 
 # p1 <- ggplot(data=accs) + geom_point(aes(x=age_sqrt, y=rate_sqrt, colour=factor(era)), alpha=0.4) + 
 #   geom_boxplot(aes(x=age_sqrt, y=rate_sqrt, group=factor(era)), stat='boxplot', alpha=0.4) + geom_vline(xintercept=10, linetype=2)+
