@@ -149,7 +149,7 @@ Accumulation rates (*yr/cm* of sediment accumulation) for records in the region 
 
 ![](Baconizing_paper_files/figure-html/get_acc_rates-1.svg)<!-- -->
 
-**Figure 7**. *Sediment accumulation rates for cores in the study region with samples in the last 200 years (in calibrated radiocarbon years, with 0 at 1950 CE).  A clear break can be seen across the records.*
+**Figure 7**. *Sediment accumulation rates for cores in the study region with samples in the last 2000 years (in calibrated radiocarbon years, with 0 at 1950 CE).  The upper panel shows the accumulation rate in years per cm against the interval midpoint age in calibrated radiocarbon years. The dashed vertical line indicates 1850 CE, the approximate date used to represent major land-use change as a result of EuroAmerican settlement. Note the difference in accumulation rates between the modern and historical eras. The lower panel shows the distribution of accumulation rates for the modern and historical era, highlighting the difference in central tendency.*
 
 It is possible to see that there is a trend of increasing deposition rates with time across the modern/historical interval (Figure 7a), however Bacon does not support the ability to allow time-dependent priors, except through the use of sequential hiatuses, with varying accumulation rates.  Unfortunately, each interval bounded by a hiatus must have more than one section contained within it, and thus, the implementation of sequential hiatuses becomes problematic and highly site-specific. 
 
@@ -157,7 +157,7 @@ It is possible to see that there is a trend of increasing deposition rates with 
 
 
 
-Bacon models were fit with section thicknesses for values of 5, 10, 15 and 20cm for each core.  For each section thickness the section thickness with the best fit model was chosen.  A generalized linear model using a gamma family shows a significant relationship between total core length and best-fit section thickness ($F_{1.241}$ = NA, 82.7250778, p > 0.001).  This relationship indicates the general principle of wider section thicknesses for Bacon models on longer cores holds generally, but, the distribution of best-fit thicknesses (Figure 8) also appears to indicate that many shorter cores are well served by wide section thicknesses.  The model itself accounts for only 26% of total deviance, and should be treated as indicative, but not prescriptive.
+Bacon models were fit with section thicknesses for values of 5, 10, 15 and 20cm for each core.  For each section thickness the section thickness with the best fit model was chosen.  A generalized linear model using a gamma family shows a significant relationship between total core length and best-fit section thickness ($F_{1.241}$ = NA, 75.2850816, p > 0.001).  This relationship indicates the general principle of wider section thicknesses for Bacon models on longer cores holds generally, but, the distribution of best-fit thicknesses (Figure 8) also appears to indicate that many shorter cores are well served by wide section thicknesses.  The model itself accounts for only 26% of total deviance, and should be treated as indicative, but not prescriptive.
 
 ![](Baconizing_paper_files/figure-html/plot_thicknessmodel-1.svg)<!-- -->
 

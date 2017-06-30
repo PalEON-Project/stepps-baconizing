@@ -414,7 +414,7 @@ plot_acc_rates(accs)
 
 ```
 
-**Figure 7**. *Sediment accumulation rates for cores in the study region with samples in the last 200 years (in calibrated radiocarbon years, with 0 at 1950 CE).  A clear break can be seen across the records.*
+**Figure 7**. *Sediment accumulation rates for cores in the study region with samples in the last 2000 years (in calibrated radiocarbon years, with 0 at 1950 CE).  The upper panel shows the accumulation rate in years per cm against the interval midpoint age in calibrated radiocarbon years. The dashed vertical line indicates 1850 CE, the approximate date used to represent major land-use change as a result of EuroAmerican settlement. Note the difference in accumulation rates between the modern and historical eras. The lower panel shows the distribution of accumulation rates for the modern and historical era, highlighting the difference in central tendency.*
 
 It is possible to see that there is a trend of increasing deposition rates with time across the modern/historical interval (Figure 7a), however Bacon does not support the ability to allow time-dependent priors, except through the use of sequential hiatuses, with varying accumulation rates.  Unfortunately, each interval bounded by a hiatus must have more than one section contained within it, and thus, the implementation of sequential hiatuses becomes problematic and highly site-specific. 
 
