@@ -2,11 +2,9 @@
 
 expert_elicitation <- function() {
 
-  version <- 1
-  
     all_sites <- readr::read_csv('data/pollen_meta_v1.0.csv')
   elicitation <- readr::read_csv('data/input/pollen_meta_2014-05-01_compiled.csv')
-    pollen_ts <- readr::read_csv(file = paste0('data/sediment_ages_v', version, '.0_varves.csv'))
+    pollen_ts <- readr::read_csv(file = paste0('data/sediment_ages_v1.0_varves.csv'))
   
   core_estimates <- function(x) {
     x <- x %>% data.frame
@@ -46,11 +44,11 @@ expert_elicitation <- function() {
    
    plot_table <- data.frame(  original = c(recal$original, recal$bacon),
                             settlement = c(elicit$sett_age, elicit$sett_age),
-                                 class = c(rep(c('Settlement to Original',
-                                                 'Settlement to Bacon'), each = nrow(elicit))))
+                                 class = c(rep(c('Original Age Model',
+                                                 'Bacon Age Model'), each = nrow(elicit))))
 
-   plot_table$class <- factor(plot_table$class, levels = c('Settlement to Original',
-                                                           'Settlement to Bacon'))
+   plot_table$class <- factor(plot_table$class, levels = c('Original Age Model',
+                                                           'Bacon Age Model'))
 
    output_plot <- ggplot(plot_table %>% filter(original > 1000 & settlement > 1000), 
                          aes(x = settlement, y = original)) + 
@@ -59,8 +57,8 @@ expert_elicitation <- function() {
      coord_cartesian(xlim = c(1820, 1920), ylim = c(1200, 2000), expand = FALSE) +
      geom_abline(slope = 1, intercept = 0) +
      geom_smooth(method = 'lm') +
-     xlab("Assigned Settlement Age Control") +
-     ylab("Modeled Age") +
+     xlab("Assigned Settlement Age Control (CE)") +
+     ylab("Modeled Age (CE)") +
      theme_bw() +
      theme(axis.title.x = element_text(family = 'serif', 
                                        face = 'bold.italic', 
