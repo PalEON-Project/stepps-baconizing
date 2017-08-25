@@ -9,13 +9,6 @@ author:
   name: John Williams
 bibliography: styles/baconizing.bib
 output:
-  word_document:
-    reference_docx: styles/word_template.docx
-    toc: yes
-    toc_depth: '3'
-  pdf_document:
-    toc: yes
-    toc_depth: '3'
   html_document:
     code_folding: show
     fig_caption: yes
@@ -25,12 +18,40 @@ output:
     theme: readable
     toc: yes
     toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    reference_docx: styles/word_template.docx
+    toc: yes
+    toc_depth: '3'
 dev: svg
 highlight: tango
 keywords: chronology, geochronology, paleoecology, age-models, Bacon, 210Pb, 14C,
   radiocarbon
 csl: styles/elsevier-harvard.csl
-abstract: Well constructed chronologies are critical to reliable paleoecological inference. Hence, a first step in large-scale paleodata syntheses is to review and, as needed, revise chronologies.  Here we demonstrate and document the systematic construction of age models from the Neotoma Paleoecological Database, as a way of examining the assumptions and decisions involved in model construction. We use the Bacon age modeling software, implemented in R, and catalogue several of the challenges and decision-making process necessary for chronology development. This paper examines the biases resulting from posthoc calibration of default radiocarbon chronologies, ^210^Pb uncertainty, the treatment of inflection points in sedimentation rates, the use biostratigraphic markers associated with known historical events, handling of accumulation rates that may change over time, memory parameters, section and thicknesses within Bacon,. One third of age models in Neotoma have default chronologies expressed in radiocarbon years, and simply calibrating interpolated ages results in differences of between 31 and 470 cal yrs BP when compared to rebuilding age models. ^210^Pb dates XXX The resulting age models show that section thickness generally increases with absolute model age. Accumulation rate clearly change over time, this shift happens rapidly within upper sediments and must be accounted for in the Bacon model settings. Reported ^210^Pb age uncertainties within the model framework are, most often, significantly lower than the estimated model uncertainties. Within legacy records, where ^210^Pb dates are unreported, modeled 210Pb uncertainties based on reported dates, provide a reasonable framework for re-building chronologies. ADD - SUMMARIZE SOLUTIONS – BOTH AS-IS AND FUTURE.  
+abstract: Well constructed chronologies are critical to reliable paleoecological inference.
+  Hence, a first step in large-scale paleodata syntheses is to review and, as needed,
+  revise chronologies.  Here we demonstrate and document the systematic construction
+  of age models from the Neotoma Paleoecological Database, as a way of examining the
+  assumptions and decisions involved in model construction. We use the Bacon age modeling
+  software, implemented in R, and catalogue several of the challenges and decision-making
+  process necessary for chronology development. This paper examines the biases resulting
+  from posthoc calibration of default radiocarbon chronologies, ^210^Pb uncertainty,
+  the treatment of inflection points in sedimentation rates, the use biostratigraphic
+  markers associated with known historical events, handling of accumulation rates
+  that may change over time, memory parameters, section and thicknesses within Bacon,.
+  One third of age models in Neotoma have default chronologies expressed in radiocarbon
+  years, and simply calibrating interpolated ages results in differences of between
+  31 and 470 cal yrs BP when compared to rebuilding age models. ^210^Pb dates XXX
+  The resulting age models show that section thickness generally increases with absolute
+  model age. Accumulation rate clearly change over time, this shift happens rapidly
+  within upper sediments and must be accounted for in the Bacon model settings. Reported
+  ^210^Pb age uncertainties within the model framework are, most often, significantly
+  lower than the estimated model uncertainties. Within legacy records, where ^210^Pb
+  dates are unreported, modeled 210Pb uncertainties based on reported dates, provide
+  a reasonable framework for re-building chronologies. ADD - SUMMARIZE SOLUTIONS –
+  BOTH AS-IS AND FUTURE.
 ---
 
 # Introduction
@@ -158,7 +179,7 @@ Estimating age-depth relationships and uncertainties requires that decisions be 
 
 Neotoma contains `r nrow(neotoma::get_table('ChronControlTypes'))` different chronology control types, including various pollen stratigraphic controls, radiocarbon and other isotopic dates and marine isotope stages.  Since this analysis was focused primarily on sedimentary pollen records, most of the chronological controls used reflect more recent control types, including ^210^Pb, ^137^Cs, and ^14^C dates, as well as biostratigraphic dates associated with events of known or inferred dates, such as historical fires and the *Tsuga* decline.  Core tops are often used, and have highly certain dates, however, several older records use interpolated dates for the core top when sediment was lost in the coring process.  These cores should be treated with caution, and this is often noted in the core description.
 
-```{r}
+```{r, results = 'hide', echo = FALSE, warning=FALSE}
 if('controls.RDS' %in% list.files('data/output/rds_files/')) {
   controls <- readRDS('data/output/rds_files/controls.RDS')
 } else {
