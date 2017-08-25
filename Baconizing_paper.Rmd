@@ -106,94 +106,7 @@ chron <- sapply(all_downloads, function(x){
 meta.table$chron <- NA
 meta.table$chron <- chron
 
-```
-
-```{r, linear-fake, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
-
-source('R/figures/compare_recalibrations.R')
-
-if (paste0('comp_recal_v', version, '.rds') %in% list.files('data/output')) {
-  comp_recal <- readRDS(paste0('data/output/comp_recal_v', version, '.rds'))
-} else {
-  comp_recal <- compare_recalibrations()
-  saveRDS(comp_recal, file = paste0('data/output/comp_recal_v', version, '.rds'))
-}
-
-source('R/recalibrate.actual.R', echo = FALSE)
-
-age_seq <- seq(1000, 21000, by = 1000)
-
-new.chrons <- new.chrons %>%  
-  filter(!core %in% c("Chalko Lake", "Aghnaghak", "Pittsburg Basin", 
-                      "Lac à l'Ange", "Marl Pond", "Cheyenne Bottoms", 
-                      "San Agustin Plains")) %>% 
-  group_by(handle) %>% 
-  mutate(max = findInterval(max(age.lin, na.rm = TRUE), age_seq)) %>% 
-  na.omit
-
-basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin)) + 
-            geom_path(aes(group = handle, color = factor(max))) +
-            scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
-            scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0)) +
-        theme_bw() +
-        xlab('Direct Age Recalibration') +
-        ylab('Linear Model Recalibration') +
-        theme(axis.title.x = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-              legend.position = 'none',
-        axis.title.y = element_text(family = 'serif', 
-                                    face = 'bold.italic', 
-                                    size = 18),
-        axis.ticks = element_blank(),
-        axis.text.x = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14),
-        axis.text.y = element_text(family = 'serif', 
-                                    face = 'italic', 
-                                    size = 14))
-
-# Build an age model with a knot every 500 years:
-diff.model <- gam(diff ~ s(age.lin, k = 42), 
-                  data = new.chrons)
-
-diff.pred <- predict(diff.model,
-                     newdata = data.frame(age.lin = seq(0, 21000, by = 10)),
-                     se.fit = TRUE, type = 'response')
-
-diff.data <- data.frame(age = seq(0, 21000, by = 10),
-                        pred = diff.pred[[1]], 
-                        se   = diff.pred[[2]])
-
-diff <- ggplot() +
-            geom_point(data = new.chrons, 
-                       aes(x = age.lin, y = diff, color = as.factor(max))) +
-            geom_ribbon(data = diff.data, 
-                        aes(x = age, ymax = pred + se * 1.96, 
-                            ymin = pred - se * 1.96), 
-                        color = 'red', alpha = 0.5) +
-            scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
-            scale_y_continuous(limits = c(-2000, 2000), expand = c(0, 0)) +
-            geom_hline(aes(yintercept = 0)) +
-            xlab('Linear Model with Recalibration') +
-            ylab('Model Difference') +
-          theme_bw() +
-          theme(axis.title.x = element_text(family = 'serif', 
-                                      face = 'bold.italic', 
-                                      size = 18),
-                legend.position = 'none',
-          axis.title.y = element_text(family = 'serif', 
-                                      face = 'bold.italic', 
-                                      size = 18),
-          axis.ticks = element_blank(),
-          axis.text.x = element_text(family = 'serif', 
-                                      face = 'italic',
-                                      size = 14),
-          axis.text.y = element_text(family = 'serif', 
-                                      face = 'italic', 
-                                      size = 14))
-
-ggsave(file = 'figures/difference.svg', plot = diff, width = 9, height = 2.5)
+source('R/section_1_scripts.R')
 
 ```
 
@@ -202,7 +115,7 @@ Differences between age models and direct recalibration.
   <!-- fallback image in CSS -->
 </object>
 
-**Figure 1**. *The difference between (a) directly calibrating (red arrows) radiocarbon ages from an existing model (black dashed line) and (b) rebuilding age models using linear interpolatation (red dashed line) from calibrated radiocarbon ages (red line).  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages. (d) Using the chronological controls of the default age model from Neotoma records, calibrate chronological controls reported in radiocarbon years, and then use linear interpolation.  Any records with age-reversals were rejected to simplify this illustrative example.*
+**Figure 1**. *Diagram of two methods for generating calibrated dates from radiocarbon age-models.  (a) Each age (in radiocarbon years) is calibrated directly (red arrows) from an existing model (black dashed line) or (b) the age models is reconstructed using linear interpolatation (red dashed line) from calibrated radiocarbon ages (red line).  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages. (d) Using the chronological controls of the default age model from Neotoma records, calibrate chronological controls reported in radiocarbon years, and then use linear interpolation.  Any records with age-reversals were rejected to simplify this illustrative example.*
 
 
 
@@ -243,19 +156,33 @@ Estimating age-depth relationships and uncertainties requires that decisions be 
 
 ## Choice of Age Controls and Types
 
-<!--Add a section here on what kind of age controls you opted to use, or not use.  Within a given type, did you use all available age controls in Neotoma, or did you discard any?  Provide a basic list:  radiocarbon, core tops, Pb210, biostratigraphic/Ambrosia, …
+Neotoma contains `r nrow(neotoma::get_table('ChronControlTypes'))` different chronology control types, including various pollen stratigraphic controls, radiocarbon and other isotopic dates and marine isotope stages.  Since this analysis was focused primarily on sedimentary pollen records, most of the chronological controls used reflect more recent control types, including ^210^Pb, ^137^Cs, and ^14^C dates, as well as biostratigraphic dates associated with events of known or inferred dates, such as historical fires and the *Tsuga* decline.  Core tops are often used, and have highly certain dates, however, several older records use interpolated dates for the core top when sediment was lost in the coring process.  These cores should be treated with caution, and this is often noted in the core description.
 
-This could be written as  a standalone section, or as a paragraph within the above section.
+```{r}
+if('controls.RDS' %in% list.files('data/output/rds_files/')) {
+  controls <- readRDS('data/output/rds_files/controls.RDS')
+} else {
+  controls <- lapply(all_downloads, function(x)try(get_chroncontrol(x)))
+  for(i in length(controls):1){if('try-error' %in% class(controls[[i]])) {controls[[i]] <- NULL }}
+  saveRDS(controls, 'data/output/rds_files/controls.RDS')
+}
 
-Next two sections focus on 210Pb and Biosttratigraphic, but radiocarbon dates aren’t mentioned.  I assume that this is because methods for quantifying error in radiocarbon dates are now well established.  If so, I recommend stating that in this section/paragraph, with pointers to relevant references.  
+control_type <- controls %>% 
+  map(function(x)data.frame(control = as.character(x$chron.control$control.type))) %>% 
+  bind_rows() %>% 
+  group_by(control) %>% 
+  summarise(count = n())
 
-Also, what about core tops.  Did you need to make any changes there?  -->
+knitr::kable(control_type)
+```
 
 ## Chronological Uncertainty
 
+Methods of understanding an managing radiocarbon uncertainty are well established, however the use of ^210^Pb and biostratigraphic dates are less well understood in the context of sedimentary archives, particularly in large scale synthesis work, where biostratigraphic events may be time-transitive, and uncertainties associated with ^210^Pb may appear to narrow to properly model ages using the Bacon software.
+
 ### Dealing with zero-value ^210^Pb errors
 
-Bacon requires that all chronological markers be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma was entered without error reporting.  Of the 398 ^210^Pb markers in Neotoma, 148 have no error reported (Figure 3).  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and the integer ceiling taken) to obtain standard deviations to be used in the Bacon model (Figure 3). 
+Bacon requires that all chronological markers be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma were entered without error reporting.  Of the 398 ^210^Pb age controls in Neotoma, 148 have no error reported (Figure 3).  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and rounded up to the nearest integer) to obtain standard deviations to be used in the Bacon model (Figure 3). 
 
 ```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
 
@@ -267,19 +194,25 @@ lead_plots(all_geochron)
 
 ```
 
-**Figure 3.** *Reported uncertainty for ^210^Pb dates within Neotoma, by age, with the total count of unassigned samples by age bin (lower).  Estimated uncertainty, using a model relating reported ^210^Pb uncertainty to age, is then assigned to all ^210^Pb dates with unreported uncertainty.* 
+**Figure 3.** *Reported uncertainty for ^210^Pb dates within Neotoma, by age, with the total count of unassigned samples by age bin (lower).  Estimated uncertainty, using a model relating reported ^210^Pb uncertainty to age, is then assigned to all ^210^Pb dates with unreported uncertainty. Present is defined as radiocarbon present, or 1950 CE.* 
 
-### Expert elicitation exercise to identify settlement horizon
+### Expert elicitation exercise to identify biostratigraphic events
 
-Age estimates of pollen samples, and in some cases their uncertainty, can be estimated using an age-depth model determined by a combination of the chronological controls. To determine which sample best represents pre-settlement times, it is possible to select the sample closest in age but not younger than the time of settlement. Instead, we rely on the existence of a biostratigraphic signal corresponding with the time of interest. During European settlement, land-clearances led to noticeable increases in certain agricultural indicators that is reflected in the pollen records, especially *Ambrosia* [@mcandrews1988human]. This change in the relative abundance of Ambrosia, referred to as the *Ambrosia* rise, can be used to identify a reasonably representative presettlement assemblage that justifiable precedes major land clearance - here the pre-settlement pollen sample is defined to be the sample immediately prior to the first pollen sample that reflects the *Ambrosia* rise. We deal with some of the uncertainty associated with the identification of a biostratigraphic marker by: 1) avoiding the need to assign a date to our representative pre-settlement assemblage, and 2) using expert elicitation to reduce expert bias.
+<!--Biostratigraphic events sometimes used in paleoecological age models if the cause and timing of the event is well established.
+2) Ambrosia rise and other markers (Rumex) often used in eastern North America as signal of EuroAmerican land clearnance (McAndrews, etc. REFS).
+This rise is usually identified by visual inspection.
+Hard to assess uncertainty.
+Here we do so.-->
 
-The *Ambrosia* rise is a well known phenomenon in the eastern United States, and elsewhere, that appears to be contemporraneous with Euro-American settlement, land clearance and the initiation of intensive agriculture in the region [@McAndrews1968;@mcandrews1988human]. In the Upper Midwest, significant increases in *Ambrosia*, *Rumex*, and/or Poaceae are typically coincident with the settlement horizon. Because of this feature it is possible to establish a biostratigraphic chronological control. When the rise can be identified visually it can be used as a stratigraphic marker with an age defined as either immediately preceeding (when the "pre-settlement" sample is used), or immedately after.  The pre-settlement sample has been identified for many of the fossil pollen cores in the Neotoma database, to reduce variability associated with the protocol used to determine these samples we asked a team of experts to identify pre-settlement samples based only on pollen diagrams depicting proportional changes through time as a function of depth for key indicator species and the ten most abundant arboreal taxa. Experts were prohibited from relying on stratigraphic dates (radiocarbon or other) or age-depth model estimates of sample age.
+To determine which sample best represents pre-settlement times, it is possible to select the sample closest in age but not younger than the time of settlement. Instead, we rely on the existence of a biostratigraphic signal corresponding with the time of interest. During European settlement, land-clearances led to noticeable increases in certain agricultural indicators that is reflected in the pollen records, especially *Ambrosia* [@mcandrews1988human]. This change in the relative abundance of Ambrosia, referred to as the *Ambrosia* rise, can be used to identify a reasonably representative presettlement assemblage that justifiable precedes major land clearance - here the pre-settlement pollen sample is defined to be the sample immediately prior to the first pollen sample that reflects the *Ambrosia* rise. We deal with some of the uncertainty associated with the identification of a biostratigraphic marker by: 1) avoiding the need to assign a date to our representative pre-settlement assemblage, and 2) using expert elicitation to reduce expert bias.
 
-For a summary of the settlement horizon elicitation exercise, see the calibration paper [@dawson2016quantifying].
+The *Ambrosia* rise is a well known phenomenon in the eastern United States, and elsewhere, that appears to be contemporaneous with Euro-American settlement, land clearance and the initiation of intensive agriculture in the region [@McAndrews1968;@mcandrews1988human]. In the Upper Midwest, significant increases in *Ambrosia*, *Rumex*, and/or Poaceae are typically coincident with the settlement horizon. Because of this feature it is possible to establish a biostratigraphic chronological control. When the rise can be identified visually it can be used as a stratigraphic marker with an age defined as either immediately preceeding (when the "pre-settlement" sample is used), or immedately after.  The pre-settlement sample has been identified for many of the fossil pollen cores in the Neotoma database, to reduce variability associated with the protocol used to determine these samples we asked a team of experts to identify pre-settlement samples based only on pollen diagrams depicting proportional changes through time as a function of depth for key indicator species and the ten most abundant arboreal taxa. Experts were prohibited from relying on stratigraphic dates (radiocarbon or other) or age-depth model estimates of sample age.
 
-To generate the prediction data set, we would like to make use of the elicitation exercise results in order to include an additional stratigraphic marker in the chronological control tables. To do this, we need to be able to assign pre-settlement ages that correspond with the expert-determined pre-settlement depths with some confidence. From the PLS data, we have corresponding sample year for all sampled location. Within each grid cell, we determined the maximum sampling year, and then our pre-settlement age was determined by subtracting 50 from this value. The period of settlement across the upper Midwestern United States spanned from 1820 - 1910 [@goring2016novel], providing a potential period of settlement spanning nearly 100 years, thus we applied an age uncertainty (stanadrd deviation) of 50 years for the settlement marker, around the date of survey for the grid cell within which the core was located.  Ideally, methods would provide the opportunity to include asymmetric uncertainty, since, in the case of the settlement horizon, we know the minimum age, but not the most recent age of potential settlement.
+For a summary of the settlement horizon elicitation exercise, see the calibration paper [@dawson2016quantifying; @@kujawa2016theeffect].
 
-Five cores were located within grid cells without digitized PLS data. In these cases, we look to the surrounding grid cells to estimate the maximum sampling year. In the upper peninsula of Michigan, there was a single site for which there was no PLS data, which was assigned a maximum sampling year of 1860. The four remaining grid cells in which there were cores but no PLS data were in the lower peninsula of Michigan, and were assigned a maximum year of sampling of 1840.
+The elicitation exercise provides an independently assesed estimate of biostratigraphic change in the pollen records that can be used as a biostratigraphic marker. Gridded Public Land Survey (PLS) datasets in this region provide a historical record of the minimum date of presence for legacy forests [@goring2016novel]. Goring et al. [-@goring2016novel] use historical records of forest cover from the 1820s - 1903 to provide estimates of forest cover prior to EuroAmerican settlement.  The gridded datasets associated with the paper also provides the PLS sampling year; we subtract 50 from the value for grid cells in which sites fall to assign a "pre-settlement" period for each core, with an age uncertainty (stanadard deviation) of 50 years.  Ideally, methods would include asymmetric uncertainty, since, in the case of the settlement horizon, we know the minimum age of, but not the most recent age for potential settlement.
+
+Five cores were located within grid cells without digitized PLS data. In these cases, we look to the surrounding grid cells to estimate the maximum sampling year. One site in the Upper Peninsula of Michigan was assigned a maximum sampling year of 1860. The four remaining cores were in the Lower Peninsula of Michigan, and were assigned a maximum year of sampling of 1840.
 
 ## Bacon Settings
 
