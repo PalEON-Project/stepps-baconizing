@@ -57,6 +57,7 @@ expert_elicitation <- function() {
      coord_cartesian(xlim = c(1820, 1920), ylim = c(1200, 2000), expand = FALSE) +
      geom_abline(slope = 1, intercept = 0) +
      geom_smooth(method = 'lm') +
+     scale_x_reverse() +
      xlab("Assigned Settlement Age Control (CE)") +
      ylab("Modeled Age (CE)") +
      theme_bw() +

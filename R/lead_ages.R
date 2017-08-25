@@ -56,6 +56,7 @@ compare_lead <- function() {
                        x = 1950 - age), alpha = 0.7) +
     geom_point(aes(x = 1950 - age, y = bacon_age1), alpha = 0.9) +
     coord_equal(xlim = c(1800, 2000), ylim = c(1800, 2000), expand = c(0,0)) +
+    scale_x_reverse() +
     xlab('Reported 210Pb Age') +
     ylab('Bacon Estimated Age') +
     theme_bw() +
