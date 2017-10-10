@@ -9,6 +9,10 @@ author:
   name: John Williams
 bibliography: styles/baconizing.bib
 output:
+  word_document:
+    reference_docx: styles/word_template.docx
+    toc: yes
+    toc_depth: '3'
   html_document:
     code_folding: show
     fig_caption: yes
@@ -21,37 +25,20 @@ output:
   pdf_document:
     toc: yes
     toc_depth: '3'
-  word_document:
-    reference_docx: styles/word_template.docx
-    toc: yes
-    toc_depth: '3'
 dev: svg
 highlight: tango
 keywords: chronology, geochronology, paleoecology, age-models, Bacon, 210Pb, 14C,
   radiocarbon
 csl: styles/elsevier-harvard.csl
-abstract: Well constructed chronologies are critical to reliable paleoecological inference.
-  Hence, a first step in large-scale paleodata syntheses is to review and, as needed,
-  revise chronologies.  Here we demonstrate and document the systematic construction
-  of age models from the Neotoma Paleoecological Database, as a way of examining the
-  assumptions and decisions involved in model construction. We use the Bacon age modeling
-  software, implemented in R, and catalogue several of the challenges and decision-making
-  process necessary for chronology development. This paper examines the biases resulting
-  from posthoc calibration of default radiocarbon chronologies, ^210^Pb uncertainty,
-  the treatment of inflection points in sedimentation rates, the use biostratigraphic
-  markers associated with known historical events, handling of accumulation rates
-  that may change over time, memory parameters, section and thicknesses within Bacon,.
-  One third of age models in Neotoma have default chronologies expressed in radiocarbon
-  years, and simply calibrating interpolated ages results in differences of between
-  31 and 470 cal yrs BP when compared to rebuilding age models. ^210^Pb dates XXX
-  The resulting age models show that section thickness generally increases with absolute
-  model age. Accumulation rate clearly change over time, this shift happens rapidly
-  within upper sediments and must be accounted for in the Bacon model settings. Reported
-  ^210^Pb age uncertainties within the model framework are, most often, significantly
-  lower than the estimated model uncertainties. Within legacy records, where ^210^Pb
-  dates are unreported, modeled 210Pb uncertainties based on reported dates, provide
-  a reasonable framework for re-building chronologies. ADD - SUMMARIZE SOLUTIONS –
-  BOTH AS-IS AND FUTURE.
+abstract: |
+  Well constructed chronologies are critical to reliable paleoecological inference.  Analysis that relies strongly on chronologies must take into account both the methods' inherent assumptions and the parameters used in the development of the chronologies.  Hence, a first step in large-scale paleodata syntheses is to review and, as needed, revise chronologies. The selection of a single age-model software helps reduce variability due to differing assumptions among models, but the choice of age model parameters, and assumptions about synthesis data are equally important. This paper uses pollen records and associated chronological controls from the Neotoma Paleoecological Database ([http://neotomadb.org]()) to examine the biases and assumptions made in chronology construction on an aggregate dataset.  We examine the challenges of missing uncertainty estimates in ^210^Pb dates, the use of zero-length hiatuses to account for changing accumulation rates with depth. We also use the exercise to provide some prescriptive guidance for chronology construction in the large-scale re-analysis of records.
+  
+  One third of age models in Neotoma have default chronologies expressed only in radiocarbon years.  Calibrating interpolated ages results in differences of between 31 and 470 cal yrs BP when compared to new age models. Bacon age models using ^210^Pb dates show a linear relationship between ^210^Pb ages and the calibrated ages, but Bacon calculated uncertainties are much higher than the reported ^210^Pb uncertainty and increase exponentially with age. Establishing biostratigraphic markers and using a hiatus at the point of inflection for sediment accumulation at this time period results in age estimates at settlement that are, on average 44 years younger in the new Bacon models.
+  
+  Bacon parameters fit to the best model show some general trends.  Accumulation rates show a pattern similar to other studies, with an inflection point at approximately 200 years before present.  Best-fit model section thickness increases with absolute model age, and a framework in which each core is reconstructed multiple times with a grid of parameters for section thickness, memory and accumulation provides a basis for broad-scale reconstruction that accounts for regional and local-scale variability in accumulation patterns for sediment over time.
+  
+  This paper uses these reconstructions as a basis to solve several issues with chronology construction, and to point to outstanding issues in age-model reconstruction that can be solved with new methodological approaches.  In particular, choices about model parameters, assumptions about sediment accumulation processes and product representation must be addressed for us to move forward as a community.
+
 ---
 
 # Introduction
@@ -388,7 +375,7 @@ A challenge for paleoecologists is that site level effects can often play a sign
 
 ## Modelling Recommendations
 
-This work has highlighted a number of future opportunities for age-depth model development.  The last decade has seen rapid improvements in modeling software and our understanding of the limitations of chronologies [@trachsel2017all;@telfordfirst], but work remains.  This work can be broadly categorized into parameters, processes and products:
+This work has highlighted a number of future opportunities for age-depth model development.  The last decade has seen rapid improvements in modeling software and our understanding of the limitations of chronologies [@trachsel2017all;@telford2004all], but work remains.  This work can be broadly categorized into parameters, processes and products:
 
 ### Parameters
 
@@ -410,27 +397,27 @@ The age model, as a component of paleoecological studies, is increasing critical
 
 | Challenge | Solution |
 | ------------------- | -------------------------------------- |
-| Parameter ||
+| **Parameter** ||
 | Age uncertainties vary in the shape of their distributions. |  Allow uncertainty models to include other distributions, including truncated distributions. |
 | Accumulation rates change through time but priors are fixed. | The current solution is to use 'zero-length' hiatuses, which serve to reset the accumulation rate, but allowing models of change based on empirical studies would improve fit. |
 | Parameter values can have significant, but unintuitive effects on model fit   | Allowing models to accept vectors of possible values may improve fit and provide a better understanding of the interacting relationships between model parameters.   |
-| Process ||
+| **Process** ||
 | Uncertainty in depth is not represented | Estimates of overlap within composite cores, based on correlation from geochemical or visual cues may be included |
 | Models don't use secondary information. | Secondary parameters may be used to indicate rapid changes in memory, or accumulation. |
-| Product ||
+| **Product** ||
 | Age models require significant oversight |  Codify certain decisions, provide testing suites for fit parameters. |
 | Ensuring that model outputs are clear and the decisions made about parameters are justified.  | Improved uptake of reproducible workflows and use of provenance tools. |
 
 ## Future development
 
-The tools and techniques for generating age models continues to increase.  BChron [ref], Bacon STAN [ref], CSciBox (url: [https://www.cs.colorado.edu/~lizb/cscience.html](), OxCal [ref] all exist as alternative tools, and geochronR exists as a resource for managing age models in the R programming environment.  It is unlikely the community will select a single resource for modeling chronologies, but the adoption of certain standards across the paleogeosciences can help improve interoperability of data, and ultimately, lead to improvements in our overall understanding of many of the exciting research questions that drive us as a community and as individuals.
+The tools and techniques for generating age models continues to increase.  BChron [@parnell2016package], Bacon STAN ([https://github.com/andrewdolman/baconr/]()), CSciBox ([https://www.cs.colorado.edu/~lizb/cscience.html]()), OxCal [@ramsey2013recent] all exist as alternative tools, and geochronR ([https://github.com/nickmckay/GeoChronR]()) exists as a resource for managing age models in the R programming environment.  It is unlikely the community will select a single resource for modeling chronologies, but the adoption of certain standards across the paleogeosciences can help improve interoperability of data, and ultimately, lead to improvements in our overall understanding of many of the exciting research questions that drive us as a community and as individuals.
 
 # Conclusions
 
-We know lots now that we didn't know before.  If you read carefully you would too.
+Large-scale synthesis using Quaternary paleoecological records may require the development of purpose-built chronologies.  Careful attention to chronology development can result in substantial changes to site-level chronologies, and systematic offsets at a regional scale.  The development of new chronologies must consider choices at the scale of individual chronological controls, at the scale of the site, and at regional scales.  Using a matrix of parameters with empirical support, and choosing among multiple realizations is likely the most effective method for developing high quality chronologies for use in synthesis research.  Once models have been constructed, a secondary goal is the preservation and encoding of the choices that went into model development.  High quality paleoecological research increasingly depends on high quality chronological support, and as such, researchers must pass on the information they have gained, in developing site level and regional chronologies, in a well supported and effectively communicated manner.
 
 # Acknowledgements
 
-This work is a contribution of the PalEON Project (http://paleon-project.org).  SJG would like to thank support from NSG, CEG and AMG.
+This work is a contribution of the PalEON Project (http://paleon-project.org).  SJG would like to thank support from NSG, CEG and AMG.  SJG is supported through NSF Grants NSF-1541002, NSF-1550855, NSF-1241868, and NSF-1550707.
 
 # References
