@@ -9,6 +9,13 @@ author:
   name: John Williams
 bibliography: styles/baconizing.bib
 output:
+  word_document:
+    reference_docx: styles/word_template.docx
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
   html_document:
     code_folding: show
     fig_caption: yes
@@ -18,23 +25,16 @@ output:
     theme: readable
     toc: yes
     toc_float: yes
-  pdf_document:
-    toc: yes
-    toc_depth: '3'
-  word_document:
-    reference_docx: styles/word_template.docx
-    toc: yes
-    toc_depth: '3'
 dev: svg
 highlight: tango
 keywords: chronology, geochronology, paleoecology, age-models, Bacon, 210Pb, 14C,
   radiocarbon
 csl: styles/elsevier-harvard.csl
 abstract: |
-  Well constructed chronologies are critical to reliable paleoecological inference. Analysis that relies strongly on chronologies must take into account the methods' inherent assumptions and the parameters used in the development of the chronologies. A first step in large-scale paleodata syntheses is to review and, as needed, revise chronologies. The selection of a single age-modeling software helps reduce variability among chronologies due to differing assumptions among models, but the choice of age model parameters, and assumptions about synthesis data are equally important. This paper uses pollen records and associated chronological controls from the Neotoma Paleoecological Database ([http://neotomadb.org]()) to examine the biases and assumptions made in chronology construction on an aggregate dataset.  We examine the challenges of missing uncertainty estimates in ^210^Pb dates, and the use of zero-length hiatuses to account for changing accumulation rates with depth. We also use this exercise to provide prescriptive guidance for chronology construction in the large-scale re-analysis of records.
   A third of pollen age models in Neotoma have chronologies expressed in radiocarbon years only. The analysis of newly constructed age models indicates broader patterns that may change our interpretations of chronologies. Direct calibration of interpolated ages results in differences of 31 -- 470 cal yrs BP when compared to newly constructed age models. ^210^Pb dates show a linear relationship between ^210^Pb ages and Bacon calibrated ages, but Bacon calculated uncertainties are approximately 2 times higher than the reported ^210^Pb uncertainty. Sediment accumulation rates (*yrs/cm* sediment) show an inflection point and associated five-fold decline at approximately 200 years before present. Establishing biostratigraphic markers for the EuroAmerican settlement era, and using a hiatus at the point of inflection for sediment accumulation at this time period results in age estimates for the EuroAmerican settlement era that are, on average 44 years younger in the new Bacon models.
   Parameters for the best-fit Bacon model show some general trends. Best-fit model section thickness increases with absolute model age, and a framework in which each core is reconstructed multiple times with a grid of parameters for section thickness, memory and accumulation provides a basis for broad-scale reconstruction that accounts for regional and local-scale variability in accumulation patterns for sediment over time.
   This paper uses these reconstructions as a basis to solve several issues with chronology construction, and to point to outstanding issues in age-model reconstruction that can be solved with new methodological approaches.  In particular, choices about model parameters, assumptions about sediment accumulation processes and product representation must be addressed for us to move forward as a community.
+  Well constructed chronologies are critical to reliable paleoecological inference. Analysis that relies strongly on chronologies must take into account the methods' inherent assumptions and the parameters used in the development of the chronologies. A first step in large-scale paleodata syntheses is to review and, as needed, revise chronologies. The selection of a single age-modeling software helps reduce variability among chronologies due to differing assumptions among models, but the choice of age model parameters, and assumptions about synthesis data are equally important. This paper uses pollen records and associated chronological controls from the Neotoma Paleoecological Database ([http://neotomadb.org]()) to examine the biases and assumptions made in chronology construction on an aggregate dataset.  We examine the challenges of missing uncertainty estimates in ^210^Pb dates, and the use of zero-length hiatuses to account for changing accumulation rates with depth. We also use this exercise to provide prescriptive guidance for chronology construction in the large-scale re-analysis of records.
 ---
 
 # Introduction
