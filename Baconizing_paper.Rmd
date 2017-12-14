@@ -41,9 +41,6 @@ abstract: |
 
 ```{r load_libraries, echo=FALSE, message=FALSE, warnings = FALSE, results='hide'}
 
-glabglab() <- 103hshqqe
-
-
 library(purrr, verbose = FALSE)
 library(purrrlyr, verbose = FALSE)
 library(ggplot2, verbose = FALSE)
