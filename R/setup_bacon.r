@@ -1,9 +1,9 @@
 #  Note, put this code in a directory with a Bacon.R file and a Cores directory.
-require(neotoma)
-require(maps)
-require(fields)
-require(raster)
-require(rgdal)
+library(neotoma)
+library(maps)
+library(fields)
+library(raster)
+library(rgdal)
 library(dplyr)
 
 # sp is required by raster, loaded by default
@@ -18,16 +18,7 @@ source('R/utils/write_agefile_stepps.r')
 # dataset id change for Jones Lake: old=1394, new=15274
 # dataset id change for Canyon Lake: old=3055, new=15682
 
-# determine if any new sites not included in the previous data pull
-gpids <- get_table(table.name='GeoPoliticalUnits')
-gpid = c(gpids[which(gpids$GeoPoliticalName == 'Minnesota'),1],
-         gpids[which(gpids$GeoPoliticalName == 'Wisconsin'),1],
-         gpids[which(gpids$GeoPoliticalName == 'Michigan'),1])
-
-dl = list()
-for (i in 1:length(gpid)){
-  dl = c(dl, get_dataset(datasettype='pollen', gpid=gpid[i], ageyoung=0))
-}
+dl <- get_dataset(datasettype='pollen', gpid=c('Minnesota', 'Wisconsin', 'Michigan'), ageyoung=0)
 
 ids = as.numeric(names(dl))
 nsites  = length(ids)
@@ -35,38 +26,33 @@ nsites  = length(ids)
 # load list containing pollen counts
 # will load object called pollen2k
 # the first time takes a while to pull from Neotoma
-pol = NA
-if (file.exists(paste0('data/pollen_', version, '.rdata'))) {
-  load(paste0('data/pollen_', version, '.rdata')) 
+
+if (file.exists(paste0('data/pollen_v', version, '.rds'))) {
+  pol <- readRDS(paste0('data/pollen_v', version, '.rds'))
 } 
-if (!file.exists(paste0('data/pollen_', version, '.rdata'))|(length(ids)!=length(pollen))){
-  
-  # download and save the raw data
-  pollen = list()
-  for (i in 1:nsites){ 
-    print(i)
-    pollen[[i]] = get_download(ids[i])[[1]]
-  }  
-  save(pollen, file=paste0('data/pollen_', version, '.rdata'))
-} 
+if (!file.exists(paste0('data/pollen_v', version, '.rdata'))|(length(ids)!=length(pollen))){
+  pol <- get_download(dl)
+
+  saveRDS(pol, file=paste0('data/pollen_v', version, '.rds'))
+}
 
 # extract the meta data
-pollen_meta = data.frame(dataset_id = sapply(pol, function(x) x$dataset$dataset.meta$dataset.id), 
+pollen_meta = data.frame(dataset_id  = sapply(pol, function(x) x$dataset$dataset.meta$dataset.id), 
                          name        = sapply(pol, function(x)x$dataset$site.data$site.name),
                          handle      = sapply(pol, function(x)x$dataset$dataset.meta$collection.handle),
                          lat         = sapply(pol, function(x) x$dataset[[1]]$lat),
                          long        = sapply(pol, function(x) x$dataset[[1]]$long),
-                         state       = rep(NA),
+                         state       = NA,
                          age_type    = sapply(pol, function(x) x$sample.meta$age.type[1]),
-                         bacon       = rep(NA, nsites),
-                         amb_rise    = rep(NA),
+                         bacon       = NA,
+                         amb_rise    = NA,
                          pol_age_min = sapply(pol, function(x) min(x$sample.meta$age)),
                          pol_age_max = sapply(pol, function(x) max(x$sample.meta$age)),
-                         gc_age_min = rep(NA, nsites),
-                         gc_age_max = rep(NA, nsites),
-                         reason     = rep(NA, nsites),
-                         new        = rep(NA, nsites)
-                         )
+                         gc_age_min = NA,
+                         gc_age_max = NA,
+                         reason     = NA,
+                         new        = NA)
+
 # get the state, and then split mi:up and mi:lp
 pollen_meta$state = map.where(database="state", x=pollen_meta$long, y=pollen_meta$lat)
 pollen_meta       = split_mi(pollen_meta, longlat=TRUE)
@@ -93,7 +79,6 @@ bacon_params <- data.frame(handle = sapply(pol, function(x)x$dataset$dataset.met
                            ndates = NA,
                            success = NA,
                            stringsAsFactors=FALSE)
-
 
 # write the chron control files for bacon
 for(i in 1:nsites){ 
@@ -140,8 +125,6 @@ for(i in 1:nsites){
     bacon_params$suit[i] = FALSE
     pollen_meta$bacon[i] = FALSE
   }
-  # curl breaks without this
-  # Sys.sleep(3)
 }
 
 # check to see why some fail

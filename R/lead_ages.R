@@ -17,7 +17,7 @@ compare_lead <- function() {
   leads$age[!is.na(leads$age) & leads$age > 500] <- 1950 - 
     leads$age[!is.na(leads$age) & leads$age > 500]
   
-  site_table <- read.csv('data/pollen_meta_v1.0.csv', stringsAsFactors = FALSE)
+  site_table <- read.csv('data/pollen_meta_v7.csv', stringsAsFactors = FALSE)
   
   leads$handles <- (site_table$handle[match(leads$site.name, site_table$name)])
   

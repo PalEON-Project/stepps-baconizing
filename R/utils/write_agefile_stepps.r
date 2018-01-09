@@ -62,7 +62,7 @@ write_agefile_stepps <- function (download, survey.year, path, corename, site.id
       # UPGRAVEN
       chron.controls <- get_chroncontrol(1295, verbose = FALSE)
     } else {
-      prec = read.csv('data/neotoma_age-model-precedence.csv', header=TRUE)
+      prec = read.csv('data/input/neotoma_age-model-precedence.csv', header=TRUE)
       
       age_types = sapply(download$chronologies, function(x) x$age.type[1])
       best_default = which.min(prec$precedence[match(age_types, prec$age_type)])

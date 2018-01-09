@@ -1,20 +1,28 @@
+# Generate age models using BChron, not Bacon.
+
+library(Bchron)
 #  Get all the chronologies and rebuild as before:
 
-if (!'chronologies.rds' %in% list.files('data/output/')) {
+
+if (file.exists(paste0('data/pollen_v', version, '.rds'))) {
+  pol <- readRDS(paste0('data/pollen_v', version, '.rds'))
+}
+
+if (!paste0('chronologies_v', version, '.rds') %in% list.files('data/output/')) {
   chronologies <- list()
   
-  for (i in 1:length(all_downloads)) {
-    chronologies[[i]] <- try(get_chroncontrol(all_downloads[[i]]), silent = TRUE)
+  for (i in 1:length(pol)) {
+    chronologies[[i]] <- try(get_chroncontrol(pol[[i]]), silent = TRUE)
     flush.console()
     if ('try-error' %in% class(chronologies[[i]])) {
       chronologies[[i]] <- list(empty = NA)
     }
   }
   
-  saveRDS(chronologies, file = 'data/output/chronologies.rds')
+  saveRDS(chronologies, file = paste0('data/output/chronologies_v',version,'.rds'))
 
 } else{
-  readRDS('data/output/chronologies.rds')
+  chronologies <- readRDS(paste0('data/output/chronologies_v',version,'.rds'))
 }
 
 rebuild <- function(x){
@@ -28,7 +36,7 @@ rebuild <- function(x){
     if (chronologies[[x]]$meta$age.type == 'Radiocarbon years BP' &
          nrow(chronologies[[x]]$chron.control) > 1) {
       
-      ages <- all_downloads[[x]]$sample.meta$age
+      ages <- pol[[x]]$sample.meta$age
       good.ages <- ages > 71 & ages < 40000 & !is.na(ages)
       
       if (sum(good.ages) > 0) {
@@ -39,10 +47,16 @@ rebuild <- function(x){
         from.calib <- sapply(calibed, function(x)weighted.mean(x$ageGrid, x$densities))
         
         controls <- chronologies[[x]]$chron.control$age
+        
+        controls[is.na(controls)] <- ((chronologies[[x]]$chron.control$age.young +
+          chronologies[[x]]$chron.control$age.old) / 2 +
+          chronologies[[x]]$chron.control$age.young)[is.na(controls)]
+        
         errors   <- abs(chronologies[[x]]$chron.control$age - chronologies[[x]]$chron.control$age.young)
     
         calib <- !chronologies[[x]]$chron.control$control.type %in% 
-          c('Core top', 'Annual laminations (varves)', 'Lead-210', 'Radiocarbon, calibrated') &
+          c('Core top', 'Annual laminations (varves)', 
+            'Lead-210', 'Radiocarbon, calibrated') &
            controls < 40000 & controls > 71
 
         errors[is.na(errors)] <- 200
@@ -58,38 +72,38 @@ rebuild <- function(x){
 
         new.ages <- approx(x    = chronologies[[x]]$chron.control$depth, 
                            y    = controls,
-                           xout = all_downloads[[x]]$sample.meta$depth)
+                           xout = pol[[x]]$sample.meta$depth)
         
         if (all(diff(new.ages$y[good.ages]) > 0, na.rm = TRUE)) {
           # Given that this is "rough & ready", eliminate all cores with age reversals.
-          output <- data.frame(core       = all_downloads[[x]]$dataset$site$site.name,
-                               handle     = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
+          output <- data.frame(core       = pol[[x]]$dataset$site$site.name,
+                               handle     = pol[[x]]$dataset$dataset.meta$collection.handle,
                                age.direct = from.calib,
                                age.lin    = new.ages$y[good.ages])
         } else {
-          output <- data.frame(core       = all_downloads[[x]]$dataset$site.data$site.name,
-                               handle     = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
+          output <- data.frame(core       = pol[[x]]$dataset$site.data$site.name,
+                               handle     = pol[[x]]$dataset$dataset.meta$collection.handle,
                                age.direct = NA,
                                age.lin    = NA)  
         }
       } else {
         # If there's no data then we push out an NA (but still keep the site name, for tracking)
         
-        output <- data.frame(core       = all_downloads[[x]]$dataset$site.data$site.name,
-                             handle     = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
+        output <- data.frame(core       = pol[[x]]$dataset$site.data$site.name,
+                             handle     = pol[[x]]$dataset$dataset.meta$collection.handle,
                              age.direct = NA,
                              age.lin    = NA)
       }
     } else {
-      output <- data.frame(core = all_downloads[[x]]$dataset$site$site.name,
-                           handle = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
+      output <- data.frame(core = pol[[x]]$dataset$site$site.name,
+                           handle = pol[[x]]$dataset$dataset.meta$collection.handle,
                            age.direct = NA,
                            age.lin = NA)
     }
     
   } else {
-    output <- data.frame(core = all_downloads[[x]]$dataset$site$site.name,
-                         handle = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
+    output <- data.frame(core = pol[[x]]$dataset$site$site.name,
+                         handle = pol[[x]]$dataset$dataset.meta$collection.handle,
                          age.direct = NA,
                          age.lin = NA)
   }
@@ -100,28 +114,28 @@ rebuild <- function(x){
 }
 
 #  This is just to debug, so I can see where errors occur.
-#  for(i in 1:length(chronologies))rebuild(i)
+for(i in 1:length(chronologies))rebuild(i)
 
-if (!'new.chrons.rds' %in% list.files('data/output')) {
+if (!paste0('newchrons_',version,'.rds') %in% list.files('data/output')) {
   # Build the chronologies.  This then saves to a file so we don't have to re-run it every time.
   
-  new.chrons <- (1:length(chronologies)) %>% 
-    map(function(x){
-      test <- try(rebuild(x))
-      
-      if (class(test) == 'try-error') {
-        test <- data.frame(core       = NA, 
-                           handle     = NA,
-                           age.direct = NA,
-                           age.lin    = NA,
-                           diff       = NA,
-                           stringsAsFactors = FALSE)
-        }
-      return(test)}) %>% 
+  new.chrons <- lapply(1:length(chronologies), function(x){
+    test <- try(rebuild(x))
+  
+    if ('try-error' %in% class(test)) {
+      test <- data.frame(core       = NA, 
+                         handle     = NA,
+                         age.direct = NA,
+                         age.lin    = NA,
+                         stringsAsFactors = FALSE)
+    } else {
+      return(test)
+    }
+  }) %>% 
     bind_rows
 
-  saveRDS(new.chrons, file = 'data/output/new.chrons.rds')
+  saveRDS(new.chrons, file = paste0('data/output/newchrons_', version, '.rds'))
 
 } else {
-  new.chrons <- readRDS('data/output/new.chrons.rds')
+  new.chrons <- readRDS(paste0('data/output/newchrons_', version, '.rds'))
 }

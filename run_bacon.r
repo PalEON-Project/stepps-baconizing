@@ -7,7 +7,7 @@ source('R/config.r')
 source('Bacon.R')
 source('R/utils/helpers.r')
 
-setup = FALSE
+setup <- FALSE
 
 if (setup){
   # remove files from any previous runs
@@ -53,6 +53,7 @@ pollen_meta  <- read.csv(paste0('data/pollen_meta_v', version, '.csv'), header=T
 # 
 # i_check = which(setts == TRUE)
 #############################################################################################
+
 run_batch <- function(bacon_params){
 
   for(i in 1:nrow(bacon_params)){
@@ -60,20 +61,27 @@ run_batch <- function(bacon_params){
     
     print(i)
     site.params <- bacon_params[i,]
-    if (!(site.params$bacon)){next}
-    if (is.na(site.params$thick)){next}
+    if (!(site.params$bacon))     {next}
+    if (is.na(site.params$thick)) {next}
     # thick = site.params$thick
     # suff = thick
     
     site.params$mem.strength = 2
     site.params$mem.mean     = 0.5
-    # site.params$thick        = thick
+    # site.params$thick      = thick
     
     # HANSEN and KERR LAKE both have crazy high accumulation rate
     if (site.params$dataset.id %in% c(1004, 15916)){
       site.params$acc.mean.old = 100
     }
     
+    # This fails in linux if libgsl.so.0 cannot be found.  To fix this I ran:
+    # > sudo find . -name "libgsl.so"
+    # This provided the path to libgsl.so
+    # Then, I created a simlink:
+    # sudo ln ./usr/lib/x86_64-linux-gnu/libgsl.so ./usr/lib/x86_64-linux-gnu/libgsl.so.0
+    # This allows things to work.
+ 
     site.params <- run.bacon(site.params)
     
   }
@@ -86,6 +94,7 @@ bacon_params$thick = pollen_meta_v6$thick[match(bacon_params$dataset.id, pollen_
 pollen_meta$thick  = pollen_meta_v6$thick[match(bacon_params$dataset.id, pollen_meta_v6$id)]
 bacon_params$bacon = pollen_meta$bacon[match(bacon_params$dataset.id, pollen_meta$dataset_id)]
 
+# This takes a long time to run, because it runs every Bacon core.
 run_batch(bacon_params)
 
 # overwrite pollen_meta file?

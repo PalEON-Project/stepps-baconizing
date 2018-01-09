@@ -1,9 +1,11 @@
-
-source('R/figures/compare_recalibrations.R')
+#
+# Some setup scripts, making plots for the paper to be included within the
+# Introduction
 
 if (paste0('comp_recal_v', version, '.rds') %in% list.files('data/output')) {
   comp_recal <- readRDS(paste0('data/output/comp_recal_v', version, '.rds'))
 } else {
+  source('R/figures/compare_recalibrations.R')
   comp_recal <- compare_recalibrations()
   saveRDS(comp_recal, file = paste0('data/output/comp_recal_v', version, '.rds'))
 }

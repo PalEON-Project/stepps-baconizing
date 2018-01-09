@@ -1,3 +1,8 @@
+# Returns a plot comparing sequential ages and BChron calibrated dates for 
+# artificial cores.
+#
+# Does not return anything, simply saves an SVG file
+
 compare_recalibrations <- function() {
 
   oldest <- seq(1000, 21000, by = 1000)
