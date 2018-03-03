@@ -1,6 +1,10 @@
+Cores/*
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 stepps-baconizing.Rproj
 autobuild.sh
+Baconizing_paper_files/*
+draft_documents/*
+*#

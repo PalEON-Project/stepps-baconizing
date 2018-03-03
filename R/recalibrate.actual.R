@@ -4,15 +4,15 @@ library(Bchron)
 #  Get all the chronologies and rebuild as before:
 
 
-if (file.exists(paste0('data/pollen_v', version, '.rds'))) {
-  pol <- readRDS(paste0('data/pollen_v', version, '.rds'))
+if (file.exists(paste0('all_downloads_v', version, '.rds'))) {
+  all_downloads <- readRDS(paste0('all_downloads_v', version, '.rds'))
 }
 
 if (!paste0('chronologies_v', version, '.rds') %in% list.files('data/output/')) {
   chronologies <- list()
   
-  for (i in 1:length(pol)) {
-    chronologies[[i]] <- try(get_chroncontrol(pol[[i]]), silent = TRUE)
+  for (i in 1:length(all_downloads)) {
+    chronologies[[i]] <- try(get_chroncontrol(all_downloads[[i]]), silent = TRUE)
     flush.console()
     if ('try-error' %in% class(chronologies[[i]])) {
       chronologies[[i]] <- list(empty = NA)
@@ -36,7 +36,7 @@ rebuild <- function(x){
     if (chronologies[[x]]$meta$age.type == 'Radiocarbon years BP' &
          nrow(chronologies[[x]]$chron.control) > 1) {
       
-      ages <- pol[[x]]$sample.meta$age
+      ages <- all_downloads[[x]]$sample.meta$age
       good.ages <- ages > 71 & ages < 40000 & !is.na(ages)
       
       if (sum(good.ages) > 0) {
@@ -72,38 +72,38 @@ rebuild <- function(x){
 
         new.ages <- approx(x    = chronologies[[x]]$chron.control$depth, 
                            y    = controls,
-                           xout = pol[[x]]$sample.meta$depth)
+                           xout = all_downloads[[x]]$sample.meta$depth)
         
         if (all(diff(new.ages$y[good.ages]) > 0, na.rm = TRUE)) {
           # Given that this is "rough & ready", eliminate all cores with age reversals.
-          output <- data.frame(core       = pol[[x]]$dataset$site$site.name,
-                               handle     = pol[[x]]$dataset$dataset.meta$collection.handle,
+          output <- data.frame(core       = all_downloads[[x]]$dataset$site$site.name,
+                               handle     = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
                                age.direct = from.calib,
                                age.lin    = new.ages$y[good.ages])
         } else {
-          output <- data.frame(core       = pol[[x]]$dataset$site.data$site.name,
-                               handle     = pol[[x]]$dataset$dataset.meta$collection.handle,
+          output <- data.frame(core       = all_downloads[[x]]$dataset$site.data$site.name,
+                               handle     = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
                                age.direct = NA,
                                age.lin    = NA)  
         }
       } else {
         # If there's no data then we push out an NA (but still keep the site name, for tracking)
         
-        output <- data.frame(core       = pol[[x]]$dataset$site.data$site.name,
-                             handle     = pol[[x]]$dataset$dataset.meta$collection.handle,
+        output <- data.frame(core       = all_downloads[[x]]$dataset$site.data$site.name,
+                             handle     = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
                              age.direct = NA,
                              age.lin    = NA)
       }
     } else {
-      output <- data.frame(core = pol[[x]]$dataset$site$site.name,
-                           handle = pol[[x]]$dataset$dataset.meta$collection.handle,
+      output <- data.frame(core = all_downloads[[x]]$dataset$site$site.name,
+                           handle = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
                            age.direct = NA,
                            age.lin = NA)
     }
     
   } else {
-    output <- data.frame(core = pol[[x]]$dataset$site$site.name,
-                         handle = pol[[x]]$dataset$dataset.meta$collection.handle,
+    output <- data.frame(core = all_downloads[[x]]$dataset$site$site.name,
+                         handle = all_downloads[[x]]$dataset$dataset.meta$collection.handle,
                          age.direct = NA,
                          age.lin = NA)
   }
