@@ -12,7 +12,7 @@ allan_thick <- function() {
     } else {
       output <- NA
     }
-    return(data.frame(core_length= as.numeric(output)))}, .collate = 'cols') %>% 
+    return(data.frame(core_length = as.numeric(output)))}, .collate = 'cols') %>% 
     dplyr::select(name, handle, thick, pol_age_max, age_type, core_length1)
   
   uncalib <- thick$age_type %in% "Radiocarbon years BP" & 
@@ -53,6 +53,6 @@ allan_thick <- function() {
   
   model <- gam(pol_age_max ~ s(thick, k = 3), family = 'poisson', data = thickness)
   
-  return(list(plot = thick_model, model = model, glm = thick_glm))
+  return(list(plot = thick_model, model = model, glm = thick_glm, thick = thick))
   
 }
