@@ -9,6 +9,13 @@ author:
   name: John Williams
 bibliography: styles/baconizing.bib
 output:
+  word_document:
+    reference_docx: styles/word_template.docx
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
   html_document:
     code_folding: show
     fig_caption: yes
@@ -18,19 +25,50 @@ output:
     theme: readable
     toc: yes
     toc_float: yes
-  pdf_document:
-    toc: yes
-    toc_depth: '3'
-  word_document:
-    reference_docx: styles/word_template.docx
-    toc: yes
-    toc_depth: '3'
 dev: svg
 highlight: tango
 keywords: chronology, geochronology, paleoecology, age-models, Bacon, 210Pb, 14C,
   radiocarbon
 csl: styles/elsevier-harvard.csl
-abstract: "Well constructed chronologies are critical to reliable paleoecological inference and any paleoecological analysis must critically assess the underlying data, age-depth models, and their assumptions and parameters used to build the chronologies. Robust broad-scale syntheses of paleoclimatic and paleoecological data usually require the rebuilding of site chronologies, to ensure that inferences are based on current best practices in age-depth modeling and are not confounded by inconsistencies among sites.  The scope and power of these syntheses are facilitated by 1) advances in Bayesian age-depth modeling approaches and 2) continuing growth of data volumes in community curated data resources in paleoecology.  However, understanding of best practices and parameter settings for these age-depth modeling when working with many records is still poorly understood, and data resources often carry legacy chronologies that must be updated.  This paper uses pollen records and associated chronological controls from the Neotoma Paleoecological Database ([http://neotomadb.org]()) to examine the biases and assumptions made in chronology construction on an aggregate dataset. We examine the challenges of missing uncertainty estimates in ^210^Pb dates, and the use of zero-length hiatuses to account for changing accumulation rates with depth. We also use this exercise to provide prescriptive guidance for chronology construction in the large-scale re-analysis of records.Simple post hoc calibration of interpolated radiocarbon ages results in differences of 31 -- 470 calendar years when compared to newly constructed age models. Age estimates from ^210^Pb dates are linearly related to Bacon model estimates, but Bacon-calculated uncertainties are approximately twice the reported ^210^Pb uncertainty. Sediment deposition times (yrs/cm sediment) show an inflection point and associated five-fold decline at approximately 200 years before present. This shift required setting temporally varying priors for sedimentation rate in Bacon, with a prescribed breakpoint at the settlement horizon. Revised age estimates for the EuroAmerican settlement horizon are, on average, 44 years younger in the new Bacon models than in prior models. The optimal value forsection thickness tends to increases total core length.  Caution must still be exercised with age-depth modeling; even with advances in software and data resources, accurate age models require expert judgment and human supervision.  One key need is to better capture and store age-depth model metadata and parameter settings in community data resources, to improve reproducibility and to allow quicker regeneration and updating of these age models as parameterizations and models improve. Other recommendations include the addition of additional kinds of uncertainty models in age-depth models, allowing priors and parameters to evolve through time, extension of models to enable fuller parameter space exploration and optimization, integrating of physical sedimentological data into age-depth models, and the better integration of age-depth models and community curated data resources through shared adoption of common standards."
+abstract: Well constructed chronologies are critical to reliable paleoecological inference
+  and any paleoecological analysis must critically assess the underlying data, age-depth
+  models, and their assumptions and parameters used to build the chronologies. Robust
+  broad-scale syntheses of paleoclimatic and paleoecological data usually require
+  the rebuilding of site chronologies, to ensure that inferences are based on current
+  best practices in age-depth modeling and are not confounded by inconsistencies among
+  sites.  The scope and power of these syntheses are facilitated by 1) advances in
+  Bayesian age-depth modeling approaches and 2) continuing growth of data volumes
+  in community curated data resources in paleoecology.  However, understanding of
+  best practices and parameter settings for these age-depth modeling when working
+  with many records is still poorly understood, and data resources often carry legacy
+  chronologies that must be updated.  This paper uses pollen records and associated
+  to examine the biases and assumptions made in chronology construction on an aggregate
+  dataset. We examine the challenges of missing uncertainty estimates in ^210^Pb dates,
+  and the use of zero-length hiatuses to account for changing accumulation rates with
+  depth. We also use this exercise to provide prescriptive guidance for chronology
+  construction in the large-scale re-analysis of records.Simple post hoc calibration
+  of interpolated radiocarbon ages results in differences of 31 -- 470 calendar years
+  when compared to newly constructed age models. Age estimates from ^210^Pb dates
+  are linearly related to Bacon model estimates, but Bacon-calculated uncertainties
+  are approximately twice the reported ^210^Pb uncertainty. Sediment deposition times
+  (yrs/cm sediment) show an inflection point and associated five-fold decline at approximately
+  200 years before present. This shift required setting temporally varying priors
+  for sedimentation rate in Bacon, with a prescribed breakpoint at the settlement
+  horizon. Revised age estimates for the EuroAmerican settlement horizon are, on average,
+  44 years younger in the new Bacon models than in prior models. The optimal value
+  forsection thickness tends to increases total core length.  Caution must still be
+  exercised with age-depth modeling; even with advances in software and data resources,
+  accurate age models require expert judgment and human supervision.  One key need
+  is to better capture and store age-depth model metadata and parameter settings in
+  community data resources, to improve reproducibility and to allow quicker regeneration
+  and updating of these age models as parameterizations and models improve. Other
+  recommendations include the addition of additional kinds of uncertainty models in
+  age-depth models, allowing priors and parameters to evolve through time, extension
+  of models to enable fuller parameter space exploration and optimization, integrating
+  of physical sedimentological data into age-depth models, and the better integration
+  of age-depth models and community curated data resources through shared adoption
+  of common standards.
+  chronological controls from the Neotoma Paleoecological Database ([http://neotomadb.org]())
 ---
 
 # Introduction
