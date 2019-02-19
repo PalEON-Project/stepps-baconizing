@@ -9,22 +9,22 @@ author:
   name: John Williams
 bibliography: styles/baconizing.bib
 output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    number_sections: yes
+    theme: readable
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
   word_document:
     reference_docx: styles/word_template.docx
     toc: yes
     toc_depth: '3'
-  pdf_document:
-    toc: yes
-    toc_depth: '3'
-  html_document:
-    code_folding: show
-    fig_caption: yes
-    keep_md: yes
-    number_sections: yes
-    self_contained: yes
-    theme: readable
-    toc: yes
-    toc_float: yes
 dev: svg
 highlight: tango
 keywords: chronology, geochronology, paleoecology, age-models, Bacon, 210Pb, 14C,
@@ -73,32 +73,18 @@ abstract: Well constructed chronologies are critical to reliable paleoecological
 
 # Introduction
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(cache=TRUE)
-```
-
 ```{r load_libraries, echo=FALSE, message=FALSE, warnings = FALSE, results='hide'}
+knitr::opts_chunk$set(cache=TRUE)
 
-library(purrr, verbose = FALSE)
-library(purrrlyr, verbose = FALSE)
-library(ggplot2, verbose = FALSE)
-library(neotoma, verbose = FALSE)
-library(plyr, verbose = FALSE)
-library(reshape2, verbose = FALSE)
-library(mgcv, verbose = FALSE)
-library(Bchron, verbose = FALSE)
-library(viridis, verbose = FALSE)
-library(dplyr, verbose = FALSE)
-library(readr, verbose = FALSE)
-library(gridExtra, verbose = FALSE)
+# Version numbering and other important parameters are stored in a file `settings.yaml`
 
-version <- 0.1
+source('R/load_packages.R')
 
 ```
 
-Advances in paleoecoinformatics are continually improving our ability to store and process large numbers of paleoecological records [@brewer2012paleoecoinformatics;@uhen2013card;@williams2017neotoma], which enables the use of increasingly large data networks to study ecological and climatic processes operating at large spatial scales and at timescales inaccessible to modern observational data [@marlon2017climatic;@bothe2015continental;@abram2016early]. Paleoecological and paleoclimatic databases streamline this process by providing the means to store, curate, and query structured data across specified spatial and temporal bounds. Examples of these databases include NOAA-Paleoclimatology [https://www.ncdc.noaa.gov/data-access/paleoclimatology-data](), Linked Earth [http://linked.earth](), and the Neotoma Paleoecology Database [URL: http://neotomadb.org; @williams2017neotoma]. Generating accurate and precise age inferences using the best available age controls and state-of-the-art age-depth models is a key challenge for scientists using paleoecological data resources for large-scale data syntheses.  Because of the increasingly large data volumes involved (for example, as of `r Sys.Date()`, Neotoma now includes `r length(neotoma::get_site())` site-level records, including `r length(neotoma::get_dataset(datasettype="pollen"))` fossil pollen records globally), the central challenge in large-scale regeneration of chronologies is how best to balance speed/automation with careful critical analysis and adjustment of individual age models by experts.  Here we review these issues, assess key sources of uncertainty, and provide examples of solutions developed during our recent data synthesis efforts with the Neotoma Paleoecology Database and the Paleoecological Observatory Network (PalEON).
+Advances in paleoecoinformatics are continually improving our ability to store and process large numbers of paleoecological records [@brewer2012paleoecoinformatics;@uhen2013card;@williams2017neotoma], which enables the use of increasingly large data networks to study ecological and climatic processes operating at large spatial scales and at timescales inaccessible to modern observational data [@marlon2017climatic;@bothe2015continental;@abram2016early]. Paleoecological and paleoclimatic databases streamline this process by providing the means to store, curate, and query structured data across specified spatial and temporal bounds. Examples of these databases include NOAA-Paleoclimatology [https://www.ncdc.noaa.gov/data-access/paleoclimatology-data](), Linked Earth [http://linked.earth](), and the Neotoma Paleoecology Database [URL: http://neotomadb.org; @williams2017neotoma]. Generating accurate and precise age inferences using the best available age controls and state-of-the-art age-depth models is a key challenge for scientists using paleoecological data resources for large-scale data syntheses.  Because of the increasingly large data volumes involved (for example, as of `r Sys.Date()`, Neotoma now includes `r nrow(neotoma::get_site())` site-level records, including `r length(neotoma::get_dataset(datasettype="pollen"))` fossil pollen records globally), the central challenge in large-scale regeneration of chronologies is how best to balance speed/automation with careful critical analysis and adjustment of individual age models by experts.  Here we review these issues, assess key sources of uncertainty, and provide examples of solutions developed during our recent data synthesis efforts with the Neotoma Paleoecology Database and the Paleoecological Observatory Network (PalEON).
 
-An emerging practice in paleoecological and paleoclimatic data resources is to store both the original proxy measurements by depth (*e.g.*, the stratigraphic position of vertebrate specimens or micropaleontological assemblages) and the associated age controls, so that age estimates for the proxy measurements can be regenerated as age-depth models and geochronological parameterizations improve [@grimm2014working;@blois2011methodological;@giesecke2014towards].  The chronology for a given record comprises three distinct elements: the age-depth model used for a given paleoecological or paleoclimatic record, the age controls that constrain that age model, and the resultant age estimates for all stratigraphic depths or intervals in that record [@mckay2015linked;@grimm2008neotoma]. Robust chronologies require accurate and precise estimates of absolute ages from radiometric and other age controls, well supported conversion from radiocarbon years to calendar years, age-depth models that make use of prior knowledge [*e.g.* Steno's Law of stratigraphic superposition and rates of sediment deposition and accumulation, @goring2012deposition], and a clear quantification of uncertainty that accounts for both measurement and process uncertainty.  
+An emerging practice in paleoecological and paleoclimatic data resources is to store both the original proxy measurements by depth (*e.g.*, the stratigraphic position of vertebrate specimens or micropaleontological assemblages) and the associated age controls, so that age estimates for the proxy measurements can be regenerated as age-depth models and geochronological parameterizations improve [@grimm2014working;@blois2011methodological;@giesecke2014towards].  The chronology for a given record comprises three distinct elements: the age-depth model used for a given paleoecological or paleoclimatic record, the age controls that constrain that age model, and the resultant age estimates for all stratigraphic depths or intervals in that record [@mckay2015linked;@grimm2008neotoma]. Robust chronologies require accurate and precise estimates of absolute ages from radiometric and other age controls, well supported conversion from radiocarbon years to calendar years, age-depth models that make use of prior knowledge [*e.g.* Steno's Law of stratigraphic superposition and rates of sediment deposition and accumulation, @goring2012deposition], and a clear quantification of uncertainty that accounts for both measurement and process uncertainty.
 
 The accuracy and precision of these chronologies are fundamental to paleoecological interpretation, and indeed, geochronology and age models are central to our understanding of the evolution of the earth system [@harrison2016geochronology]. Quaternary scientists are, of course, well aware of the fundamental importance of chronologies, and various papers have explored these issues and the interpretive challenges that can arise from them [@grimm2009magnitude;@liu2012temporal;@trachsel2017all;@blaauw2012out].
 
@@ -108,26 +94,26 @@ Data resources such as Neotoma or LinkedEarth/LiPD can store multiple chronologi
 
 source('R/getNAcores.R')
 
-all_downloads <- north_american_cores(version)
+all_downloads <- north_american_cores(settings$version)
 
-if (paste0('pubs_v', version, '.rds') %in% list.files('data/output')) {
-  pubs <- readRDS(paste0('data/output/pubs_v', version, '.rds'))
+if (paste0('pubs_v', settings$version, '.rds') %in% list.files('data/output')) {
+  pubs <- readRDS(paste0('data/output/pubs_v', settings$version, '.rds'))
 } else {
   pubs <- neotoma::get_publication(all_downloads)
-  saveRDS(pubs, file = paste0('data/output/pubs_v', version, '.rds'))
+  saveRDS(pubs, file = paste0('data/output/pubs_v', settings$version, '.rds'))
 }
 
-meta.table <- pubs %>% 
+meta.table <- pubs %>%
   map(function(x){
-    metas <- do.call(rbind.data.frame, 
+    metas <- do.call(rbind.data.frame,
                      lapply(x, '[[', 'meta'))
     output <- metas[which.min(metas$year),]
     if(nrow(output) == 0) {
-      output <- data.frame(id = NA, 
-                           pub.type = NA, 
+      output <- data.frame(id = NA,
+                           pub.type = NA,
                            year = NA,
                            citation = NA)}
-    return(output)}) %>% 
+    return(output)}) %>%
   bind_rows
 
 chron <- sapply(all_downloads, function(x){
@@ -153,7 +139,7 @@ Differences between age models and direct recalibration.
 
 **Figure 1**. *Diagram of two methods for generating calibrated dates from radiocarbon age-models.  (a) Each age (in radiocarbon years) is calibrated directly (red arrows) from an existing model (black dashed line) or (b) the age models is reconstructed using linear interpolatation (red dashed line) from calibrated radiocarbon ages (red line).  Negative values indicate that recalibration of interpolated ^14^C dates followed by linear interpolation of calibrated ages provides systematically older ages than direct recalibration of interpolated ages. (d) Using the chronological controls of the default age model from Neotoma records, calibrate chronological controls reported in radiocarbon years, and then use linear interpolation.  Any records with age-reversals were rejected to simplify this illustrative example.*
 
-Hence, an early step in any large-scale data synthesis is to review the extant chronologies associated with the records at hand and update them as needed. Ideally, these updated chronologies should be placed back into the archival data resources, to maximize comparability of results across studies, reproducibility, and reuse by other researchers. Recent examples of large-scale paleo-synthesis analysis have focused on standardizing age models for records within a database  and establishing regional benchmarks. Age model standardization in Europe relied on the Clam software , as did efforts with the North American Pollen Database [@blois2011methodological]. 
+Hence, an early step in any large-scale data synthesis is to review the extant chronologies associated with the records at hand and update them as needed. Ideally, these updated chronologies should be placed back into the archival data resources, to maximize comparability of results across studies, reproducibility, and reuse by other researchers. Recent examples of large-scale paleo-synthesis analysis have focused on standardizing age models for records within a database  and establishing regional benchmarks. Age model standardization in Europe relied on the Clam software , as did efforts with the North American Pollen Database [@blois2011methodological].
 
 At the same time, Bayesian approaches are becoming the new standard in age-depth modeling, because of their ability to return robust uncertainty estimates, and to incorporate knowledge about system processes and prior knowlege into the sedimentation models [*e.g.*, @blaauw2011flexible;@ramsey2013recent;@parnell2016package]. Although many site-level papers have adopted Bayesian methods, few large scale syntheses have done so [e.g., the ACER database used Clam: @sanchez2017acer].
 
@@ -169,12 +155,12 @@ Second, many different kinds of age controls may be used to constrain age-depth 
 
 source('R/figures/ageplot_histogram.R')
 
-chronology_type_histogram(meta.table)
+hists <- chronology_type_histogram(meta.table)
 
 ```
 
 <object type="image/svg+xml" data="figures/histograms_cleaned.svg">
-  Histograms of age model types against year of publication 
+  Histograms of age model types against year of publication
   <!-- fallback image in CSS -->
 </object>
 
@@ -199,21 +185,23 @@ Estimating age-depth relationships and uncertainties requires that decisions be 
 Neotoma contains `r nrow(neotoma::get_table('ChronControlTypes'))` age control types ([http://api.neotomadb.org/v1/dbtables/ChronControlTypes]()), including various pollen stratigraphic controls, radiocarbon and other isotopic dates and marine isotope stages.  Since analysis in Dawson *et al*. [-@dawson2016quantifying] was focused on reconstructing vegetation compositional dynamics in the late-Holocene, most chronological controls presented here are appropriate for teporal domains from the present back to 10^1^ to 10^5^ years before 1950, including ^210^Pb, ^137^Cs, and ^14^C dates, as well as biostratigraphic dates associated with events of known or inferred dates, such as historical fires and the *Tsuga* decline (*cf*. [@bennett2002determining;@booth2012decomposing]).  Core tops are often used, and have highly certain dates, however, several older records use interpolated dates for the core top when sediment was lost in the coring process.  These cores should be treated with caution, and this is often noted in the core description.
 
 ```{r, results = 'hide', echo = FALSE, warning=FALSE}
-if('controls.RDS' %in% list.files('data/output/rds_files/')) {
-  controls <- readRDS('data/output/rds_files/controls.RDS')
+
+if(paste0('controls_', settings$version, '.rds') %in% list.files('data/output/rds_files/')) {
+  controls <- readRDS(paste0('data/output/rds_files/controls_', settings$version, '.rds'))
 } else {
   controls <- lapply(all_downloads, function(x)try(get_chroncontrol(x)))
   for(i in length(controls):1){if('try-error' %in% class(controls[[i]])) {controls[[i]] <- NULL }}
-  saveRDS(controls, 'data/output/rds_files/controls.RDS')
+  saveRDS(controls, paste0('data/output/rds_files/controls_', settings$version, '.rds'))
 }
 
-control_type <- controls %>% 
-  map(function(x)data.frame(control = as.character(x$chron.control$control.type))) %>% 
-  bind_rows() %>% 
-  group_by(control) %>% 
+control_type <- controls %>%
+  map(function(x)data.frame(control = as.character(x$chron.control$control.type))) %>%
+  bind_rows() %>%
+  group_by(control) %>%
   summarise(count = n())
 
-knitr::kable(control_type)
+knitr::kable(control_type[order(control_type$count, decreasing = TRUE), ])
+
 ```
 
 ## Chronological Uncertainty
@@ -224,11 +212,11 @@ Biostratigraphic events usually require expert identification, with uncertainty 
 
 ### Dealing with zero-value ^210^Pb errors
 
-Bacon requires that all age controls be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma were entered without error reporting.  Of the 398 ^210^Pb age controls in Neotoma (as of `r Sys.Date()`), 148 have no error reported (Figure 3).  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and rounded up to the nearest integer) to obtain standard deviations to be used in the Bacon model (Figure 3). 
+Bacon requires that all age controls be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma were entered without error reporting.  Of the 398 ^210^Pb age controls in Neotoma (as of `r Sys.Date()`), 148 have no error reported (Figure 3).  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and rounded up to the nearest integer) to obtain standard deviations to be used in the Bacon model (Figure 3).
 
 ```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
 
-all_geochron <- readRDS(paste0('data/output/all_geochron_v', version, '.rds'))
+all_geochron <- readRDS(paste0('data/output/all_geochron_v', settings$version, '.rds'))
 
 source('R/lead_plotting.R')
 
@@ -236,7 +224,7 @@ lead_plots(all_geochron)
 
 ```
 
-**Figure 3.** *Reported uncertainty for ^210^Pb dates within Neotoma, by age (upper panel), with the total count of unassigned samples by age bin (lower panel).  In our age-depth models, estimated uncertainty, using a model relating reported ^210^Pb uncertainty to age, is then assigned to all ^210^Pb dates with unreported uncertainty. Present is defined as radiocarbon present, or 1950 CE.* 
+**Figure 3.** *Reported uncertainty for ^210^Pb dates within Neotoma, by age (upper panel), with the total count of unassigned samples by age bin (lower panel).  In our age-depth models, estimated uncertainty, using a model relating reported ^210^Pb uncertainty to age, is then assigned to all ^210^Pb dates with unreported uncertainty. Present is defined as radiocarbon present, or 1950 CE.*
 
 ### Identify biostratigraphic events and assigning ages
 
@@ -270,13 +258,18 @@ Dividing a core into sections is an approximation of time discretization [REF - 
 
 ```{r, lead_comparison, results = 'hide', echo = FALSE, warning=FALSE, dev='svg'}
 
+### NOTE:  THE ADDITION OF HUSTLER LAKE RESULTS IN A WEIRD SET OF VALUES
+
 source('R/lead_ages.R')
-comp_doc <- compare_lead()
+comp_doc <- compare_lead(coredir = "../bacon-agegen",
+                         version = settings$version,
+                         param_file = "data/input/bacon_params_v1.csv")
 
 model  <- lm(I(1950 - bacon_age1) ~ age, data = comp_doc[[2]])
 uncert <- lm(bacon_error1 ~ e.older, data = comp_doc[[2]])
 
 comp_doc[[1]]
+
 ```
 
 **Figure 4**. *Reported and estimated ^210^Pb ages from the Bacon models generally show strong accordance.  However, uncertainties within the constructed Bacon models at the depths of the ^210^Pb samples are higher for Bacon models (y-axis) than from the original estimates for models including ^210^Pb dates (x-axis). The autoregressive nature of the Bacon model, the influence of the memory parameter, and the nature of the Bayesian model itself mean that uncertainty is propagated through the core, and as such low uncertainty in the individual ^210^Pb dates (x-axis) does not result in low Bacon uncertainty.*
@@ -289,20 +282,20 @@ Only three lakes in the region had age models that included ^210^Pb dates and re
 
 lead_out <- comp_doc[[2]]
 
-drop_outlier <- lead_out %>% 
-  filter(bacon_error1 < 200) %>% 
-  select(site.name, age, bacon_error1, e.older) %>% 
-  na.omit() %>% 
+drop_outlier <- lead_out %>%
+  filter(bacon_error1 < 200) %>%
+  select(site.name, age, bacon_error1, e.older) %>%
+  na.omit() %>%
   arrange(site.name, age)
 
-lead_comp_plot <- ggplot(data = drop_outlier) + 
-  geom_point(aes(x = age, y = bacon_error1, shape = site.name), 
+lead_comp_plot <- ggplot(data = drop_outlier) +
+  geom_point(aes(x = age, y = bacon_error1, shape = site.name),
              alpha = 0.7, size = 3) +
-  geom_point(aes(x = age, y = e.older, shape = site.name), 
+  geom_point(aes(x = age, y = e.older, shape = site.name),
              color = 'red', alpha = 0.7, size = 3) +
   geom_ribbon(aes(x = age, ymin = e.older, ymax= bacon_error1, group = site.name),
               alpha = 0.1, color = alpha(colour = 'black', 0.2)) +
-  geom_segment(aes(x = age, xend = age, 
+  geom_segment(aes(x = age, xend = age,
                    y = bacon_error1, yend = e.older), alpha = 0.3) +
   scale_x_continuous(limits=c(-50, 100)) +
   scale_y_continuous(limits=c(0, 80)) +
@@ -312,25 +305,25 @@ lead_comp_plot <- ggplot(data = drop_outlier) +
   annotate("text", x = -25, y = 80, label = "Bacon Uncertainty") +
   annotate("text", x = -25, y = 75, label = "210Pb Uncertainty", color = "red") +
   theme_bw() +
-    theme(axis.title.x = element_text(family = 'serif', 
-                                      face = 'bold.italic', 
+    theme(axis.title.x = element_text(family = 'serif',
+                                      face = 'bold.italic',
                                       size = 18),
-          axis.title.y = element_text(family = 'serif', 
-                                      face = 'bold.italic', 
+          axis.title.y = element_text(family = 'serif',
+                                      face = 'bold.italic',
                                       size = 18),
           axis.ticks = element_blank(),
-          axis.text.x = element_text(family = 'serif', 
-                                     face = 'italic', 
+          axis.text.x = element_text(family = 'serif',
+                                     face = 'italic',
                                      size = 14),
-          axis.text.y = element_text(family = 'serif', 
-                                     face = 'italic', 
+          axis.text.y = element_text(family = 'serif',
+                                     face = 'italic',
                                      size = 14))
 
 ggsave(filename = 'figures/lead_comp_plot.svg', plot = lead_comp_plot, width = 8, height = 5)
 ```
 
 <object type="image/svg+xml" data="figures/lead_comp_final.svg">
-  Comparison of 210Pb dates measured and reconstructed error at those depths. 
+  Comparison of 210Pb dates measured and reconstructed error at those depths.
 </object>
 
 **Figure 5**. *For the three cores within the region with both reported ^210^Pb and reconstructed Bacon uncertainties, the latter are consistently higher, although the magnitude of the difference varies by record.  Fish Lake shows the smallest difference, while reconstructed ages for Brown's Bay shows the largest difference.*
@@ -339,7 +332,7 @@ ggsave(filename = 'figures/lead_comp_plot.svg', plot = lead_comp_plot, width = 8
 
 ```{r, elecitation_plot, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
 source('R/elicitation_plot.R')
-
+# Double check that this is the right depth. . .
 elicitation_plots <- expert_elicitation()
 
 ```
@@ -385,7 +378,7 @@ Deposition rates increase with time across the pre- and post-settlement interval
 ```{r, get_thickness, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
 
 source('R/thick_model.R')
-model_plot <- allan_thick()
+model_plot <- allan_thick('../bacon-agegen')
 
 ```
 

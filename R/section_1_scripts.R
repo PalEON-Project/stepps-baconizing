@@ -24,8 +24,7 @@ new.chrons <- new.chrons %>%
 
 basic <- ggplot(new.chrons, aes(x = age.direct, y = age.lin)) + 
   geom_path(aes(group = handle, color = factor(max))) +
-  scale_x_continuous(limits = c(-50, 21000), expand = c(0, 0)) +
-  scale_y_continuous(limits = c(-50, 22000), expand = c(0, 0)) +
+  coord_cartesian(xlim = c(-50, 21000), ylim = c(-50, 22000), expand = FALSE) +
   theme_bw() +
   xlab('Direct Age Recalibration') +
   ylab('Linear Model Recalibration') +
@@ -63,8 +62,7 @@ diff <- ggplot() +
               aes(x = age, ymax = pred + se * 1.96, 
                   ymin = pred - se * 1.96), 
               color = 'red', alpha = 0.5) +
-  scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
-  scale_y_continuous(limits = c(-2000, 2000), expand = c(0, 0)) +
+  coord_cartesian(xlim = c(0, 21000), ylim = c(-2000, 2000), expand = FALSE) +
   geom_hline(aes(yintercept = 0)) +
   xlab('Linear Model with Recalibration') +
   ylab('Model Difference') +
