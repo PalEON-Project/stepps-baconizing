@@ -42,6 +42,7 @@ abstract: Well constructed chronologies are critical to reliable paleoecological
   best practices and parameter settings for these age-depth modeling when working
   with many records is still poorly understood, and data resources often carry legacy
   chronologies that must be updated.  This paper uses pollen records and associated
+  chronological controls from the Neotoma Paleoecological Database ([http://neotomadb.org]())
   to examine the biases and assumptions made in chronology construction on an aggregate
   dataset. We examine the challenges of missing uncertainty estimates in ^210^Pb dates,
   and the use of zero-length hiatuses to account for changing accumulation rates with
@@ -56,7 +57,7 @@ abstract: Well constructed chronologies are critical to reliable paleoecological
   for sedimentation rate in Bacon, with a prescribed breakpoint at the settlement
   horizon. Revised age estimates for the EuroAmerican settlement horizon are, on average,
   44 years younger in the new Bacon models than in prior models. The optimal value
-  forsection thickness tends to increases total core length.  Caution must still be
+  for section thickness tends to increases total core length.  Caution must still be
   exercised with age-depth modeling; even with advances in software and data resources,
   accurate age models require expert judgment and human supervision.  One key need
   is to better capture and store age-depth model metadata and parameter settings in
@@ -68,7 +69,7 @@ abstract: Well constructed chronologies are critical to reliable paleoecological
   of physical sedimentological data into age-depth models, and the better integration
   of age-depth models and community curated data resources through shared adoption
   of common standards.
-  chronological controls from the Neotoma Paleoecological Database ([http://neotomadb.org]())
+
 ---
 
 # Introduction
@@ -94,34 +95,29 @@ Data resources such as Neotoma or LinkedEarth/LiPD can store multiple chronologi
 
 source("R/getNAcores.R")
 source("R/get_allpublications.R")
+source("R/get_allchronologies.R")
+source("R/build_newchrons.R", echo = FALSE)
+source("R/figures/plot_recal_diffs.R")
 
 all_downloads <- north_american_cores(settings$version)
 pubs <- get_allpublications(all_downloads, settings)
+chronologies <- get_allchronologies(all_downloads, settings)
 
-# Generate age models using BChron, not Bacon.
-#  Get all the chronologies and rebuild as before:
+# Generate age models using BChron:
+# Get chronologies and rebuild, but drop som specified sample sites
+# because of strange behavior:
 
-if (!paste0('chronologies_v', version, '.rds') %in% list.files('data/output/')) {
-  chronologies <- list()
+new_chrons <- build_newchrons(all_downloads, chronologies, settings) %>%
+  filter(!core %in% c("Chalko Lake", "Aghnaghak", "Pittsburg Basin",
+                      "Lac à l'Ange", "Marl Pond", "Cheyenne Bottoms",
+                      "San Agustin Plains")) %>%
+  group_by(handle) %>%
+  mutate(max = findInterval(max(age.lin, na.rm = TRUE), age_seq)) %>%
+  na.omit
 
-  for (i in 1:length(all_downloads)) {
-    chronologies[[i]] <- try(get_chroncontrol(all_downloads[[i]]),
-                             silent = TRUE)
-    flush.console()
-    if ('try-error' %in% class(chronologies[[i]])) {
-      chronologies[[i]] <- list(empty = NA)
-    }
-  }
+age_seq <- seq(1000, 21000, by = 1000)
 
-  saveRDS(chronologies,
-          file = paste0('data/output/chronologies_v',
-                        settings$version,'.rds'))
-
-  } else{
-    chronologies <- readRDS(paste0('data/output/chronologies_v',version,'.rds'))
-}
-
-source('R/section_1_scripts.R')
+plot_recal_diffs(new_chrons)
 
 ```
 
