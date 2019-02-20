@@ -12,7 +12,7 @@ compare_recalibrations <- function() {
     # This is plotting out the changes between actual and interpolated dates when ages 
     # are directly recalibrated.
     ages <- seq(71, max.age, length.out = length(depths))
-    calibed <- BchronCalibrate(ages, 
+    calibed <- BchronCalibrate(ages = round(ages, 0), 
                                ageSds = rep(1, length(ages)), 
                                calCurves = rep('intcal13', length(ages)))
     
@@ -32,7 +32,7 @@ compare_recalibrations <- function() {
   
   diff  <- ggplot(out.tests, aes(x = linear, y = diff, color = max.age)) +
     geom_line() +
-    scale_x_continuous(limits = c(0, 21000), expand = c(0, 0)) +
+    coord_cartesian(xlim = c(0, 21000), expand = FALSE) +
     geom_hline(aes(yintercept = 0)) +
     xlab('Linear Model with Recalibration') +
     ylab('Model Difference') +
