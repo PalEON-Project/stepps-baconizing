@@ -16,6 +16,7 @@ get_allgeochron <- function(all_downloads, settings) {
         dsid, "/chronology")
 
       chrons <- jsonlite::fromJSON(url, simplifyVector = FALSE)$data[[1]]
+
       if ("chronologies" %in% names(chrons)) {
         geochron <- lapply(chrons$chronologies[[1]]$controls,
           function(x) x$geochron)
@@ -29,6 +30,7 @@ get_allgeochron <- function(all_downloads, settings) {
           geo.chron.type = sapply(geochron,
             function(x) null_to_na(x$geochrontype)),
           stringsAsFactors = FALSE)
+
       } else {
         all_geochron[[i]] <- data.frame(dataset.id = dsid,
                                         age.type = NA,
@@ -41,11 +43,11 @@ get_allgeochron <- function(all_downloads, settings) {
     }
 
     all_geochron <- all_geochron %>%
-      dplyr::bind_rows()
+      bind_rows()
 
     saveRDS(all_geochron, control_file)
 
   }
 
-  return(controls)
+  return(all_geochron)
 }

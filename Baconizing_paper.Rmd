@@ -107,6 +107,8 @@ chronologies <- get_allchronologies(all_downloads, settings)
 # Get chronologies and rebuild, but drop som specified sample sites
 # because of strange behavior:
 
+age_seq <- seq(1000, 21000, by = 1000)
+
 new_chrons <- build_newchrons(all_downloads, chronologies, settings) %>%
   filter(!core %in% c("Chalko Lake", "Aghnaghak", "Pittsburg Basin",
                       "Lac à l'Ange", "Marl Pond", "Cheyenne Bottoms",
@@ -114,8 +116,6 @@ new_chrons <- build_newchrons(all_downloads, chronologies, settings) %>%
   group_by(handle) %>%
   mutate(max = findInterval(max(age.lin, na.rm = TRUE), age_seq)) %>%
   na.omit
-
-age_seq <- seq(1000, 21000, by = 1000)
 
 plot_recal_diffs(new_chrons)
 
@@ -175,13 +175,9 @@ Neotoma contains `r nrow(neotoma::get_table('ChronControlTypes'))` age control t
 
 ```{r, results = 'hide', echo = FALSE, warning=FALSE}
 
-if(paste0('controls_', settings$version, '.rds') %in% list.files('data/output/rds_files/')) {
-  controls <- readRDS(paste0('data/output/rds_files/controls_', settings$version, '.rds'))
-} else {
-  controls <- lapply(all_downloads, function(x)try(get_chroncontrol(x)))
-  for(i in length(controls):1){if('try-error' %in% class(controls[[i]])) {controls[[i]] <- NULL }}
-  saveRDS(controls, paste0('data/output/rds_files/controls_', settings$version, '.rds'))
-}
+source("R/get_allcontrols.R")
+
+controls <- get_allcontrols(all_downloads, settings)
 
 control_type <- controls %>%
   map(function(x)data.frame(control = as.character(x$chron.control$control.type))) %>%
@@ -204,12 +200,13 @@ Biostratigraphic events usually require expert identification, with uncertainty 
 Bacon requires that all age controls be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma were entered without error reporting.  Of the 398 ^210^Pb age controls in Neotoma (as of `r Sys.Date()`), 148 have no error reported (Figure 3).  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and rounded up to the nearest integer) to obtain standard deviations to be used in the Bacon model (Figure 3).
 
 ```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
+source("R/get_allgeochron.R")
 
-all_geochron <- readRDS(paste0('data/output/all_geochron_v', settings$version, '.rds'))
+all_geochron <- get_allgeochron(all_downloads, settings)
 
-source('R/lead_plotting.R')
+source("R/lead_plotting.R")
 
-lead_plots(all_geochron)
+lead_plots(all_geochron, all_downloads)
 
 ```
 
@@ -248,12 +245,12 @@ Dividing a core into sections is an approximation of time discretization [REF - 
 ```{r, lead_comparison, results = 'hide', echo = FALSE, warning=FALSE, dev='svg'}
 
 ### NOTE:  THE ADDITION OF HUSTLER LAKE RESULTS IN A WEIRD SET OF VALUES
-
-source('R/lead_ages.R')
+  
+source("R/lead_ages.R")
 comp_doc <- compare_lead(coredir = "../bacon-agegen",
                          version = settings$version,
                          param_file = "data/input/bacon_params_v1.csv")
-
+ 
 model  <- lm(I(1950 - bacon_age1) ~ age, data = comp_doc[[2]])
 uncert <- lm(bacon_error1 ~ e.older, data = comp_doc[[2]])
 
@@ -269,46 +266,10 @@ Only three lakes in the region had age models that included ^210^Pb dates and re
 
 ```{r, error_by_age, results = 'hide', echo = FALSE, warning=FALSE}
 
-lead_out <- comp_doc[[2]]
+source("R/figures/comp_lead_plot.R")
 
-drop_outlier <- lead_out %>%
-  filter(bacon_error1 < 200) %>%
-  select(site.name, age, bacon_error1, e.older) %>%
-  na.omit() %>%
-  arrange(site.name, age)
+comp_lead_plot(comp_doc)
 
-lead_comp_plot <- ggplot(data = drop_outlier) +
-  geom_point(aes(x = age, y = bacon_error1, shape = site.name),
-             alpha = 0.7, size = 3) +
-  geom_point(aes(x = age, y = e.older, shape = site.name),
-             color = 'red', alpha = 0.7, size = 3) +
-  geom_ribbon(aes(x = age, ymin = e.older, ymax= bacon_error1, group = site.name),
-              alpha = 0.1, color = alpha(colour = 'black', 0.2)) +
-  geom_segment(aes(x = age, xend = age,
-                   y = bacon_error1, yend = e.older), alpha = 0.3) +
-  scale_x_continuous(limits=c(-50, 100)) +
-  scale_y_continuous(limits=c(0, 80)) +
-  coord_equal(expand = c(0,0)) +
-  xlab('Years Before Present') +
-  ylab('Model Uncertainty') +
-  annotate("text", x = -25, y = 80, label = "Bacon Uncertainty") +
-  annotate("text", x = -25, y = 75, label = "210Pb Uncertainty", color = "red") +
-  theme_bw() +
-    theme(axis.title.x = element_text(family = 'serif',
-                                      face = 'bold.italic',
-                                      size = 18),
-          axis.title.y = element_text(family = 'serif',
-                                      face = 'bold.italic',
-                                      size = 18),
-          axis.ticks = element_blank(),
-          axis.text.x = element_text(family = 'serif',
-                                     face = 'italic',
-                                     size = 14),
-          axis.text.y = element_text(family = 'serif',
-                                     face = 'italic',
-                                     size = 14))
-
-ggsave(filename = 'figures/lead_comp_plot.svg', plot = lead_comp_plot, width = 8, height = 5)
 ```
 
 <object type="image/svg+xml" data="figures/lead_comp_final.svg">
@@ -320,7 +281,8 @@ ggsave(filename = 'figures/lead_comp_plot.svg', plot = lead_comp_plot, width = 8
 ### Expert Elicitation
 
 ```{r, elecitation_plot, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
-source('R/elicitation_plot.R')
+
+source("R/elicitation_plot.R")
 # Double check that this is the right depth. . .
 elicitation_plots <- expert_elicitation()
 
@@ -352,7 +314,7 @@ Accumulation rates (*yr/cm* of sediment accumulation) for records in the region 
 
 ```{r, get_acc_rates, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE, dev = 'svg'}
 
-source('R/acc_rate_priors.r')
+source("R/acc_rate_priors.r")
 
 plot_acc_rates(accs)
 
@@ -366,7 +328,7 @@ Deposition rates increase with time across the pre- and post-settlement interval
 
 ```{r, get_thickness, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
 
-source('R/thick_model.R')
+source("R/thick_model.R")
 model_plot <- allan_thick('../bacon-agegen')
 
 ```
