@@ -1,4 +1,4 @@
-get_allgeochron <- function(all_downloads, settings) {
+get_allgeochron <- function(settings) {
 
   null_to_na <- function(x) ifelse(is.null(x), NA, x)
 
@@ -9,8 +9,10 @@ get_allgeochron <- function(all_downloads, settings) {
   } else {
     all_geochron <- list()
 
-    for (i in 1:length(all_downloads)) {
-      dsid <- all_downloads[[i]]$dataset$dataset.meta$dataset.id
+    all_dl <- get_dataset(datasettype = "pollen")
+
+    for (i in 1:length(all_dl)) {
+      dsid <- all_dl[[i]]$dataset.meta$dataset.id
 
       url <- paste0("http://api-dev.neotomadb.org/v2.0/data/datasets/",
         dsid, "/chronology")
@@ -21,8 +23,12 @@ get_allgeochron <- function(all_downloads, settings) {
         geochron <- lapply(chrons$chronologies[[1]]$controls,
           function(x) x$geochron)
 
+        depths <- sapply(chrons$chronologies[[1]]$controls,
+          function(x) null_to_na(x$depth))
+
         all_geochron[[i]] <- data.frame(
           dataset.id = dsid,
+          depth = depths,
           age.type = sapply(geochron, function(x) null_to_na(x$agetype)),
           age = sapply(geochron, function(x) null_to_na(x$age)),
           e.older = sapply(geochron, function(x) null_to_na(x$erroryounger)),
@@ -33,6 +39,7 @@ get_allgeochron <- function(all_downloads, settings) {
 
       } else {
         all_geochron[[i]] <- data.frame(dataset.id = dsid,
+                                        depth = NA,
                                         age.type = NA,
                                         age = NA,
                                         e.older = NA,
