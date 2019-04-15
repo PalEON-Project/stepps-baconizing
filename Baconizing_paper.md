@@ -1,4 +1,75 @@
-# Age Models in Large Scale Paleoecological Synthesis
+---
+title: "Age Models in Large Scale Paleoecological Synthesis"
+author:
+- affiliation: University of Wisconsin - Madison
+  name: Simon Goring
+- affiliation: Mount Royal University
+  name: Andria Dawson (co-authored)
+- affiliation: University of Wisconsin - Madison
+  name: John Williams
+bibliography: styles/baconizing.bib
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    keep_md: yes
+    number_sections: yes
+    self_contained: yes
+    theme: readable
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    reference_docx: styles/word_template.docx
+    toc: yes
+    toc_depth: '3'
+dev: svg
+highlight: tango
+keywords: chronology, geochronology, paleoecology, age-models, Bacon, 210Pb, 14C,
+  radiocarbon
+csl: styles/elsevier-harvard.csl
+abstract: Well constructed chronologies are critical to reliable paleoecological inference
+  and any paleoecological analysis must critically assess the underlying data, age-depth
+  models, and their assumptions and parameters used to build the chronologies. Robust
+  broad-scale syntheses of paleoclimatic and paleoecological data usually require
+  the rebuilding of site chronologies, to ensure that inferences are based on current
+  best practices in age-depth modeling and are not confounded by inconsistencies among
+  sites.  The scope and power of these syntheses are facilitated by 1) advances in
+  Bayesian age-depth modeling approaches and 2) continuing growth of data volumes
+  in community curated data resources in paleoecology.  However, understanding of
+  best practices and parameter settings for these age-depth modeling when working
+  with many records is still poorly understood, and data resources often carry legacy
+  chronologies that must be updated.  This paper uses pollen records and associated
+  to examine the biases and assumptions made in chronology construction on an aggregate
+  dataset. We examine the challenges of missing uncertainty estimates in ^210^Pb dates,
+  and the use of zero-length hiatuses to account for changing accumulation rates with
+  depth. We also use this exercise to provide prescriptive guidance for chronology
+  construction in the large-scale re-analysis of records.Simple post hoc calibration
+  of interpolated radiocarbon ages results in differences of 31 -- 470 calendar years
+  when compared to newly constructed age models. Age estimates from ^210^Pb dates
+  are linearly related to Bacon model estimates, but Bacon-calculated uncertainties
+  are approximately twice the reported ^210^Pb uncertainty. Sediment deposition times
+  (yrs/cm sediment) show an inflection point and associated five-fold decline at approximately
+  200 years before present. This shift required setting temporally varying priors
+  for sedimentation rate in Bacon, with a prescribed breakpoint at the settlement
+  horizon. Revised age estimates for the EuroAmerican settlement horizon are, on average,
+  44 years younger in the new Bacon models than in prior models. The optimal value
+  forsection thickness tends to increases total core length.  Caution must still be
+  exercised with age-depth modeling; even with advances in software and data resources,
+  accurate age models require expert judgment and human supervision.  One key need
+  is to better capture and store age-depth model metadata and parameter settings in
+  community data resources, to improve reproducibility and to allow quicker regeneration
+  and updating of these age models as parameterizations and models improve. Other
+  recommendations include the addition of additional kinds of uncertainty models in
+  age-depth models, allowing priors and parameters to evolve through time, extension
+  of models to enable fuller parameter space exploration and optimization, integrating
+  of physical sedimentological data into age-depth models, and the better integration
+  of age-depth models and community curated data resources through shared adoption
+  of common standards.
+  chronological controls from the Neotoma Paleoecological Database ([http://neotomadb.org]())
+---
 
 # Introduction
 
@@ -6,7 +77,7 @@
 
 
 
-Advances in paleoecoinformatics are continually improving our ability to store and process large numbers of paleoecological records [@brewer2012paleoecoinformatics;@uhen2013card;@williams2017neotoma], which enables the use of increasingly large data networks to study ecological and climatic processes operating at large spatial scales and at timescales inaccessible to modern observational data [@marlon2017climatic;@bothe2015continental;@abram2016early]. Paleoecological and paleoclimatic databases streamline this process by providing the means to store, curate, and query structured data across specified spatial and temporal bounds. Examples of these databases include NOAA-Paleoclimatology [https://www.ncdc.noaa.gov/data-access/paleoclimatology-data](), Linked Earth [http://linked.earth](), and the Neotoma Paleoecology Database [URL: http://neotomadb.org; @williams2017neotoma]. Generating accurate and precise age inferences using the best available age controls and state-of-the-art age-depth models is a key challenge for scientists using paleoecological data resources for large-scale data syntheses.  Because of the increasingly large data volumes involved (for example, as of 2018-03-11, Neotoma now includes 8 site-level records, including 3592 fossil pollen records globally), the central challenge in large-scale regeneration of chronologies is how best to balance speed/automation with careful critical analysis and adjustment of individual age models by experts.  Here we review these issues, assess key sources of uncertainty, and provide examples of solutions developed during our recent data synthesis efforts with the Neotoma Paleoecology Database and the Paleoecological Observatory Network (PalEON).
+  Advances in paleoecoinformatics are continually improving our ability to store and process large numbers of paleoecological records [@brewer2012paleoecoinformatics;@uhen2013card;@williams2017neotoma], which enables the use of increasingly large data networks to study ecological and climatic processes operating at large spatial scales and at timescales inaccessible to modern observational data [@marlon2017climatic;@bothe2015continental;@abram2016early]. Paleoecological and paleoclimatic databases streamline this process by providing the means to store, curate, and query structured data across specified spatial and temporal bounds. Examples of these databases include NOAA-Paleoclimatology [https://www.ncdc.noaa.gov/data-access/paleoclimatology-data](), Linked Earth [http://linked.earth](), and the Neotoma Paleoecology Database [URL: http://neotomadb.org; @williams2017neotoma]. Generating accurate and precise age inferences using the best available age controls and state-of-the-art age-depth models is a key challenge for scientists using paleoecological data resources for large-scale data syntheses.  Because of the increasingly large data volumes involved (for example, as of 2019-01-04, Neotoma now includes 16367 site-level records, including 3870 fossil pollen records globally), the central challenge in large-scale regeneration of chronologies is how best to balance speed/automation with careful critical analysis and adjustment of individual age models by experts.  Here we review these issues, assess key sources of uncertainty, and provide examples of solutions developed during our recent data synthesis efforts with the Neotoma Paleoecology Database and the Paleoecological Observatory Network (PalEON).
 
 An emerging practice in paleoecological and paleoclimatic data resources is to store both the original proxy measurements by depth (*e.g.*, the stratigraphic position of vertebrate specimens or micropaleontological assemblages) and the associated age controls, so that age estimates for the proxy measurements can be regenerated as age-depth models and geochronological parameterizations improve [@grimm2014working;@blois2011methodological;@giesecke2014towards].  The chronology for a given record comprises three distinct elements: the age-depth model used for a given paleoecological or paleoclimatic record, the age controls that constrain that age model, and the resultant age estimates for all stratigraphic depths or intervals in that record [@mckay2015linked;@grimm2008neotoma]. Robust chronologies require accurate and precise estimates of absolute ages from radiometric and other age controls, well supported conversion from radiocarbon years to calendar years, age-depth models that make use of prior knowledge [*e.g.* Steno's Law of stratigraphic superposition and rates of sediment deposition and accumulation, @goring2012deposition], and a clear quantification of uncertainty that accounts for both measurement and process uncertainty.  
 
@@ -60,7 +131,7 @@ Estimating age-depth relationships and uncertainties requires that decisions be 
 
 ## Choice of Age Controls and Types
 
-Neotoma contains 90 age control types ([http://api.neotomadb.org/v1/dbtables/ChronControlTypes]()), including various pollen stratigraphic controls, radiocarbon and other isotopic dates and marine isotope stages.  Since analysis in Dawson *et al*. [-@dawson2016quantifying] was focused on reconstructing vegetation compositional dynamics in the late-Holocene, most chronological controls presented here are appropriate for teporal domains from the present back to 10^1^ to 10^5^ years before 1950, including ^210^Pb, ^137^Cs, and ^14^C dates, as well as biostratigraphic dates associated with events of known or inferred dates, such as historical fires and the *Tsuga* decline (*cf*. [@bennett2002determining;@booth2012decomposing]).  Core tops are often used, and have highly certain dates, however, several older records use interpolated dates for the core top when sediment was lost in the coring process.  These cores should be treated with caution, and this is often noted in the core description.
+Neotoma contains 95 age control types ([http://api.neotomadb.org/v1/dbtables/ChronControlTypes]()), including various pollen stratigraphic controls, radiocarbon and other isotopic dates and marine isotope stages.  Since analysis in Dawson *et al*. [-@dawson2016quantifying] was focused on reconstructing vegetation compositional dynamics in the late-Holocene, most chronological controls presented here are appropriate for teporal domains from the present back to 10^1^ to 10^5^ years before 1950, including ^210^Pb, ^137^Cs, and ^14^C dates, as well as biostratigraphic dates associated with events of known or inferred dates, such as historical fires and the *Tsuga* decline (*cf*. [@bennett2002determining;@booth2012decomposing]).  Core tops are often used, and have highly certain dates, however, several older records use interpolated dates for the core top when sediment was lost in the coring process.  These cores should be treated with caution, and this is often noted in the core description.
 
 
 
@@ -72,7 +143,7 @@ Biostratigraphic events usually require expert identification, with uncertainty 
 
 ### Dealing with zero-value ^210^Pb errors
 
-Bacon requires that all age controls be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma were entered without error reporting.  Of the 398 ^210^Pb age controls in Neotoma (as of 2018-03-11), 148 have no error reported (Figure 3).  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and rounded up to the nearest integer) to obtain standard deviations to be used in the Bacon model (Figure 3). 
+Bacon requires that all age controls be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma were entered without error reporting.  Of the 398 ^210^Pb age controls in Neotoma (as of 2019-01-04), 148 have no error reported (Figure 3).  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and rounded up to the nearest integer) to obtain standard deviations to be used in the Bacon model (Figure 3). 
 
 ![](Baconizing_paper_files/figure-html/unnamed-chunk-2-1.svg)<!-- -->
 
@@ -108,11 +179,1519 @@ Dividing a core into sections is an approximation of time discretization [REF - 
 
 ### ^210^Pb Errors
 
+
+```
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+## Parsed with column specification:
+## cols(
+##   depth = col_double(),
+##   min = col_double(),
+##   max = col_double(),
+##   median = col_double(),
+##   mean = col_double()
+## )
+```
+
 ![](Baconizing_paper_files/figure-html/lead_comparison-1.svg)<!-- -->
 
 **Figure 4**. *Reported and estimated ^210^Pb ages from the Bacon models generally show strong accordance.  However, uncertainties within the constructed Bacon models at the depths of the ^210^Pb samples are higher for Bacon models (y-axis) than from the original estimates for models including ^210^Pb dates (x-axis). The autoregressive nature of the Bacon model, the influence of the memory parameter, and the nature of the Bayesian model itself mean that uncertainty is propagated through the core, and as such low uncertainty in the individual ^210^Pb dates (x-axis) does not result in low Bacon uncertainty.*
 
-Bacon-modeled ages are linearly relatedto ^210^Pb ages, but with the Bacon ages older than the ^210^Pb ages (slope = 1.12, p < 0.01; Figure 4).  Uncertainty estimates for the Bacon chronologies are also consistently larger than the ^210^Pb error estimates for the point samples and the difference increases with depth (slope = 1.98, p < 0.01).
+Bacon-modeled ages are linearly relatedto ^210^Pb ages, but with the Bacon ages older than the ^210^Pb ages (slope = 0.05, p < 0.01; Figure 4).  Uncertainty estimates for the Bacon chronologies are also consistently larger than the ^210^Pb error estimates for the point samples and the difference increases with depth (slope = 0.35, p < 0.01).
 
 Only three lakes in the region had age models that included ^210^Pb dates and reported estimates of uncertainty for the chronology. Bacon age estimates for these records show higher uncertainty than the original age model, but the difference is site-specific (Figure 5).  For Crooked Lake [@brugam1997holocene] the uncertainty difference is high and consistent with depth/age (triangles, Figure 5), while for Fish Lake [@umbanhowar2004interaction] the difference is small (squares; Figure 5).  Brown's Bay shows the highest uncertainty, but only at the deepest depth (circles; Figure 5). This analysis illustrates how prior age modeling approaches tend to underestimate age uncertainty relative to Bayesian approaches such as Bacon, but that the degree of difference varies widely among sites and within cores. This indicates that analysis that aims to examine spatio-temporal patterns must consider age-depth model construction as a source of variability, and should aim to standardize models to reduce this variability.
 
@@ -160,7 +1739,7 @@ Deposition rates increase with time across the pre- and post-settlement interval
 
 
 
-Bacon models were fit with section thicknesses for values of 5, 10, 15 and 20cm for each core (Figure 8).  Optimum section thickness was assigned from the best fit model and all four section thicknesses were chosen for some subset of models, with 5cm the most common model thickness (0/ cores), and 10 and 15 the least common section thickness (each 0/ cores).  A generalized linear model (GLM) using a gamma family shows a significant relationship between total core length and best-fit section thickness ($F_{1.241}$ = 82.8, p > 0.001), with wider section thicknesses tending to be more often optimal for longer cores. This relationship between core thickhness is strongest for the cores with section thickness set to 5cm, which were preferentially chosen for cores <3m long (0 of  cores).  Nevertheless, the distribution of best-fit thicknesses (Figure 8) also appears to indicate that many shorter cores are well served by wide section thicknesses.  The GLM accounts for only 26% of total deviance, and should be treated as indicative, not prescriptive.
+Bacon models were fit with section thicknesses for values of 5, 10, 15 and 20cm for each core (Figure 8).  Optimum section thickness was assigned from the best fit model and all four section thicknesses were chosen for some subset of models, with 5cm the most common model thickness (99 of 282 cores), and 10 and 15 the least common section thickness (each 45 of 282 cores).  A generalized linear model (GLM) using a gamma family shows a significant relationship between total core length and best-fit section thickness ($F_{1.241}$ = 85.3, p > 0.001), with wider section thicknesses tending to be more often optimal for longer cores. This relationship between core thickhness is strongest for the cores with section thickness set to 5cm, which were preferentially chosen for cores <3m long (185 of 282 cores).  Nevertheless, the distribution of best-fit thicknesses (Figure 8) also appears to indicate that many shorter cores are well served by wide section thicknesses.  The GLM accounts for only 26% of total deviance, and should be treated as indicative, not prescriptive.
 
 ![](Baconizing_paper_files/figure-html/plot_thicknessmodel-1.svg)<!-- -->
 
@@ -180,13 +1759,13 @@ This work has highlighted a number of future opportunities for age-depth model d
 
 Most modern age-modeling software provides for the use of only a single uncertainty model for age estimates, normally distributed (or Student's $t$) error. (Note, however, that age-depth models relying on radiocarbon dates can translate normal This is at odds with certain age constraints, such as the "modern" sample, which has an absolutely known age, or, in this study, the pre-settlement horizon which provides a fixed "older" date, but an uncertain younger boundary, and as such reflects a truncated distribution. Providing a broader range of uncertainty distributions could improve modelling of certain features used as chronological controls in age models.
 
-Another need is to allow these parameters to vary through time.  This work has reinforced earlier findings [@goring2012deposition;@bennett2016interpretation;@webb1988rates] that  some sedimentation rate change through time, so prior estimates of sedimentation rate need similar flexilibility. The autocorrelation of accumulation rates (in Bacon, the memory parameter) may also change through time, as the sediment source changes, or, as a result of long term changes in precipitation variability evident in regional climate reconstructions [@cook2010megadroughts;@marlon2017climatic]. Currently, accomodating changes in any parameter through time requires the use of a zero-length hiatus in Bacon, and may be impossible with other software. Allowing time/depth varying parameters using priors drawn from (for example) Neotoma [@williams2017neotoma] or the Europrean Pollen Database [@brewer2016late] would provide significantly more control for chronology models.
+Another need is to allow these parameters to vary through time.  This work has reinforced earlier findings [@goring2012deposition;@bennett2016interpretation;@webb1988rates] that  some sedimentation rate change through time, so prior estimates of sedimentation rate need similar flexilibility. The autocorrelation of accumulation rates (in Bacon, the memory parameter) may also change through time, as the sediment source changes, or, as a result of long term changes in precipitation variability evident in regional climate reconstructions [@cook2010megadroughts;@marlon2017climatic;@newby2014centennial]. Currently, accomodating changes in any parameter through time requires the use of a zero-length hiatus in Bacon, and may be impossible with other software. Allowing time/depth varying parameters using priors drawn from (for example) Neotoma [@williams2017neotoma] or the Europrean Pollen Database [@brewer2016late] would provide significantly more control for chronology models.
 
 Another useful advance would be to develop software systems for more systematic exploration of age model settings and parameters and optimal parameter selection. Given the number of parameters required to fit models, and their interactions, it is only natural that, at times, changes in parameter values can have non-intuitive changes in model performance or fit. Changing memory parameters should increase or decrease the flexibility of models, but section thickness can also influence flexibility, and these may have interacting effects. By allowing users to pass vectors of values for parameters it may be possible to produce a parameter space of fits with a single call, from which the best-fit model may be selected.
 
 ## Process
 
-Sedimentation is a physical process that is driven by climatic factors, changes in sediment source, changes in basin size or shape, and autotrophic effects. Artifacts in the modeling of sedimentation rates may be affected by the process of coring (e.g. as a result of compaction during coring) and in generating composite cores when multiple drives are used to collect a complete sedimentary sequence (e.g. with gaps between cores or differences between cores in sedimentation rates). Information relating the way multiple drives are spliced is rarely included in data records, but can introduce depth uncertainty in the composite core. Most of this information about core splicing is lost during publication.  Work on fit assessment is being undertaken with Corelyzer [ref] and independently within the ODP program [ref], but this information is not yet being introduced into age-depth modelling software.
+Sedimentation is a physical process that is driven by climatic factors, changes in sediment source, changes in basin size or shape, and autotrophic effects. Artifacts in the modeling of sedimentation rates may be affected by the process of coring (e.g. as a result of compaction during coring) and in generating composite cores when multiple drives are used to collect a complete sedimentary sequence (e.g. with gaps between cores or differences between cores in sedimentation rates). Information relating the way multiple drives are spliced is rarely included in data records, but can introduce depth uncertainty in the composite core. Most of this information about core splicing is lost during publication.  Work on fit assessment is being undertaken with CoreWall [http://www.corewall.org]() and independently within the ODP program (CLIP: [http://www.ldeo.columbia.edu/BRG/ODP/ODP/CLIP/clip.html]()), but this information is not yet being introduced into age-depth modelling software.
 
 External influences on sedimentation rate may appear in secondary proxies, for example, grain size [ref] or taxonomic composition in peat sequences [ref]. Currently there is no ability to use this physical sedimentological data to constrain age model accumulation or flexibility, e.g. by placing a high prior likelihood of changed sedimentation rate at an observed shift from Pleistocene mineralogenic silts to Holocene gyttjas. Providing these secondary controls would add additional complexity to age models, but could improve overall model fit, particularly as XRF and other associated measurements from core logs become more commonplace and accessible.
 
