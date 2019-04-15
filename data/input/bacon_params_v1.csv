@@ -1,0 +1,284 @@
+handle,datasetid,core_top,acc.mean.mod,acc.mean.old,acc.shape.mod,acc.shape.old,mem.strength,mem.mean,hiatus,thick,age.type,run,suitable,ndates,success,reliableold,reliableyoung,notes
+ALLIE,29,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calibrated radiocarbon years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+ALMORA1,30,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,6,NA,NA,NA,Overwrote prior chronology file.
+HELLSKIT,3131,NA,3.02,15,0.53,0.9,2,0.5,NA,15,Varve years BP,FALSE,0,NA,NA,NA,NA,Thickness adjusted based on prior work.; Annual laminations defined as an age model but ages and depths not aligned.
+LAKEMARY,3473,NA,3.02,15,0.53,0.9,2,0.5,NA,10,Radiocarbon years BP,FALSE,1,4,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+ANDERSLK,202,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,3,NA,NA,NA,Overwrote prior chronology file.
+ANDREE,204,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,3,NA,NA,NA,Overwrote prior chronology file.
+ANDRUSC2,205,-33,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,12,NA,NA,NA,No core top assigned in core but lead 210 dates used. Core top assigned to sample at depth 0.2; Overwrote prior chronology file.
+BADMED,223,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+BBASS,241,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+BECKMAN,249,NA,3.02,15,0.53,0.9,2,0.5,NA,10,Calendar years BP,FALSE,1,2,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+BECKMNBG,3062,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+BIGJOHN,272,NA,3.02,15,0.53,0.9,2,0.5,NA,15,Radiocarbon years BP,FALSE,1,4,NA,NA,NA,Thickness adjusted based on prior work.; There are no default models defined for the best age type: Age models have same preparation date.  Model with highest chron ID was selected; Overwrote prior chronology file.
+BILLYS,275,NA,3.02,15,0.53,0.9,2,0.5,NA,15,Calibrated radiocarbon years BP,FALSE,1,8,NA,NA,NA,Thickness adjusted based on prior work.; There are no default models defined for the best age type: Default assigned to best age-type by precedence.; Overwrote prior chronology file.
+BLANDIN,280,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+BLKHOOF,282,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+BLUMOUND,287,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,6,NA,NA,NA,Overwrote prior chronology file.
+BOBLAKE,296,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+BOGD,298,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,5,NA,NA,NA,Overwrote prior chronology file.
+BOSSUOT,305,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+BROWNC12,313,-32,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,11,NA,NA,NA,No core top assigned in core but lead 210 dates used. Core top assigned to sample at depth 0.2; Overwrote prior chronology file.
+BROWNSBY,314,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,12,NA,NA,NA,Overwrote prior chronology file.
+BURNTSDE,325,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+CAMP11LK,332,NA,3.02,15,0.53,0.9,2,0.5,NA,20,Radiocarbon years BP,FALSE,1,13,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+CAMP12LK,333,-33,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,14,NA,NA,NA,No core top assigned in core but lead 210 dates used. Core top assigned to sample at depth 0.25; Overwrote prior chronology file.
+CAMPBELL,334,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+CEDARBLK,352,NA,3.02,15,0.53,0.9,2,0.5,NA,20,Radiocarbon years BP,FALSE,1,5,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+CHIPPEWA,369,NA,3.02,15,0.53,0.9,2,0.5,NA,15,Radiocarbon years BP,FALSE,1,4,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+CINDY,382,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+MNGRCL,515,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+CRAZY,521,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+CUB2,532,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,7,NA,NA,NA,Overwrote prior chronology file.
+DALTON,545,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+DARKLAKE,546,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,NA,NA,NA,NA,Annual laminations defined in the age models.
+DEMONTLK,679,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,7,NA,NA,NA,Overwrote prior chronology file.
+DENTONLK,681,-33,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,13,NA,NA,NA,No core top assigned in core but lead 210 dates used. Core top assigned to sample at depth 0.2; Overwrote prior chronology file.
+DEVILSWI,684,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,13,NA,NA,NA,Overwrote prior chronology file.
+DISTER59,700,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,4,NA,NA,NA,Overwrote prior chronology file.
+DISTRHFT,3081,NA,3.02,15,0.53,0.9,2,0.5,NA,20,Radiocarbon years BP,FALSE,1,6,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+DOGFISH,717,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+DUNNIGAN,774,-33,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,14,NA,NA,NA,No core top assigned in core but lead 210 dates used. Core top assigned to sample at depth 0.2; Overwrote prior chronology file.
+EASTTWIN,781,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+EGGERT,786,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+ERNSTPIT,806,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+FAITH,817,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+FARQUAR,822,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+FAWNLAKE,824,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+FOXPOND,846,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+FRAINSLK,847,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,9,NA,NA,NA,Overwrote prior chronology file.
+FRENCH,850,NA,3.02,15,0.53,0.9,2,0.5,NA,20,Radiocarbon years BP,FALSE,1,5,NA,NA,NA,Thickness adjusted based on prior work.; There are no default models defined for the best age type: Most recently generated model chosen; Overwrote prior chronology file.
+GASS,860,NA,3.02,15,0.53,0.9,2,0.5,NA,20,Radiocarbon years BP,FALSE,1,8,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+GEORGE,869,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+MNBELG,15245,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+GOLDSMTH,967,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+GREENLK,982,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,4,NA,NA,NA,Overwrote prior chronology file.
+GRICE,990,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+HANSEN,1004,NA,3.02,100,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,3,NA,NA,NA,High accumulation rates for the core detected: Assigning default accumulation rate to 100.; Overwrote prior chronology file.
+HEMOPOND,1032,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+HORSE,1109,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+HORSHOHA,1110,NA,3.02,15,0.53,0.9,2,0.5,NA,20,Radiocarbon years BP,FALSE,1,5,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+HOSTAGE,1111,NA,3.02,15,0.53,0.9,2,0.5,NA,10,Radiocarbon years BP,FALSE,1,4,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+HUGLAKE,1134,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+HUSTLER,1138,-33,3.02,100,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,12,NA,NA,NA,No core top assigned in core but lead 210 dates used. Core top assigned to sample at depth 0.75; High accumulation rates for the core detected: Assigning default accumulation rate to 100.; Overwrote prior chronology file.
+IOLABOG,1151,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+IRVIN,1153,NA,3.02,15,0.53,0.9,2,0.5,NA,15,Calibrated radiocarbon years BP,FALSE,1,8,NA,NA,NA,Thickness adjusted based on prior work.; Overwrote prior chronology file.
+JACOBSN1,1163,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Radiocarbon years BP,FALSE,1,3,NA,NA,NA,Overwrote prior chronology file.
+JACOBSN2,3138,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,4,NA,NA,NA,Overwrote prior chronology file.
+MNSHBL,15274,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+KEGAN,1446,NA,3.02,15,0.53,0.9,2,0.5,NA,5,Calendar years BP,FALSE,1,2,NA,NA,NA,Overwrote prior chronology file.
+KELLHOL1,1447,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+KELLHOL2,3452,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+KELLNERS,1448,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+KIRCHNR1,1520,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+KIRCHNR2,3455,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+KITCHNER,1524,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+KOTIRANT,1548,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+KRYZ,1552,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+KYLENLK,1564,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+LAKE16,1580,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+LAKE27,1581,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LAKEANN,1584,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LAKEANNF,3468,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+LAKEANNH,3469,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LAKECARL,1588,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LEWISLK,1629,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LILYLAKE,1633,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+LITTBASS,1639,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LITTLPIN,1643,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LKCLDSA,1649,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LKCLDSH,3482,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LKCLDSSW,3483,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LOSTLAKE,1665,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MABEL,1685,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+STWDARK2,3781,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MARTINPD,1708,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MCCRANEY,1720,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MCNRNY2A,1725,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MCNRNY3A,3485,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MCNRNY4A,3486,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MENDOTAC,1735,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MENDOTAD,3488,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MINNIEN,1757,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MINNIEO,3492,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MUDLKMN1,1777,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MUDLKMN2,1778,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MURPHY,1781,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MYRTLE,1786,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+NELSLK,1793,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+NELSONPD,1794,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ONAMIA,1830,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ONDRISPD,1831,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+OTTOMLK,1840,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+PGONIABG,3541,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+POGONIA,3558,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+THIRDLK,3784,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+THRDBGN,3786,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+THRDBGW,3788,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+PENNINGT,1884,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+PETERSL,1891,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+PLEASAMN,1955,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+PORTAGE,1966,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+RADTKE,2011,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+REICHOW,2051,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+REIDEL,2053,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+RHOLL,2062,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+RICEMNA,2066,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+RICEMNB,3568,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+ROSSBURG,2290,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+RUBYLAKE,2309,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+RUTZLAKE,2314,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+RYERSE,2318,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+SEDIVY,2354,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SEIDEL01,2355,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+SEIDEL02,3620,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SHAGAWA,2375,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SILVERMN,2383,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SISEEBA,2394,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SOLUM,2581,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SOSTANCH,2584,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SPECTACL,2585,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SPIRIT,2586,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+STCATHER,2600,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+STONE,2605,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+STONTAM1,2607,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+STONTAM2,3780,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SUNFISH,2613,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+TAMARACK,2624,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+TERHELL,2638,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+THOMPSON,2640,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+TOENJES,2648,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+TWINMN1,2881,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+UPGRAVEN,2888,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+VESTABRG,3831,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+WEBERLK,3837,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+WENTZEL,2948,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+WHITLIL1,2952,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+WHITLILY,3841,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+WILWRDPD,2956,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+WINTERGR,2961,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+WOLFCRK,3029,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+WOLSFELD,3031,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+WOLVERIN,3032,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+WOODLAKE,3035,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+YELLOWDG,3047,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+CANYONMI,15682,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SOUHERON,10970,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+OCHEDA,10971,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+BLOMFORD,10973,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+FAWNANMN,10974,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+FROVOLD,10975,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+GOOSEMN,10976,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+OLSONMN,10977,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+RNDGROVE,10983,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LTDOLLAR,12001,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LASTLAKE,12004,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNLYC2,12005,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MONSON,12006,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+DEANS,12007,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+EMILY,12008,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+PERCHMN,12009,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+CHUBLAKE,12010,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNDLLR,12011,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+ZIEBELL,12012,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MNDLML,12013,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LYBECK,12014,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+UNION,12015,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNFRAL,12016,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ALBERTL3,15248,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+EVRHRTLK,12024,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SHARKEY,13029,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+KIMBLE,13032,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+IRWINSMT,13047,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+WESTOLAF,13051,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+OAKGLEN,13056,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+CAMPLAKE,13057,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ADELINE,13060,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ELEVENS,13069,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ESKALAKE,13071,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+FALLISON,13073,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+GLIMML1,13097,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+BASSK,14270,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SALLIE,14403,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+TOWER1,14410,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+TOWER4,14443,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+TOWER6,14889,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+TOWER7,17993,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNPPJL,14435,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+HELLHOLE,14446,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LILY,14535,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+KELLYDUD,14537,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MARTHA,14539,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+NORPOL,19316,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MINNREG,14626,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+AMBER,14631,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+CAMP,14633,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+CRYSTAL,14635,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+FISHL,14637,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+FISHS,14639,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+EAGLEL,14641,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+EMILY_NE,14643,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+FULLER,14645,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LAKEMINA,14839,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ELKGR-89,20311,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+NELSONMI,14933,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MUDLKMI,15032,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+LILYMI,15035,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MNCLEB,15167,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNCLEC,15168,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNCLE4,15169,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNCLED,15219,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNCLEL,15269,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNBCSC,15228,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNCLSQ,15252,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MNCHLH,15254,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNOTCL,15256,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNCVTL,15266,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNHBLS,15270,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNWSSO,15273,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+WILLIAMJ,15281,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MNHNLL,15294,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+EMRICK,15302,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+ESOLDIER,15309,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+GUARD,15311,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+TROUTLBG,15316,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MNHNWB,15318,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+DEEPLAKE,15403,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+ADVENTUR,15460,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+BENACH,15463,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+BLUEJ,15477,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+BROZIE,15478,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+CAMPTWO,15479,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+COWDEN,15487,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+FERRY01,15489,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+HICKSMI,15492,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MORRIMI,15511,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+BUCKMI,15660,NA,3.02,15,0.53,0.9,2,0.5,NA,20,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+HEMLOCK,15740,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+WARNERWI,15882,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+KERRMI,15916,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+CROOKEDN,15919,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+CROOKEDR,20695,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+CROOKEDU,20697,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+JAYLAKE,15922,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+OPINES,15925,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+QUALLY,15965,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ITASCALC,15985,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ITASCAMB,15989,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ITASCAMC,15992,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ITASCAMD,15998,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+ITASCAT2,16002,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LIMABOG,16129,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+CAPITOLA,17304,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+BEAVERWI,17387,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+STEELMN,17396,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LORRAINE,17404,NA,3.02,15,0.53,0.9,2,0.5,NA,15,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+PENEGOR,17406,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+FOXMN,19834,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LITSHING,17947,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+MADELIA,19812,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LONESTAR,19931,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+LILY04,19933,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
+SRHODY,20397,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+MINDEN,20512,NA,3.02,15,0.53,0.9,2,0.5,NA,10,NA,FALSE,NA,NA,NA,NA,NA,Thickness adjusted based on prior work.
+OTTERMI,25306,NA,3.02,15,0.53,0.9,2,0.5,NA,5,NA,FALSE,NA,NA,NA,NA,NA,.
