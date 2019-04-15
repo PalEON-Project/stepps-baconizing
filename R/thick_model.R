@@ -1,25 +1,26 @@
-allan_thick <- function() {
-  thickness <- readr::read_csv('data/pollen_meta_v1.0.csv')
+allan_thick <- function(coredir) {
+  thickness <- readr::read_csv('data/input/bacon_params_v1.csv')
 
   thick <- thickness %>% purrrlyr::by_row(function(x){
-    dir  <- paste0('Cores/',x$handle, '/')
+    
+    dir  <- paste0(coredir, '/Cores/',x$handle, '/')
     file <- paste0(x$handle, '_depths.txt')
     if(file %in% list.files(dir)) {
-      depths <- readr::read_delim(paste0(dir, file), 
+      depths <- suppressMessages(readr::read_delim(paste0(dir, file), 
                                   delim = ',',
-                                  col_names = FALSE)
+                                  col_names = FALSE))
       output <- diff(range(depths))
     } else {
       output <- NA
     }
     return(data.frame(core_length = as.numeric(output)))}, .collate = 'cols') %>% 
-    dplyr::select(name, handle, thick, pol_age_max, age_type, core_length1)
+    dplyr::select(datasetid, handle, thick, reliableold, age.type, core_length1)
   
   uncalib <- thick$age_type %in% "Radiocarbon years BP" & 
-    thick$pol_age_max < 46000 &
-    thick$pol_age_max > 75
+    thick$reliableold < 46000 &
+    thick$reliableold > 75
   
-  recalib <- BchronCalibrate(thick$pol_age_max[uncalib],
+  recalib <- BchronCalibrate(thick$reliableold[uncalib],
                              rep(100, sum(uncalib)),
                              calCurves = rep('intcal13', sum(uncalib)))
   
@@ -51,7 +52,7 @@ allan_thick <- function() {
                                      face = 'italic', 
                                      size = 14))
   
-  model <- gam(pol_age_max ~ s(thick, k = 3), family = 'poisson', data = thickness)
+  model <- gam(reliableold ~ s(thick, k = 3), family = 'poisson', data = thickness)
   
   return(list(plot = thick_model, model = model, glm = thick_glm, thick = thick))
   

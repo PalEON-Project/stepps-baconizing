@@ -12,13 +12,17 @@ lead_plots <- function(geochron_tables, all_downloads) {
       data.frame(dataset.id = ds$dataset.id,
                  site.name = st$site.name,
                  stringsAsFactors = FALSE)
-    }) %>% bind_rows
+    }) %>%
+    bind_rows()
 
   leads <- geochron_tables %>%
     dplyr::filter(!is.na(age) & geo.chron.type %in% "Lead-210") %>%
     dplyr::left_join(ds_name) %>%
     dplyr::select(dataset.id, site.name, age.type,
-                  age, e.older, e.younger, geo.chron.type)
+                  age, e.older, e.younger, geo.chron.type) %>%
+    dplyr::mutate(e.older = ceiling(e.older),
+                  e.younger = ceiling(e.younger),
+                  age = round(age, 0))
 
   bad_cal_ages <- leads %>%
     filter(!age.type == "Calendar years AD/BC" & age > 800)
