@@ -1,11 +1,11 @@
 ---
 title: "Age Models in Large Scale Paleoecological Synthesis"
 author:
-- affiliation: University of Wisconsin - Madison
+- affiliation: Department of Geography, University of Wisconsin - Madison, Madison, USA
   name: Simon Goring
-- affiliation: Mount Royal University
+- affiliation: Department of General Education, Mount Royal University, Calgary, Canada
   name: Andria Dawson (co-authored)
-- affiliation: University of Wisconsin - Madison
+- affiliation: Department of Geography, University of Wisconsin - Madison, Madison, USA
   name: John Williams
 bibliography: styles/baconizing.bib
 output:
