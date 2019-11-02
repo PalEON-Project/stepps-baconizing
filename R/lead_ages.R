@@ -15,7 +15,7 @@ compare_lead <- function(coredir, geochron_tables, settings, param_file) {
 
   leads <- geochron_tables %>%
     dplyr::filter(!is.na(age) & geo.chron.type %in% "Lead-210") %>%
-    dplyr::left_join(ds_name) %>%
+    dplyr::left_join(ds_name, by = "dataset.id") %>%
     dplyr::select(dataset.id, site.name, age.type, depth,
                   age, e.older, e.younger, geo.chron.type) %>%
     mutate(age.type = ifelse((age.type == "Calendar years AD/BC" & age < 800) |
@@ -72,7 +72,7 @@ compare_lead <- function(coredir, geochron_tables, settings, param_file) {
                       ymin = bacon_age1 - bacon_error1,
                       ymax = bacon_age1 + bacon_error1), alpha = 0.7) +
     geom_errorbarh(aes(y = bacon_age1,
-                       xmax = 1950 - age + e.young,
+                       xmax = 1950 - age + e.younger,
                        xmin = 1950 - age - e.older,
                        x = 1950 - age), alpha = 0.7) +
     geom_point(aes(x = 1950 - age, y = bacon_age1), alpha = 0.9) +

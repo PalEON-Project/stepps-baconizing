@@ -9,6 +9,10 @@ author:
   name: John Williams
 bibliography: styles/baconizing.bib
 output:
+  word_document:
+    reference_docx: styles/word_template.docx
+    toc: yes
+    toc_depth: '3'
   html_document:
     code_folding: show
     fig_caption: yes
@@ -19,10 +23,6 @@ output:
     toc: yes
     toc_float: yes
   pdf_document:
-    toc: yes
-    toc_depth: '3'
-  word_document:
-    reference_docx: styles/word_template.docx
     toc: yes
     toc_depth: '3'
 dev: svg
@@ -40,6 +40,7 @@ abstract: Well constructed chronologies are critical to reliable paleoecological
 knitr::opts_chunk$set(cache=TRUE)
 
 # Version numbering and other important parameters are stored in a file `settings.yaml`
+
 
 source('R/load_packages.R')
 
@@ -102,7 +103,7 @@ Second, many different kinds of age controls may be used to constrain age-depth 
 
  The magnitude and sources of uncertainty in stratigraphic markers varies.  For sites with continuous deposition, the core top age can be assumed to be the year (or decade) of sampling, while tephras are often widespread and well dated.  However, not all tephras are well dated and not all tephra deposits at a given site can be confidently matched to known eruption events or previously dated tephra deposits [@watson2016peatlands;@mackay2016mid]. Biostratigraphic age controls are determined by the identification of changes in biological proxies  that correspond to well-dated events, e.g. EuroAmerican land clearance [@mcandrews1988human]. Although identification of these events usually requires on visual identification by experts, the uncertainty in these estimates can be quantified through expert elicitation [@dawson2016quantifying;@kujawa2016theeffect] and assigned to changes in biological proxies that correspond to well dated events such as EuroAmerican land clearance in eastern North America [@McAndrews1968]. Further uncertainties arise from variations in sample density [@liu2012temporal], and questions over whether biological events were synchronous across sites, time-transgressive, or a temporal mosaic [@bennett2002determining;@davis1981outbreaks;@williams2011extrinsic;blois2011methodological]. Large networks of sites with well-constrained chronologies can provide answers to these questions and constrain the temporal uncertainty associated with using biostratigraphic control points in age models [@blois2011methodological].
 
-```{r, plot.chron.change, fig.width=6, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
+```{r, plot_chron_change, fig.width=6, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
 
 source('R/figures/ageplot_histogram.R')
 
@@ -135,7 +136,7 @@ Estimating age-depth relationships and uncertainties requires that decisions be 
 
 Neotoma contains `r nrow(neotoma::get_table('ChronControlTypes'))` age control types ([http://api.neotomadb.org/v1/dbtables/ChronControlTypes]()), including various pollen stratigraphic controls, radiocarbon and other isotopic dates and marine isotope stages.  Since analysis in Dawson *et al*. [-@dawson2016quantifying] was focused on reconstructing vegetation compositional dynamics in the late-Holocene, most chronological controls presented here are appropriate for teporal domains from the present back to 10^1^ to 10^5^ years before 1950, including ^210^Pb, ^137^Cs, and ^14^C dates, as well as biostratigraphic dates associated with events of known or inferred dates, such as historical fires and the *Tsuga* decline (*cf*. [@bennett2002determining;@booth2012decomposing]).  Core tops are often used, and have highly certain dates, however, several older records use interpolated dates for the core top when sediment was lost in the coring process.  These cores should be treated with caution, and this is often noted in the core description.
 
-```{r, results = 'hide', echo = FALSE, warning=FALSE}
+```{r get_chroncontroltypes, results = 'hide', echo = FALSE, warning=FALSE}
 
 source("R/get_allcontrols.R")
 
@@ -161,7 +162,7 @@ Biostratigraphic events usually require expert identification, with uncertainty 
 
 Bacon requires that all age controls be associated with defined errors. Historically, some ^210^Pb data entered into Neotoma were entered without error reporting.  Of the 398 ^210^Pb age controls in Neotoma (as of `r Sys.Date()`), 148 have no error reported (Figure 3).  Binford [-@binford1990calculation] reports *"Ninety-five per cent confidence intervals range from about 1 -- 2 years at 10 years of age, 10 -- 20 at 100 years, and 80 -- 90 at 150 years old."*  Using this assessment we fit a smooth linear function to assign 95% confidence intervals for all ^210^Pb dates with missing uncertainty data.  These confidence intervals were then divided by 2 (and rounded up to the nearest integer) to obtain standard deviations to be used in the Bacon model (Figure 3).
 
-```{r, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
+```{r plotlead210, echo=FALSE, message=FALSE, results='hide', warning=FALSE, dev='svg'}
 source("R/get_allgeochron.R")
 
 all_geochron <- get_allgeochron(settings)
@@ -204,15 +205,13 @@ Dividing a core into sections is an approximation of time discretization [REF - 
 
 ### ^210^Pb Errors
 
-```{r, lead_comparison, results = 'hide', echo = FALSE, warning=FALSE, dev='svg'}
-
-### NOTE:  THE ADDITION OF HUSTLER LAKE RESULTS IN A WEIRD SET OF VALUES
+```{r, lead_comparison, results = 'hide', echo = FALSE, warning=FALSE, dev='svg', eval=TRUE, message=FALSE}
 
 source("R/lead_ages.R")
 comp_doc <- compare_lead(coredir = "../bacon-agegen",
                          all_geochron,
                          settings = settings,
-                         param_file = "data/input/bacon_params_v1.csv")
+                         param_file = "../bacon-agegen/data/params/bacon_params_v1.csv")
 
 model  <- lm(I(1950 - bacon_age1) ~ age, data = comp_doc[[2]])
 uncert <- lm(bacon_error1 ~ e.older, data = comp_doc[[2]])
@@ -243,7 +242,7 @@ comp_lead_plot(comp_doc)
 
 ### Expert Elicitation
 
-```{r, elecitation_plot, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
+```{r, elicitation_plot, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
 
 source("R/elicitation_plot.R")
 # Double check that this is the right depth. . .
@@ -267,17 +266,29 @@ Linear models relating assigned settlement ages to modeled ages for the original
 
 **Table 1**. *Empirical estimates of accumulation rates in the Upper Midwestern United States from Neotoma records.*
 
- Group   Mean	   Variance	    Rate	   Shape
------- -------- ----------- -------- -------
-Modern	3.02	     5.70	      0.53     1.6
-2K	    15.00	     250	      0.06	   0.9
+```{r, get_acc_rates, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE, results='as-is'}
 
+source("R/acc_rate_priors.r")
+accs <- get_accs(bacon_params, path = "../bacon-agegen/Cores/")
+
+means <- accs %>%
+  group_by(era) %>%
+  summarise(mean  = mean(rate_sqrt),
+            var   = var(rate_sqrt),
+            rate  = fitdistr(rate_sqrt, 'gamma')$estimate['rate'],
+            shape = fitdistr(rate_sqrt, 'gamma')$estimate['shape']) %>%
+            mutate(era = ifelse(era == 'modern',
+                                   'Post-Settlement',
+                                   'Pre-Settlement'))
+
+knitr::kable(means, digits = 2,
+             col.names = c("Period", "Average (yr/cm)",
+                           "Variance", "Gamma Rate", "Gamma Shape"))
+```
 
 Accumulation rates (*yr/cm* of sediment accumulation) for records in the region show clear differentiation between accumulation rates within the last 200 years and accumulations prior to the last 200 years. Means and variance are presented in **Table 1** along with the Gamma rate and shape parameters. Deposition times (the mean *yr cm^-1^* deposition) change dramatically, dropping by five-fold in the modern period.
 
-```{r, get_acc_rates, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE, dev = 'svg'}
-
-source("R/acc_rate_priors.r")
+```{r, get_acc_plot, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE, dev = 'svg'}
 
 plot_acc_rates(accs)
 
@@ -292,7 +303,8 @@ Deposition rates increase with time across the pre- and post-settlement interval
 ```{r, get_thickness, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
 
 source("R/thick_model.R")
-model_plot <- allan_thick('../bacon-agegen')
+model_plot <- allan_thick(coredir = '../bacon-agegen',
+                          paramfile = '../bacon-agegen/data/params/bacon_params_v1.csv')
 
 ```
 

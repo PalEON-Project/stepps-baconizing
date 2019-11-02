@@ -13,15 +13,12 @@ expert_elicitation <- function() {
 
   core_estimates <- function(x) {
     x <- x %>%
-      data.frame()
-
-      data.frame(id        = x$datasetID,
-                 handle    = x$handle,
-                 lat = x$lat,
-                 long = x$long,
-                 depth_inc = sort(x[c("pre1", "pre2", "pre3", "pre4")])[2] %>%
-                                  unlist,
-                 stringsAsFactors = FALSE)
+      mutate(depth_inc = sort(c(pre1, pre2, pre3, pre4))[2]) %>%
+      dplyr::select(id = datasetID,
+                    handle    = handle,
+                    lat,
+                    long,
+                    depth_inc)
   }
 
   elicit <- by_row(elicitation, core_estimates)$`.out` %>%
@@ -36,46 +33,54 @@ expert_elicitation <- function() {
   # We define the hiatus as the settlement year in the Bulk Baconizing document:
 
   site_names <- all_downloads %>%
-   map_chr(function(x) x$dataset$site$site.name)
+    map_chr(function(x) x$dataset$site$site.name)
 
-  test_ages <- function(x) {
+  handles <- sapply(all_downloads,
+    function(x) {
+      x$dataset$dataset.meta$collection.handle
+    })
 
-   handles <- sapply(all_downloads,
-     function(x) {
-       x$dataset$dataset.meta$collection.handle
-     })
+  test_ages <- function(x, ds_handles = handles) {
 
-   if(x$depth_inc > 1 & x$id %in% pollen_ts$id & x$handle %in% handles) {
+   if(x$depth_inc > 1 &
+      x$id %in% pollen_ts$id &
+      x$handle %in% ds_handles) {
 
-     good_handle <- match(x$handle, handles)
+      good_handle <- match(x$handle,
+                           ds_handles)
 
-    orig   <- all_downloads[[good_handle]]$sample.meta$age[x$depth_inc]
-    atype  <- all_downloads[[good_handle]]$sample.meta$age.type[1]
+      orig   <- all_downloads[[good_handle]]$sample.meta$age[x$depth_inc]
+      atype  <- all_downloads[[good_handle]]$sample.meta$age.type[1]
 
-    output <- pollen_ts %>%
-      filter(id %in% x$id) %>%
-      filter(row_number() %in% x$depth_inc) %>%
-      select(dplyr::contains("bacon")) %>%
-      unlist %>%
-      mean(na.rm = TRUE)
+      output <- pollen_ts %>%
+        filter(id %in% x$id) %>%
+        filter(row_number() %in% x$depth_inc) %>%
+        dplyr::select(dplyr::contains("bacon")) %>%
+        unlist %>%
+        mean(na.rm = TRUE)
 
     output <- data.frame(bacon = 1950 - output,
                          original = 1950 - orig,
-                         type = atype)
+                         type = atype,
+                         stringsAsFactors = FALSE)
 
    } else {
-     output <- data.frame(bacon = NA, original = NA, type = NA)
+     output <- data.frame(bacon = NA,
+                          original = NA,
+                          type = NA_character_,
+                          stringsAsFactors = FALSE)
    }
   }
 
-  recal <- dplyr::by_row(elicit, test_ages)$`.out` %>%
+  recal <- purrrlyr::by_row(elicit, test_ages)$`.out` %>%
     bind_rows()
 
   plot_table <- data.frame(  original = c(recal$original, recal$bacon),
                           settlement = c(elicit$sett_age, elicit$sett_age),
                                class = c(rep(c("Original Age Model",
                                                "Bacon Age Model"),
-                                               each = nrow(elicit))))
+                                               each = nrow(elicit))),
+                                             stringsAsFactors = FALSE)
 
   plot_table$class <- factor(plot_table$class, levels = c("Original Age Model",
                                                          "Bacon Age Model"))

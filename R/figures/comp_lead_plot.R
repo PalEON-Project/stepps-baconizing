@@ -4,7 +4,7 @@ comp_lead_plot <- function(comp_doc){
 
   drop_outlier <- lead_out %>%
     filter(bacon_error1 < 200) %>%
-    select(site.name, age, bacon_error1, e.older) %>%
+    dplyr::select(site.name, age, bacon_error1, e.older) %>%
     na.omit() %>%
     arrange(site.name, age)
 
