@@ -42,9 +42,7 @@ knitr::opts_chunk$set(cache=TRUE)
 
 # Version numbering and other important parameters are stored in a file `settings.yaml`
 
-
 source('R/load_packages.R')
-
 ```
 
 Advances in paleoecoinformatics are continually improving our ability to store and process large numbers of paleoecological records [@brewer2012paleoecoinformatics;@uhen2013card;@williams2017neotoma], which enables the use of increasingly large data networks to study ecological and climatic processes operating at large spatial scales and at timescales inaccessible to modern observational data [@marlon2017climatic;@bothe2015continental;@abram2016early]. Paleoecological and paleoclimatic databases streamline this process by providing the means to store, curate, and query structured data across specified spatial and temporal bounds. Examples of these databases include NOAA-Paleoclimatology [https://www.ncdc.noaa.gov/data-access/paleoclimatology-data](), Linked Earth [http://linked.earth](), and the Neotoma Paleoecology Database [URL: http://neotomadb.org; @williams2017neotoma]. All paleoecological and paleoclimatic interpretations based on these resources depend upon the accuracy and precision of the underlying age-depth models [@grimm2009magnitude;@liu2012temporal;@trachsel2017all;@blaauw2012out]. Because of the increasingly large data volumes involved (for example, as of `r Sys.Date()`, Neotoma now includes `r nrow(neotoma::get_site())` site-level records, including `r length(neotoma::get_dataset(datasettype="pollen"))` fossil pollen records globally), a central challenge in large-scale regeneration of chronologies is how best to balance speed/automation with careful critical analysis and adjustment of individual age models by experts.  Here we review these issues, assess key sources of uncertainty, and provide examples of solutions developed during our recent data synthesis efforts with the Neotoma Paleoecology Database and the Paleoecological Observatory Network (PalEON).
@@ -83,7 +81,6 @@ new_chrons <- build_newchrons(all_downloads, chronologies, settings) %>%
   na.omit
 
 plot_recal_diffs(new_chrons)
-
 ```
 
 <object type="image/svg+xml" data="figures/agediff_plot_final.svg" style="width: 100%;">
@@ -116,7 +113,6 @@ Second, many different kinds of age controls may be used to constrain age-depth 
 source('R/figures/ageplot_histogram.R')
 
 hists <- chronology_type_histogram(all_downloads, pubs, settings)
-
 ```
 
 <object type="image/svg+xml" data="figures/histograms_cleaned.svg">
@@ -161,13 +157,18 @@ source("R/get_allcontrols.R")
 controls <- get_allcontrols(all_downloads, settings)
 
 control_type <- controls %>%
-  map(function(x)data.frame(control = as.character(x$chron.control$control.type))) %>%
+  map(function(x) {
+    cty <- as.character(x$chron.control$control.type)
+    return(
+      data.frame(controlid = x$parent$dataset.id,
+                 control = cty,
+                 stringsAsFactors = FALSE))
+  }) %>%
   bind_rows() %>%
   group_by(control) %>%
   summarise(count = n())
 
 knitr::kable(control_type[order(control_type$count, decreasing = TRUE), ])
-
 ```
 
 ## Chronological Uncertainty: ^210^Pb and Biostratigraphic Age Controls
@@ -192,7 +193,6 @@ all_geochron <- get_allgeochron(settings)
 source("R/lead_plotting.R")
 
 lead_plots(all_geochron, all_downloads)
-
 ```
 
 **Figure 3.** *Reported uncertainty for ^210^Pb dates within Neotoma, by age (upper panel), with the total count of unassigned samples by age bin (lower panel).  In our age-depth models, estimated uncertainty, using a model relating reported ^210^Pb uncertainty to age, is then assigned to all ^210^Pb dates with unreported uncertainty. Present is defined as radiocarbon present, or 1950 CE.*
@@ -242,7 +242,6 @@ model  <- lm(I(1950 - bacon_age1) ~ age, data = comp_doc[[2]])
 uncert <- lm(bacon_error1 ~ e.older, data = comp_doc[[2]])
 
 comp_doc[[1]]
-
 ```
 
 **Figure 4**. *Reported and estimated ^210^Pb ages from the Bacon models generally show strong accordance.  However, uncertainties within the constructed Bacon models at the depths of the ^210^Pb samples are higher for Bacon models (y-axis) than from the original estimates for models including ^210^Pb dates (x-axis). The autoregressive nature of the Bacon model, the influence of the memory parameter, and the nature of the Bayesian model itself mean that uncertainty is propagated through the core, and as such low uncertainty in the individual ^210^Pb dates (x-axis) does not result in low Bacon uncertainty.*
@@ -256,7 +255,6 @@ Only three lakes in the region had age-depth models that included ^210^Pb dates 
 source("R/figures/comp_lead_plot.R")
 
 comp_lead_plot(comp_doc)
-
 ```
 
 <object type="image/svg+xml" data="figures/lead_comp_final.svg">
@@ -268,11 +266,9 @@ comp_lead_plot(comp_doc)
 ### Expert Elicitation
 
 ```{r, elicitation_plot, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
-
 source("R/elicitation_plot.R")
 # Double check that this is the right depth. . .
 elicitation_plots <- expert_elicitation()
-
 ```
 
 The modeled ages from the original Neotoma age models frequently were older than the biostratigraphic ages assigned based on the dates for the Public Land Survey.  Of the 163 records with assigned settlement dapths and with ages obtained from the elicitation exercise, 55 of the original age models have a modeled ages at the assigned settlement horizon that are younger than 1800 CE, while only 17 of the Bacon models have a modeled age for the settlement horizon younger than 1800 CE. Age estimates from the Bacon models showed better affinity to the assigned biostratigraphic dates, which is expected given that these biostratigraphic ages are used as constraints for the Bacon models.  The Bacon models are, on average, 44 years younger at the settlement horizon than the original models. <!-- JWW This age difference would result in faster estimated rates of change for vegetation in the Bacon models than for the post-settlement sediments. -->
