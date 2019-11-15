@@ -33,8 +33,19 @@ lead_plots <- function(geochron_tables, all_downloads) {
   assertthat::assert_that(nrow(bad_cal_ages) == 0,
     msg = "There are 210Pb ages returned by Neotoma with calibrated radiocarbon ages in excess of 800 years.")
 
-#  assertthat::assert_that(nrow(bad_BC_ages) == 0,
-#    msg = "There are 210Pb ages returned by Neotoma with calibratedradiocarbon ages in excess of 800 years.")
+
+  if(nrow(bad_BC_ages) > 0) {
+    bad_bc <- lapply(sort(unique(bad_BC_ages$dataset.id)), function(x) {
+      thing <- jsonlite::fromJSON(paste0('http://api-dev.neotomadb.org/v2.0/data/datasets/', x))
+      data.frame(datasetid = x,
+                 site = thing$data$site$sitename,
+                 database = thing$data$site$datasets[[1]]$database,
+                 stringsAsFactors = FALSE)
+    }) %>%
+      bind_rows()
+    readr::write_csv(bad_bc, "data/output/toolowbcadleads.csv")
+    warning("Found some lead ages that seem too low for the AD/BC reported age scale.")
+  }
 
   # We want all ages to be in CE:
   leads <- leads  %>%
